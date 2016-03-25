@@ -15,7 +15,7 @@ class EmployeeRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,8 +27,9 @@ class EmployeeRequest extends Request
     {
         return [
             'strFirstName'      =>  'unique_with:tblEmployee,strMiddleName,strLastName',
-            'fileUpload'        =>  'image'
-            'strEmpContactNo'   =>  'regex:^\d{10}'
+            'strEmpEmail'       =>  'unique:tblEmployee,strEmail',
+            'fileUpload'        =>  'image',
+            'strEmpContactNo'   =>  'regex:/^\d{10}/'
         ];
     }
 

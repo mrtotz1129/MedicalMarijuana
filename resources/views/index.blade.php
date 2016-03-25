@@ -2,24 +2,27 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Hospital MS</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{!! asset('css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
-   <link href="{!! asset('css/style2.min.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{!! asset('css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{!! asset('css/style2.min.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{!! asset('css/maintenance-style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="shortcut icon" href="{!! asset('img/icon.png') !!}"/>
 
    <link href="{!! asset('css/mainStyle.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
    <link href="{!! asset('css/jquery.dataTables.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
    <link href="{!! asset('css/buttons.dataTables.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-    <script src="{!! asset('js/jquery-1.12.0.min.js') !!}"></script>
+  
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{!! asset('js/materialize.js') !!}"></script>
+    <script src="{!! asset('js/init.js') !!}"></script>
     <script src="{!! asset('js/jquery.dataTables.js') !!}"></script>
-    
-
+<div class="navbar-fixed">
   <nav class="indigo">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo"><img src="{!! asset('img/title.png') !!}" width="70%" height="50%"></a>
@@ -34,21 +37,20 @@
         </ul>
       </div>
     </nav>
-
+</div>
 
 </head>
 
 <body class="blue-grey lighten-5">
+  @yield('mainBody')
   <div class="wrapper">
      @yield('body')
    </div>
    
-   <script src="{!! asset('js/materialize.js') !!}"></script>
-   <script src="{!! asset('js/init.js') !!}"></script>
+  
 
    <script src="{!! asset('js/dataTables.buttons.js') !!}"></script>
    <script src="{!! asset('js/buttons.html5.min.js') !!}"></script>
-
    <script src="{!! asset('js/jszip.min.js') !!}"></script>
    <script src="{!! asset('js/pdfmake.min.js') !!}"></script>
    <script src="{!! asset('js/vfs_fonts.js') !!}"></script>

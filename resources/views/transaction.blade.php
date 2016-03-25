@@ -17,33 +17,9 @@
                             <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
                             </li>
                         </ul>
-                        <p class="user-roal">Administrator</p>
+                        <p class="user-roal">Pharmacist</p>
                     </div>
                 </div>
-                </li>
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion indigo darken-2">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">settings</i> Maintenance</a>
-                            <div style="" class="collapsible-body">
-                                <ul class="indigo darken-1">
-                                    <li><a href="layout-fullscreen.html" class="white-text">Employee</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Fee</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Equipment</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Room</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Supplier</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Drugs</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Discpunt</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
                 </li>
                  <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">

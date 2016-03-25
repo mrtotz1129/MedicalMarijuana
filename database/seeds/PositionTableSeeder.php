@@ -11,6 +11,26 @@ class PositionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('')
+    	DB::table('tblEmployeeType')
+    		->delete();
+
+    	DB::table('tblEmployeeType')
+    		->insert([
+    			[
+    				'strPosition'	=> 'Doctor',
+    				'intStatus'		=> 1,
+    				'created_at'	=> date('Y-m-d H:i:s')
+    			],
+    			[
+    				'strPosition'	=> 'Nurse',
+    				'intStatus'		=> 1,
+    				'created_at'	=> date('Y-m-d H:i:s')	
+    			],
+    			[
+    				'strPosition'	=> 'Cashier',
+    				'intStatus'		=> 1,
+    				'created_at'	=> date('Y-m-d H:i:s')
+    			]
+    		]);
     }
 }

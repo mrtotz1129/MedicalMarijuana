@@ -20,3 +20,5 @@ Route::resource('supplier', 'SupplierController');
 Route::resource('drug', 'DrugController');
 Route::resource('discount', 'DiscountController');
 
+Route::get('logout', 'LogoutController@logout');
+

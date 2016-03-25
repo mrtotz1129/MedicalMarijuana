@@ -1,4 +1,4 @@
-@extends('transaction')
+@extends('maintenance')
 @section('article')
 <article class="white main z-depth-1">
 <br>
@@ -12,11 +12,6 @@
 			data-tooltip="Create"><i class="material-icons">add</i></a>
 		</div>
 	</div>
-	 <div class="header-search-wrapper indigo darken-2" style="width: 700px; height: 40px;">
-        <i class="mdi-action-search indigo-text text-darken-3"></i>
-        <input name="Search" class="header-search-input z-depth-2" placeholder="Search Patient" type="text">
-        <br>
-    </div>
     <br>
     <div class="container">
     	<table id="example" class="display" cellspacing="0" width="100%">

@@ -26,7 +26,7 @@
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">attach_money</i>Transactions</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
-                                    <li><a href="layout-fullscreen.html" class="white-text">Admission</a>
+                                    <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>
                                     </li>
                                     <li><a href="layout-horizontal-menu.html" class="white-text">Check Up</a>
                                     </li>

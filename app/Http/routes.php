@@ -19,6 +19,7 @@ Route::resource('room', 'RoomController');
 Route::resource('supplier', 'SupplierController');
 Route::resource('drug', 'DrugController');
 Route::resource('discount', 'DiscountController');
+Route::resource('admission', 'AdmissionController');
 
 Route::get('logout', 'LogoutController@logout');
 

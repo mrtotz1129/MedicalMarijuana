@@ -26,19 +26,19 @@
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">settings</i> Maintenance</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
-                                    <li><a href="layout-fullscreen.html" class="white-text">Employee</a>
+                                    <li><a href="{!! url('employee') !!}" class="white-text">Employee</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Fee</a>
+                                    <li><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Equipment</a>
+                                    <li><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Room</a>
+                                    <li><a href="{!! url('room') !!}" class="white-text">Room</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Supplier</a>
+                                    <li><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Drugs</a>
+                                    <li><a href="{!! url('drug') !!}" class="white-text">Drugs</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Discpunt</a>
+                                    <li><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
                                 </ul>
                             </div>

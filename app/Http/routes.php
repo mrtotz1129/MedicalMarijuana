@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('employee-maintenance');
+    return view('maintenance-employee');
 });

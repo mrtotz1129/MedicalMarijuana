@@ -28,8 +28,7 @@
 
  
   .main {
-    text-align: center;
-    background: transparent;
+    margin-left: 15%;
     margin-top: 10px;
     border-radius: 10px;
   }

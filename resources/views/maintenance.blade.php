@@ -16,11 +16,6 @@
                             </li>
                             <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
                             </li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
-                            </li>
-                            <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
-                            </li>
                         </ul>
                         <p class="user-roal">Administrator</p>
                     </div>
@@ -28,7 +23,7 @@
                 </li>
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="mdi-action-view-carousel white-text"></i> Employees</a>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">group</i> Employees</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
                                     <li><a href="layout-fullscreen.html" class="white-text">Full Screen</a>
@@ -42,7 +37,7 @@
                 </li>
                  <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="mdi-action-view-carousel white-text"></i>Fees</a>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">attach_money</i>Fees</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
                                     <li><a href="layout-fullscreen.html" class="white-text">Full Screen</a>

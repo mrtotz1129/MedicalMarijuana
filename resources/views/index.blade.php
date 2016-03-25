@@ -20,12 +20,11 @@
     <script src="{!! asset('js/jquery.dataTables.js') !!}"></script>
     
 
-  <nav class="indigo darken-2">
+  <nav class="indigo">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo"><img src="{!! asset('img/title.png') !!}" width="70%" height="50%"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-         
           <li><a href="{!! url('product') !!}" class="indigo-text text-darken-2 btn white">Log out</a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
@@ -100,7 +99,7 @@
   </div>
   <div class="footer-copyright">
     <div class="container">
-    Made by <a class="green-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+    Made by <a class="green-text text-lighten-3" href="http://materializecss.com">TarubDevs</a>
     </div>
   </div>
 </footer>

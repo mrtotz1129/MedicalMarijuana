@@ -12,7 +12,9 @@
         	 		<br><h3 class="thin white-text text-darken-4 center">Log In</h3>
         			 	<div class="container" style="margin-bottom: 20px;">
         			      <div class="row container">
-        			        <div class="input-field col s12">
+        			        <form method="POST" action="{!! url('/') !!}">
+                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                      <div class="input-field col s12">
         			          <input  id="username" type="text" class="validate white-text" name="strUsername">
         			          <label for="username" class="white-text">Username</label>
         			        </div>
@@ -22,9 +24,10 @@
         			        </div>
         			      </div>
 
-        			      <button class="btn waves-effect waves-light col s12" type="submit" name="action">Submit
+        			      <button class="btn waves-effect waves-light col s12" type="submit" name="action">Login
         			          <i class="material-icons right">send</i>
         			      </button>
+                    </form>
         			     </div>
         			     <br><br>
         	 </article>

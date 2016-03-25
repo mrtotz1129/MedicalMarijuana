@@ -19,7 +19,7 @@
 				                <th>Type</th>
 				                <th>Name</th>
 				                <th>Address</th>
-				                <th>Contact NO.</th>
+				                <th>Contact No.</th>
 				                <th>Status</th>
 				                <th>Actions</th>
 				            </tr>
@@ -38,8 +38,8 @@
 					            'csvHtml5',
 					            'pdfHtml5'
 					        ]
-					    } );
-					} );
+					    });
+					});
 				</script>
 				<!-- Create Employee Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
@@ -108,7 +108,7 @@
 				                <div class="row">
 				                  <div class="input-field col s12" style="margin-top: 40px !important;">
 				                      <select required class="browser-default" name="strEmpGender" id="createGender">
-				                        <option value="" disabled selected></option>
+				                        <option value="" disabled selected>Gender</option>
 				                        <option value="M">Male</option>
 				                        <option value="F">Female</option>
 				                      </select>

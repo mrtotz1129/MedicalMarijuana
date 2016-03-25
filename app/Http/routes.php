@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('maintenance-employee');
-});
+Route::resource('/', 'LoginController');
+Route::resource('employee', 'EmployeeController');
+Route::resource('fee', 'FeeController');
+Route::resource('equipment', 'EquipmentController');
+Route::resource('room', 'RoomController');
+Route::resource('supplier', 'SupplierController');
+Route::resource('drug', 'DrugController');
+Route::resource('discount', 'DiscountController');
+
+Route::get('logout', 'LogoutController@logout');
+

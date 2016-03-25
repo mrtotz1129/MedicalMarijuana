@@ -23,22 +23,22 @@
                 </li>
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">settings</i> Maintenance</a>
+                        <li class="bold {!! strpos(Request::url(), 'employee') !== false || strpos(Request::url(), 'fee') !== false || strpos(Request::url(), 'equipment') !== false || strpos(Request::url(), 'room') !== false || strpos(Request::url(), 'supplier') !== false || strpos(Request::url(), 'drug') !== false || strpos(Request::url(), 'discount') !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><i class="material-icons white-text">settings</i> Maintenance</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
-                                    <li><a href="layout-fullscreen.html" class="white-text">Employee</a>
+                                    <li class="{!! strpos(Request::url(), 'employee') !== false ? 'active' : '' !!}"><a href="{!! url('employee') !!}" class="white-text">Employee</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Fee</a>
+                                    <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Equipment</a>
+                                    <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'active' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Room</a>
+                                    <li class="{!! strpos(Request::url(), 'room') !== false ? 'active' : '' !!}"><a href="{!! url('room') !!}" class="white-text">Room</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Supplier</a>
+                                    <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Drugs</a>
+                                    <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Drugs</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Discpunt</a>
+                                    <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
                                 </ul>
                             </div>

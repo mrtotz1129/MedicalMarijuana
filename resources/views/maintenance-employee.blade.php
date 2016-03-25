@@ -43,7 +43,7 @@
 				</script>
 				<!-- Create Employee Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('employee') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">

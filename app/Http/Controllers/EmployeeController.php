@@ -37,9 +37,35 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-                
+        $employee       =   new Employee;
+        $hasFile        =   false;
+        $imageDir       =   'uploaded_images/employee';
+        $firstName      =   $request->input('strFirstName'); 
+        $middleName     =   $request->input('strMiddleName');  
+        $lastName       =   $request->input('strLastName');
+        $fileName       =   $lastName . ', ' . $firstName . ' ' . $middleName;
+
+        if($request->hasFile('fileUpload')) {
+            $hasFile = true;
+            $request->file('fileUpload')->move(public_path() . '/' . $imageDir, 
+                $fileName);
+        }              
+
+        $employee->txtImagePath         =   $imageDir . '/' . $fileName;
+        $employee->strFirstName         =   $firstname;
+        $employee->strMiddleName        =   $middleName;
+        $employee->strLastName          =   $lastName;
+        $employee->dateBirthday         =   $request->input('strBirthdate');
+        $employee->strGender            =   $request->input('strEmpGender');
+        $employee->strContactNum        =   $request->input('strEmpContactNo');
+        $employee->strEmail             =   $request->input('strEmpEmail');
+        $employee->strAddress           =   $request->input('strEmpAddress');
+        $employee->intEmployeeTypeIdFK  =   $request->input('selectedJob');
+        $employee->intStatus            =   1;
+
+        $employee->save();
     }
 
     /**

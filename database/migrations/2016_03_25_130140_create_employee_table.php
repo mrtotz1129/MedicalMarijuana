@@ -26,14 +26,14 @@ class CreateEmployeeTable extends Migration
                 ->nullable();
             $table->string('strEmail');
             $table->string('strAddress');
-            $table->integer('intEmployeeIdFK')
+            $table->integer('intEmployeeTypeIdFK')
                 ->unsigned();
             $table->integer('intStatus');
             $table->timestamps();
 
             $table->unique(['strFirstName', 'strMiddleName', 'strLastName'], 'uq_employee_name');
             $table->unique('strEmail');
-            $table->foreign('intEmployeeIdFK')
+            $table->foreign('intEmployeeTypeIdFK')
                 ->references('intEmployeeTypeId')
                 ->on('tblEmployeeType')
                 ->onUpdate('cascade');

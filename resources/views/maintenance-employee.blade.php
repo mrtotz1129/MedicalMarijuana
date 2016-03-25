@@ -60,7 +60,7 @@
 				                       <div class="file-field input-field">
 				                             <div class="btn">
 				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
+				                               <input type="file" id="fileUpload" name="fileUpload">
 				                             </div>
 				                             <div class="file-path-wrapper">
 				                               <input class="file-path validate" type="text">
@@ -79,16 +79,16 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="strEmpFirstName" placeholder="Ex: Benigno" id="strEmpFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="strEmpFirstName" class="active">First Name<span class="red-text"><b>*</b></span></label>
+				                        <input name="strFirstName" placeholder="Ex: Benigno" id="strFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
+				                        <label for="strFirstName" class="active">First Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="strEmpMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="strEmpMiddleName" class="active">Middle Name</label>
+				                        <input name="strMiddleName" placeholder="Ex: Cojuangco" id="strMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="strMiddleName" class="active">Middle Name</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="strEmpLastName" placeholder="Ex: Aquino" id="strEmpLastName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="strEmpLastName" class="active">Last Name<span class="red-text"><b>*</b></span></label>
+				                        <input name="strLastName" placeholder="Ex: Aquino" id="strLastName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="strLastName" class="active">Last Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input type="date" value="March/9/1996" name="strBirthdate" placeholder="January 1, 1996" class="datepicker active tooltipped" id="createBirthday" required data-position="bottom" data-delay="30" data-tooltip="Ex: January/1/1996">
@@ -131,10 +131,7 @@
 				                  </div>
 				                  <div class="input-field col s8">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
-				                          <option value="" disabled selected> </option>
-				                          <c:forEach items="${empCategory}" var="name">
-				                            <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-				                          </c:forEach>
+				                          <option value="Position" disabled selected> </option>
 				                      </select>
 				                      <label for="slct1" class="active">Position<span class="red-text">*</span></label>
 				                  </div>

@@ -174,7 +174,7 @@
 				   <div id="update-employee-modal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="updateEmpForm" action="{!! url('employee/update') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-				    	<input type="hidden" id="employee_update_id" />
+				    	<input type="hidden" id="employee_update_id" name="employee_update_id" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">

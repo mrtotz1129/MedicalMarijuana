@@ -108,9 +108,77 @@ class EmployeeController extends Controller
         $employee->save();
     }
 
-    public function updateEmployee(EmployeeRequest $request) 
+    public function updateEmployee(Request $request) 
     {
-        $this->saveEmployee($request);
+        $employee       =   EmployeeModel::find($request->input('employee_update_id'));
+        $hasFile        =   false;
+        $imageDir       =   'uploaded_images/employee';
+        $firstName      =   $request->input('strFirstName'); 
+        $middleName     =   $request->input('strMiddleName');  
+        $lastName       =   $request->input('strLastName');
+        $fileName       =   $lastName . ', ' . $firstName . ' ' . $middleName;
+        $counter        =   0;
+
+        if($employee->strFirstName !== $firstName) {
+            $employee->strFirstName = $firstName;
+            $counter++;
+        }
+
+        if($employee->strMiddleName !== $middleName) {
+            $employee->strMiddleName = $middleName;
+            $counter++;
+        }
+
+        if($employee->strLastName !== $lastName) {
+            $employee->strLastName = $lastName;
+            $counter++;
+        }
+
+        if($employee->dateBirthday !== $request->input('strBirthdate')) {
+            $employee->dateBirthday = $request->input('strBirthdate');
+            $counter++;
+        }
+
+        if($employee->strGender !== $request->input('strEmpGender')) {
+            $employee->strGender = $request->input('strEmpGender');
+            $counter++;
+        }
+
+        if($employee->strContactNum !== $request->input('strEmpContactNo')) {
+            $employee->strContactNum = $request->input('strEmpContactNo');
+            $counter++;
+        }
+
+        if($employee->strEmail !== $request->input('strEmpEmail')) {
+            $employee->strEmail = $request->input('strEmpEmail');
+            $counter++;
+        }
+
+        if($employee->strAddress !== $request->input('strEmpAddress')) {
+            $employee->strAddress = $request->input('strEmpAddress');
+            $counter++;
+        }
+
+        if($employee->intEmployeeTypeIdFK !== $request->input('selectedJob')) {
+            $employee->intEmployeeTypeIdFK = $request->input('selectedJob');
+            $counter++;
+        }
+
+        if($request->hasFile('fileUpload')) {
+            $hasFile = true;
+            $request->file('fileUpload')->move(public_path() . '/' . $imageDir, 
+                trim($fileName));
+        }
+
+        if($hasFile) {
+            $employee->txtImagePath = $imageDir . '/' . $fileName; 
+        }
+
+        if(count($counter) > 0) {
+            $employee->save();
+        }
+
+        return redirect('employee');
     }
 
     function saveEmployee(Request $request) {
@@ -118,7 +186,8 @@ class EmployeeController extends Controller
         $hasFile        =   false;
         $imageDir       =   'uploaded_images/employee';
         $firstName      =   $request->input('strFirstName'); 
-        $middleName     =   $request->input('strMiddleName');  
+        $middleName     =   ($request->input('strMiddleName') != null) ? $request->input('strMiddleName')
+            : null;  
         $lastName       =   $request->input('strLastName');
         $fileName       =   $lastName . ', ' . $firstName . ' ' . $middleName;
 

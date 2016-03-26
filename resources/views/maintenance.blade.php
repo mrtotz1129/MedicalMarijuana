@@ -30,11 +30,11 @@
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'active' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
+                                    <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'room') !== false ? 'active' : '' !!}"><a href="{!! url('room') !!}" class="white-text">Room</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
+                                    <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'active' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Drugs</a>
                                     </li>

@@ -19,17 +19,20 @@ class PositionTableSeeder extends Seeder
     			[
     				'strPosition'	=> 'Doctor',
     				'intStatus'		=> 1,
-    				'created_at'	=> date('Y-m-d H:i:s')
+    				'created_at'	=> date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s')
     			],
     			[
     				'strPosition'	=> 'Nurse',
     				'intStatus'		=> 1,
-    				'created_at'	=> date('Y-m-d H:i:s')	
+    				'created_at'	=> date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s')
     			],
     			[
     				'strPosition'	=> 'Cashier',
     				'intStatus'		=> 1,
-    				'created_at'	=> date('Y-m-d H:i:s')
+    				'created_at'	=> date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s')
     			]
     		]);
     }

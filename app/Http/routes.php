@@ -24,3 +24,4 @@ Route::resource('admission', 'AdmissionController');
 Route::get('logout', 'LogoutController@logout');
 
 Route::post('employee/update', 'EmployeeController@updateEmployee');
+Route::post('position/create', 'PositionController@createPosition');

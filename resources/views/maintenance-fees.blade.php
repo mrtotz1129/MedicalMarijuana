@@ -163,10 +163,6 @@
 
 				            </div>
 				        </div>
-				      <div class="modal-footer">
-				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
-				      </div>
 				      </form>
 				</div>
 		</div>

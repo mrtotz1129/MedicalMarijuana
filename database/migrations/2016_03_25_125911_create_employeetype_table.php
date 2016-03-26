@@ -17,6 +17,8 @@ class CreateEmployeetypeTable extends Migration
             $table->string('strPosition');
             $table->integer('intStatus');
             $table->timestamps();
+
+            $table->unique('strPosition');
         });
     }
 

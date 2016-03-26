@@ -84,10 +84,10 @@
 				                    </div>
 				                    <div class="input-field col s8">
 				                        <select class="browser-default" id="slct1" name="selectedJob" required>
-				                            <option value="" disabled selected> </option>
-				                            <c:forEach items="${empCategory}" var="name">
-				                              <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-				                            </c:forEach>
+				                            <option disabled selected>Equipment Type</option>
+				                            @foreach($equipmentTypes as $equipmentType)
+				                              <option value="{!! $equipmentType->intEquipmentCategoryId !!}">{!! $equipmentType->strEquipmentCatName !!}</option>
+				                            @endforeach
 				                        </select>
 				                        <label for="slct1" class="active">Type<span class="red-text">*</span></label>
 				                    </div>

@@ -69,7 +69,7 @@
 				              <!-- first -->
 				                <div class="row">
 				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">
@@ -154,7 +154,7 @@
 				                      <label for="slct1" class="active">Position<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s4">
-				                    <a href="#addOption" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
+				                    <a href="#addPositionModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
 				                  </div>
 				                  
 				                </div>
@@ -267,7 +267,7 @@
 				                            <option value="{!! $position->intEmployeeTypeId !!}">{!! $position->strPosition !!}</option>
 				                          @endforeach
 				                      </select>
-				                      <label for="slct1" class="active">Position<span class="red-text">*</span></label>
+				                      <label for="selectedJobEdit" class="active">Position<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s4">
 				                    <a href="#addOption" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
@@ -289,22 +289,23 @@
 	</article>
 
 <!-- add option -->
-   <div id="addOption" class="modal" style="margin-top: 30px;">
-     <form id="createOption">
+   <div id="addPositionModal" class="modal" style="margin-top: 30px;">
+     <form id="createPositionForm">
+     	<input type="hidden" id="position_create_token" value="{!! csrf_token() !!}" />
        <div class="modal-content">
          <h4>Add Another Position</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
-               <select id="addOptionSelect" class="browser-default" size="10">
-                 <c:forEach items="${empCategory}" var="name">
-                     <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-                   </c:forEach>
+               <select id="addPositionSelect" class="browser-default" size="10">
+                 @foreach($positions as $position)
+                     <option value="{!! $position->intEmployeeTypeId !!}">{!! $position->strPosition !!}</option>
+                 @endforeach
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addOptionName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">Position</label>
+               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addPositionName" name="addPositionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
+               <label for="addPositionName" class="active">Position</label>
              </div>
              <div class="input-field col s8 offset-s2 center">
                <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
@@ -407,6 +408,30 @@
 			});
 		});
 	}
+
+	$('#createPositionForm').on('submit', function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: "{!! url('position/create') !!}",
+			type: "POST",
+			data: {
+				_token: document.getElementById('position_create_token').value,
+				position: document.getElementById('addPositionName').value
+			},
+			success: function(data) {
+				var option = document.createElement('option');
+				option.value = data.intEmployeeTypeId;
+				option.text = data.strPosition;
+				document.getElementById('slct1').appendChild(option);
+
+				$('#addPositionModal').closeModal();
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	});
 </script>
  
 @endsection

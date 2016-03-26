@@ -21,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $positions     =    PositionModel::where('intStatus', 1)
+        $positions     =    PositionModel::where('intStatus', '>', 0)
             ->get();
         $employees     =    \DB::table('tblEmployee')
             ->join('tblEmployeeType', 'tblEmployeeType.intEmployeeTypeId', '='
@@ -30,6 +30,7 @@ class EmployeeController extends Controller
                 'tblEmployee.strFirstName', 'tblEmployee.strMiddleName',
                 'tblEmployee.strLastName', 'tblEmployee.strAddress', 
                 'tblEmployee.strContactNum')
+            ->where('tblEmployee.intStatus', '>', 0)
             ->get();      
 
         return view('maintenance-employee')
@@ -56,6 +57,8 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
         $this->saveEmployee($request);
+
+        return redirect('employee');
     }
 
     /**
@@ -212,7 +215,5 @@ class EmployeeController extends Controller
         $employee->intStatus            =   1;
 
         $employee->save();
-
-        return redirect('employee');
     }
 }

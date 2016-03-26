@@ -32,6 +32,6 @@ Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');
 Route::post('fee-type/create', 'FeeTypeController@createFeeType');
 Route::get('test', function() {
-	return view('transaction-cashier');
+	return view('patient-record');
 });
 

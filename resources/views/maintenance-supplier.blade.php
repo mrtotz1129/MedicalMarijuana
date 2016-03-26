@@ -42,34 +42,32 @@
 				<!-- Create Fee Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
-				      <div class="modal-content" style="padding-bottom: 0px !important;">
+				      <div class="modal-content">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Add Supplier</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
+			              <div class="aside aside1 z-depth-0">
+			              <!-- first -->
+			                <div class="row">
+			                  <div class="input-field col s12">
+			                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+			                   </div>
+			                   <div class="input-field col s12">
+			                       <div class="file-field input-field">
+			                             <div class="btn">
+			                               <span>Upload</span>
+			                               <input type="file" id="fileUpload">
+			                             </div>
+			                             <div class="file-path-wrapper">
+			                               <input class="file-path validate" type="text">
+			                             </div>
+			                           </div>
+			                   </div>
+			                </div>
+			              </div>
 				              <!-- END ASIDE 1 -->
-
-
 				                <div class="aside aside2 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
@@ -90,6 +88,7 @@
 				                    </div>
 				                </div>
 				              </div>
+
 				              <!-- END ASIDE 2 -->
 				            </div>
 				        </div>

@@ -15,12 +15,12 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Fee ID</th>
+				                {{-- <th>Fee ID</th> --}}
 				                <th>Type</th>
 				                <th>Name</th>
 				                <th>Details</th>
 				                <th>Price</th>
-				                <th>Status</th>
+				                {{-- <th>Status</th> --}}
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -59,13 +59,13 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    <div class="input-field col s12">
+				                    {{-- <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Benigno" id="feeID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
 				                        <label for="feeID" class="active">Fee ID<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				                    </div> --}}
 				                    <div class="input-field col s8">
 				                        <select class="browser-default" id="slct1" name="selectedJob" required>
-				                            <option value="" disabled selected> </option>
+				                            <option value="" disabled selected>Fee Type</option>
 				                              <option value="${name.strCategoryName}">Doctor's Fee</option>
 				                              <option value="${name.strCategoryName}">Nurse's Fee</option>
 				                        </select>
@@ -157,7 +157,7 @@
    <div id="addOption" class="modal" style="margin-top: 30px;">
      <form id="createOption">
        <div class="modal-content">
-         <h4>Add Another Position</h4>
+         <h4>Add Another Fee Type</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">

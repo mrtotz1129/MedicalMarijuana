@@ -260,7 +260,7 @@
 				                      <input name="strEmpAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="strEmpAddressEdit" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
 				                      <label for="strEmpAddressEdit" class="active">Address<span class="red-text">*</span></label>
 				                  </div>
-				                  <div class="input-field col s8">
+				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="selectedJobEdit" name="selectedJob" required>
 				                          <option value="" disabled selected>Position</option>
 				                          @foreach($positions as $position)
@@ -269,9 +269,9 @@
 				                      </select>
 				                      <label for="selectedJobEdit" class="active">Position<span class="red-text">*</span></label>
 				                  </div>
-				                  <div class="input-field col s4">
+				                 {{--  <div class="input-field col s4">
 				                    <a href="#addOption" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
-				                  </div>
+				                  </div> --}}
 				                  
 				                </div>
 				              </div>
@@ -378,7 +378,13 @@
 				document.getElementById('strEmpEmailEdit').value = data.strEmail;
 				document.getElementById('strEmpAddressEdit').value = data.strAddress;
 				document.getElementById('selectedJobEdit').value = data.intEmployeeTypeIdFK;
-				document.getElementById('employeeimgEdit').src = assetBaseUrl + data.txtImagePath;
+
+				if(data.txtImagePath != null) {
+					document.getElementById('employeeimgEdit').src = assetBaseUrl + data.txtImagePath;
+				} else {
+					document.getElementById('employeeimgEdit').src = 
+						assetBaseUrl + 'img/no_image.png';
+				}
 
 				$('#update-employee-modal').openModal();
 			},
@@ -424,6 +430,16 @@
 				option.value = data.intEmployeeTypeId;
 				option.text = data.strPosition;
 				document.getElementById('slct1').appendChild(option);
+
+				option = document.createElement('option');
+				option.value = data.intEmployeeTypeId;
+				option.text = data.strPosition;
+				document.getElementById('addPositionSelect').appendChild(option);
+
+				option = document.createElement('option');
+				option.value = data.intEmployeeTypeId;
+				option.text = data.strPosition;
+				document.getElementById('selectedJobEdit').appendChild(option);
 
 				$('#addPositionModal').closeModal();
 			},

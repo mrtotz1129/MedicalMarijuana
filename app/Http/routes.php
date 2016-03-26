@@ -23,10 +23,9 @@ Route::resource('admission', 'AdmissionController');
 
 Route::get('logout', 'LogoutController@logout');
 
+Route::post('employee/update', 'EmployeeController@updateEmployee');
+Route::post('position/create', 'PositionController@createPosition');
 Route::get('test', function() {
 	return view('transaction-cashier');
 });
-
-
-Route::post('employee/update', 'EmployeeController@updateEmployee');
 

@@ -21,7 +21,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $positions     =    PositionModel::all();
+        $positions     =    PositionModel::where('intStatus', 1)
+            ->get();
         $employees     =    \DB::table('tblEmployee')
             ->join('tblEmployeeType', 'tblEmployeeType.intEmployeeTypeId', '='
                 , 'tblEmployee.intEmployeeTypeIdFK')

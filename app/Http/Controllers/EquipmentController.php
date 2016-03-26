@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\EquipmentTypeModel;
+
 class EquipmentController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        return view('maintenance-equipment');
+        $equipmentTypes = EquipmentTypeModel::where('intStatus', 1)
+            ->get();
+
+        return view('maintenance-equipment')
+            ->with('equipmentTypes', $equipmentTypes);
     }
 
     /**

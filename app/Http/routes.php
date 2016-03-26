@@ -20,6 +20,11 @@ Route::resource('supplier', 'SupplierController');
 Route::resource('drug', 'DrugController');
 Route::resource('discount', 'DiscountController');
 Route::resource('admission', 'AdmissionController');
+Route::resource('checkup', 'CheckupController');
+Route::resource('cashier', 'CashierController');
+Route::resource('laboratory', 'LabController');
+Route::resource('pharmacy', 'PharmacyController');
+Route::resource('transaction/room', 'RoomTransactionController');
 
 Route::get('logout', 'LogoutController@logout');
 

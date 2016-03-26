@@ -52,15 +52,15 @@
                                 <ul class="indigo darken-1">
                                     <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Check Up</a>
+                                    <li><a href="{!! url('checkup') !!}" class="white-text">Check Up</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Cashier</a>
+                                    <li><a href="{!! url('cashier') !!}" class="white-text">Cashier</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Laboratory</a>
+                                    <li><a href="{!! url('laboratory') !!}" class="white-text">Laboratory</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Pharmacy</a>
+                                    <li><a href="{!! url('pharmacy') !!}" class="white-text">Pharmacy</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Room</a>
+                                    <li><a href="{!! url('transaction/room') !!}" class="white-text">Room</a>
                                     </li>
                                 </ul>
                             </div>

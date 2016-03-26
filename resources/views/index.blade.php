@@ -22,6 +22,7 @@
     <script src="{!! asset('js/materialize.js') !!}"></script>
     <script src="{!! asset('js/init.js') !!}"></script>
     <script src="{!! asset('js/jquery.dataTables.js') !!}"></script>
+    <script src="{!! asset('js/addToTable.js') !!}"></script>
 <div class="navbar-fixed">
   <nav class="indigo">
       <div class="nav-wrapper">

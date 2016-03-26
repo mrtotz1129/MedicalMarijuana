@@ -17,12 +17,11 @@
     	<table id="example" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Employee Number</th>
-                    <th>Type</th>
+                    <th>Patient Number</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact NO.</th>
-                    <th>Status</th>
+                    <th>Room No.</th>
                     <th>Actions</th>
                 </tr>
             </thead>  	
@@ -67,6 +66,13 @@
 	                             </div>
 	                           </div>
 	                   </div>
+	                   <p class="center">
+	                         <input name="group1" type="radio" id="test1" />
+	                         <label for="test1">Out Patient</label>
+	                         <input name="group1" type="radio" id="test2" />
+	                         <label for="test2">In Patient</label>
+	                   </p>
+	   
 	                </div>
 	              </div>
 	              <!-- END ASIDE 1 -->
@@ -129,18 +135,15 @@
 	                      <input name="strEmpAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="createAddress" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
 	                      <label for="createAddress" class="active">Address<span class="red-text">*</span></label>
 	                  </div>
-	                  <div class="input-field col s8">
+	                  <div class="input-field col s12">
 	                      <select class="browser-default" id="slct1" name="selectedJob" required>
 	                          <option value="" disabled selected> </option>
-	                          <c:forEach items="${empCategory}" var="name">
-	                            <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-	                          </c:forEach>
+	                          <option value="1">Room 101</option>
+	                          <option value="1">Room 102</option>
 	                      </select>
-	                      <label for="slct1" class="active">Position<span class="red-text">*</span></label>
+	                      <label for="slct1" class="active">Available Room/Bed<span class="red-text">*</span></label>
 	                  </div>
-	                  <div class="input-field col s4">
-	                    <a href="#addOption" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
-	                  </div>
+	      
 	                  
 	                </div>
 	              </div>

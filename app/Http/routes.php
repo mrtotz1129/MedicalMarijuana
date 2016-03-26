@@ -22,4 +22,6 @@ Route::resource('discount', 'DiscountController');
 Route::resource('admission', 'AdmissionController');
 
 Route::get('logout', 'LogoutController@logout');
-
+Route::get('test', function() {
+	return view('transaction-cashier');
+});

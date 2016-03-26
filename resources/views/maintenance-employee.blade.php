@@ -168,7 +168,7 @@
 				              <!-- first -->
 				                <div class="row">
 				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+				                      s
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">

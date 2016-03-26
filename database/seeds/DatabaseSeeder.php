@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PositionTableSeeder::class);
         $this->call(EquipmentTypeTableSeeder::class);
+        $this->call(FeeTypeTableSeeder::class);
 
         Model::reguard();
     }

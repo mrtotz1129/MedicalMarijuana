@@ -86,8 +86,6 @@
 
 	              </div>
 	              <!-- END ASIDE 1 -->
-
-
 	                <div class="aside aside2 z-depth-0">
 	                <!-- second -->
 	                <div class="row">

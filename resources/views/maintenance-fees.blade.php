@@ -52,29 +52,8 @@
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Create Fee</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
-
-
-				                <div class="aside aside2 z-depth-0">
+				           
+				                <div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
@@ -99,10 +78,17 @@
 				                        <input name="" placeholder="Ex: Aquino" id="feeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="feeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
-				                     <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="feeDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="feeDesc" class="active">Fee Description<span class="red-text"><b>*</b></span></label>
+
+				                    <div class="input-field col s12">
+				                        <input name="" placeholder="Ex: Aquino" id="feeName" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="feeName" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
+                     		      	 <div class="input-field col s6">
+                           	           <i class="material-icons prefix">mode_edit</i>
+                           	           <textarea id="remarks" class="materialize-textarea"></textarea>
+                           	           <label for="remarks">Description</label>
+                           	         </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -124,26 +110,6 @@
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Update Fee</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
 
 				                <!-- second -->
 				                  <div class="row">
@@ -166,10 +132,16 @@
 				                        <input name="" placeholder="Ex: Aquino" id="feeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="feeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
-				                     <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="feeDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="feeDesc" class="active">Fee Description<span class="red-text"><b>*</b></span></label>
+				                       <div class="input-field col s12">
+				                        <input name="" placeholder="Ex: Aquino" id="feeName" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="feeName" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
+                     		      	 <div class="input-field col s6">
+                           	           <i class="material-icons prefix">mode_edit</i>
+                           	           <textarea id="remarks" class="materialize-textarea"></textarea>
+                           	           <label for="remarks">Description</label>
+                           	         </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -182,7 +154,6 @@
 				      </div>
 				      </form>
 				</div>
-
 		</div>
 	</article>
 

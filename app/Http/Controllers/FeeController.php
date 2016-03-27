@@ -101,7 +101,15 @@ class FeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fee = FeeModel::find($id);
+
+        $fee->intFeeTypeIdFK    =   $request->feeType;
+        $fee->strFeeName        =   $request->feeName;
+        $fee->dblPrice          =   $request->feePrice;
+        $fee->txtFeeDesc        =   $request->feeDesc;
+        $fee->intStatus         =   1;
+
+        $fee->save();
     }
 
     /**

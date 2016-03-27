@@ -118,14 +118,14 @@
 
 				<!-- Update Fee Modal -->
 				   <div id="updateModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="updateFeeForm" action="createEmployee" enctype="multipart/form-data">
+				      <input type="hidden" id="updateFeeFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Update Fee</h4>
 				        </div>
-
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
@@ -136,7 +136,7 @@
 				                        <label for="feeID" class="active">Fee ID<span class="red-text"><b>*</b></span></label>
 				                    </div> --}}
 				                    <div class="input-field col s8">
-				                        <select class="browser-default" id="slct1" name="selectedJob" required>
+				                        <select class="browser-default" id="slct1" name="feeType" required>
 				                            <option value="" disabled selected>Fee Type</option>
 				                             @foreach($feeTypes as $feeType)
 				                             <option value="{!! $feeType->intFeeTypeId !!}">{!! $feeType->strFeeTypeName !!}</option>
@@ -145,17 +145,17 @@
 				                        <label for="slct1" class="active">Type<span class="red-text">*</span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="feeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="feeName" placeholder="Ex: Aquino" id="feeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="feeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                       <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="feePrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="feePrice" placeholder="Ex: Aquino" id="feePrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="feePrice" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
                      		      	 <div class="input-field col s6">
                            	           <i class="material-icons prefix">mode_edit</i>
-                           	           <textarea id="remarksEdit" class="materialize-textarea"></textarea>
+                           	           <textarea id="remarksEdit" class="materialize-textarea" name="feeDescription"></textarea>
                            	           <label for="remarksEdit" id="remarksEditLabel">Description</label>
                            	         </div>
 				                </div>
@@ -234,6 +234,29 @@
 			error: function(xhr) {
 				console.log(xhr);
 			}
+		});
+
+		$('#updateFeeForm').on('submit', function(event) {
+			event.preventDefault();
+
+			$.ajax({
+				url: "fee/" + id,
+				type: "POST",
+				data: {
+					_method: "PUT",
+					_token: document.getElementById('updateFeeFormToken').value,
+					feeType: document.getElementById('slct1').value,
+					feeName: document.getElementById('feeName').value,
+					feePrice: document.getElementById('feePrice').value,
+					feeDesc: document.getElementById('remarksEdit').value
+				},
+				success: function(data) {
+					window.location.href = "{!! url('fee') !!}";
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
 		});
 	}
 

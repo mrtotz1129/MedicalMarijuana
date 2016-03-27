@@ -23,7 +23,6 @@ class CreateNursestationTable extends Migration
                 ->on('tblFloor')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-
         });
     }
 

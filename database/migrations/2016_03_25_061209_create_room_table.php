@@ -34,7 +34,6 @@ class CreateRoomTable extends Migration
                 ->on('tblNurseStation')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-
         });
     }
 

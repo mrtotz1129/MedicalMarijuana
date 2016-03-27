@@ -24,7 +24,8 @@ class CreateContactnoTable extends Migration
             $table->foreign('intPatientIdFK')
                 ->references('intPatientId')
                 ->on('tblPatient')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

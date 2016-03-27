@@ -12,7 +12,7 @@ class CreateTransferroomTable extends Migration
      */
     public function up()
     {
-        Schema::create('tblTransferRoom', function(Blueprint $table){
+        Schema::create('tblTransferRoom', function(Blueprint $table) {
             $table->increments('intTransferRoomId');
             $table->integer('intPatientIdFK')
                 ->unsigned();

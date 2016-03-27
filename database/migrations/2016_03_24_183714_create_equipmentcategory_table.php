@@ -14,7 +14,7 @@ class CreateEquipmentcategoryTable extends Migration
     {
         Schema::create('tblEquipmentCategory', function(Blueprint $table) {
             $table->increments('intEquipmentCategoryId');
-            $table->string('strEquipmentCatName');
+            $table->string('strEquipmentCatName', 100);
             $table->text('txtEquipmentDesc')
                 ->nullable();
             $table->integer('intStatus');

@@ -10,13 +10,14 @@
 			</div>
 
 			<div class="col s3">
-				<h5>Name: <h5 class="thin">Jerald John</h5></h5>
-				<h5>Last Visit: <h5 class="thin">december 23, 1996</h5></h5>
-				<h5>Addresss: <h5 class="thin">Manila</h5></h5>
+				<h5>Name: <span class="thin">Jerald John</span></h5>
+				<h5>Last Visit: <span class="thin">december 23, 1996</span></h5>
+				<h5>Addresss: <span class="thin">Manila</span></h5>
 			</div>
 
 			<div class="col s3">
-				<h5>Unsettled Balance: <h5 class="thin">Php 500,000.00</h5></h5>
+				<h5>Confined at: <span class="thin">Room 273-B</span></h5>
+				<h5>Unsettled Balance: <span class="thin">Php 500,000.00</span></h5>
 			</div>
 		</div>
 

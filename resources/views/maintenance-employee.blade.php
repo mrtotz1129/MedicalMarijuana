@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col s6">
-					<h4 class="thin indigo-text text-darken-2 col">Employee Maintenance</h4>
+					<h4 class="thin indigo-text text-darken-2 col"><img src="{!! asset('img/tutor.png') !!}" width="18%" height="18%" align="center">  Employee Maintenance</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large indigo darken-2 left white-text tooltipped" 

@@ -17,6 +17,8 @@ class CreateSupplierTable extends Migration
             $table->string('strSupplierName', 100);
             $table->string('strSupplierAddress');
             $table->string('strSupplierContactNo', 15);
+            $table->text('txtImagePath')
+                ->nullable();
             $table->integer('intStatus');
             $table->timestamps();
 

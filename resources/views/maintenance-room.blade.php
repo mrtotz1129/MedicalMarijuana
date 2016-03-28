@@ -45,12 +45,14 @@
 				<!-- Create Room Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('room') !!}" enctype="multipart/form-data">
+
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Create Room</h4>
 				        </div>
+
 				              <div class="aside aside1 z-depth-0">
 				              <!-- first -->
 				                <div class="row">
@@ -74,6 +76,7 @@
 
 
 				                <div class="aside aside2 z-depth-0">
+
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
@@ -100,15 +103,23 @@
 				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
 				                  </div>
 				                  <div class="input-field col s8">
-				                      <select class="browser-default" id="slct1" name="nurseStationSelect">
-				                          <option disabled selected>Nurse Station</option>
+				                      <select class="browser-default" id="slct1" name="selectedJob">
+				                          <option disabled selected>Choose option</option>
+				                          <option value="Nurse Station 1">Nurse Station 1</option>
+
+
 				                      </select>
 				                      <label for="slct1" class="active">Nurse Station</label>
 				                  </div>
 				                  
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description</label>
+				                        <input name="" placeholder="Ex: 5" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
+				                        <input name="" placeholder="Ex: Aquino" id="noOfBed" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="noOfBed" class="active">Numbers of bed<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
 				              </div>
@@ -134,27 +145,8 @@
 				              <h4 class="grey-text text-darken-1 center	">Update Rooms</h4>
 				        </div>
 				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
 
- <div class="aside aside2 z-depth-0">
+ 						<div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">

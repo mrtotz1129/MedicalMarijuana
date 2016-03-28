@@ -7,6 +7,7 @@
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
+
 					href="#createBuilding" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
@@ -15,9 +16,10 @@
 		<br>
 					<table id="example" class="display" cellspacing="0" width="100%">
 						<thead>
-								<th>Building Id</th>
+							
 				                <th>Name</th>
 				                <th>Address</th>
+				                <th>No. of floors</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -25,7 +27,7 @@
 				        <tbody>
 				        	@foreach($buildings as $building)
 				        	<tr>
-				        		<td>{!! $building->intBuildingId !!}</td>
+				        		
 				        		<td>{!! $building->strBuildingName !!}</td>
 				        		<td>{!! $building->strBuildingLocation !!}</td>
 				        		<td>

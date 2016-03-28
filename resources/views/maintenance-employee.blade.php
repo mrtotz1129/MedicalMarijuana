@@ -63,7 +63,7 @@
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
-				        <div class="input-field col s12">
+				        <div class="row">
 				              <h4 class="grey-text text-darken-1 center	">Create Employee</h4>
 				        </div>
 				              <div class="aside aside1 z-depth-0">

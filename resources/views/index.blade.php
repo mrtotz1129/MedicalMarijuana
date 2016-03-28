@@ -24,7 +24,7 @@
     <script src="{!! asset('js/jquery.dataTables.js') !!}"></script>
     <script src="{!! asset('js/addToTable.js') !!}"></script>
 <div class="navbar-fixed">
-  <nav class="indigo">
+  <nav class="indigo darken-4">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo"><img src="{!! asset('img/title.png') !!}" width="70%" height="50%"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>

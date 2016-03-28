@@ -2,14 +2,18 @@
 @section('article')
 <article class="white main z-depth-1">
 <br>
-	<div class="row">
-		<div class="col s6">
-			<h3 class="thin indigo-text text-darken-2 col left">Cashier</h3>
-			<a href="#billOut" class="modal-trigger">BILL OUT</a>
-		</div>
-	</div>
-    <br>
-    <div class="container">
+		<div class="row indigo lighten-1" style="margin-left: -10px; border-top-right-radius: 10px;">
+				<div class="col s6">
+					<h4 class="thin white-text">Cashier</h4>
+				</div>
+				<div class="col s6 right">
+					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
+					href="#create" style="position: relative; top: 40px; right: 1%;" 
+					data-tooltip="Create"><i class="material-icons">add</i></a>
+				</div>
+			</div>	
+		<div class="container">
+		<br>
     	<table id="billTbl" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>

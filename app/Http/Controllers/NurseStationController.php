@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\BuildingModel;
+
 class NurseStationController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class NurseStationController extends Controller
      */
     public function index()
     {
-        //
+        $buildingList = BuildingModel::all();
+        return view('maintenance-nurse-station')
+            ->with('buildingList', $buildingList);
     }
 
     /**

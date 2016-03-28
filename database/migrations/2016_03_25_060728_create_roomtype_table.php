@@ -16,6 +16,8 @@ class CreateRoomtypeTable extends Migration
             $table->increments('intRoomTypeId');
             $table->string('strRoomTypeDesc');
             $table->timestamps();
+
+            $table->unique('strRoomTypeDesc');
         });
     }
 

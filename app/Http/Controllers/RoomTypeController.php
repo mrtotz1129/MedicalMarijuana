@@ -18,5 +18,7 @@ class RoomTypeController extends Controller
         $roomType->strRoomTypeDesc  =   $request->roomTypeName;
 
         $roomType->save();
+
+        return response()->json($roomType);
     }
 }

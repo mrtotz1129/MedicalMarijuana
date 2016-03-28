@@ -88,8 +88,11 @@
 				                        <label for="roomName" class="active">Room Name</label>
 				                    </div>
 				                    <div class="input-field col s8">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="roomTypeCreate" name="selectedJob" required>
 				                          <option disabled selected>Type</option>
+				                          @foreach($roomTypes as $roomType)
+				                          <option value"{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+				                          @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
 				                  </div>
@@ -196,10 +199,13 @@
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
-               <select id="addOptionSelect" class="browser-default" size="10">
+               <select id="roomTypeList" class="browser-default" size="10">
                  <!-- <c:forEach items="${empCategory}" var="name"> -->
                      <!-- <option value="${name.strCategoryName}">${name.strCategoryName }</option> -->
                    <!-- </c:forEach> -->
+                   @foreach($roomTypes as $roomType)
+                   <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+                   @endforeach
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
@@ -272,6 +278,18 @@
 				roomTypeName: document.getElementById('roomTypeNameInput').value
 			},
 			success: function(data) {
+				var option = document.createElement('option');
+				option.text = data.strRoomTypeDesc;
+				option.value = data.intRoomTypeId;
+
+				document.getElementById('roomTypeCreate').appendChild(option);
+
+				option = document.createElement('option');
+				option.text = data.strRoomTypeDesc;
+				option.value = data.intRoomTypeId;
+
+				document.getElementById('roomTypeList').appendChild(option); 
+
 				$('#addRoomTypeModal').closeModal();
 			},
 			error: function(xhr) {

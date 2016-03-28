@@ -189,21 +189,22 @@
 
 <!-- add option -->
    <div id="addRoomTypeModal" class="modal" style="margin-top: 30px;">
-     <form id="createOption">
+     <form id="addRoomTypeForm">
+     	<input type="hidden" id="roomTypeFormToken" value="{!! csrf_token() !!}" />
        <div class="modal-content">
          <h4>Add Room Type</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
                <select id="addOptionSelect" class="browser-default" size="10">
-                 <c:forEach items="${empCategory}" var="name">
-                     <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-                   </c:forEach>
+                 <!-- <c:forEach items="${empCategory}" var="name"> -->
+                     <!-- <option value="${name.strCategoryName}">${name.strCategoryName }</option> -->
+                   <!-- </c:forEach> -->
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addOptionName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">Position</label>
+               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$" id="roomTypeNameInput">
+               <label for="addOptionName" class="active">Room Type Name</label>
              </div>
              <div class="input-field col s8 offset-s2 center">
                <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
@@ -260,6 +261,24 @@
 	    readURL(this);
 	});
 
+	$('#addRoomTypeForm').on('submit', function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: "{!! url('room-type/create') !!}",
+			type: "POST",
+			data: {
+				_token: document.getElementById('roomTypeFormToken').value,
+				roomTypeName: document.getElementById('roomTypeNameInput').value
+			},
+			success: function(data) {
+				$('#addRoomTypeModal').closeModal();
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	});
 </script>
  
 @endsection

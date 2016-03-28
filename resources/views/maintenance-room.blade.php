@@ -188,10 +188,10 @@
 	</article>
 
 <!-- add option -->
-   <div id="addOption" class="modal" style="margin-top: 30px;">
+   <div id="addRoomTypeModal" class="modal" style="margin-top: 30px;">
      <form id="createOption">
        <div class="modal-content">
-         <h4>Add Another Position</h4>
+         <h4>Add Room Type</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">

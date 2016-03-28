@@ -4,18 +4,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col s6">
-					<h4 class="thin indigo-text text-darken-2 col">Building Maintenance</h4>
+					<h4 class="thin indigo-text text-darken-2 col indigo">Building Maintenance</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large indigo darken-2 left white-text tooltipped" 
 					href="#addBuildling" style="margin-top: 20px;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
-				</div>
-			</div>	
-				<table id="example" class="display" cellspacing="0" width="100%">
-				        <thead>
-				            <tr>
-				                <th>Building ID</th>
+				</I
 				                <th>Name</th>
 				                <th>Address</th>
 				                <th>Actions</th>

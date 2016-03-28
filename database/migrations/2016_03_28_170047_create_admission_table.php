@@ -16,10 +16,13 @@ class CreateAdmissionTable extends Migration
             $table->increments('intAdmissionId');
             $table->integer('intPatientIdFK')
                 ->unsigned();
-            $table->integer('intRoomIdFK')
+            $table->integer('intBedIdFK')
+                ->unsigned();
+            $table->integer('intAdmissionStatusIdFK')
                 ->unsigned();
             $table->dateTime('datAdmission');
-            $table->integer('intAdmissionStatusIdFK')
+            $table->string('strAdmissionRemarks');
+            $table->integer('intDoctorIdFK')
                 ->unsigned();
 
             $table->foreign('intPatientIdFK')
@@ -28,15 +31,21 @@ class CreateAdmissionTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
-            $table->foreign('intRoomIdFK')
-                ->references('intRoomId')
-                ->on('tblRoom')
+            $table->foreign('intBedIdFK')
+                ->references('intBedId')
+                ->on('tblBed')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
             $table->foreign('intAdmissionStatusIdFK')
                 ->references('intStatusId')
                 ->on('tblStatus')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('intDoctorIdFK')
+                ->references('intEmployeeId')
+                ->on('tblEmployee')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

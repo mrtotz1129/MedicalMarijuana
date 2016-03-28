@@ -28,7 +28,7 @@
                          !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/settings-icon.png') !!}" width="20%" height="20%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
-                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Building</a>
+                                     <li class="{!! strpos(Request::url(), 'building') !== false ? 'active' : '' !!}"><a href="{!! url('building') !!}" class="white-text">Building</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Nurse Station</a>
                                     </li>

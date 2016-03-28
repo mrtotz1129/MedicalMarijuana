@@ -16,8 +16,11 @@ class CreateBuildingTable extends Migration
             $table->increments('intBuildingId');
             $table->string('strBuildingName');
             $table->string('strBuildingLocation');
-            $table->string('strBuildingDesc');
+            $table->text('txtBuildingDesc');
             $table->integer('intBuildingStatus');
+            $table->timestamps();
+
+            $table->unique('strBuildingName');
         });
     }
 

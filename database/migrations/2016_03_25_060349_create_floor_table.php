@@ -16,7 +16,8 @@ class CreateFloorTable extends Migration
             $table->increments('intFloorId');
             $table->integer('intBuildingIdFK')
                 ->unsigned();
-            $table->string('strFloorDesc');
+            $table->integer('intFloorDesc');
+            $table->timestamps();
 
             $table->foreign('intBuildingIdFK')
                 ->references('intBuildingId')

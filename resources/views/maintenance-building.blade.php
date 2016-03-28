@@ -7,7 +7,7 @@
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					href="#create" style="position: relative; top: 40px; right: 1%;" 
+					href="#createBuilding" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
@@ -52,7 +52,7 @@
 					} );
 				</script>
 				<!-- Create Building Modal -->
-				   <div id="addBuildling" class="modal modal-fixed-footer">
+				   <div id="createBuilding" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('building') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">

@@ -34,6 +34,12 @@ class CreateRoomTable extends Migration
                 ->on('tblNurseStation')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+
+            $table->foreign('intFloorIdFK')
+                ->references('intFloorId')
+                ->on('tblFloor')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

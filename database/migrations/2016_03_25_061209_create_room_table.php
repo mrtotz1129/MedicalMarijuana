@@ -14,7 +14,6 @@ class CreateRoomTable extends Migration
     {
         Schema::create('tblRoom', function(Blueprint $table) {
             $table->increments('intRoomId');
-            $table->string('strRoomName');
             $table->integer('intRoomTypeIdFK')
                 ->unsigned();
             $table->integer('intRoomStatus');

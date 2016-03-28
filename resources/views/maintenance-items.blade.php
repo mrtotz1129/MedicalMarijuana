@@ -18,10 +18,10 @@
 				                <th>Item ID</th>
 				                <th>Type</th>
 				                <th>Name</th>
+				                <th>Generic Name</th>
 				                <th>Details</th>
-				                <th>Supplier</th>
 				                <th>Price</th>
-				                <th>Status</th>
+				               	<th>Unit of Measurement</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>

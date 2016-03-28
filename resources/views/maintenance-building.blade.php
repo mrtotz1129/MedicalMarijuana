@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col s6">
-					<h4 class="thin indigo-text text-darken-2 col">Supplier Maintenance</h4>
+					<h4 class="thin indigo-text text-darken-2 col">Building Maintenance</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large indigo darken-2 left white-text tooltipped" 
@@ -15,7 +15,7 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Supplier ID</th>
+				                <th>Building ID</th>
 				                <th>Name</th>
 				                <th>Address</th>
 				                <th>Status</th>
@@ -39,17 +39,17 @@
 					    } );
 					} );
 				</script>
-				<!-- Create Fee Modal -->
+				<!-- Create Building Modal -->
 				   <div id="addBuildling" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
-				      <div class="modal-content">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('fee') !!}" enctype="multipart/form-data">
+				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add Building</h4>
+				              <h4 class="grey-text text-darken-1 center	">Create Builidng</h4>
 				        </div>
-			              <div class="aside aside1 z-depth-0">
-				                <div class="aside aside2 z-depth-0">
+				           
+				                <div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
@@ -83,16 +83,17 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
+				<!-- Update Building Modal -->
 				   <div id="updateBuilding" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('fee') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Supplier</h4>
+				              <h4 class="grey-text text-darken-1 center	">Update Builidng</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
+				           
+				                <div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">

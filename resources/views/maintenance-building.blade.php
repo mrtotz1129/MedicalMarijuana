@@ -30,6 +30,7 @@
 				        		
 				        		<td>{!! $building->strBuildingName !!}</td>
 				        		<td>{!! $building->strBuildingLocation !!}</td>
+				        		<td>{!! $building->intFloorDesc !!}</td>
 				        		<td>
 				        			<a href="javascript:updateId({!! $building->intBuildingId !!})" class="tooltipped" data-tooltip="Update Building Details"><i class="material-icons">mode_edit</i></a>
 				        			<a href="javascript:deactivateId({!! $building->intBuildingId !!})" class="tooltipped" data-tooltip="Deactivate Building Details"><i class="material-icons">delete</i></a>

@@ -32,6 +32,7 @@ Route::resource('items', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
 
 Route::get('logout', 'LogoutController@logout');
+Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
 
 Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');

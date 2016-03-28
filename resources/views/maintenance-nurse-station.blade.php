@@ -43,6 +43,7 @@
 				<!-- Create Nurse Modal -->
 				   <div id="create" class="modal modal-fixed-footer" style="width: 700px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    	<input type="hidden" id="nurseStationFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -57,7 +58,7 @@
 				                    </div>
 
 				                    <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="buildingCreateSelect" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
 				                          @foreach($buildingList as $building)
 				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
@@ -68,9 +69,6 @@
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Floor</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
@@ -78,9 +76,9 @@
 				                  <div class="input-field col s12">
 				                    <select multiple>
 				                      <option value="" disabled selected>Choose your option</option>
-				                      <option value="1">Nurse 1</option>
-				                      <option value="2">Nurse 2</option>
-				                      <option value="3">Nurse 3</option>
+				                      @foreach($nurses as $nurse)
+				                      <option value="{!! $nurse->intEmployeeId !!}">{!! $nurse->name !!}</option>
+				                      @endforeach
 				                    </select>
 				                    <label>Select Nurses</label>
 				                  </div>
@@ -208,6 +206,24 @@
 	    readURL(this);
 	});
 
+	document.getElementById('buildingCreateSelect').onchange = function() {
+		$.ajax({
+			url: "{!! url('building/changed') !!}",
+			type: 'POST',
+			data: {
+				_token: document.getElementById('nurseStationFormToken').value,
+				buildingId: this.value
+			},
+			success: function(data) {
+				for(var i = 0; i < data.length; i++) {
+					var option = document.createElement()
+				}
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	};
 </script>
  
 @endsection

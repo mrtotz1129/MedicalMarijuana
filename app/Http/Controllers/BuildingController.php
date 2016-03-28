@@ -20,7 +20,12 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
+        $buildings = \DB::table('tblBuilding')
+            ->join('tblFloor', 'tblFloor.intBuildingIdFK', '=', 'tblBuilding.intBuildingId')
+            ->distinct()
+            ->select('tblBuilding.intBuildingId', 'tblBuilding.strBuildingName', 'tblBuilding.strBuildingLocation',
+                \DB::raw('count("intFloorDesc") as intFloorDesc'))
+            ->groupBy('tblBuilding.strBuildingName')
             ->get();
 
         return view('maintenance-building')
@@ -54,12 +59,14 @@ class BuildingController extends Controller
 
         $building->save();
 
-        $floor = new FloorModel;
+        for($i = 0; $i < (int) $request->intFloorDesc; $i++) {
+            $floor = new FloorModel;
 
-        $floor->intBuildingIdFK =   $building->intBuildingId;
-        $floor->intFloorDesc    =   $request->intFloorDesc;
+            $floor->intBuildingIdFK =   $building->intBuildingId;
+            $floor->intFloorDesc    =   $i+1;
 
-        $floor->save();
+            $floor->save();
+        }
 
         return redirect('building');
     }

@@ -46,7 +46,8 @@ class RoomController extends Controller
     {
         $room = new RoomModel;
 
-        $room->
+        $room->intRoomTypeIdFK      =   $request->intRoomTypeIdFK;
+        $room->intNurseStationIdFK  =   $request->nurseStationSelect;   
     }
 
     /**

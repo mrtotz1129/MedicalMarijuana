@@ -25,7 +25,7 @@
                     <ul class="collapsible collapsible-accordion indigo darken-2">
                         <li class="bold {!! strpos(Request::url(), 'employee') !== false || strpos(Request::url(), 'fee') !== false || strpos(Request::url(), 'equipment') !== false || 
                         strpos(Request::url(), 'room') !== false || strpos(Request::url(), 'supplier') !== false || strpos(Request::url(), 'drug') !== false || strpos(Request::url(), 'discount')
-                         !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/settings-icon.png') !!}" width="20%" height="20%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
+                         !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/settings-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
                                      <li class="{!! strpos(Request::url(), 'building') !== false ? 'active' : '' !!}"><a href="{!! url('building') !!}" class="white-text">Building</a>
@@ -58,7 +58,7 @@
                 <li class="li-hover"><div class="divider  indigo lighten-2"></div></li>
                  <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/transaction-icon.png') !!}" width="20%" height="20%" align="center" style="margin-bottom: 5px;"> Transactions</a>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/transaction-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Transactions</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
                                     <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>

@@ -14,12 +14,12 @@ class CreateMachineresultTable extends Migration
     {
         Schema::create('tblMachineResult', function(Blueprint $table){
             $table->increments('intMachineResultId');
-            $table->string('strMachinePatientIdFK')
+            $table->integer('intPatientIdFK')
                 ->unsigned();
             $table->timestamps();
 
-            $table->foreign('strMachinePatientIdFK')
-                ->references('strMachinePatientId')
+            $table->foreign('intPatientIdFK')
+                ->references('intPatientId')
                 ->on('tblPatient')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');

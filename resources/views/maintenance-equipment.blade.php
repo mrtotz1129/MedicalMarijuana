@@ -15,7 +15,6 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Equipment ID</th>
 				                <th>Type</th>
 				                <th>Name</th>
 				                <th>Details</th>

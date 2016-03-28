@@ -38,10 +38,17 @@
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'active' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Drugs</a>
+                                    <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Items</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
+                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Building</a>
+                                    </li>
+                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Bed</a>
+                                    </li>
+                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Nurse Station</a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -62,7 +69,7 @@
                                     </li>
                                     <li><a href="{!! url('pharmacy') !!}" class="white-text">Pharmacy</a>
                                     </li>
-                                    <li><a href="{!! url('transaction/room') !!}" class="white-text">Room</a>
+                                    <li><a href="{!! url('pharmacy') !!}" class="white-text">Rehab</a>
                                     </li>
                                 </ul>
                             </div>

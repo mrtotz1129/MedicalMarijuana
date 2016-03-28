@@ -16,7 +16,7 @@ class DrugController extends Controller
      */
     public function index()
     {
-        return view('maintenance-drugs');
+        return view('maintenance-items');
     }
 
     /**

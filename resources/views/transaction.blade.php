@@ -36,8 +36,6 @@
                                     </li>
                                     <li><a href="layout-horizontal-menu.html" class="white-text">Pharmacy</a>
                                     </li>
-                                    <li><a href="layout-horizontal-menu.html" class="white-text">Room</a>
-                                    </li>
                                 </ul>
                             </div>
                         </li>

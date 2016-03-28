@@ -18,6 +18,7 @@
 				                <th>Supplier ID</th>
 				                <th>Name</th>
 				                <th>Address</th>
+				                <th>Status</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>

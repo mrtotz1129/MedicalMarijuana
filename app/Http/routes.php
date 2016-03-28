@@ -26,6 +26,9 @@ Route::resource('cashier', 'CashierController');
 Route::resource('laboratory', 'LabController');
 Route::resource('pharmacy', 'PharmacyController');
 Route::resource('transaction/room', 'RoomTransactionController');
+Route::resource('nurse-station', 'NurseStationController');
+Route::resource('bed', 'BedController');
+Route::resource('items', 'ItemsController');
 
 Route::get('logout', 'LogoutController@logout');
 

@@ -17,6 +17,8 @@ class CreatePatientTable extends Migration
             $table->string('strFirstName', 100);
             $table->string('strMiddleName', 100)
                 ->nullable();
+            $table->string('strMachinePatientId')
+                ->nullable();
             $table->string('strLastName', 100);
             $table->string('strGender', 10);
             $table->date('dateBirthday');

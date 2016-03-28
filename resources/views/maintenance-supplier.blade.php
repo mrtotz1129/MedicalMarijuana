@@ -18,10 +18,7 @@
 				                <!-- <th>Supplier ID</th> -->
 				                <th>Name</th>
 				                <th>Address</th>
-<<<<<<< HEAD
-=======
 				                <th>Contact Number</th>
->>>>>>> 3d38f1d97b6bab65ebd778b3d03c565925049c93
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -103,16 +100,11 @@
 				                        <input name="strSupplierAddress" placeholder="Ex: Aquino" id="supplierAddress" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="supplierAddress" class="active">Supplier Address<span class="red-text"><b>*</b></span></label>
 				                    </div>
-<<<<<<< HEAD
-				                    <div class="input-field col s10" style="margin-top: 28px !important; margin-left: 10px;">
-				                      <input name="" placeholder="Ex: 9268806979" type="text" id="createContact" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex: 9268806979<br/>( 10 numbers only )" pattern="^[0-9]{10,10}$">
-=======
 				                    <div class="input-field col s1">
 				                      <label style="margin-left: -3px; margin-top: 15px !important;" for="contact">(+63)</label>
 				                  	</div>
 				                    <div class="input-field col s10" style="margin-top: 28px !important; margin-left: 10px;">
 				                      <input name="strSupplierContactNo" placeholder="Ex: 9268806979" type="text" id="createContact" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex: 9268806979<br/>( 10 numbers only )" pattern="^[0-9]{10,10}$">
->>>>>>> 3d38f1d97b6bab65ebd778b3d03c565925049c93
 				                      <label for="createContact" style="margin-left: -35px;">Contact Number</label>
 				                  </div>
 				                </div>

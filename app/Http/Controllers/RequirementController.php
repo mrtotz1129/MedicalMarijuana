@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\RequirementRequest;
 use App\Http\Controllers\Controller;
+
+use App\RequirementModel;
 
 class RequirementController extends Controller
 {
@@ -16,7 +19,9 @@ class RequirementController extends Controller
      */
     public function index()
     {
-        //
+        $requirementList = RequirementModel::all()
+                                ->where('intRequirementStatus', 1);
+        return view('maintenance-requirements')->with('requirementList', $requirementList);
     }
 
     /**
@@ -35,9 +40,15 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequirementRequest $request)
     {
-        //
+        $requirement                        =          new RequirementModel;
+        $requirement->strRequirementName    =          $request->strRequirementName;
+        $requirement->txtRequirementDesc    =          $request->txtRequirementDesc;
+        $requirement->intRequirementStatus  =          1;
+        $requirement->save();
+
+        return redirect('requirement');
     }
 
     /**
@@ -48,7 +59,8 @@ class RequirementController extends Controller
      */
     public function show($id)
     {
-        //
+        $requirement = RequirementModel::find($id);
+        return response()->json($requirement);
     }
 
     /**
@@ -71,7 +83,11 @@ class RequirementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $requirement = RequirementModel::find($id);
+        $requirement->strRequirementName = $request->requirementName;
+        $requirement->txtRequirementDesc = $request->requirementDesc;
+        $requirement->intRequirementStatus = 1;
+        $requirement->save();
     }
 
     /**
@@ -82,6 +98,8 @@ class RequirementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $requirement = RequirementModel::find($id);
+        $requirement->intRequirementStatus = 0;
+        $requirement->save();
     }
 }

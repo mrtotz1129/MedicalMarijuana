@@ -26,7 +26,6 @@ class RoomRequest extends Request
     public function rules()
     {
         return [
-            'strRoomTypeDesc'   =>  'required|unique:tblRoom',
             'roomTypeCreate'    =>  'required'
         ];
     }
@@ -34,8 +33,6 @@ class RoomRequest extends Request
     public function messages()
     {
         return [
-            'strRoomTypeDesc.required'      =>  'Room name is required.',
-            'strRoomTypeDesc.unique'        =>  'Room name already exists.',
             'roomTypeCreate.required'       =>  'Room type is required.'
         ];
     }

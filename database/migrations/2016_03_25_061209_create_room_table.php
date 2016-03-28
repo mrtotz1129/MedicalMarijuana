@@ -22,6 +22,9 @@ class CreateRoomTable extends Migration
             $table->integer('intNurseStationIdFK')
                 ->unsigned()
                 ->nullable();
+            $table->timestamps();
+
+            $table->unique('strRoomName');
 
             $table->foreign('intRoomTypeIdFK')
                 ->references('intRoomTypeId')

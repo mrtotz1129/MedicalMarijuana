@@ -9,6 +9,7 @@ use App\Http\Requests\RoomRequest;
 use App\Http\Controllers\Controller;
 
 use App\RoomTypeModel;
+use App\RoomModel;
 
 class RoomController extends Controller
 {
@@ -43,7 +44,10 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-        //
+        $room = new RoomModel;
+
+        $room->intRoomTypeIdFK      =   $request->intRoomTypeIdFK;
+        $room->intNurseStationIdFK  =   $request->nurseStationSelect;   
     }
 
     /**

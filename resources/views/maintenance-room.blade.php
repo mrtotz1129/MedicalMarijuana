@@ -44,7 +44,7 @@
 				</script>
 				<!-- Create Room Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('room') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -55,7 +55,7 @@
 				              <!-- first -->
 				                <div class="row">
 				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">
@@ -84,11 +84,11 @@
 				                        <label for="roomID" class="active">Room ID<span class="red-text"><b>*</b></span></label>
 				                    </div> -->
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomName" class="active">Room Name</label>
+				                        <input name="strRoomTypeDesc" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2" required>
+				                        <label for="roomName" class="active">Room Name<span class="red-text">*</span></label>
 				                    </div>
 				                    <div class="input-field col s8">
-				                      <select class="browser-default" id="roomTypeCreate" name="selectedJob" required>
+				                      <select class="browser-default" id="roomTypeCreate" name="roomTypeCreate" required>
 				                          <option disabled selected>Type</option>
 				                          @foreach($roomTypes as $roomType)
 				                          <option value"{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
@@ -108,7 +108,7 @@
 				                  
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
+				                        <label for="roomDesc" class="active">Room Description</label>
 				                    </div>
 				                </div>
 				              </div>

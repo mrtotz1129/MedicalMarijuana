@@ -9,6 +9,7 @@
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
+					<a href="#viewNurse" class="modal-trigger btn btn-large green darken-2">VIEW NURSES</a>
 				</div>
 			</div>	
 		<div class="container">
@@ -153,29 +154,35 @@
 		</div>
 	</article>
 
-<!-- add option -->
-   <div id="addOption" class="modal" style="margin-top: 30px;">
+<!-- view nurse -->
+   <div id="viewNurse" class="modal" style="margin-top: 30px;">
      <form id="createOption">
        <div class="modal-content">
-         <h4>Add Another Position</h4>
-         <div class="row">
-           <div class="col s12">
-             <div class="input-field col s8 offset-s2">
-               <select id="addOptionSelect" class="browser-default" size="10">
-                 <c:forEach items="${empCategory}" var="name">
-                     <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-                   </c:forEach>
-               </select>
-             </div>
-             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addOptionName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">Position</label>
-             </div>
-             <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
-             </div>
-           </div>
+         <h4>Nurses in this Station</h4>
+         <div class="row container">
+          	<table id="example" class="display" cellspacing="0" width="100%">
+          	        <thead>
+          	            <tr>
+          	                <th>Nurse Name</th>
+          	            </tr>
+          	        </thead>
+          	        	
+          	    </table>
+          	</div>
+
+          	<script type="text/javascript">
+          		$(document).ready(function() {
+          		    $('#example').DataTable( {
+          		        dom: 'Bfrtip',
+          		        buttons: [
+          		            'copyHtml5',
+          		            'excelHtml5',
+          		            'csvHtml5',
+          		            'pdfHtml5'
+          		        ]
+          		    } );
+          		} );
+          	</script>
          </div>
        </div>
      </form>

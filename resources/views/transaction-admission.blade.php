@@ -128,7 +128,7 @@
 	                  </div>
 	                  <div class="input-field col s12">
 	                      <input type="email" name="strEmpEmail"  placeholder="Ex: salon@yahoo.com" class="validate tooltipped" required id="createEmail" data-position="bottom" data-delay="30" data-tooltip="Ex: salon@yahoo.com">
-	                      <label for="createEmail" class="active">Email<span class="red-text">*</span></label>
+	                      <label for="createEmail" class="active">Email</label>
 	                  </div>
 	                  <div class="input-field col s12">
 	                      <input name="strEmpAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="createAddress" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">

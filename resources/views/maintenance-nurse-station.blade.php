@@ -115,7 +115,8 @@
 
 				<!-- Update Fee Modal -->
 				   <div id="updateNurseStationModal" class="modal modal-fixed-footer" style="width: 700px !important;">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form id="updateNurseStationForm" class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    	<input type="hidden" id="updateNurseStationFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -127,7 +128,7 @@
 				                <!-- second -->
 				                  <div class="row">
 				                   <div class="input-field col s12">
-				                      <select class="browser-default" id="updateBuildingSelect" name="selectedJob" required>
+				                      <select class="browser-default" id="updateBuildingSelect" name="updateBuildingSelect" required>
 				                          <option disabled selected>Building</option>
 				                          @foreach($buildingList as $building)
 				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
@@ -136,18 +137,18 @@
 				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="floorUpdateSelect" name="floorUpdateSelect" required>
 				                          <option disabled selected>Floor</option>
 				                      </select>
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
 
 				                  <div class="input-field col s12">
-				                    <select multiple>
+				                    <select multiple id="nurseUpdateSelect" name="nurseUpdateSelect[]">
 				                      <option value="" disabled selected>Choose your option</option>
-				                      <option value="1">Nurse 1</option>
-				                      <option value="2">Nurse 2</option>
-				                      <option value="3">Nurse 3</option>
+				                     	@foreach($nurses as $nurse)
+				                      <option value="{!! $nurse->intEmployeeId !!}">{!! $nurse->name !!}</option>
+				                      @endforeach
 				                    </select>
 				                    <label>Select Nurses</label>
 				                  </div>
@@ -211,6 +212,8 @@
 </script>
 
 <script type="text/javascript">
+	var tempId = 0;
+
           		    var nurseTable = $('#example').DataTable( {
           		        dom: 'Bfrtip',
           		        buttons: [
@@ -264,6 +267,8 @@
 	};
 
 	function viewId(id)  {
+		console.log(id);
+
 		$.ajax({
 			url: "{!! url('nurse-station/changed') !!}",
 			type: "POST",
@@ -272,6 +277,8 @@
 				nurseStationId: id
 			},
 			success: function(data) {
+				console.log(data);
+
 				nurseTable.clear().draw();
 
 				for(var i = 0; i < data.length; i++) {
@@ -287,13 +294,33 @@
 	}
 
 	function updateId(id) {
+		tempId = id;
+
 		$.ajax({
 			url: "nurse-station/" + id,
 			type: "GET",
 			success: function(data) {
-				// document.getElementById('updateBuildingSelect').value = data.intBuildingId;
+				document.getElementById('updateBuildingSelect').value = data[0].intBuildingId;
 
-				// $('#updateNurseStationModal').openModal();
+				$('#floorUpdateSelect').empty();
+
+				for(var i = 0; i < data[1].length; i++) {
+					var option = document.createElement('option');
+					option.text = data[1][i].intFloorDesc;
+					option.value = data[1][i].intFloorId;
+
+					document.getElementById('floorUpdateSelect').appendChild(option);
+				}
+
+				document.getElementById('floorUpdateSelect').value = data[0].intFloorId;
+
+				for(var i = 0; i < data[2].length; i++) {
+					var nurseUpdate = document.getElementsByName('nurseUpdateSelect');
+
+					nurseUpdate.checked
+				}
+
+				$('#updateNurseStationModal').openModal();
 				console.log(data);
 			},
 			error: function(xhr) {
@@ -322,6 +349,27 @@
 			});
 		}
 	}
+
+	document.getElementById('updateNurseStationForm').onsubmit = function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: "nurse-station/" + tempId,
+			type: "POST",
+			data: {
+				_method: "PUT",
+				_token: document.getElementById('updateNurseStationFormToken').value,
+				formData: $('#updateNurseStationForm').serialize()
+			}, 
+			success: function(data) {
+				window.location.href = "{!! url('nurse-station') !!}";
+				// console.log(data);
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	};
 </script>
  
 @endsection

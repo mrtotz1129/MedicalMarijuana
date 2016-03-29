@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\BuildingModel;
 use App\EmployeeModel;
 use App\NurseStationModel;
+use App\FloorModel;
 
 class NurseStationController extends Controller
 {
@@ -34,9 +35,11 @@ class NurseStationController extends Controller
             ->join('tblFloor', 'tblFloor.intFloorId', '=', 'tblNurseStation.intFloorIdFK')
             ->join('tblBuilding', 'tblBuilding.intBuildingId', '=', 'tblFloor.intBuildingIdFK')
             ->leftJoin('tblNurseStationDetail', 'tblNurseStationDetail.intNurseStationIdFK', '=', 'tblNurseStation.intNurseStationId')
+            ->distinct()
             // ->join('tblEmployee', 'tblNurseStationDetail.intNurseIdFK', '=', 'tblEmployee.intEmployeeId')
             ->select('tblNurseStation.intNurseStationId', 'tblBuilding.strBuildingName', 'tblFloor.intFloorDesc')
             ->where('tblNurseStation.intNurseStationStatus', '>', 0)
+            ->groupBy('tblNurseStation.intNurseStationId')
             ->get();
 
         return view('maintenance-nurse-station')
@@ -98,10 +101,15 @@ class NurseStationController extends Controller
             ->where('tblNurseStation.intNurseStationId', $id)
             ->first();
 
-        // $floors = FloorModel::where('intBuildingIdFK', $details->intBuildingId)
-        //     ->get();
+        $floors = FloorModel::where('intBuildingIdFK', $details->intBuildingId)
+            ->get();
 
-        return response()->json([$details->intBuildingId, 21]);
+        $nurses = \DB::table('tblNurseStationDetail')
+            ->where('intNurseStationIdFK', $id)
+            ->where('intNurseStatus', '>', 0)
+            ->get();
+
+        return response()->json([$details, $floors, $nurses]);
     }
 
     /**
@@ -124,7 +132,35 @@ class NurseStationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $arrForm = [];
+        parse_str($request->formData, $arrForm);
+
+        $nurseStation = NurseStationModel::find($id);
+
+        $nurseStation->intFloorIdFK =   $arrForm['floorUpdateSelect'];
+
+        $nurseStation->save();
+
+        if(isset($arrForm['nurseUpdateSelect'])) {
+            $nurse = \DB::table('tblNurseStationDetail')
+                    ->where('intNurseStationIdFK', $id)
+                    ->first();
+
+            if(count($nurse) > 0) {
+                \DB::table('tblNurseStationDetail')
+                       ->where('intNurseStationIdFK', $id)
+                       ->delete();
+            } else {
+                for($i = 0; $i < count($arrForm['nurseUpdateSelect']); $i++) {
+                    \DB::table('tblNurseStationDetail')
+                        ->insert([
+                            'intNurseStationIdFK'   =>  $id,
+                            'intNurseIdFK'          =>  $arrForm['nurseUpdateSelect'][$i],
+                            'intNurseStatus'        =>  1
+                        ]);
+                }
+            }
+        }
     }
 
     /**

@@ -18,7 +18,7 @@ class NurseStationAjaxController extends Controller
             ->join('tblEmployee', 'tblEmployee.intEmployeeId', '=', 'tblNurseStationDetail.intNurseIdFK')
             ->select('tblEmployee.strFirstName', 'tblEmployee.strMiddleName', 'tblEmployee.strLastName')
             ->where('tblNurseStation.intNurseStationId', $request->nurseStationId)
-            ->first();
+            ->get();
 
         return response()->json($nurse);
     }

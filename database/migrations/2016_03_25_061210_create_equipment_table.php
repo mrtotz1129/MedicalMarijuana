@@ -14,15 +14,17 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('tblEquipment', function(Blueprint $table) {
             $table->increments('intEquipmentId');
-            $table->char('strEquipmentCode', 15);
+            $table->string('strEquipmentCode');
             $table->integer('intEquipmentCategoryIdFK')
                 ->unsigned();
             $table->integer('intRoomIdFK')
                 ->unsigned();
             $table->integer('intSupplierIdFK')
                 ->unsigned();
-            $table->timestamps();
+            $table->text('txtEquipmentImgPath')
+                ->nullable();
             $table->integer('intStatus');
+            $table->timestamps();
 
             $table->foreign('intEquipmentCategoryIdFK')
                 ->references('intEquipmentCategoryId')

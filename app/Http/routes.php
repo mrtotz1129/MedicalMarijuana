@@ -34,6 +34,7 @@ Route::resource('service', 'ServiceController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
+Route::post('floor/changed', 'FloorAjaxController@retrieveRooms');
 Route::post('nurse-station/changed', 'NurseStationAjaxController@retrieveNurse');
 Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation');
 
@@ -44,7 +45,7 @@ Route::post('position/create', 'PositionController@createPosition');
 Route::post('fee-type/create', 'FeeTypeController@createFeeType');
 Route::post('supplier/update', 'SupplierController@updateSupplier');
 Route::post('room-type/create', 'RoomTypeController@createRoomType');
+Route::post('equipment/create', 'EquipmentController@createEquipment');
 Route::get('test', function() {
 	return view('maintenance-building');
 });
-

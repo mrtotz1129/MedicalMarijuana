@@ -14,6 +14,7 @@ class CreatePatientTable extends Migration
     {
         Schema::create('tblPatient', function(Blueprint $table) {
             $table->increments('intPatientId');
+            $table->boolean('blnIsAdmitted');
             $table->string('strFirstName', 100);
             $table->string('strMiddleName', 100)
                 ->nullable();
@@ -22,6 +23,13 @@ class CreatePatientTable extends Migration
             $table->string('strLastName', 100);
             $table->string('strGender', 10);
             $table->date('dateBirthday');
+            $table->text('txtAddress');
+            $table->string('strEmail')
+                ->nullable();
+            $table->string('strContactNumber', 15)
+                ->nullable();
+            $table->text('txtPatientImgPath')
+                ->nullable();
             $table->integer('intStatus');
             $table->timestamps();
 

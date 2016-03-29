@@ -14,7 +14,7 @@
 			</div>	
 		<div class="container">
 		<br>
-				<table id="example" class="display" cellspacing="0" width="100%">
+				<table id="nurseList" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
 				                <th>Nurse Station ID</th>
@@ -30,7 +30,7 @@
 
 				<script type="text/javascript">
 					$(document).ready(function() {
-					    $('#example').DataTable( {
+					    $('#nurseList').DataTable( {
 					        dom: 'Bfrtip',
 					        buttons: [
 					            'copyHtml5',

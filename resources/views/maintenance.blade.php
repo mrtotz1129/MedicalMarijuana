@@ -1,7 +1,7 @@
 @extends('index')
 @section('body')
-<aside id="left-sidebar-nav" >
-                <ul style="width: 240px;" id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y indigo darken-2 white-text">
+<aside id="left-sidebar-nav" class="aside-1">
+                <ul style="width: 240px;" id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y indigo darken-1 white-text">
                 <li class="user-details cyan darken-1" style="background-image: url({!! asset('img/user-bg.png') !!});">
                 <div class="row">
                     <div class="col col s4 m4 l4">
@@ -22,7 +22,7 @@
                 </div>
                 </li>
                 <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion indigo darken-2">
+                    <ul class="collapsible collapsible-accordion indigo darken-1">
                         <li class="bold {!! strpos(Request::url(), 'employee') !== false || strpos(Request::url(), 'fee') !== false || strpos(Request::url(), 'equipment') !== false || 
                         strpos(Request::url(), 'room') !== false || strpos(Request::url(), 'supplier') !== false || strpos(Request::url(), 'drug') !== false || strpos(Request::url(), 'discount')
                          !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/settings-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
@@ -57,7 +57,7 @@
 
                 <li class="li-hover"><div class="divider  indigo lighten-2"></div></li>
                  <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion indigo darken-2">
+                    <ul class="collapsible collapsible-accordion indigo darken-1">
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/transaction-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Transactions</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">

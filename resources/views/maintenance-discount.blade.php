@@ -57,9 +57,13 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Senior's" id="discountType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Senior( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="discountType" class="active">Type</label>
-				                    </div>
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Discount Type</option>
+				                           <option value="1">Percent</option>
+				                           <option value="2">Amount</option>
+				                       </select>
+				                       <label for="slct1" class="active">Discount Type<span class="red-text">*</span></label>
+				                   </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
@@ -108,9 +112,8 @@
 				                     <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Discount Type</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           <option value="1">Percent</option>
+				                           <option value="2">Amount</option>
 				                       </select>
 				                       <label for="slct1" class="active">Discount Type<span class="red-text">*</span></label>
 				                   </div>

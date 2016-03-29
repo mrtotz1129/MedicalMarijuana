@@ -21,7 +21,11 @@ class DiscountController extends Controller
     {
         $requirementList = RequirementModel::all()
                                 ->where('intRequirementStatus', 1);
-        return view('maintenance-discount')->with('requirementList', $requirementList);
+        $discountList = DiscountModel::all()
+                                ->where('intDiscountStatus', 1);
+        return view('maintenance-discount')
+            ->with('requirementList', $requirementList)
+            ->with('discountList', $discountList);
     }
 
     /**
@@ -42,7 +46,28 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
+        $requirementList[] = $request->requirementList;
         $discount = new DiscountModel;
+
+        $discount->strDiscountName = $request->strDiscountName;
+        $discount->intDiscountTypeId = $request->intDiscountTypeId;
+        if ($discount->intDiscountTypeId == 1){
+            $discount->dblDiscountPercent = $request->dblDiscount;
+        }else{
+            $discount->dblDiscountAmount = $request->dblDiscount;
+        }
+        $discount->intDiscountStatus = 1;
+        $discount->save();
+
+       foreach ($requirementList as $requirement){
+            \DB::insert([
+                'intDiscountIdFK' => $discount->intDiscountId,
+                'intRequirementIdFK' => $requirement[0],
+                'intStatus' => 1
+                ]);
+        }
+
+        return redirect('discount');
     }
 
     /**

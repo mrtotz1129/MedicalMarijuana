@@ -18,12 +18,29 @@
 				            <tr>
 				            	<th>Type</th>
 				                <th>Name</th>
-				                <th>Details</th>
 				                <th>Discount</th>
 				              	<th>Requirement</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
+				        <tbody>
+				        	@foreach($discountList as $discount)
+				        	<tr>
+				        		<td>{!! $discount->discount_typee !!}</td>
+				        		<td>{!! $discount->strDiscountName !!}</td>
+				        		@if($discount->intDiscountTypeId === 1)
+				        			<td>{!! $discount->dblDiscountPercent !!}</td>
+				        		@else
+									<td>{!! $discount->dblDiscountAmount !!}</td>
+				        		@endif
+				        		<td></td>
+				        		<td>
+				        			<a href="javascript:updateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
+				        		</td>
+				        	</tr>
+				        	@endforeach
+				        </tbody>
 				        	
 				    </table>
 				</div>
@@ -43,7 +60,7 @@
 				</script>
 				<!-- Create Discount Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('discount') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -57,7 +74,7 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select class="browser-default" id="slct1" name="intDiscountTypeId" required>
 				                           <option disabled selected>Discount Type</option>
 				                           <option value="1">Percent</option>
 				                           <option value="2">Amount</option>
@@ -65,15 +82,15 @@
 				                       <label for="slct1" class="active">Discount Type<span class="red-text">*</span></label>
 				                   </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="strDiscountName" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="dblDiscount" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                    <select multiple>
+				                    <select multiple name="requirementList[]">
 				                      <option value="" disabled selected>Choose your option</option>
 				                      @foreach($requirementList as $requirement)
 										<option value="{!! $requirement->intRequirementId !!}">{!! $requirement->strRequirementName !!}</option>

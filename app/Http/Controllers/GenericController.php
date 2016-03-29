@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\RoomTypeModel;
-
-class AdmissionController extends Controller
+class GenericController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +16,7 @@ class AdmissionController extends Controller
      */
     public function index()
     {
-        $roomTypes = RoomTypeModel::all();
-
-        return view('transaction-admission')
-            ->with('roomTypes', $roomTypes);
+        //
     }
 
     /**

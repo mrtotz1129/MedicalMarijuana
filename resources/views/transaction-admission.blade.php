@@ -1,7 +1,7 @@
 @extends('maintenance')
 @section('article')
 <article class="white main z-depth-1">
-	<div class="row indigo darken-2" style="margin-left: -10px; border-top-right-radius: 10px;">
+	<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
 				<div class="col s6">
 					<h4 class="thin white-text">Admission</h4>
 				</div>
@@ -11,7 +11,7 @@
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
-		<div class="container">
+		<div class="container" style="margin-left: -30px;">
 		<br>
     	<table id="example" class="display" cellspacing="0" width="100%">
             <thead>
@@ -57,7 +57,7 @@
 	              <!-- first -->
 	                <div class="row">
 	                  <div class="input-field col s12">
-	                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
+	                       <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 	                   </div>
 	                   <div class="input-field col s12">
 	                       <div class="file-field input-field">
@@ -76,6 +76,14 @@
 	                         <input name="group1" type="radio" id="test2" />
 	                         <label for="test2">In Patient</label>
 	                   </p>
+	                   <br>
+	                    <div class="input-field col s12">
+	                       <select class="browser-default" id="doctorSelect" name="selectedJob" required>
+	                           <option disabled selected>Choose Doctor</option>
+	                           <option value=""></option>
+	                       </select>
+	                       <label for="doctorSelect" class="active">Available Doctor</label>
+	                   	</div>
 	   
 	                </div>
 	              </div>
@@ -166,16 +174,16 @@
             <div class="input-field col s12">
                <select class="browser-default" id="roomTypeSelect" name="selectedJob" required>
                    <option disabled selected>Room</option>
-               
-                   <option value=""></option>
-              
+                   @foreach($roomTypes as $roomType)
+                   <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+                   @endforeach
                </select>
                <label for="roomTypeSelect" class="active">Room Type<span class="red-text">*</span></label>
            	</div>
 
            	<div class="input-field col s12">
                <select class="browser-default" id="roomNumberSelect" name="selectedJob" required>
-                   <option disabled selected>Room Numer</option>
+                   <option disabled selected>Room Number</option>
               
                    <option value=""></option>
                </select>
@@ -193,6 +201,24 @@
 </article>
 
 <script type="text/javascript">
-	
+	document.getElementById('roomTypeSelect').onchange = function()
+	{
+		$.ajax({
+			url: "{!! url('') !!}",
+			type: "POST",
+			data: 
+			{
+				_token: document.getElementById('')
+			},
+			success: function(data)
+			{
+
+			},
+			error: function(xhr)
+			{
+				console.log(xhr);
+			}
+		});
+	};
 </script>
 @endsection

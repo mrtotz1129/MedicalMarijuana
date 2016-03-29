@@ -1,7 +1,7 @@
 @extends('maintenance')
 @section('article')
 	<article class="white main z-depth-1">
-		<div class="row indigo darken-2" style="margin-left: -10px; border-top-right-radius: 10px;">
+		<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
 				<div class="col s6">
 					<h4 class="thin white-text">Nurse Station Maintenance</h4>
 				</div>
@@ -12,7 +12,7 @@
 					<!-- <a href="#viewNurse" class="modal-trigger btn btn-large green darken-2">VIEW NURSES</a> -->
 				</div>
 			</div>	
-		<div class="container">
+		<div class="container" style="margin-left: -30px;">
 		<br>
 				<table id="nurseList" class="display" cellspacing="0" width="100%">
 				        <thead>

@@ -13,6 +13,7 @@ use App\RoomModel;
 use App\NurseStationModel;
 use App\BuildingModel;
 use App\RoomPriceModel;
+use App\BedModel;
 
 class RoomController extends Controller
 {
@@ -78,7 +79,11 @@ class RoomController extends Controller
 
         for($i = 0; $i < (int) $request->intNumBed; $i++)
         {
-            
+            $bed = new BedModel;
+            $bed->intRoomIdFK   = $room->intRoomId;
+            $bed->intBedStatus  =   1;
+
+            $bed->save();
         }
 
         return redirect('room');

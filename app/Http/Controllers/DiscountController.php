@@ -59,11 +59,12 @@ class DiscountController extends Controller
         $discount->intDiscountStatus = 1;
         $discount->save();
 
-       foreach ($requirementList as $requirement){
-            \DB::insert([
-                'intDiscountIdFK' => $discount->intDiscountId,
-                'intRequirementIdFK' => $requirement[0],
-                'intStatus' => 1
+       foreach ($requirementList[0] as $requirement){
+            \DB::table('tblDiscountDetail')
+                ->insert([
+                    'intDiscountIdFK' => $discount->intDiscountId,
+                    'intRequirementIdFK' => $requirement,
+                    'intStatus' => 1
                 ]);
         }
 

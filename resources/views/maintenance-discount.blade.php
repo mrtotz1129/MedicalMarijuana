@@ -26,14 +26,14 @@
 				        <tbody>
 				        	@foreach($discountList as $discount)
 				        	<tr>
-				        		<td>{!! $discount->discount_typee !!}</td>
+				        		<td>{!! $discount->discount_type !!}</td>
 				        		<td>{!! $discount->strDiscountName !!}</td>
 				        		@if($discount->intDiscountTypeId === 1)
 				        			<td>{!! $discount->dblDiscountPercent !!}</td>
 				        		@else
 									<td>{!! $discount->dblDiscountAmount !!}</td>
 				        		@endif
-				        		<td><a href="javascript:viewRequirement({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">search</i></a></td>
+				        		<td><a href="javascript:viewRequirement({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="View Requirements"><i class="material-icons">search</i></a></td>
 				        		<td>
 				        			<a href="javascript:updateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
 				        			<a href="javascript:deactivateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
@@ -167,7 +167,7 @@
 				</div>
 
 					<!-- View Requirement -->
-				   <div id="viewRequirement" class="modal modal-fixed-footer">
+				   <div id="viewRequirementModal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -267,6 +267,30 @@
 	$("#fileUpload").change(function(){
 	    readURL(this);
 	});
+
+	function viewRequirement(id){
+		alert(id);
+		$.ajax({
+			type: "GET",
+			url: "view-requirement",
+			data: {
+				'id' : id
+			},
+			dataType: "json",
+			async: true,
+			success: function(data){
+				alert(data[0].strRequirementName);
+				var table = $('#requirements').DataTable();
+				$.each(data, function(i, requirement){
+					table.row.add([requirement.strRequirementName]).draw(false);
+				});
+				$('#viewRequirementModal').openModal();
+			},
+			error: function(xhr){
+				alert('error');
+			}
+		});
+	}
 
 </script>
  

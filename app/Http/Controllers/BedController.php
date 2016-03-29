@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\BuildingModel;
+
 class BedController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class BedController extends Controller
      */
     public function index()
     {
-        return view('maintenance-bed');
+        $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
+            ->get();
+
+        return view('maintenance-bed')
+            ->with('buildings', $buildings);
     }
 
     /**

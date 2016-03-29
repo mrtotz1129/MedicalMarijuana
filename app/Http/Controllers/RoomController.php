@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\RoomTypeModel;
 use App\RoomModel;
 use App\NurseStationModel;
+use App\BuildingModel;
 
 class RoomController extends Controller
 {
@@ -22,12 +23,16 @@ class RoomController extends Controller
     public function index()
     {
         $roomTypes = RoomTypeModel::all();
-        $nurseStations = NurseStationModel::where('intFloorStatus', '>', 0)
+        $nurseStations = NurseStationModel::where('intNurseStationStatus', '>', 0)
+            ->get();
+
+        $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
             ->get();
 
         return view('maintenance-room')
             ->with('roomTypes', $roomTypes)
-            ->with('nurseStations', $nurseStations);
+            ->with('nurseStations', $nurseStations)
+            ->with('buildings', $buildings);
     }
 
     /**

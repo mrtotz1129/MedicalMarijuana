@@ -92,7 +92,16 @@ class NurseStationController extends Controller
      */
     public function show($id)
     {
-        //
+        $details = \DB::table('tblNurseStation')
+            ->join('tblFloor', 'tblFloor.intFloorId', '=', 'tblNurseStation.intFloorIdFK')
+            ->join('tblBuilding', 'tblBuilding.intBuildingId', '=', 'tblFloor.intBuildingIdFK')
+            ->where('tblNurseStation.intNurseStationId', $id)
+            ->first();
+
+        // $floors = FloorModel::where('intBuildingIdFK', $details->intBuildingId)
+        //     ->get();
+
+        return response()->json([$details->intBuildingId, 21]);
     }
 
     /**

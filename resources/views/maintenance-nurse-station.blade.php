@@ -114,22 +114,20 @@
 				</div>
 
 				<!-- Update Fee Modal -->
-				   <div id="updateNurseStationModal" class="modal modal-fixed-footer" style="width: 70px !important;">
+				   <div id="updateNurseStationModal" class="modal modal-fixed-footer" style="width: 700px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Supplier</h4>
+				              <h4 class="grey-text text-darken-1 center	">Update Nurse Station</h4>
 				        </div>
 				              
-
-
 				                <div class="aside aside2 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                   <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="updateBuildingSelect" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
 				                          @foreach($buildingList as $building)
 				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
@@ -140,9 +138,6 @@
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Floor</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
@@ -163,7 +158,7 @@
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
 				      </div>
 				      </form>
 				</div>
@@ -292,7 +287,19 @@
 	}
 
 	function updateId(id) {
-		$('#updateNurseStationModal').openModal();
+		$.ajax({
+			url: "nurse-station/" + id,
+			type: "GET",
+			success: function(data) {
+				// document.getElementById('updateBuildingSelect').value = data.intBuildingId;
+
+				// $('#updateNurseStationModal').openModal();
+				console.log(data);
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		})
 	}
 
 	function deactivateId(id) {

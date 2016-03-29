@@ -48,6 +48,7 @@
 				   </div>
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content">
+				      <input type="hidden" id="bedCreateFormToken" value="{!! csrf_token() !!}" />
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				                <div class="aside aside1 z-depth-0">
@@ -57,14 +58,16 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                   <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="buildingSelect" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
-				                         
+				                         @foreach($buildings as $building)
+				                         <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                         @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="floorCreateSelect" name="selectedJob" required>
 				                          <option disabled selected>Floor</option>
 				                         
 				                      </select>
@@ -209,6 +212,31 @@
 	    readURL(this);
 	});
 
+
+	document.getElementById('buildingSelect').onchange = function() {
+		$.ajax({
+			url: "{!! url('building/changed') !!}",
+			type: 'POST',
+			data: {
+				_token: document.getElementById('bedCreateFormToken').value,
+				buildingId: this.value
+			},
+			success: function(data) {
+				$('#floorCreateSelect').empty();
+
+				for(var i = 0; i < data.length; i++) {
+					var option = document.createElement('option');
+					option.text = data[i].intFloorDesc;
+					option.value = data[i].intFloorId;
+
+					document.getElementById('floorCreateSelect').appendChild(option);
+				}
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	}
 </script>
  
 @endsection

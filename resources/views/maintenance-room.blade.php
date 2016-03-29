@@ -64,7 +64,7 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Building</option>
-				                           @foreach($buildingList as $building)
+				                           @foreach($buildings as $building)
 				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
 				                           @endforeach
 				                       </select>
@@ -73,9 +73,7 @@
 				                   <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Floor</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                   </div>
@@ -87,9 +85,7 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Room Type</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
 				                   </div>
@@ -101,9 +97,7 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Nurse Station</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Nurse Station<span class="red-text">*</span></label>
 				                   </div>
@@ -143,18 +137,14 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Building</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Floor</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                   </div>
@@ -166,9 +156,7 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Room Type</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                           
 				                       </select>
 				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
 				                   </div>
@@ -180,9 +168,7 @@
 				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Nurse Station</option>
-				                           @foreach($buildingList as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
+				                         
 				                       </select>
 				                       <label for="slct1" class="active">Nurse Station<span class="red-text">*</span></label>
 				                   </div>

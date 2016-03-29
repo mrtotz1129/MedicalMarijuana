@@ -3,7 +3,7 @@
 <article class="white main z-depth-1">
 	<div class="row indigo lighten-1" style="margin-left: -10px; border-top-right-radius: 10px;">
 				<div class="col s6">
-					<h4 class="thin white-text">Admisson</h4>
+					<h4 class="thin white-text">Admission</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 

@@ -43,6 +43,7 @@ Route::post('position/create', 'PositionController@createPosition');
 Route::post('fee-type/create', 'FeeTypeController@createFeeType');
 Route::post('supplier/update', 'SupplierController@updateSupplier');
 Route::post('room-type/create', 'RoomTypeController@createRoomType');
+Route::post('equipment/create', 'EquipmentController@createEquipment');
 Route::get('test', function() {
 	return view('maintenance-building');
 });

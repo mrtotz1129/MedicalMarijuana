@@ -21,8 +21,10 @@ class CreateEquipmentTable extends Migration
                 ->unsigned();
             $table->integer('intSupplierIdFK')
                 ->unsigned();
-            $table->timestamps();
+            $table->text('txtEquipmentImgPath')
+                ->nullable();
             $table->integer('intStatus');
+            $table->timestamps();
 
             $table->foreign('intEquipmentCategoryIdFK')
                 ->references('intEquipmentCategoryId')

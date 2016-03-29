@@ -31,7 +31,7 @@ Route::resource('bed', 'BedController');
 Route::resource('item', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
 Route::resource('service', 'ServiceController');
-Route::resource('uom', 'UomController');
+Route::resource('measurement', 'UomController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

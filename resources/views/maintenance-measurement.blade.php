@@ -20,6 +20,7 @@
 				                <th>Name</th>
 				                <th>Abbreviation</th>
 				                <th>Equivalent</th>
+				                <th>Action</th>
 				            </tr>
 				        </thead>
 				        	
@@ -96,8 +97,8 @@
 
 				<!-- Update Measurement Modal -->
 				   <div id="updateModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="updateFeeForm" action="createEmployee" enctype="multipart/form-data">
-				      <input type="hidden" id="updateFeeFormToken" value="{!! csrf_token() !!}" />
+				    <form class="col s12 form" method="post" id="updateMeasurementForm" action="createEmployee" enctype="multipart/form-data">
+				      <input type="hidden" id="updateMeasurementFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -110,16 +111,16 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    	<div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="measurementName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="measurementName" class="active">Measurement Name<span class="red-text"><b>*</b></span></label>
+				                        <input name="" placeholder="Ex: Benigno" id="measurementName_update" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
+				                        <label for="measurementName_update" class="active">Measurement Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="MeasurementAbbv" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="MeasurementAbbv" class="active">Measurement Abbreviation<span class="red-text"><b>*</b></span></label>
+				                        <input name="" placeholder="Ex: Aquino" id="measurementAbbrev_update" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="measurementAbbrev_update" class="active">Measurement Abbreviation<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equivalent" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equivalent" class="active">Equivalent per Piece<span class="red-text"><b>*</b></span></label>
+				                        <input name="" placeholder="Ex: Aquino" id="equivalent_update" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="equivalent_update" class="active">Equivalent per Piece<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
 				              </div>
@@ -145,7 +146,7 @@
       <p>Are you sure?</p>
     </div>
     <div class="modal-footer">
-      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_fee_btn">Yes</a>
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_measurement_btn">Yes</a>
       <a class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
     </div>
 </div>
@@ -154,14 +155,12 @@
 <script type="text/javascript">
 	function updateId(id) {
 		$.ajax({
-			url: 'fee/' + id,
+			url: 'measurement/' + id,
 			type: 'GET',
 			success: function(data) {
-				document.getElementById('slct1').value = data.intFeeTypeIdFK;
-				document.getElementById('feeName').value = data.strFeeName;
-				document.getElementById('feePrice').value = data.dblPrice;
-				document.getElementById('remarksEdit').value = data.txtFeeDesc;
-				document.getElementById('remarksEditLabel').setAttribute('class', 'active');
+				document.getElementById('measurementName_update').value = data.strUnitOfMeasurementName;
+				document.getElementById('measurementAbbrev_update').value = data.strUnitOfMeasurementAbbrev;
+				document.getElementById('equivalent_update').value = data.dblEquivalent;
 
 				$('#updateModal').openModal();
 			},
@@ -170,22 +169,21 @@
 			}
 		});
 
-		$('#updateFeeForm').on('submit', function(event) {
+		$('#updateMeasurementForm').on('submit', function(event) {
 			event.preventDefault();
 
 			$.ajax({
-				url: "fee/" + id,
+				url: "measurement/" + id,
 				type: "POST",
 				data: {
 					_method: "PUT",
-					_token: document.getElementById('updateFeeFormToken').value,
-					feeType: document.getElementById('slct1').value,
-					feeName: document.getElementById('feeName').value,
-					feePrice: document.getElementById('feePrice').value,
-					feeDesc: document.getElementById('remarksEdit').value
+					_token: document.getElementById('updateMeasurementFormToken').value,
+					strMeasurementName: document.getElementById('measurementName_update').value,
+					strMeasurementAbbrev: document.getElementById('measurementAbbrev_update').value,
+					dblEquivalent: document.getElementById('equivalent_update').value
 				},
 				success: function(data) {
-					window.location.href = "{!! url('fee') !!}";
+					window.location.href = "{!! url('measurement') !!}";
 				},
 				error: function(xhr) {
 					console.log(xhr);
@@ -197,16 +195,16 @@
 	function deactivateId(id) {
 		$('#deactivate_fee_modal').openModal();
 
-		$('#deactivate_fee_btn').on('click', function() {
+		$('#deactivate_measurement_btn').on('click', function() {
 			$.ajax({
-				url: "fee/" + id,
+				url: "measurement/" + id,
 				type: "POST",
 				data: {
 					_method: "DELETE",
-					feeId: id
+					measurementId: id
 				},
 				success: function(data) {
-					window.location.href = "{!! url('fee') !!}";
+					window.location.href = "{!! url('measurement') !!}";
 				},
 				error: function(xhr) {
 					console.log(xhr);
@@ -214,35 +212,6 @@
 			});
 		});
 	}
-
-	$('#fee_create_form').on('submit', function(event) {
-		event.preventDefault();
-
-		$.ajax({
-			url: "{!! url('fee-type/create') !!}",
-			type: "POST",
-			data: {
-				_token: document.getElementById('fee_create_token').value,
-				feeTypeName: document.getElementById('fee_type_create').value
-			},
-			success: function(data) {
-				var option = document.createElement('option');
-				option.value = data.intFeeTypeId;
-				option.text = data.strFeeTypeName;
-				document.getElementById('feeTypeSelect').appendChild(option);
-
-				option = document.createElement('option');
-				option.value = data.intFeeTypeId;
-				option.text = data.strFeeTypeName;
-				document.getElementById('feeTypeCreateSelect').appendChild(option);
-
-				$('#feeTypeCreateModal').closeModal();
-			},
-			error: function(xhr) {
-				console.log(xhr);
-			}
-		});
-	});	
 </script>
  
 @endsection

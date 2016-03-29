@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\UomRequest;
 use App\Http\Controllers\Controller;
 
 use App\UOMModel;
@@ -18,7 +18,8 @@ class UomController extends Controller
      */
     public function index()
     {
-        $measurementList = UOMModel::all();
+        $measurementList = UOMModel::all()
+                            ->where('intStatus', 1);
         return view('maintenance-measurement')
                 ->with('measurementList', $measurementList);
     }

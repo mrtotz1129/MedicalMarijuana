@@ -53,27 +53,6 @@
 				              <h4 class="grey-text text-darken-1 center	">Create Room</h4>
 				        </div>
 
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
-
 
 				                <div class="aside aside2 z-depth-0">
 
@@ -82,44 +61,21 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    <!-- <div class="input-field col s12">
+				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Benigno" id="roomID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
 				                        <label for="roomID" class="active">Room ID<span class="red-text"><b>*</b></span></label>
-				                    </div> -->
-				                    <!-- <div class="input-field col s12">
-				                        <input name="strRoomTypeDesc" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2" required>
-				                        <label for="roomName" class="active">Room Name<span class="red-text">*</span></label>
-				                    </div> -->
-				                    <div class="input-field col s8">
-				                      <select class="browser-default" id="roomTypeCreate" name="roomTypeCreate" required>
-				                          <option disabled selected>Type</option>
-				                          @foreach($roomTypes as $roomType)
-				                          <option value"{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
-				                          @endforeach
-				                      </select>
-				                      <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
-				                  </div>
-				                  <div class="input-field col s4">
-				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
-				                  </div>
-				                  <div class="input-field col s8">
-				                      <select class="browser-default" id="slct1" name="selectedJob">
-				                          <option disabled selected>Choose option</option>
-				                          <option value="Nurse Station 1">Nurse Station 1</option>
-
-
-				                      </select>
-				                      <label for="slct1" class="active">Nurse Station</label>
-				                  </div>
-				                  
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: 5" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
 				                    </div>
-
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="noOfBed" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="noOfBed" class="active">Numbers of bed<span class="red-text"><b>*</b></span></label>
+				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="roomName" class="active">Room Name</label>
+				                    </div>
+				                    <div class="input-field col s12">
+				                        <input name="strEmpLastName" placeholder="Ex: Aquino" id="roomType" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="roomType" class="active">Room Type<span class="red-text"><b>*</b></span></label>
+				                    </div>
+				                    <div class="input-field col s12">
+				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
 				              </div>

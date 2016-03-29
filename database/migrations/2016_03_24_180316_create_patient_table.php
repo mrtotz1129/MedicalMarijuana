@@ -14,6 +14,7 @@ class CreatePatientTable extends Migration
     {
         Schema::create('tblPatient', function(Blueprint $table) {
             $table->increments('intPatientId');
+            $table->boolean('blnIsAdmitted');
             $table->string('strFirstName', 100);
             $table->string('strMiddleName', 100)
                 ->nullable();

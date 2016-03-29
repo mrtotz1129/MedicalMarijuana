@@ -82,13 +82,17 @@
 				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomName" class="active">Room Name</label>
 				                    </div>
-				                    <div class="input-field col s12">
+				                    <div class="input-field col s8">
 				                       <select class="browser-default" id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Room Type</option>
 				                           
 				                       </select>
 				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
 				                   </div>
+
+				                   <div class="input-field col s4">
+				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
+				                  </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>

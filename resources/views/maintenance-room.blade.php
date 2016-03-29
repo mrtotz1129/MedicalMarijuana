@@ -18,10 +18,8 @@
 				            <tr>
 				                <th>Room ID</th>
 				                <th>Type</th>
-				                <th>Name</th>
 				                <th>Details</th>
 				                <th>Price</th>
-				                <th>Status</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -45,6 +43,7 @@
 				<!-- Create Room Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('room') !!}" enctype="multipart/form-data">
+				    <input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
 
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -62,7 +61,7 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select class="browser-default" id="buildingCreate" name="selectedJob" required>
 				                           <option disabled selected>Building</option>
 				                           @foreach($buildings as $building)
 				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
@@ -71,35 +70,48 @@
 				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                   </div>
 				                   <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select class="browser-default" id="floorCreateSelect" name="floorCreateSelect" required>
 				                           <option disabled selected>Floor</option>
 				                           
 				                       </select>
 				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                   </div>
 
-				                    <div class="input-field col s12">
+				                    <!-- <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomName" class="active">Room Name</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                    </div> -->
+				                    <div class="input-field col s8">
+				                       <select class="browser-default" id="roomTypeCreateSelect" name="roomTypeCreate" required>
 				                           <option disabled selected>Room Type</option>
-				                           
+				                           @foreach($roomTypes as $roomType)
+				                           <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+				                           @endforeach
 				                       </select>
 				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
 				                   </div>
+
+				                   <div class="input-field col s4">
+				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
+				                  </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
+				                        <input name="txtRoomDescription" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="roomDesc" class="active">Room Description</label>
 				                    </div>
 
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
+				                       <select class="browser-default" id="slct1" name="nurseStationSelect">
 				                           <option disabled selected>Nurse Station</option>
-				                           
+				                           @foreach($nurseStations as $nurseStation)
+				                           <option value="{!! $nurseStation->intNurseStationId !!}">{!! $nurseStation->intNurseStationId !!}</option>
+				                           @endforeach
 				                       </select>
-				                       <label for="slct1" class="active">Nurse Station<span class="red-text">*</span></label>
+				                       <label for="slct1" class="active">Nurse Station</label>
 				                   </div>
 
 
@@ -163,6 +175,11 @@
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
 				                    <div class="input-field col s12">
@@ -263,7 +280,32 @@
 	    readURL(this);
 	});
 
-	$('#addRoomTypeForm').on('submit', function(event) {
+	document.getElementById('buildingCreate').onchange = function() {
+		$.ajax({
+			url: "{!! url('building/changed') !!}",
+			type: 'POST',
+			data: {
+				_token: document.getElementById('createRoomFormToken').value,
+				buildingId: this.value
+			},
+			success: function(data) {
+				$('#floorCreateSelect').empty();
+
+				for(var i = 0; i < data.length; i++) {
+					var option = document.createElement('option');
+					option.text = data[i].intFloorDesc;
+					option.value = data[i].intFloorId;
+
+					document.getElementById('floorCreateSelect').appendChild(option);
+				}
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	};
+	
+	document.getElementById('addRoomTypeForm').onsubmit = function(event) {
 		event.preventDefault();
 
 		$.ajax({
@@ -278,7 +320,7 @@
 				option.text = data.strRoomTypeDesc;
 				option.value = data.intRoomTypeId;
 
-				document.getElementById('roomTypeCreate').appendChild(option);
+				document.getElementById('roomTypeCreateSelect').appendChild(option);
 
 				option = document.createElement('option');
 				option.text = data.strRoomTypeDesc;
@@ -286,13 +328,14 @@
 
 				document.getElementById('roomTypeList').appendChild(option); 
 
+				document.getElementById('roomTypeNameInput').value = null;
 				$('#addRoomTypeModal').closeModal();
 			},
 			error: function(xhr) {
 				console.log(xhr);
 			}
 		});
-	});
+	};
 </script>
  
 @endsection

@@ -29,10 +29,15 @@ class RoomController extends Controller
         $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
             ->get();
 
+        // $rooms = \DB::table('tblRoom')
+            // ->
+            // ->select('tblRoom.intRoomId', 'tblRoomType.strRoomTypeDesc', 'tblRoom.txtRoomDescription', '')
+
         return view('maintenance-room')
             ->with('roomTypes', $roomTypes)
             ->with('nurseStations', $nurseStations)
-            ->with('buildings', $buildings);
+            ->with('buildings', $buildings)
+            ;
     }
 
     /**
@@ -56,9 +61,14 @@ class RoomController extends Controller
         $room = new RoomModel;
 
         $room->intRoomTypeIdFK      =   $request->roomTypeCreate;
-        $room->intNurseStationIdFK  =   $request->nurseStationSelect;
-        // $room->intFloorIdFK         =   $request->; 
+        $room->intNurseStationIdFK  =   $request->nurseStationSelect != null ? $request->nurseStationSelect : null;
+        $room->intFloorIdFK         =   $request->floorCreateSelect; 
         $room->intRoomStatus        =   1;  
+        $room->txtRoomDescription   =   $request->txtRoomDescription != null ? $request->txtRoomDescription : null;
+
+        $room->save();
+
+        return redirect('room');
     }
 
     /**

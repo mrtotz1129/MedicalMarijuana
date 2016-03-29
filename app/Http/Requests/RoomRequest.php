@@ -26,14 +26,17 @@ class RoomRequest extends Request
     public function rules()
     {
         return [
-            'roomTypeCreate'    =>  'required'
+            'roomTypeCreate'    =>  'required',
+            'dblPrice'          =>  'required|numeric'
         ];
     }
 
     public function messages()
     {
         return [
-            'roomTypeCreate.required'       =>  'Room type is required.'
+            'roomTypeCreate.required'       =>  'Room type is required.',
+            'dblPrice.required'             =>  'Room price is required.',
+            'dblPrice.numeric'              =>  'Room price should be numeric.'
         ];
     }
 

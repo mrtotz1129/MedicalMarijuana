@@ -45,6 +45,8 @@
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                                     </li>
+                                     <li class="{!! strpos(Request::url(), 'requirement') !== false ? 'active' : '' !!}"><a href="{!! url('requirement') !!}" class="white-text">Requirements</a>
+                                    </li>
                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'employee') !== false ? 'active' : '' !!}"><a href="{!! url('employee') !!}" class="white-text">Employee</a>

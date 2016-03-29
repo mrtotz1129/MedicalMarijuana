@@ -103,11 +103,11 @@
 				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
 				                  </div>
 				                  <div class="input-field col s8">
-				                      <select class="browser-default" id="slct1" name="selectedJob">
+				                      <select class="browser-default" id="slct1" name="nurseStationSelect">
 				                          <option disabled selected>Choose option</option>
-				                          <option value="Nurse Station 1">Nurse Station 1</option>
-
-
+				                          @foreach($nurseStations as $nurseStation)
+				                          <option value="{!! $nurseStation->intFloorIdFK !!}">{!! $nurseStation->intNurseStationId !!}</option>
+				                          @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Nurse Station</label>
 				                  </div>

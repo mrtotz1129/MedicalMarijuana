@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\BuildingModel;
 use App\EmployeeModel;
+use App\NurseStationModel;
 
 class NurseStationController extends Controller
 {
@@ -52,7 +53,25 @@ class NurseStationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nurseStation = new NurseStationModel;
+
+        $nurseStation->intFloorIdFK     =   $request->floorCreateSelect;
+        $nurseStation->intFloorStatus   =   1;
+
+        $nurseStation->save();
+
+        if($request->nurses != null) {
+            for($i = 0; $i < count($request->nurses); $i++) {
+                \DB::table('tblNurseStationDetail')
+                    ->insert([
+                        'intNurseStationIdFk'   =>  $nurseStation->intNurseStationId,
+                        'intNurseIdFk'          =>  $request->nurses[$i],
+                        'intNurseStatus'        =>  1
+                    ]);   
+            }
+        }
+
+        return redirect('nurse-station');
     }
 
     /**

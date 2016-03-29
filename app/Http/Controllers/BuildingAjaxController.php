@@ -15,9 +15,9 @@ class BuildingAjaxController extends Controller
    {
         $floors = \DB::table('tblFloor')
             ->join('tblBuilding', 'tblBuilding.intBuildingId', '=', 'tblFloor.intBuildingIdFK')
-            ->select('tblFloor.intFloorDesc')
+            ->select('tblFloor.intFloorId', 'tblFloor.intFloorDesc')
             ->where('tblBuilding.intBuildingId', $request->buildingId)
-            ->first();
+            ->get();
 
         return response()->json($floors);
    }

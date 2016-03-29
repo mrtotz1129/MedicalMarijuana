@@ -16,7 +16,7 @@ class BedController extends Controller
      */
     public function index()
     {
-        return view('maintenance-bed')
+        return view('maintenance-bed');
     }
 
     /**

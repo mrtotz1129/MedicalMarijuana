@@ -16,7 +16,6 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Supplier ID</th>
 				                <th>Name</th>
 				                <th>Address</th>
 				                <th>Status</th>
@@ -60,27 +59,21 @@
 				                   <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                         
 				                      </select>
 				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Floor</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                         
 				                      </select>
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Room</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                        
 				                      </select>
 				                      <label for="slct1" class="active">Room<span class="red-text">*</span></label>
 				                  </div>
@@ -115,27 +108,21 @@
 				                   <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                          
 				                      </select>
 				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Floor</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                          
 				                      </select>
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Room</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
+				                          
 				                      </select>
 				                      <label for="slct1" class="active">Room<span class="red-text">*</span></label>
 				                  </div>

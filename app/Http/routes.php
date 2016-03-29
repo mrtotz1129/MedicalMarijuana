@@ -48,4 +48,3 @@ Route::post('equipment/create', 'EquipmentController@createEquipment');
 Route::get('test', function() {
 	return view('maintenance-building');
 });
-

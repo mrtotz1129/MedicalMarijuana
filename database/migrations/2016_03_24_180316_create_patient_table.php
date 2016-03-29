@@ -22,10 +22,10 @@ class CreatePatientTable extends Migration
             $table->string('strLastName', 100);
             $table->string('strGender', 10);
             $table->date('dateBirthday');
-            $table->text('txtAddress')
+            $table->text('txtAddress');
+            $table->string('strEmail')
                 ->nullable();
-            $table->string('strEmail');
-            $table->string('strContactNumber')
+            $table->string('strContactNumber', 15)
                 ->nullable();
             $table->text('txtPatientImgPath')
                 ->nullable();

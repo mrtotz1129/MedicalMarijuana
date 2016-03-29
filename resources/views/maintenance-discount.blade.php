@@ -57,23 +57,27 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Senior's" id="discountType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Senior( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="discountType" class="active">Type</label>
-				                    </div>
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Discount Type</option>
+				                           <option value="1">Percent</option>
+				                           <option value="2">Amount</option>
+				                       </select>
+				                       <label for="slct1" class="active">Discount Type<span class="red-text">*</span></label>
+				                   </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                    <select multiple>
 				                      <option value="" disabled selected>Choose your option</option>
-				                      <option value="1">Requirement 1</option>
-				                      <option value="2">Requirement 2</option>
-				                      <option value="3">Requirement 3</option>
+				                      @foreach($requirementList as $requirement)
+										<option value="{!! $requirement->intRequirementId !!}">{!! $requirement->strRequirementName !!}</option>
+				                      @endforeach
 				                    </select>
 				                    <label>Select Requirement</label>
 				                  </div>
@@ -105,16 +109,20 @@
 				                   <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Senior's" id="discountType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Senior( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="discountType" class="active">Type</label>
-				                    </div>
+				                     <div class="input-field col s12">
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Discount Type</option>
+				                           <option value="1">Percent</option>
+				                           <option value="2">Amount</option>
+				                       </select>
+				                       <label for="slct1" class="active">Discount Type<span class="red-text">*</span></label>
+				                   </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">

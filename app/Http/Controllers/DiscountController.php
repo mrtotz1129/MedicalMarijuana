@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\RequirementModel;
+use App\DiscountModel;
+
 class DiscountController extends Controller
 {
     /**
@@ -16,7 +19,9 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        return view('maintenance-discount');
+        $requirementList = RequirementModel::all()
+                                ->where('intRequirementStatus', 1);
+        return view('maintenance-discount')->with('requirementList', $requirementList);
     }
 
     /**
@@ -37,7 +42,7 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $discount = new DiscountModel;
     }
 
     /**

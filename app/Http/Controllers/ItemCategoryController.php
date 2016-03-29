@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\ItemCategoryRequest;
 use App\Http\Controllers\Controller;
 
 class ItemCategoryController extends Controller
@@ -35,9 +35,11 @@ class ItemCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemCategoryRequest $request)
     {
-        //
+        $itemCategory = new ItemCategoryModel;
+        $itemCategory->strItemCategoryDesc = $request->strItemCategoryDesc;
+        $itemCategory->save();
     }
 
     /**

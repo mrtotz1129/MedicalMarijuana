@@ -7,7 +7,7 @@
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					href="#createModal" style="position: relative; top: 40px; right: 1%;" 
+					onclick="openCreateModal()" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
@@ -24,9 +24,17 @@
 				        </thead>
 				        	
 				        <tbody>
+				        @foreach($serviceList as $service)
 				        	<tr>
-				        		<td></td>
+				        		<td>{!! $service->strServiceName !!}</td>
+				        		<td>{!! $service->txtServiceDesc !!}</td>
+				        		<td>{!! number_format($service->service_price, 2) !!}</td>
+				        		<td>
+				        			<a href="javascript:updateId({!! $service->intServiceId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $service->intServiceId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
+				        		</td>
 				        	</tr>
+				        @endforeach
 				        </tbody>
 				    </table>
 				</div>
@@ -48,7 +56,7 @@
 
 				<!-- Create Service Modal -->
 				   <div id="createModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('fee') !!}" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('service') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -63,18 +71,18 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="strFeeName" placeholder="Ex: Aquino" id="strFeeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="strFeeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
+				                        <input name="strServiceName" placeholder="Ex: Aquino" id="strFeeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="strFeeName" class="active">Service Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
 				                    <div class="input-field col s12">
 				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
+				                        <label for="dblPrice" class="active">Service Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
                      		      	 <div class="input-field col s6">
                            	           <i class="material-icons prefix">mode_edit</i>
-                           	           <textarea id="remarks" class="materialize-textarea" name="txtFeeDesc"></textarea>
+                           	           <textarea id="remarks" class="materialize-textarea" name="txtServiceDesc"></textarea>
                            	           <label for="remarks">Description</label>
                            	         </div>
 				                </div>
@@ -91,8 +99,8 @@
 
 				<!-- Update Fee Modal -->
 				   <div id="updateModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="updateFeeForm" action="createEmployee" enctype="multipart/form-data">
-				      <input type="hidden" id="updateFeeFormToken" value="{!! csrf_token() !!}" />
+				    <form class="col s12 form" method="post" id="updateServiceForm" action="createEmployee" enctype="multipart/form-data">
+				      <input type="hidden" id="updateServiceFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -105,19 +113,19 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="strFeeName" placeholder="Ex: Aquino" id="strFeeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="strFeeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
+				                        <input name="strFeeName" placeholder="Ex: Aquino" id="serviceName_update" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="serviceName_update" class="active">Service Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
 				                    <div class="input-field col s12">
-				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="servicePrice_update" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="servicePrice_update" class="active">Service Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
                      		      	 <div class="input-field col s6">
                            	           <i class="material-icons prefix">mode_edit</i>
-                           	           <textarea id="remarks" class="materialize-textarea" name="txtFeeDesc"></textarea>
-                           	           <label for="remarks">Description</label>
+                           	           <textarea id="serviceDesc_update" class="materialize-textarea" name="txtFeeDesc"></textarea>
+                           	           <label for="serviceDesc_update" id="lblDesc">Description</label>
                            	         </div>
 				                </div>
 				              </div>
@@ -150,42 +158,46 @@
 {{-- Modal Deactivate END --}}
 
 <script type="text/javascript">
+
+	function openCreateModal(){
+		$('#createModal').openModal();
+	}
+
 	function updateId(id) {
+
 		$.ajax({
-			url: 'fee/' + id,
+			url: 'service/' + id,
 			type: 'GET',
 			success: function(data) {
-				document.getElementById('slct1').value = data.intFeeTypeIdFK;
-				document.getElementById('feeName').value = data.strFeeName;
-				document.getElementById('feePrice').value = data.dblPrice;
-				document.getElementById('remarksEdit').value = data.txtFeeDesc;
-				document.getElementById('remarksEditLabel').setAttribute('class', 'active');
+				document.getElementById('serviceName_update').value = data.strServiceName;
+				document.getElementById('servicePrice_update').value = data.service_price;
+				document.getElementById('serviceDesc_update').value = data.txtServiceDesc;
+				document.getElementById('lblDesc').setAttribute('class', 'active');
 
 				$('#updateModal').openModal();
 			},
 			error: function(xhr) {
 				console.log(xhr);
 			}
-		});
+		});		
 
-		$('#updateFeeForm').on('submit', function(event) {
+		$('#updateServiceForm').on('submit', function(event) {
 			event.preventDefault();
-
 			$.ajax({
-				url: "fee/" + id,
+				url: "service/" + id,
 				type: "POST",
 				data: {
 					_method: "PUT",
-					_token: document.getElementById('updateFeeFormToken').value,
-					feeType: document.getElementById('slct1').value,
-					feeName: document.getElementById('feeName').value,
-					feePrice: document.getElementById('feePrice').value,
-					feeDesc: document.getElementById('remarksEdit').value
+					_token: document.getElementById('updateServiceFormToken').value,
+					strServiceName: document.getElementById('serviceName_update').value,
+					dblPrice: document.getElementById('servicePrice_update').value,
+					txtServiceDesc: document.getElementById('serviceDesc_update').value,
 				},
 				success: function(data) {
-					window.location.href = "{!! url('fee') !!}";
+					window.location.href = "{!! url('service') !!}";
 				},
 				error: function(xhr) {
+					alert('error');
 					console.log(xhr);
 				}
 			});
@@ -197,49 +209,26 @@
 
 		$('#deactivate_fee_btn').on('click', function() {
 			$.ajax({
-				url: "fee/" + id,
+				url: "service/" + id,
 				type: "POST",
 				data: {
 					_method: "DELETE",
 					feeId: id
 				},
 				success: function(data) {
-					window.location.href = "{!! url('fee') !!}";
+					window.location.href = "{!! url('service') !!}";
 				},
 				error: function(xhr) {
 					console.log(xhr);
 				}
 			});
 		});
+			
 	}
 
 	$('#fee_create_form').on('submit', function(event) {
 		event.preventDefault();
 
-		$.ajax({
-			url: "{!! url('fee-type/create') !!}",
-			type: "POST",
-			data: {
-				_token: document.getElementById('fee_create_token').value,
-				feeTypeName: document.getElementById('fee_type_create').value
-			},
-			success: function(data) {
-				var option = document.createElement('option');
-				option.value = data.intFeeTypeId;
-				option.text = data.strFeeTypeName;
-				document.getElementById('feeTypeSelect').appendChild(option);
-
-				option = document.createElement('option');
-				option.value = data.intFeeTypeId;
-				option.text = data.strFeeTypeName;
-				document.getElementById('feeTypeCreateSelect').appendChild(option);
-
-				$('#feeTypeCreateModal').closeModal();
-			},
-			error: function(xhr) {
-				console.log(xhr);
-			}
-		});
 	});	
 </script>
  

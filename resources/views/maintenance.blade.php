@@ -28,32 +28,34 @@
                          !== false ? 'indigo' : '' !!}"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/settings-icon.png') !!}" width="20%" height="20%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-1">
-                                    <li class="{!! strpos(Request::url(), 'employee') !== false ? 'active' : '' !!}"><a href="{!! url('employee') !!}" class="white-text">Employee</a>
+                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Building</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
+                                    <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Nurse Station</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
+                                     <li class="{!! strpos(Request::url(), 'room') !== false ? 'active' : '' !!}"><a href="{!! url('room') !!}" class="white-text">Room</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'room') !== false ? 'active' : '' !!}"><a href="{!! url('room') !!}" class="white-text">Room</a>
+                                    <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Bed</a>
+                                    </li>
+                                     <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'active' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Items</a>
+                                     <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Items</a>
+                                    </li>
+                                    <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
-                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Building</a>
+                                    <li class="{!! strpos(Request::url(), 'employee') !== false ? 'active' : '' !!}"><a href="{!! url('employee') !!}" class="white-text">Employee</a>
                                     </li>
-                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Bed</a>
-                                    </li>
-                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Nurse Station</a>
-                                    </li>
-
+                                    
                                 </ul>
                             </div>
                         </li>
                     </ul>
                 </li>
+
+                <li class="li-hover"><div class="divider  indigo lighten-2"></div></li>
                  <li class="no-padding">
                     <ul class="collapsible collapsible-accordion indigo darken-2">
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/transaction-icon.png') !!}" width="20%" height="20%" align="center" style="margin-bottom: 5px;"> Transactions</a>
@@ -76,10 +78,11 @@
                         </li>
                     </ul>
                 </li>
+                  <li class="li-hover"><div class="divider indigo lighten-2"></div></li>
                 <li class="bold"><a href="app-email.html" class="waves-effect waves-cyan white-text"><i class="mdi-communication-email white-text"></i> Mailbox <span class="new badge">4</span></a>
                 </li>
                
-                <li class="li-hover"><div class="divider"></div></li>
+                <li class="li-hover"><div class="divider indigo lighten-2"></div></li>
                 <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
                 
             <div style="left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 591px; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 279px;" class="ps-scrollbar-y"></div></div></ul>

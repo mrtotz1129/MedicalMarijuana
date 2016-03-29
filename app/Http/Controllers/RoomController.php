@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\RoomTypeModel;
+
 class RoomController extends Controller
 {
     /**
@@ -16,7 +18,10 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('maintenance-room');
+        $roomTypes = RoomTypeModel::all();
+
+        return view('maintenance-room')
+            ->with('roomTypes', $roomTypes);
     }
 
     /**

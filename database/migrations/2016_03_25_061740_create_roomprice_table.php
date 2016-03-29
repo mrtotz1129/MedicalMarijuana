@@ -16,7 +16,7 @@ class CreateRoompriceTable extends Migration
             $table->increments('intRoomPriceId');
             $table->integer('intRoomIdFK')
                 ->unsigned();
-            $table->decimal('deciRoomPrice', 6, 2);
+            $table->decimal('deciRoomPrice', 8, 2);
             $table->timestamps();
 
             $table->foreign('intRoomIdFK')

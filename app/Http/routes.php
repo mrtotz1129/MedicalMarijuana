@@ -12,6 +12,7 @@
 */
 
 Route::resource('/', 'LoginController');
+Route::resource('building', 'BuildingController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('fee', 'FeeController');
 Route::resource('equipment', 'EquipmentController');

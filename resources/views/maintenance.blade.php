@@ -1,6 +1,7 @@
 @extends('index')
 @section('body')
-4:24 AM 3/29/2016
+
+<aside class="left-sidebar-nav aside-1">
                 <ul style="width: 240px;" id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y indigo darken-1 white-text">
                 <li class="user-details cyan darken-1" style="background-image: url({!! asset('img/user-bg.png') !!});">
                 <div class="row">
@@ -43,6 +44,8 @@
                                      <li class="{!! strpos(Request::url(), 'drug') !== false ? 'active' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Items</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'fee') !== false ? 'active' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
+                                    </li>
+                                     <li class="{!! strpos(Request::url(), 'requirement') !== false ? 'active' : '' !!}"><a href="{!! url('requirement') !!}" class="white-text">Requirements</a>
                                     </li>
                                     <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Discount</a>
                                     </li>
@@ -89,13 +92,7 @@
             </ul>
                 <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
             </aside>
-            <script type="text/javascript">
-                    // Initialize collapse button
-                   $(".button-collapse").sideNav();
-                   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-                   $('.collapsible').collapsible();
-                         
-            </script>
+
 
 <div>
     @yield('article')

@@ -17,7 +17,9 @@ class CreateServiceTable extends Migration
             $table->string('strServiceName');
             // $table->integer('intDepartmentIdFK')
             //     ->unsigned();
+            $table->text('txtServiceDesc');
             $table->integer('intServiceStatus');
+            $table->timestamps();
 
             // $table->foreign('intDepartmentIdFK')
             //     ->references('intDepartmentId')

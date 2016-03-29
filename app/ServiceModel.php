@@ -12,4 +12,12 @@ class ServiceModel extends Model
     public function prices(){
     	$this->hasMany('App\ServicePriceModel');
     }
+
+    public function setServicePriceAttribute($value){
+    	$this->attributes['service_price'] = $value;
+    }
+
+    public function getServicePriceAttribute(){
+    	return $this->attributes['service_price'];
+    }
 }

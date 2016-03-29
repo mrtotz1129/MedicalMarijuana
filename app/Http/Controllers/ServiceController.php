@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\ServiceRequest;
 use App\Http\Controllers\Controller;
+
+use App\ServiceModel;
+use App\ServicePriceModel;
 
 class ServiceController extends Controller
 {
@@ -16,7 +19,16 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('');
+        $serviceList = ServiceModel::all()
+                        ->where('intServiceStatus', 1);
+        foreach ($serviceList as $service) {
+            $servicePrice = ServicePriceModel::where('intServiceIdFK', $service->intServiceId)
+                                        ->orderBy('created_at', 'desc')
+                                        ->first();
+            $service->service_price = $servicePrice->deciServicePrice;
+        }
+        return view('maintenance-services')
+                ->with('serviceList', $serviceList);
     }
 
     /**
@@ -39,8 +51,9 @@ class ServiceController extends Controller
     {
         $service = new ServiceModel;
         $service->strServiceName = $request->strServiceName;
-        $service->intDepartmentIdFK = $request->intDepartmentId;
+        // $service->intDepartmentIdFK = $request->intDepartmentId;
         $service->intServiceStatus = 1;
+        $service->txtServiceDesc = $request->txtServiceDesc;
         $service->save();
 
         $servicePrice = new ServicePriceModel;
@@ -60,7 +73,10 @@ class ServiceController extends Controller
     public function show($id)
     {
         $service = ServiceModel::find($id);
-
+        $servicePrice = ServicePriceModel::where('intServiceIdFK', $service->intServiceId)
+                            ->orderBy('created_at', 'desc')
+                            ->first();
+        $service->service_price = $servicePrice->deciServicePrice;
         return response()->json($service);
     }
 
@@ -84,22 +100,21 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $service = ServiceModel::find($id);
-        $service->strServiceName = $request->strServiceName;
-        $service->intDepartmentIdFK = $request->intDepartmentId;
-        $service->save();
+        $service                        = ServiceModel::find($id);
+        $service->strServiceName        = $request->strServiceName;
+        // $service->intDepartmentIdFK  = $request->intDepartmentId;
+        $service->txtServiceDesc        = $request->txtServiceDesc;
+        // $service->save();
 
-        $dblServicePrice = ServicePriceModel::where('intServiceId', $id)
-                                ->orderBy('created_at', 'desc')
-                                ->first();
-        if ($dblServicePrice != $request->dblPrice){
-            $servicePrice = new ServicePrice;
-            $servicePrice->intServiceIdFK = $id;
+        $servicePriceOrig = ServicePriceModel::where('intServiceIdFK', $service->intServiceId)
+                            ->orderBy('created_at', 'desc')
+                            ->first();
+        if ($servicePriceOrig->deciServicePrice != $request->dblPrice){
+            $servicePrice = new ServicePriceModel;
             $servicePrice->deciServicePrice = $request->dblPrice;
+            $servicePrice->intServiceIdFK = $service->intServiceId;
             $servicePrice->save();
         }
-
-        return redirect('service');
 
     }
 
@@ -111,6 +126,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service = ServiceModel::find($id);
+        $service->intServiceStatus = 0;
+        $service->save();
     }
 }

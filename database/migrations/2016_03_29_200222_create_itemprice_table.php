@@ -17,11 +17,19 @@ class CreateItempriceTable extends Migration
             $table->integer('intItemIdFK')
                 ->unsigned();
             $table->decimal('deciItemPrice', 6, 2);
-            $table->dateTime('datAsOf');
+            $table->integer('intUnitOfMeasurementIdFK')
+                ->unsigned();
+            $table->timestamps();
 
             $table->foreign('intItemIdFK')
                 ->references('intItemId')
                 ->on('tblItem')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('intUnitOfMeasurementIdFK')
+                ->references('intUnitOfMeasurementId')
+                ->on('tblUnitOfMeasurement')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

@@ -10,6 +10,6 @@ class ServicePriceModel extends Model
     protected $primaryKey	=	'intServicePriceId';	
 
     public function service(){
-    	$this->belongTo('App\ServiceModel');
+    	$this->belongsTo('App\ServiceModel');
     }
 }

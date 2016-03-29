@@ -69,7 +69,7 @@
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
@@ -122,7 +122,7 @@
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">

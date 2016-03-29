@@ -62,9 +62,23 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="roomID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="roomID" class="active">Room ID<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Building</option>
+				                           @foreach($buildingList as $building)
+				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                           @endforeach
+				                       </select>
+				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
+				                   </div>
+				                   <div class="input-field col s12">
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Floor</option>
+				                           @foreach($buildingList as $building)
+				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                           @endforeach
+				                       </select>
+				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                   </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomName" class="active">Room Name</label>
@@ -77,6 +91,8 @@
 				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
+
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -105,13 +121,27 @@
  						<div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
+				                     <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="roomID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="roomID" class="active">Room ID<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Building</option>
+				                           @foreach($buildingList as $building)
+				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                           @endforeach
+				                       </select>
+				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
+				                   </div>
+				                   <div class="input-field col s12">
+				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                           <option disabled selected>Floor</option>
+				                           @foreach($buildingList as $building)
+				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                           @endforeach
+				                       </select>
+				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                   </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomName" class="active">Room Name</label>

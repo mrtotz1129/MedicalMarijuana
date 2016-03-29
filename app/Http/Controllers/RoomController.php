@@ -31,15 +31,18 @@ class RoomController extends Controller
         $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
             ->get();
 
-        // $rooms = \DB::table('tblRoom')
-            // ->
-            // ->select('tblRoom.intRoomId', 'tblRoomType.strRoomTypeDesc', 'tblRoom.txtRoomDescription', '')
+        $rooms = \DB::table('tblRoom')
+            ->join('tblRoomType', 'tblRoomType.intRoomTypeId', '=', 'tblRoom.intRoomTypeIdFK')
+            ->join('tblRoomPrice', 'tblRoomPrice.intRoomIdFK', '=', 'tblRoom.intRoomId')
+            ->select('tblRoom.intRoomId', 'tblRoomType.strRoomTypeDesc', 'tblRoom.txtRoomDescription', 'tblRoomPrice.deciRoomPrice')
+            ->where('tblRoom.intRoomStatus', '>', 0)
+            ->get();
 
         return view('maintenance-room')
             ->with('roomTypes', $roomTypes)
             ->with('nurseStations', $nurseStations)
             ->with('buildings', $buildings)
-            ;
+            ->with('rooms', $rooms);
     }
 
     /**
@@ -131,6 +134,10 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = RoomModel::find($id);
+
+        $room->intRoomStatus    =   0;
+
+        $room->save();
     }
 }

@@ -23,7 +23,21 @@
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
-				        	
+				        
+				        <tbody>
+				        	@foreach($rooms as $room)
+				        	<tr>
+				        		<td>{!! $room->intRoomId !!}</td>
+				        		<td>{!! $room->strRoomTypeDesc !!}</td>
+				        		<td>{!! $room->txtRoomDescription != null ? $room->txtRoomDescription : '---' !!}</td>
+				        		<td>{!! number_format($room->deciRoomPrice, 2) . 'Php' !!}</td>
+				        		<td>
+				        			<a href="javascript:updateId({!! $room->intRoomId !!})" class="tooltipped" data-tooltip="Update Room Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $room->intRoomId !!})" class="tooltipped" data-tooltip="Deactivate Room Details"><i class="material-icons">delete</i></a>
+				        		</td>
+				        	</tr>
+				        	@endforeach
+				        </tbody>
 				    </table>
 				</div>
 
@@ -135,7 +149,7 @@
 				</div>
 
 				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				   <div id="updateRoomModal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -272,6 +286,20 @@
      </form>
    </div>
 
+{{-- Modal Deactivate START --}}
+<div id="deactivate_room_modal" class="modal">
+	<input type="hidden" id="deactivate_room_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Room Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_room_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
+
 <script type="text/javascript">
 	function readURL(input) {
 
@@ -346,6 +374,33 @@
 			}
 		});
 	};
+
+	function updateId($id)
+	{
+		$('#updateRoomModal').openModal();
+	}
+
+	function deactivateId(id) 
+	{
+		$('#deactivate_room_modal').openModal();
+
+		document.getElementById('deactivate_room_btn').onclick = function() {
+			$.ajax({
+				url: "room/" + id,
+				type: "POST",
+				data: {
+					_token: document.getElementById('deactivate_room_token').value,
+					_method: "DELETE"
+				},
+				success: function(data) {
+					window.location.href = "{!! url('room') !!}";
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
+		};
+	}
 </script>
  
 @endsection

@@ -9,7 +9,7 @@
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
-					<a href="#viewNurse" class="modal-trigger btn btn-large green darken-2">VIEW NURSES</a>
+					<!-- <a href="#viewNurse" class="modal-trigger btn btn-large green darken-2">VIEW NURSES</a> -->
 				</div>
 			</div>	
 		<div class="container">
@@ -24,7 +24,23 @@
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
-									        	
+						
+						<tbody>
+							@foreach($nurseStations as $nurseStation)
+							<tr>
+								<td>{!! $nurseStation->intNurseStationId !!}</td>
+								<td>{!! $nurseStation->strBuildingName !!}</td>
+								<td>{!! $nurseStation->intFloorDesc !!}</td>
+								<td>
+									<a href="javascript:viewId({!! $nurseStation->intNurseStationId !!})" class="btn btn-large green darken-2">VIEW NURSES</a>
+								</td>
+								<td>
+									<a href="javascript:updateId({!! $nurseStation->intNurseStationId !!})" class="tooltipped" data-tooltip="Update Nurse Station Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $nurseStation->intNurseStationId !!})" class="tooltipped" data-tooltip="Deactivate Nurse Station Details"><i class="material-icons">delete</i></a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>        	
 				    </table>
 				</div>
 
@@ -98,7 +114,7 @@
 				</div>
 
 				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer" style="width: 70px !important;">
+				   <div id="updateNurseStationModal" class="modal modal-fixed-footer" style="width: 70px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -166,27 +182,31 @@
           	                <th>Nurse Name</th>
           	            </tr>
           	        </thead>
+          	        
+          	        <tbody>
           	        	
+          	        </tbody>
           	    </table>
           	</div>
-
-          	<script type="text/javascript">
-          		$(document).ready(function() {
-          		    $('#example').DataTable( {
-          		        dom: 'Bfrtip',
-          		        buttons: [
-          		            'copyHtml5',
-          		            'excelHtml5',
-          		            'csvHtml5',
-          		            'pdfHtml5'
-          		        ]
-          		    } );
-          		} );
-          	</script>
          </div>
        </div>
      </form>
    </div>
+
+{{-- Modal Deactivate START --}}
+<div id="deactivate_nursestation_modal" class="modal">
+	<input type="hidden" id="deactivate_employee_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Nurse Station Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_nursestation_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
+
 <script type="text/javascript">
 	
   $(document).ready(function() {
@@ -196,6 +216,16 @@
 </script>
 
 <script type="text/javascript">
+          		    var nurseTable = $('#example').DataTable( {
+          		        dom: 'Bfrtip',
+          		        buttons: [
+          		            'copyHtml5',
+          		            'excelHtml5',
+          		            'csvHtml5',
+          		            'pdfHtml5'
+          		        ]
+          		    } );
+
 	function readURL(input) {
 
 	    if (input.files && input.files[0]) {
@@ -237,6 +267,54 @@
 			}
 		});
 	};
+
+	function viewId(id)  {
+		$.ajax({
+			url: "{!! url('nurse-station/changed') !!}",
+			type: "POST",
+			data: {
+				_token: document.getElementById('nurseStationFormToken').value,
+				nurseStationId: id
+			},
+			success: function(data) {
+				nurseTable.clear().draw();
+
+				for(var i = 0; i < data.length; i++) {
+					nurseTable.row.add([data[i].strLastName + ', ' + data[i].strFirstName + (data[i].strMiddleName != null ? (" " + data[i].strMiddleName) : "")]).draw(false);
+				}
+
+				$('#viewNurse').openModal();
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		})
+	}
+
+	function updateId(id) {
+		$('#updateNurseStationModal').openModal();
+	}
+
+	function deactivateId(id) {
+		$('#deactivate_nursestation_modal').openModal();
+
+		document.getElementById('deactivate_nursestation_btn').onclick = function() {
+			$.ajax({
+				url: "nurse-station/" + id,
+				type: "POST",
+				data: {
+					_method: "DELETE",
+					_token: document.getElementById('nurseStationFormToken').value
+				},
+				success: function(data) {
+					window.location.href = "{!! url('nurse-station') !!}";
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
+		}
+	}
 </script>
  
 @endsection

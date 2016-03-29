@@ -30,11 +30,19 @@ class NurseStationController extends Controller
             ->select('intEmployeeId', 'strFirstName', 'strMiddleName', 'strLastName')
             ->get();
 
-        $nurseStations = NurseStationModel;
+        $nurseStations = \DB::table('tblNurseStation')
+            ->join('tblFloor', 'tblFloor.intFloorId', '=', 'tblNurseStation.intFloorIdFK')
+            ->join('tblBuilding', 'tblBuilding.intBuildingId', '=', 'tblFloor.intBuildingIdFK')
+            ->leftJoin('tblNurseStationDetail', 'tblNurseStationDetail.intNurseStationIdFK', '=', 'tblNurseStation.intNurseStationId')
+            // ->join('tblEmployee', 'tblNurseStationDetail.intNurseIdFK', '=', 'tblEmployee.intEmployeeId')
+            ->select('tblNurseStation.intNurseStationId', 'tblBuilding.strBuildingName', 'tblFloor.intFloorDesc')
+            ->where('tblNurseStation.intNurseStationStatus', '>', 0)
+            ->get();
 
         return view('maintenance-nurse-station')
             ->with('buildingList', $buildingList)
-            ->with('nurses', $nurses);
+            ->with('nurses', $nurses)
+            ->with('nurseStations', $nurseStations);
     }
 
     /**
@@ -57,8 +65,8 @@ class NurseStationController extends Controller
     {
         $nurseStation = new NurseStationModel;
 
-        $nurseStation->intFloorIdFK     =   $request->floorCreateSelect;
-        $nurseStation->intFloorStatus   =   1;
+        $nurseStation->intFloorIdFK             =   $request->floorCreateSelect;
+        $nurseStation->intNurseStationStatus    =   1;
 
         $nurseStation->save();
 
@@ -118,6 +126,10 @@ class NurseStationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nurseStation = NurseStationModel::find($id);
+
+        $nurseStation->intNurseStationStatus    =   0;
+
+        $nurseStation->save();
     }
 }

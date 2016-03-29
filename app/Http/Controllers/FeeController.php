@@ -77,7 +77,7 @@ class FeeController extends Controller
     public function show($id)
     {
         $fee = FeeModel::find($id);
-
+        
         return response()->json($fee);
     }
 

@@ -29,6 +29,7 @@ Route::resource('transaction/room', 'RoomTransactionController');
 Route::resource('nurse-station', 'NurseStationController');
 Route::resource('bed', 'BedController');
 Route::resource('items', 'ItemsController');
+Route::resource('requirement', 'RequirementController');
 
 Route::get('logout', 'LogoutController@logout');
 

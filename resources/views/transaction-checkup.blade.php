@@ -2,16 +2,20 @@
 @section('article')
 <article class="white main z-depth-1">
 <br>
-	<div class="row">
-		<div class="col s6">
-			<h3 class="thin indigo-text text-darken-2 col left">Check Up</h3>
-			<a href="#requestTest" class="btn modal-trigger">Request</a>
-			<a href="#addDiagnosis" class="btn modal-trigger">Diagnosis</a>
-			<a href="#addPrescription" class="btn modal-trigger">Prescription</a>
-		</div>
-	</div>
-    <br>
-    <div class="container">
+	<div class="row indigo lighten-1" style="margin-left: -10px; border-top-right-radius: 10px;">
+				<div class="col s6">
+					<h4 class="thin white-text">Check Up</h4>
+				</div>
+				<div class="col s6 right">
+					
+					<a href="#requestTest" class="btn modal-trigger">Request</a>
+					<a href="#addDiagnosis" class="btn modal-trigger">Diagnosis</a>
+					<a href="#addPrescription" class="btn modal-trigger">Prescription</a>
+				</div>
+			</div>	
+		<div class="container">
+		<br>
+
     	<table id="example" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>

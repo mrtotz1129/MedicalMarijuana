@@ -10,7 +10,7 @@
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
-			</div>	
+		</div>	
 		<div class="container">
 		<br>
 				<table id="example" class="display" cellspacing="0" width="100%">
@@ -42,13 +42,16 @@
 				</script>
 				<!-- Create Fee Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
+				   <div class="row indigo">
+				   		<div class="input-field col s12">
+				   		      <h4 class="white-text">Add Bed</h4>
+				   		</div>
+				   </div>
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add Supplier</h4>
-				        </div>
+				        
 			              <div class="aside aside1 z-depth-0">
 			              <!-- first -->
 			                <div class="row">

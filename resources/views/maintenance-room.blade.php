@@ -43,7 +43,7 @@
 					} );
 				</script>
 				<!-- Create Room Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				   <div id="create" class="modal modal-fixed-footer" style="width: 700px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -80,14 +80,20 @@
 				                  </div>
 				                  <div class="input-field col s8">
 				                      <select class="browser-default" id="slct1" name="selectedJob">
-				                          <option disabled selected>Nurse Station</option>
+				                          <option disabled selected>Choose option</option>
+				                          <option value="Nurse Station 1">Nurse Station 1</option>
 				                      </select>
 				                      <label for="slct1" class="active">Nurse Station</label>
 				                  </div>
 				                  
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="" placeholder="Ex: 5" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
+				                        <input name="" placeholder="Ex: Aquino" id="noOfBed" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="noOfBed" class="active">Numbers of bed<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
 				              </div>

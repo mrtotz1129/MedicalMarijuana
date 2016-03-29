@@ -1,6 +1,6 @@
 @extends('index')
 @section('body')
-<aside id="left-sidebar-nav" class="aside-1">
+4:24 AM 3/29/2016
                 <ul style="width: 240px;" id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y indigo darken-1 white-text">
                 <li class="user-details cyan darken-1" style="background-image: url({!! asset('img/user-bg.png') !!});">
                 <div class="row">
@@ -85,11 +85,19 @@
                 <li class="li-hover"><div class="divider indigo lighten-2"></div></li>
                 <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
                 
-            <div style="left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 591px; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 279px;" class="ps-scrollbar-y"></div></div></ul>
+            <div style="left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 591px; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 279px;" class="ps-scrollbar-y"></div></div>
+            </ul>
                 <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
             </aside>
+            <script type="text/javascript">
+                    // Initialize collapse button
+                   $(".button-collapse").sideNav();
+                   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+                   $('.collapsible').collapsible();
+                         
+            </script>
 
 <div>
-	@yield('article')
+    @yield('article')
 </div>
 @endsection

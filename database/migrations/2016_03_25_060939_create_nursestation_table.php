@@ -16,7 +16,6 @@ class CreateNursestationTable extends Migration
             $table->increments('intNurseStationId');
             $table->integer('intFloorIdFK')
                 ->unsigned();
-            $table->integer('intFloorStatus');
             $table->integer('intNurseStationStatus');
             $table->timestamps();
 

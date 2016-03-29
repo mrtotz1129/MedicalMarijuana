@@ -33,6 +33,8 @@ Route::resource('requirement', 'RequirementController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
+Route::post('nurse-station/changed', 'NurseStationAjaxController@retrieveNurse');
+Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation');
 
 Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');

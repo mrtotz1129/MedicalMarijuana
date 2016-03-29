@@ -16,7 +16,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        return view('');
     }
 
     /**
@@ -35,9 +35,20 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        //
+        $service = new ServiceModel;
+        $service->strServiceName = $request->strServiceName;
+        $service->intDepartmentIdFK = $request->intDepartmentId;
+        $service->intServiceStatus = 1;
+        $service->save();
+
+        $servicePrice = new ServicePriceModel;
+        $servicePrice->deciServicePrice = $request->dblPrice;
+        $servicePrice->intServiceIdFK = $service->intServiceId;
+        $servicePrice->save();
+
+        return redirect('service');
     }
 
     /**
@@ -48,7 +59,9 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $service = ServiceModel::find($id);
+
+        return response()->json($service);
     }
 
     /**
@@ -71,7 +84,23 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = ServiceModel::find($id);
+        $service->strServiceName = $request->strServiceName;
+        $service->intDepartmentIdFK = $request->intDepartmentId;
+        $service->save();
+
+        $dblServicePrice = ServicePriceModel::where('intServiceId', $id)
+                                ->orderBy('created_at', 'desc')
+                                ->first();
+        if ($dblServicePrice != $request->dblPrice){
+            $servicePrice = new ServicePrice;
+            $servicePrice->intServiceIdFK = $id;
+            $servicePrice->deciServicePrice = $request->dblPrice;
+            $servicePrice->save();
+        }
+
+        return redirect('service');
+
     }
 
     /**

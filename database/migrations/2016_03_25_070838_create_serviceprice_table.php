@@ -16,8 +16,8 @@ class CreateServicepriceTable extends Migration
             $table->increments('intServicePriceId');
             $table->integer('intServiceIdFK')
                 ->unsigned();
-            $table->decimal('deciServicePrice', 6, 2);
-            $table->dateTime('datAsOf');
+            $table->decimal('deciServicePrice', 8, 2);
+            $table->timestamps();
 
             $table->foreign('intServiceIdFK')
                 ->references('intServiceId')

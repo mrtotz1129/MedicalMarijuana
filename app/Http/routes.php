@@ -30,6 +30,7 @@ Route::resource('nurse-station', 'NurseStationController');
 Route::resource('bed', 'BedController');
 Route::resource('items', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
+Route::resource('service', 'ServiceController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

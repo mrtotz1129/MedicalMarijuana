@@ -14,7 +14,7 @@ class CreateServiceTable extends Migration
     {
         Schema::create('tblService', function(Blueprint $table) {
             $table->increments('intServiceId');
-            $table->string('strServiceDesc');
+            $table->string('strServiceName');
             $table->integer('intDepartmentIdFK')
                 ->unsigned();
             $table->integer('intServiceStatus');
@@ -24,6 +24,8 @@ class CreateServiceTable extends Migration
                 ->on('tblDepartment')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+
+            $table->unique('strServiceName');
         });
     }
 

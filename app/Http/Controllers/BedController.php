@@ -48,7 +48,7 @@ class BedController extends Controller
      */
     public function store(Request $request)
     {
-        $request->   
+           
     }
 
     /**

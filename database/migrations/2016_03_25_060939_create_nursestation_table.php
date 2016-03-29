@@ -17,6 +17,7 @@ class CreateNursestationTable extends Migration
             $table->integer('intFloorIdFK')
                 ->unsigned();
             $table->integer('intFloorStatus');
+            $table->timestamps();
 
             $table->foreign('intFloorIdFK')
                 ->references('intFloorId')

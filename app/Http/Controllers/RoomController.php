@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\RoomTypeModel;
 use App\RoomModel;
+use App\NurseStationModel;
 
 class RoomController extends Controller
 {
@@ -21,9 +22,12 @@ class RoomController extends Controller
     public function index()
     {
         $roomTypes = RoomTypeModel::all();
+        $nurseStations = NurseStationModel::where('intFloorStatus', '>', 0)
+            ->get();
 
         return view('maintenance-room')
-            ->with('roomTypes', $roomTypes);
+            ->with('roomTypes', $roomTypes)
+            ->with('nurseStations', $nurseStations);
     }
 
     /**
@@ -46,8 +50,10 @@ class RoomController extends Controller
     {
         $room = new RoomModel;
 
-        $room->intRoomTypeIdFK      =   $request->intRoomTypeIdFK;
-        $room->intNurseStationIdFK  =   $request->nurseStationSelect;   
+        $room->intRoomTypeIdFK      =   $request->roomTypeCreate;
+        $room->intNurseStationIdFK  =   $request->nurseStationSelect;
+        // $room->intFloorIdFK         =   $request->; 
+        $room->intRoomStatus        =   1;  
     }
 
     /**

@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\BuildingModel;
+use App\EmployeeModel;
+use App\NurseStationModel;
 
 class NurseStationController extends Controller
 {
@@ -18,9 +20,19 @@ class NurseStationController extends Controller
      */
     public function index()
     {
-        $buildingList = BuildingModel::all();
+        $buildingList = BuildingModel::where('intBuildingStatus', '>', 0)
+            ->get();
+        $nurseId = \DB::table('tblEmployeeType')
+            ->where('strPosition', 'like', '%Nurse%')
+            ->select('intEmployeeTypeId')
+            ->first();
+        $nurses = EmployeeModel::where('intEmployeeTypeIdFK', $nurseId->intEmployeeTypeId)
+            ->select('intEmployeeId', 'strFirstName', 'strMiddleName', 'strLastName')
+            ->get();
+
         return view('maintenance-nurse-station')
-            ->with('buildingList', $buildingList);
+            ->with('buildingList', $buildingList)
+            ->with('nurses', $nurses);
     }
 
     /**
@@ -41,7 +53,25 @@ class NurseStationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nurseStation = new NurseStationModel;
+
+        $nurseStation->intFloorIdFK     =   $request->floorCreateSelect;
+        $nurseStation->intFloorStatus   =   1;
+
+        $nurseStation->save();
+
+        if($request->nurses != null) {
+            for($i = 0; $i < count($request->nurses); $i++) {
+                \DB::table('tblNurseStationDetail')
+                    ->insert([
+                        'intNurseStationIdFk'   =>  $nurseStation->intNurseStationId,
+                        'intNurseIdFk'          =>  $request->nurses[$i],
+                        'intNurseStatus'        =>  1
+                    ]);   
+            }
+        }
+
+        return redirect('nurse-station');
     }
 
     /**

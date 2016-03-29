@@ -39,6 +39,9 @@ class ItemsController extends Controller
     {
         $item = new ItemModel;
         $item->strItemName = $request->strItemName;
+        if ($request->strItemCategory == "Medicine"){
+            
+        }
         
     }
 

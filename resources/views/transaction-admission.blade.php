@@ -41,7 +41,7 @@
     </script>
 	
 	   <div id="create" class="modal modal-fixed-footer" style="border-radius: 10px;">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="#" enctype="multipart/form-data">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('admission') !!}" enctype="multipart/form-data">
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
 	      <div class="wrapper">
@@ -71,16 +71,18 @@
 	                           </div>
 	                   </div>
 	                   <p class="center">
-	                         <input name="group1" type="radio" id="test1" />
+	                         <input name="patientType" type="radio" id="test1" value="out" />
 	                         <label for="test1">Out Patient</label>
-	                         <input name="group1" type="radio" id="test2" />
+	                         <input name="patientType" type="radio" id="test2" value="in" />
 	                         <label for="test2">In Patient</label>
 	                   </p>
 	                   <br>
 	                    <div class="input-field col s12">
-	                       <select class="browser-default" id="doctorSelect" name="selectedJob" required>
+	                       <select class="browser-default" id="doctorSelect" name="doctorSelect" required>
 	                           <option disabled selected>Choose Doctor</option>
-	                           <option value=""></option>
+	                           @foreach($doctors as $doctor)
+	                           <option value="{!! $doctor->intEmployeeId !!}">{!! $doctor->strLastName . ', ' . $doctor->strFirstName . ($doctor->strMiddleName != null ? (' ' . $doctor->strMiddleName) : ''); !!}</option>
+	                           @endforeach
 	                       </select>
 	                       <label for="doctorSelect" class="active">Available Doctor</label>
 	                   	</div>
@@ -101,8 +103,8 @@
 	                        <label for="strEmpFirstName" class="active">First Name<span class="red-text"><b>*</b></span></label>
 	                    </div>
 	                    <div class="input-field col s12">
-	                        <input name="strMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-	                        <label for="strEmpMiddleName" class="active">Middle Name</label>
+	                        <input name="strMiddleName" placeholder="Ex: Cojuangco" id="strMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+	                        <label for="strMiddleName" class="active">Middle Name</label>
 	                    </div>
 	                    <div class="input-field col s12">
 	                        <input name="strLastName" placeholder="Ex: Aquino" id="strEmpLastName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -125,14 +127,14 @@
 	              <!-- third -->
 	                <div class="row">
 	                 <div class="input-field col s12">
-	                      <input name="" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
+	                      <input name="room"  readonly placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
 	                      <label for="room" class="active">Room<span class="red-text">*</span></label>
 	                  </div>
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
-	                      <select required class="browser-default" name="strEmpGender" id="createGender">
+	                      <select required class="browser-default" name="strGender" id="createGender">
 	                        <option value="" disabled selected>Gender</option>
-	                        <option value="M">Male</option>
-	                        <option value="F">Female</option>
+	                        <option value="Male">Male</option>
+	                        <option value="Female">Female</option>
 	                      </select>
 	                      <label for="createGender" class="active">Gender<span class="red-text">*</span></label>
 	                  </div>
@@ -140,15 +142,15 @@
 	                      <label style="margin-left: -3px; margin-top: 15px !important;" for="contact">(+63)</label>
 	                  </div>
 	                  <div class="input-field col s10" style="margin-top: 28px !important; margin-left: 10px;">
-	                      <input name="strEmpContactNo" placeholder="Ex: 9268806979" type="text" id="createContact" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex: 9268806979<br/>( 10 numbers only )" pattern="^[0-9]{10,10}$">
+	                      <input name="strContactNumber" placeholder="Ex: 9268806979" type="text" id="createContact" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex: 9268806979<br/>( 10 numbers only )" pattern="^[0-9]{10,10}$">
 	                      <label for="createContact" style="margin-left: -35px;">Contact Number</label>
 	                  </div>
 	                  <div class="input-field col s12">
-	                      <input type="email" name="strEmpEmail"  placeholder="Ex: salon@yahoo.com" class="validate tooltipped" required id="createEmail" data-position="bottom" data-delay="30" data-tooltip="Ex: salon@yahoo.com">
+	                      <input type="email" name="strEmail"  placeholder="Ex: salon@yahoo.com" class="validate tooltipped" required id="createEmail" data-position="bottom" data-delay="30" data-tooltip="Ex: salon@yahoo.com">
 	                      <label for="createEmail" class="active">Email</label>
 	                  </div>
 	                  <div class="input-field col s12">
-	                      <input name="strEmpAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="createAddress" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
+	                      <input name="strAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="createAddress" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
 	                      <label for="createAddress" class="active">Address<span class="red-text">*</span></label>
 	                  </div>
 	                 
@@ -167,7 +169,8 @@
 
 	<!-- add Room -->
    <div id="addRoom" class="modal" style="margin-top: 30px; width: 400px !important; border-radius: 10px;">
-     <form id="createOption">
+     <form id="createRoomForm">
+     	<input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
        <div class="modal-content">
          <h4 class="grey-text text-darken-2"> Choose Room</h4>
          <div class="row">
@@ -184,8 +187,6 @@
            	<div class="input-field col s12">
                <select class="browser-default" id="roomNumberSelect" name="selectedJob" required>
                    <option disabled selected>Room Number</option>
-              
-                   <option value=""></option>
                </select>
                <label for="roomNumberSelect" class="active">Room Number<span class="red-text">*</span></label>
            	</div>
@@ -201,24 +202,59 @@
 </article>
 
 <script type="text/javascript">
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            $('#employeeimg').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	$("#fileUpload").change(function(){
+	    readURL(this);
+	});
+
 	document.getElementById('roomTypeSelect').onchange = function()
 	{
 		$.ajax({
-			url: "{!! url('') !!}",
+			url: "{!! url('room-type/changed') !!}",
 			type: "POST",
 			data: 
 			{
-				_token: document.getElementById('')
+				_token: document.getElementById('createRoomFormToken').value,
+				roomTypeId: this.value
 			},
 			success: function(data)
 			{
+				$('#roomNumberSelect').empty();
 
+				for(var i = 0; i < data.length; i++)
+				{
+					var option = document.createElement('option');
+					option.value = data[i].intRoomId;
+					option.text = data[i].intRoomId;
+
+					document.getElementById('roomNumberSelect').appendChild(option);
+				}
 			},
 			error: function(xhr)
 			{
 				console.log(xhr);
 			}
 		});
+	};
+
+	document.getElementById('createRoomForm').onsubmit = function(event)
+	{
+		event.preventDefault();
+
+		document.getElementById('room').value = document.getElementById('roomNumberSelect').value;
+		
+		$('#addRoom').closeModal();
 	};
 </script>
 @endsection

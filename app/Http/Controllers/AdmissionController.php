@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\AdmissionRequest;
 use App\Http\Controllers\Controller;
 
 use App\RoomTypeModel;
+use App\EmployeeModel;
+use App\AdmissionModel;
+use App\PatientModel;
 
 class AdmissionController extends Controller
 {
@@ -20,8 +24,14 @@ class AdmissionController extends Controller
     {
         $roomTypes = RoomTypeModel::all();
 
+        $doctors = \DB::table('tblEmployee')
+            ->join('tblEmployeeType', 'tblEmployeeType.intEmployeeTypeId', '=', 'tblEmployee.intEmployeeTypeIdFK')
+            ->select('tblEmployee.intEmployeeId', 'tblEmployee.strFirstName', 'tblEmployee.strMiddleName', 'tblEmployee.strLastName')
+            ->get();
+
         return view('transaction-admission')
-            ->with('roomTypes', $roomTypes);
+            ->with('roomTypes', $roomTypes)
+            ->with('doctors', $doctors);
     }
 
     /**
@@ -40,9 +50,38 @@ class AdmissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdmissionRequest $request)
     {
-        //
+        $imagePath = 'uploaded_images/patient';
+        $patient = new PatientModel;
+
+        $patient->blnIsAdmitted         =   $request->patientType == 'in' ? true : false;
+        $patient->strFirstName          =   $request->strFirstName;
+        $patient->strMiddleName         =   $request->strMiddleName != null ? $request->strMiddleName : null;
+        $patient->strLastName           =   $request->strLastName;
+        $patient->strMachinePatientId   =   null;
+        $patient->strGender             =   $request->strGender;
+        $patient->dateBirthday          =   $request->strBirthdate;
+        $patient->txtAddress            =   $request->strAddress;
+        $patient->strEmail              =   $request->strEmail;
+        $patient->strContactNumber      =   $request->strContactNumber;
+        $patient->intStatus             =   1;
+
+        if($request->hasFile('image'))
+        {
+            $fileName = $request->strLastName . ', ' . $request->strFirstName . ($request->strMiddleName != null ? (' ' . $request->strMiddleName) : '');
+
+            $request->file('image')->move(public_path() . '/' . $imagePath, $fileName);
+            
+            $patient->txtPatientImgPath = $imagePath . '/' . $fileName;
+        }
+
+        $patient->save();
+
+
+        // $admission = new AdmissionModel;
+
+        // $admission->
     }
 
     /**

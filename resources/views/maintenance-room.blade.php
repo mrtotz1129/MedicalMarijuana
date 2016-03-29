@@ -105,6 +105,11 @@
 				                    </div>
 
 				                    <div class="input-field col s12">
+				                        <input name="intNumBed" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
 				                       <select class="browser-default" id="slct1" name="nurseStationSelect">
 				                           <option disabled selected>Nurse Station</option>
 				                           @foreach($nurseStations as $nurseStation)
@@ -180,6 +185,11 @@
 				                    <div class="input-field col s12">
 				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
+				                    </div>
+
+				                    <div class="input-field col s12">
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
 				                    <div class="input-field col s12">

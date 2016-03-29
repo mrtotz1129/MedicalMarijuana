@@ -27,7 +27,8 @@ class RoomRequest extends Request
     {
         return [
             'roomTypeCreate'    =>  'required',
-            'dblPrice'          =>  'required|numeric'
+            'dblPrice'          =>  'required|numeric',
+            'intNumBed'         =>  'required|numeric'
         ];
     }
 
@@ -36,7 +37,9 @@ class RoomRequest extends Request
         return [
             'roomTypeCreate.required'       =>  'Room type is required.',
             'dblPrice.required'             =>  'Room price is required.',
-            'dblPrice.numeric'              =>  'Room price should be numeric.'
+            'dblPrice.numeric'              =>  'Room price should be numeric.',
+            'intNumBed.required'             =>  'Room price is required.',
+            'intNumBed.numeric'              =>  'Room price should be numeric.'
         ];
     }
 

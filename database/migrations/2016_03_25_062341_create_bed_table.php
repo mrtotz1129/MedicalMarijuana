@@ -17,6 +17,7 @@ class CreateBedTable extends Migration
             $table->integer('intRoomIdFK')
                 ->unsigned();
             $table->integer('intBedStatus');
+            $table->timestamps();
 
             $table->foreign('intRoomIdFK')
                 ->references('intRoomId')

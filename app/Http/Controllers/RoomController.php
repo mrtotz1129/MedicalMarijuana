@@ -12,6 +12,7 @@ use App\RoomTypeModel;
 use App\RoomModel;
 use App\NurseStationModel;
 use App\BuildingModel;
+use App\RoomPriceModel;
 
 class RoomController extends Controller
 {
@@ -67,6 +68,18 @@ class RoomController extends Controller
         $room->txtRoomDescription   =   $request->txtRoomDescription != null ? $request->txtRoomDescription : null;
 
         $room->save();
+
+        $roomPrice = new RoomPriceModel;
+
+        $roomPrice->intRoomIdFK     =   $room->intRoomId;
+        $roomPrice->deciRoomPrice   =   $request->dblPrice;
+
+        $roomPrice->save();
+
+        for($i = 0; $i < (int) $request->intNumBed; $i++)
+        {
+            
+        }
 
         return redirect('room');
     }

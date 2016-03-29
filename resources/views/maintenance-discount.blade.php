@@ -16,12 +16,11 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Discount ID</th>
-				                <th>Type</th>
+				            	<th>Type</th>
 				                <th>Name</th>
 				                <th>Details</th>
-				                <th>Price</th>
-				                <th>Status</th>
+				                <th>Discount</th>
+				              	<th>Requirement</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -42,7 +41,7 @@
 					    } );
 					} );
 				</script>
-				<!-- Create Fee Modal -->
+				<!-- Create Discount Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
@@ -51,37 +50,11 @@
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Create Discount</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
-
-
-				                <div class="aside aside2 z-depth-0">
+				                <div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: 2013-03998" id="discountID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: 2013-03554( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="discountID" class="active">Discount ID<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Senior's" id="discountType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Senior( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -93,8 +66,17 @@
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="discountRate" class="active">Discount Rate<span class="red-text"><b>*</b></span></label>
+				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
+				                    <div class="input-field col s12">
+				                    <select multiple>
+				                      <option value="" disabled selected>Choose your option</option>
+				                      <option value="1">Requirement 1</option>
+				                      <option value="2">Requirement 2</option>
+				                      <option value="3">Requirement 3</option>
+				                    </select>
+				                    <label>Select Requirement</label>
+				                  </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -117,37 +99,11 @@
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Update Discount</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
-
-
 				                <div class="aside aside2 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
+				                   <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: 2013-03998" id="discountID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: 2013-03554( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="discountID" class="active">Discount ID<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Senior's" id="discountType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Senior( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -159,8 +115,17 @@
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="discountRate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="discountRate" class="active">Discount Rate<span class="red-text"><b>*</b></span></label>
+				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
+				                    <div class="input-field col s12">
+				                    <select multiple>
+				                      <option value="" disabled selected>Choose your option</option>
+				                      <option value="1">Requirement 1</option>
+				                      <option value="2">Requirement 2</option>
+				                      <option value="3">Requirement 3</option>
+				                    </select>
+				                    <label>Select Requirement</label>
+				                  </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->

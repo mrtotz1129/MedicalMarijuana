@@ -22,6 +22,7 @@ class CreateRoomTable extends Migration
             $table->integer('intNurseStationIdFK')
                 ->unsigned()
                 ->nullable();
+            $table->timestamps();
 
             $table->foreign('intRoomTypeIdFK')
                 ->references('intRoomTypeId')
@@ -32,6 +33,12 @@ class CreateRoomTable extends Migration
             $table->foreign('intNurseStationIdFK')
                 ->references('intNurseStationId')
                 ->on('tblNurseStation')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('intFloorIdFK')
+                ->references('intFloorId')
+                ->on('tblFloor')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Requests\RoomRequest;
 use App\Http\Controllers\Controller;
 
-use App\RoomTypeModel;
-use App\RoomModel;
+use App\BuildingModel;
 
-class RoomController extends Controller
+class NurseStationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +18,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $roomTypes = RoomTypeModel::all();
-
-        return view('maintenance-room')
-            ->with('roomTypes', $roomTypes);
+        $buildingList = BuildingModel::all();
+        return view('maintenance-nurse-station')
+            ->with('buildingList', $buildingList);
     }
 
     /**
@@ -42,12 +39,9 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomRequest $request)
+    public function store(Request $request)
     {
-        $room = new RoomModel;
-
-        $room->intRoomTypeIdFK      =   $request->intRoomTypeIdFK;
-        $room->intNurseStationIdFK  =   $request->nurseStationSelect;   
+        //
     }
 
     /**

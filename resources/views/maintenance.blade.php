@@ -30,11 +30,11 @@
                                 <ul class="indigo darken-1">
                                      <li class="{!! strpos(Request::url(), 'building') !== false ? 'active' : '' !!}"><a href="{!! url('building') !!}" class="white-text">Building</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'discount') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Nurse Station</a>
+                                    <li class="{!! strpos(Request::url(), 'nurse-station') !== false ? 'active' : '' !!}"><a href="{!! url('nurse-station') !!}" class="white-text">Nurse Station</a>
                                     </li>
                                      <li class="{!! strpos(Request::url(), 'room') !== false ? 'active' : '' !!}"><a href="{!! url('room') !!}" class="white-text">Room</a>
                                     </li>
-                                    <li class="{!! strpos(Request::url(), 'bed') !== false ? 'active' : '' !!}"><a href="{!! url('discount') !!}" class="white-text">Bed</a>
+                                    <li class="{!! strpos(Request::url(), 'bed') !== false ? 'active' : '' !!}"><a href="{!! url('bed') !!}" class="white-text">Bed</a>
                                     </li>
                                      <li class="{!! strpos(Request::url(), 'supplier') !== false ? 'active' : '' !!}"><a href="{!! url('supplier') !!}" class="white-text">Supplier</a>
                                     </li>

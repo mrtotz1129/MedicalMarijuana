@@ -16,10 +16,10 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Supplier ID</th>
-				                <th>Name</th>
-				                <th>Address</th>
-				                <th>Status</th>
+				                <th>Nurse Station ID</th>
+				                <th>Building</th>
+				                <th>Floor</th>
+				                <th>Nurse/s</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -40,57 +40,51 @@
 					    } );
 					} );
 				</script>
-				<!-- Create Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				<!-- Create Nurse Modal -->
+				   <div id="create" class="modal modal-fixed-footer" style="width: 700px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add Supplier</h4>
+				              <h4 class="grey-text text-darken-1 center	">Add Nurse Station</h4>
 				        </div>
-			              <div class="aside aside1 z-depth-0">
-			              <!-- first -->
-			                <div class="row">
-			                  <div class="input-field col s12">
-			                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-			                   </div>
-			                   <div class="input-field col s12">
-			                       <div class="file-field input-field">
-			                             <div class="btn">
-			                               <span>Upload</span>
-			                               <input type="file" id="fileUpload">
-			                             </div>
-			                             <div class="file-path-wrapper">
-			                               <input class="file-path validate" type="text">
-			                             </div>
-			                           </div>
-			                   </div>
-			                </div>
-			              </div>
-				              <!-- END ASIDE 1 -->
-				                <div class="aside aside2 z-depth-0">
+				                <div class="aside aside1 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
+
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="supplierID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="supplierID" class="active">Supplier ID<span class="red-text"><b>*</b></span></label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="supplierName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="supplierName" class="active">Supplier Name</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="supplierAddress" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="supplierAddress" class="active">Supplier Address<span class="red-text"><b>*</b></span></label>
-				                    </div>
-				                    <div class="input-field col s10" style="margin-top: 28px !important; margin-left: 10px;">
-				                      <input name="" placeholder="Ex: 9268806979" type="text" id="createContact" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex: 9268806979<br/>( 10 numbers only )" pattern="^[0-9]{10,10}$">
-				                      <label for="createContact" style="margin-left: -35px;">Contact Number</label>
+				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                          <option disabled selected>Building</option>
+				                          @foreach($buildingList as $building)
+				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                          @endforeach
+				                      </select>
+				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
+				                  <div class="input-field col s12">
+				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                          <option disabled selected>Floor</option>
+				                          @foreach($buildingList as $building)
+				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                          @endforeach
+				                      </select>
+				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                  </div>
+
+				                  <div class="input-field col s12">
+				                    <select multiple>
+				                      <option value="" disabled selected>Choose your option</option>
+				                      <option value="1">Nurse 1</option>
+				                      <option value="2">Nurse 2</option>
+				                      <option value="3">Nurse 3</option>
+				                    </select>
+				                    <label>Select Nurses</label>
+				                  </div>
+         
 				                </div>
 				              </div>
 
@@ -105,7 +99,7 @@
 				</div>
 
 				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				   <div id="create" class="modal modal-fixed-footer" style="width: 70px !important;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -113,46 +107,40 @@
 				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Update Supplier</h4>
 				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
+				              
 
 
 				                <div class="aside aside2 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="supplierID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="supplierID" class="active">Supplier ID<span class="red-text"><b>*</b></span></label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="supplierName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="supplierName" class="active">Supplier Name</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="supplierAddress" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="supplierAddress" class="active">Supplier Address<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				                   <div class="input-field col s12">
+				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                          <option disabled selected>Building</option>
+				                          @foreach($buildingList as $building)
+				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                          @endforeach
+				                      </select>
+				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
+				                  </div>
+				                  <div class="input-field col s12">
+				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                          <option disabled selected>Floor</option>
+				                          @foreach($buildingList as $building)
+				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                          @endforeach
+				                      </select>
+				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                  </div>
+
+				                  <div class="input-field col s12">
+				                    <select multiple>
+				                      <option value="" disabled selected>Choose your option</option>
+				                      <option value="1">Nurse 1</option>
+				                      <option value="2">Nurse 2</option>
+				                      <option value="3">Nurse 3</option>
+				                    </select>
+				                    <label>Select Nurses</label>
+				                  </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 --> 
@@ -194,6 +182,13 @@
        </div>
      </form>
    </div>
+<script type="text/javascript">
+	
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+          
+</script>
 
 <script type="text/javascript">
 	function readURL(input) {

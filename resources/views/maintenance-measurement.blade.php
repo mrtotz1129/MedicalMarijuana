@@ -7,7 +7,7 @@
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					href="#create" style="position: relative; top: 40px; right: 1%;" 
+					href="#createModal" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
@@ -24,15 +24,14 @@
 				        </thead>
 				        	
 				        <tbody>
-				        	@foreach($fees as $fee)
+				        	@foreach($measurementList as $measurement)
 				        	<tr>
-				        		<td>{!! $fee->strFeeTypeName !!}</td>
-				        		<td>{!! $fee->strFeeName !!}</td>
-				        		<td>{!! $fee->txtFeeDesc !!}</td>
-				        		<td>{!! number_format($fee->dblPrice, 2) !!}</td>
+				        		<td>{!! $measurement->strUnitOfMeasurementName !!}</td>
+				        		<td>{!! $measurement->strUnitOfMeasurementAbbrev !!}</td>
+				        		<td>{!! $measurement->dblEquivalent !!}</td>
 				        		<td>
-				        			<a href="javascript:updateId({!! $fee->intFeeId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
-				        			<a href="javascript:deactivateId({!! $fee->intFeeId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
+				        			<a href="javascript:updateId({!! $measurement->intUnitOfMeasurementId !!})" class="tooltipped" data-tooltip="Update Measurement Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $measurement->intUnitOfMeasurementId !!})" class="tooltipped" data-tooltip="Deactivate Measurement Details"><i class="material-icons">delete</i></a>
 				        		</td>
 				        	</tr>
 				        	@endforeach
@@ -57,7 +56,7 @@
 
 				<!-- Create Fee Modal -->
 				   <div id="createModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('fee') !!}" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('measurement') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
@@ -72,15 +71,15 @@
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    	<div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="measurementName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
+				                        <input name="strMeasurementName" placeholder="Ex: Benigno" id="measurementName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
 				                        <label for="measurementName" class="active">Measurement Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="MeasurementAbbv" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="strMeasurementAbbrev" placeholder="Ex: Aquino" id="MeasurementAbbv" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="MeasurementAbbv" class="active">Measurement Abbreviation<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equivalent" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="dblEquivalent" placeholder="Ex: Aquino" id="equivalent" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="equivalent" class="active">Equivalent per Piece<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
@@ -137,35 +136,6 @@
 				</div>
 		</div>
 	</article>
-
-<!-- add option -->
-   <div id="feeTypeCreateModal" class="modal" style="margin-top: 30px;">
-     <form id="fee_create_form">
-     	<input type="hidden" id="fee_create_token" value="{!! csrf_token() !!}" />
-       <div class="modal-content">
-         <h4>Add Another Fee Type</h4>
-         <div class="row">
-           <div class="col s12">
-             <div class="input-field col s8 offset-s2">
-               <select id="feeTypeCreateSelect" class="browser-default" size="10">
-				@foreach($feeTypes as $feeType)
-				<option value="{!! $feeType->intFeeTypeId !!}">{!! $feeType->strFeeTypeName !!}</option>
-                @endforeach
-               </select>
-             </div>
-             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="fee_type_create" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">New Fee</label>
-             </div>
-             <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
-             </div>
-           </div>
-         </div>
-       </div>
-     </form>
-   </div>
 
 {{-- Modal Deactivate START --}}
 <div id="deactivate_fee_modal" class="modal">

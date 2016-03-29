@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\UOMModel;
+
 class UomController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class UomController extends Controller
      */
     public function index()
     {
-        //
+        $measurementList = UOMModel::all();
+        return view('maintenance-measurement')
+                ->with('measurementList', $measurementList);
     }
 
     /**
@@ -35,9 +39,15 @@ class UomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UomRequest $request)
     {
-        //
+        $measurement = new UOMModel;
+        $measurement->strUnitOfMeasurementName = $request->strMeasurementName;
+        $measurement->strUnitOfMeasurementAbbrev = $request->strMeasurementAbbrev;
+        $measurement->dblEquivalent = $request->dblEquivalent;
+        $measurement->intStatus = 1;
+        $measurement->save();
+        return redirect('measurement');
     }
 
     /**
@@ -48,7 +58,8 @@ class UomController extends Controller
      */
     public function show($id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        return response()->json($measurement);
     }
 
     /**
@@ -71,7 +82,12 @@ class UomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        $measurement->strUnitOfMeasurementName = $request->strMeasurementName;
+        $measurement->strUnitOfMeasurementAbbrev = $request->strMeasurementAbbrev;
+        $measurement->dblEquivalent = $request->dblEquivalent;
+        $measurement->save();
+        return redirect('measurement');
     }
 
     /**
@@ -82,6 +98,9 @@ class UomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        $measurement->intStatus = 0;
+        $measurement->save();
+        return redirect('measurement');
     }
 }

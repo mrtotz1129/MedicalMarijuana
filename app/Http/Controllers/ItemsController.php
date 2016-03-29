@@ -16,7 +16,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        //
+        return view('maintenance-items');
     }
 
     /**
@@ -37,7 +37,9 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new ItemModel;
+        $item->strItemName = $request->strItemName;
+        
     }
 
     /**

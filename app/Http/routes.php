@@ -28,9 +28,10 @@ Route::resource('pharmacy', 'PharmacyController');
 Route::resource('transaction/room', 'RoomTransactionController');
 Route::resource('nurse-station', 'NurseStationController');
 Route::resource('bed', 'BedController');
-Route::resource('items', 'ItemsController');
+Route::resource('item', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
 Route::resource('service', 'ServiceController');
+Route::resource('uom', 'UomController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

@@ -64,7 +64,7 @@
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Benigno" id="roomID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
 				                        <label for="roomID" class="active">Room ID<span class="red-text"><b>*</b></span></label>
-				                    </div> -->
+				                    </div>
 				                    <!-- <div class="input-field col s12">
 				                        <input name="strRoomTypeDesc" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2" required>
 				                        <label for="roomName" class="active">Room Name<span class="red-text">*</span></label>

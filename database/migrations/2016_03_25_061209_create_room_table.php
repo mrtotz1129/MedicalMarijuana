@@ -19,6 +19,7 @@ class CreateRoomTable extends Migration
             $table->integer('intRoomStatus');
             $table->integer('intFloorIdFK')
                 ->unsigned();
+            $table->text('txtRoomDescription');
             $table->integer('intNurseStationIdFK')
                 ->unsigned()
                 ->nullable();

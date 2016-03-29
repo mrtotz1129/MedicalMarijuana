@@ -52,7 +52,7 @@ class RoomController extends Controller
 
         $room->intRoomTypeIdFK      =   $request->roomTypeCreate;
         $room->intNurseStationIdFK  =   $request->nurseStationSelect;
-        $room->intFloorIdFK         =   $request->; 
+        // $room->intFloorIdFK         =   $request->; 
         $room->intRoomStatus        =   1;  
     }
 

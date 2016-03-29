@@ -17,14 +17,14 @@
 				<table id="nurseList" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Nurse Station ID</th>
+				            	<th>Nurse Station ID</th>
 				                <th>Building</th>
 				                <th>Floor</th>
-				                <th>Nurse/s</th>
+				                <th>Nurse</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
-				        	
+									        	
 				    </table>
 				</div>
 

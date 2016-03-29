@@ -30,6 +30,8 @@ class NurseStationController extends Controller
             ->select('intEmployeeId', 'strFirstName', 'strMiddleName', 'strLastName')
             ->get();
 
+        $nurseStations = NurseStationModel;
+
         return view('maintenance-nurse-station')
             ->with('buildingList', $buildingList)
             ->with('nurses', $nurses);

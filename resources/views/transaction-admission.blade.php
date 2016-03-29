@@ -78,11 +78,11 @@
 	                   </p>
 	                   <br>
 	                    <div class="input-field col s12">
-	                       <select class="browser-default" id="roomTypeSelect" name="selectedJob" required>
+	                       <select class="browser-default" id="doctorSelect" name="selectedJob" required>
 	                           <option disabled selected>Choose Doctor</option>
 	                           <option value=""></option>
 	                       </select>
-	                       <label for="roomTypeSelect" class="active">Available Doctor</label>
+	                       <label for="doctorSelect" class="active">Available Doctor</label>
 	                   	</div>
 	   
 	                </div>
@@ -174,14 +174,16 @@
             <div class="input-field col s12">
                <select class="browser-default" id="roomTypeSelect" name="selectedJob" required>
                    <option disabled selected>Room</option>
-                   <option value=""></option>
+                   @foreach($roomTypes as $roomType)
+                   <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+                   @endforeach
                </select>
                <label for="roomTypeSelect" class="active">Room Type<span class="red-text">*</span></label>
            	</div>
 
            	<div class="input-field col s12">
                <select class="browser-default" id="roomNumberSelect" name="selectedJob" required>
-                   <option disabled selected>Room Numer</option>
+                   <option disabled selected>Room Number</option>
               
                    <option value=""></option>
                </select>
@@ -199,6 +201,24 @@
 </article>
 
 <script type="text/javascript">
-	
+	document.getElementById('roomTypeSelect').onchange = function()
+	{
+		$.ajax({
+			url: "{!! url('') !!}",
+			type: "POST",
+			data: 
+			{
+				_token: document.getElementById('')
+			},
+			success: function(data)
+			{
+
+			},
+			error: function(xhr)
+			{
+				console.log(xhr);
+			}
+		});
+	};
 </script>
 @endsection

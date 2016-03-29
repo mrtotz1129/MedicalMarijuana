@@ -38,6 +38,7 @@ Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
 Route::post('floor/changed', 'FloorAjaxController@retrieveRooms');
 Route::post('nurse-station/changed', 'NurseStationAjaxController@retrieveNurse');
 Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation');
+Route::post('room-type/changed', 'RoomTypeAjaxController@retrieveRooms');
 
 Route::get('view-requirement', 'ViewRequirementController@viewAllRequirement');
 

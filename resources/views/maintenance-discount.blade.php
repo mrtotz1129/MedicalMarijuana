@@ -33,7 +33,7 @@
 				        		@else
 									<td>{!! $discount->dblDiscountAmount !!}</td>
 				        		@endif
-				        		<td></td>
+				        		<td><a href="javascript:viewRequirement({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">search</i></a></td>
 				        		<td>
 				        			<a href="javascript:updateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
 				        			<a href="javascript:deactivateId({!! $discount->intDiscountId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
@@ -111,6 +111,8 @@
 				      </form>
 				</div>
 
+			
+
 				<!-- Update Fee Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
@@ -163,6 +165,60 @@
 				      </div>
 				      </form>
 				</div>
+
+					<!-- View Requirement -->
+				   <div id="viewRequirement" class="modal modal-fixed-footer">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				      <div class="modal-content" style="padding-bottom: 0px !important;">
+				        <!-- <div class="container"> -->
+				      <div class="wrapper">
+				        <div class="input-field col s12">
+				              <h4 class="grey-text text-darken-1 center	">Requirements</h4>
+				        </div>
+				                <div class="aside aside1 z-depth-0">
+				                <!-- second -->
+				                  <div class="row">
+                   		<table id="requirements" class="display" cellspacing="0" width="100%">
+				        <thead>
+				            <tr>
+				            	<th>Requirements</th>
+				            </tr>
+				        </thead>
+				        <tbody>			        	
+				        	<tr>
+				        		<td></td>
+				        		
+				        	</tr>
+				        </tbody>
+				        	
+				    </table>
+				</div>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+					    $('#requirements').DataTable( {
+					        dom: 'Bfrtip',
+					        buttons: [
+					            'copyHtml5',
+					            'excelHtml5',
+					            'csvHtml5',
+					            'pdfHtml5'
+					        ]
+					    } );
+					} );
+				</script>
+				                </div>
+				              </div>
+				              <!-- END ASIDE 2 -->
+
+				            </div>
+				        </div>
+				      <div class="modal-footer">
+				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+				      </div>
+				      </form>
+					</div>
 		</div>
 	</article>
 

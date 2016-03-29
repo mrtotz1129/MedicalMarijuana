@@ -10,6 +10,7 @@
   <link href="{!! asset('css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{!! asset('css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{!! asset('css/style2.min.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{!! asset('css/perfect-scrollbar.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{!! asset('css/maintenance-style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="shortcut icon" href="{!! asset('img/icon.png') !!}"/>
 

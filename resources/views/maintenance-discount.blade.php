@@ -71,9 +71,9 @@
 				                    <div class="input-field col s12">
 				                    <select multiple>
 				                      <option value="" disabled selected>Choose your option</option>
-				                      <option value="1">Requirement 1</option>
-				                      <option value="2">Requirement 2</option>
-				                      <option value="3">Requirement 3</option>
+				                      @foreach($requirementList as $requirement)
+										<option value="{!! $requirement->intRequirementId !!}">{!! $requirement->strRequirementName !!}</option>
+				                      @endforeach
 				                    </select>
 				                    <label>Select Requirement</label>
 				                  </div>

@@ -19,10 +19,10 @@
                     <th>Patient Number</th>
                     <th>Name</th>
                     <th>Address</th>
-                    <th>Contact NO.</th>
+                    <th>Contact No.</th>
                     <th>Room No.</th>
                     <th>Actions</th>
-                </tr>
+                </tr>	
             </thead>  	
     </table>
     </div>
@@ -52,13 +52,13 @@
 	              <!-- first -->
 	                <div class="row">
 	                  <div class="input-field col s12">
-	                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+	                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 	                   </div>
 	                   <div class="input-field col s12">
 	                       <div class="file-field input-field">
 	                             <div class="btn">
 	                               <span>Upload</span>
-	                               <input type="file" id="fileUpload">
+	                               <input type="file" id="fileUpload" name="image">
 	                             </div>
 	                             <div class="file-path-wrapper">
 	                               <input class="file-path validate" type="text">
@@ -84,15 +84,15 @@
 	                         <label class="red-text left">(*) Indicates required field</label>
 	                    </div>
 	                    <div class="input-field col s12">
-	                        <input name="strEmpFirstName" placeholder="Ex: Benigno" id="strEmpFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
+	                        <input name="strFirstName" placeholder="Ex: Benigno" id="strEmpFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
 	                        <label for="strEmpFirstName" class="active">First Name<span class="red-text"><b>*</b></span></label>
 	                    </div>
 	                    <div class="input-field col s12">
-	                        <input name="strEmpMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+	                        <input name="strMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 	                        <label for="strEmpMiddleName" class="active">Middle Name</label>
 	                    </div>
 	                    <div class="input-field col s12">
-	                        <input name="strEmpLastName" placeholder="Ex: Aquino" id="strEmpLastName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+	                        <input name="strLastName" placeholder="Ex: Aquino" id="strEmpLastName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 	                        <label for="strEmpLastName" class="active">Last Name<span class="red-text"><b>*</b></span></label>
 	                    </div>
 	                    <div class="input-field col s12">
@@ -113,7 +113,7 @@
 	                <div class="row">
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
 	                      <select required class="browser-default" name="strEmpGender" id="createGender">
-	                        <option value="" disabled selected></option>
+	                        <option value="" disabled selected>Gender</option>
 	                        <option value="M">Male</option>
 	                        <option value="F">Female</option>
 	                      </select>
@@ -137,8 +137,8 @@
 	                  <div class="input-field col s12">
 	                      <select class="browser-default" id="slct1" name="selectedJob" required>
 	                          <option value="" disabled selected> </option>
-	                          <option value="1">Room 101</option>
-	                          <option value="1">Room 102</option>
+	                          <!-- <option value="1">Room 101</option>
+	                          <option value="1">Room 102</option> -->
 	                      </select>
 	                      <label for="slct1" class="active">Available Room/Bed<span class="red-text">*</span></label>
 	                  </div>
@@ -157,4 +157,8 @@
 	      </form>
 	</div>
 </article>
+
+<script type="text/javascript">
+	
+</script>
 @endsection

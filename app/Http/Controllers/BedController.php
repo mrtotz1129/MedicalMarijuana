@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\BuildingModel;
+use App\BedModel;
 
 class BedController extends Controller
 {
@@ -21,8 +22,12 @@ class BedController extends Controller
         $buildings = BuildingModel::where('intBuildingStatus', '>', 0)
             ->get();
 
+        $beds = BedModel::where('intBedStatus', '>', 0)
+            ->get();
+
         return view('maintenance-bed')
-            ->with('buildings', $buildings);
+            ->with('buildings', $buildings)
+            ->with('beds', $beds);
     }
 
     /**
@@ -43,7 +48,7 @@ class BedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->   
     }
 
     /**
@@ -54,7 +59,8 @@ class BedController extends Controller
      */
     public function show($id)
     {
-        //
+        // $details = \DB::table('tblBed')
+            // ->join('')
     }
 
     /**
@@ -88,6 +94,10 @@ class BedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bed = BedModel::find($id);
+
+        $bed->intBedStatus  =   0;
+
+        $bed->save();
     }
 }

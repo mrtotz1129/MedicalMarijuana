@@ -16,13 +16,24 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Name</th>
-				                <th>Address</th>
-				                <th>Status</th>
+				                <th>Bed ID</th>
+				                <th>Room</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
-				        	
+				        
+				        <tbody>
+				        	@foreach($beds as $bed)
+				        	<tr>
+				        		<td>{!! $bed->intBedId !!}</td>
+				        		<td>{!! $bed->intRoomIdFK !!}</td>
+				        		<td>
+				        			<a href="javascript:updateId({!! $bed->intBedId !!})" class="tooltipped" data-tooltip="Update Bed Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $bed->intBedId !!})" class="tooltipped" data-tooltip="Deactivate Bed Details"><i class="material-icons">delete</i></a>
+				        		</td>
+				        	</tr>
+				        	@endforeach
+				        </tbody>
 				    </table>
 				</div>
 
@@ -46,7 +57,7 @@
 				   		      <h4 class="white-text">Add Bed</h4>
 				   		</div>
 				   </div>
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('bed') !!}" enctype="multipart/form-data">
 				      <div class="modal-content">
 				      <input type="hidden" id="bedCreateFormToken" value="{!! csrf_token() !!}" />
 				        <!-- <div class="container"> -->
@@ -74,7 +85,7 @@
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="slct1" name="selectedJob" required>
+				                      <select class="browser-default" id="createRoomSelect" name="selectedJob" required>
 				                          <option disabled selected>Room</option>
 				                        
 				                      </select>
@@ -93,8 +104,8 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				<!-- Update Bed Modal -->
+				   <div id="updateBedModal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
@@ -111,7 +122,9 @@
 				                   <div class="input-field col s12">
 				                      <select class="browser-default" id="slct1" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
-				                          
+				                          @foreach($buildings as $building)
+				                         <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				                         @endforeach
 				                      </select>
 				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
 				                  </div>
@@ -134,9 +147,9 @@
 				              <!-- END ASIDE 1 -->
 
 
-				                <div class="aside aside2 z-depth-0">
+				                <!-- <div class="aside aside2 z-depth-0"> -->
 				                <!-- second -->
-				                  <div class="row">
+				                  <!-- <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
@@ -153,7 +166,7 @@
 				                        <label for="supplierAddress" class="active">Supplier Address<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
-				              </div>
+				              </div> -->
 				              <!-- END ASIDE 2 --> 
 				            </div>
 				        </div>
@@ -193,6 +206,20 @@
        </div>
      </form>
    </div>
+
+{{-- Modal Deactivate START --}}
+<div id="deactivate_bed_modal" class="modal">
+	<input type="hidden" id="deactivate_bed_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Bed Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_bed_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
 
 <script type="text/javascript">
 	function readURL(input) {
@@ -236,6 +263,73 @@
 				console.log(xhr);
 			}
 		});
+	}
+
+	document.getElementById('floorCreateSelect').onchange = function()
+	{
+		$.ajax({
+			url: "{!! url('floor/changed') !!}",
+			type: 'POST',
+			data: {
+				_token: document.getElementById('bedCreateFormToken').value,
+				floorId: this.value
+			},
+			success: function(data) {
+				$('#createRoomSelect').empty();
+
+				for(var i = 0; i < data.length; i++) {
+					var option = document.createElement('option');
+					option.text = data[i].intRoomId;
+					option.value = data[i].intRoomId;
+
+					document.getElementById('createRoomSelect').appendChild(option);
+				}
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});	
+	};
+
+	function updateId(id)
+	{
+		$('#updateBedModal').openModal();
+
+		// $.ajax({
+		// 	url: "bed/" + id,
+		// 	type: "GET",
+		// 	success: function(data)
+		// 	{
+
+		// 	},
+		// 	error: function(xhr)
+		// 	{
+		// 		console.log(xhr);
+		// 	}
+		// });
+	}
+
+	function deactivateId(id)
+	{
+		$('#deactivate_bed_modal').openModal();
+
+		document.getElementById('deactivate_bed_btn').onclick = function()
+		{
+			$.ajax({
+				url: "bed/" + id,
+				type: "POST",
+				data: {
+					_method: 'DELETE',
+					_token: document.getElementById('deactivate_bed_token').value
+				},
+				success: function(data) {
+					window.location.href = '{!! url("bed") !!}';
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
+		};
 	}
 </script>
  

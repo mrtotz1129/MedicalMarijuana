@@ -10,6 +10,7 @@
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
+
 				<div class="col s4">
 					<a href="#setPrice" class="btn modal-trigger btn-floating red"><i class="material-icons">money</i></a>
 				</div>
@@ -22,16 +23,27 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				                <th>Item ID</th>
-				                <th>Type</th>
 				                <th>Name</th>
+				                <th>Category</th>
 				                <th>Generic Name</th>
-				                <th>Details</th>
-				                <th>Price</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
 				        	
+				        <tbody>
+				        @foreach($itemList as $item)
+				        	<tr>
+				        		<td>{!! $item->strItemName !!}</td>
+				        		<td>{!! $item->item_category !!}</td>
+				        		<td>{!! $item->generic_name !!}</td>
+				        		<td>
+				        			<a href="#setPrice" class="btn modal-trigger btn-floating red"><i class="material-icons">money</i></a>
+				        			<a href="javascript:updateId({!! $item->intItemId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:deactivateId({!! $item->intItemId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
+				        		</td>
+				        	</tr>
+				        @endforeach
+				        </tbody>
 				    </table>
 				</div>
 
@@ -48,14 +60,16 @@
 					    } );
 					} );
 				</script>
+
+				
 				<!-- Create Item Modal -->
 				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('item') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add New Item</h4>
+				              <h4 class="grey-text text-darken-1 center	">Add Item</h4>
 				        </div>
 				              <div class="aside aside1 z-depth-0">
 				              <!-- first -->
@@ -75,7 +89,7 @@
 				                           </div>
 				                   </div>
 				                   <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="strItemName" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="drugName" class="active">Item Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                </div>
@@ -94,9 +108,9 @@
 				                    	<div class="input-field col s6">
 				                        <select class="browser-default" id="itemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
-				                         
-												<option value="category 1">category 1</option>
-				                        
+				                        	@foreach($itemCategoryList as $itemCategory)
+												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+				                        	@endforeach
 				                        </select>
 				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
 				                    </div>
@@ -109,9 +123,9 @@
 				                    	<div class="input-field col s6">
 				                        <select class="browser-default" id="genericName" name="intGenericNameId" required>
 				                            <option disabled selected>Choose Generic name</option>
-				                            
-				                            	<option value="Gen Name1">Gen Name 1</option>
-				                    
+				                            @foreach($genericList as $generic)
+				                            	<option value="{!! $generic->intGenericNameId !!}">{!! $generic->strGenericName !!}</option>
+				                    		@endforeach
 				                        </select>
 				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
 				                    </div>
@@ -222,9 +236,9 @@
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
                <select id="addItemCategorySelect" class="browser-default" size="10">
-               		
-						<option value="Category 1">Category 1</option>
-           
+               		@foreach($itemCategoryList as $itemCategory)
+						<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+           			@endforeach
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
@@ -243,16 +257,16 @@
 
      <!-- add option -->
    <div id="addGeneric" class="modal" style="margin-top: 30px;">
-     <form id="createOption">
+     <form id="createGenericForm">
        <div class="modal-content">
-         <h4>Add New Generic</h4>
+         <h4>Add Generic Name</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
                <select id="selectGeneric" class="browser-default" size="10">
-               
-						<option value="GEn1">Gen1</option>
-         
+               		@foreach($genericList as $generic)
+						<option value="{!! $generic->intGenericNameId !!}">{!! $generic->strGenericName !!}</option>
+         			@endforeach
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
@@ -277,8 +291,10 @@
          	<div class="row">
          		  <div class="input-field col s6">
          		    <select class="browser-default" id="measurementSelect" name="selectedJob" required>
-         		        <option disabled selected>Choose Mwasurement</option>
-         		        <option value="Measurement 1">Measurement 1</option>
+         		        <option disabled selected>Choose Measurement</option>
+         		        @foreach($measurementList as $measurement)
+							<option value="{!! $measurement->strUnitOfMeasurementName !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
+         		        @endforeach
          		    </select>
          		    <label for="measurementSelect" class="active">Set Measurement<span class="red-text">*</span></label>
          			</div>
@@ -344,7 +360,6 @@
        </div>
      </form>
    </div>
-
 <script type="text/javascript">
 	function readURL(input) {
 

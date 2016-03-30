@@ -80,20 +80,26 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                      <div class="input-field col s12">
+				                      <div class="input-field col s6">
 				                        <select class="browser-default" id="itemCategory" name="selectedJob" required>
 				                            <option disabled selected>Choose Category</option>
 				                            <option value="{"></option>
 				                        </select>
 				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
 				                    </div>
+				                    <div class="col s6">
+				                    	<a href="#addCategory" class="modal-trigger green"><i class="material-icons">add</i></a>
 				                    </div>
-				                      <div class="input-field col s12">
+				                    </div>
+				                      <div class="input-field col s6">
 				                        <select class="browser-default" id="genericName" name="selectedJob" required>
 				                            <option disabled selected>Choose Category</option>
 				                            <option value=""></option>
 				                        </select>
 				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
+				                    </div>
+				                    <div class="col s6">
+				                    	<a href="#addGeneric" class="modal-trigger green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -154,20 +160,26 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                      <div class="input-field col s12">
+				                      <div class="input-field col s6">
 				                        <select class="browser-default" id="itemCategory" name="selectedJob" required>
 				                            <option disabled selected>Choose Category</option>
 				                            <option value="{"></option>
 				                        </select>
 				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
 				                    </div>
+				                    <div class="col s6">
+				                    	<a href="#addCategory" class="btn modal-trigger green"><i class="material-icons">add</i></a>
 				                    </div>
-				                      <div class="input-field col s12">
+				                    </div>
+				                      <div class="input-field col s6">
 				                        <select class="browser-default" id="genericName" name="selectedJob" required>
 				                            <option disabled selected>Choose Category</option>
 				                            <option value=""></option>
 				                        </select>
 				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
+				                    </div>
+				                    <div class="col s6">
+				                    	<a href="#addGeneric" class="btn modal-trigger green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -191,26 +203,48 @@
 	</article>
 
 <!-- add option -->
-   <div id="addOption" class="modal" style="margin-top: 30px;">
+   <div id="addCategory" class="modal" style="margin-top: 30px;">
      <form id="createOption">
        <div class="modal-content">
-         <h4>Add Another Position</h4>
+         <h4>Add New Category</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
                <select id="addOptionSelect" class="browser-default" size="10">
-                 <c:forEach items="${empCategory}" var="name">
-                     <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-                   </c:forEach>
+                     <option value="">Category 1</option>
                </select>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
                <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addOptionName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">Position</label>
+               <label for="addOptionName" class="active">Category</label>
              </div>
              <div class="input-field col s8 offset-s2 center">
                <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
+             </div>
+           </div>
+         </div>
+       </div>
+     </form>
+   </div>
+
+   <!-- add option -->
+   <div id="addGeneric" class="modal" style="margin-top: 30px;">
+     <form id="createOption">
+       <div class="modal-content">
+         <h4>Add New Geeric Name</h4>
+         <div class="row">
+           <div class="col s12">
+             <div class="input-field col s8 offset-s2">
+               <select id="addOptionSelect" class="browser-default" size="10">
+                     <option value="">Generic 1</option>
+               </select>
+             </div>
+             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
+               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addGenericName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
+               <label for="addGenericName" class="active">Generic Name</label>
+             </div>
+             <div class="input-field col s8 offset-s2 center">
+               <button type="submit" value="Submit" id="createGeneric" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
              </div>
            </div>
          </div>

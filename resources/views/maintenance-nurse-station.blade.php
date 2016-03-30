@@ -58,36 +58,26 @@
 					} );
 				</script>
 				<!-- Create Nurse Modal -->
-				   <div id="create" class="modal modal-fixed-footer" style="width: 700px !important;">
+				   <div id="create" class="modal modal-fixed-footer" style="width: 500px !important; border-radius: 10px; height: 400px !important;">
 				    <form class="col s12 form" method="post" action="{!! url('nurse-station') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" id="nurseStationFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add Nurse Station</h4>
-				        </div>
-				                <div class="aside aside1 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-
+				              <h4 class="thin center">Add Nurse Station</h4>
+				              <br>	
 				                    <div class="input-field col s12">
-				                      <select class="browser-default" id="buildingCreateSelect" name="selectedJob" required>
+				                      <select id="buildingCreateSelect" name="selectedJob" required>
 				                          <option disabled selected>Building</option>
 				                          @foreach($buildingList as $building)
 				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
 				                          @endforeach
 				                      </select>
-				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
+				                      <label>Building</label>
 				                  </div>
 				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="floorCreate" name="floorCreateSelect" required>
+				                      <select id="floorCreate" name="floorCreateSelect" required>
 				                          <option disabled selected>Floor</option>
 				                      </select>
-				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                      <label>Floor</label>
 				                  </div>
 
 				                  <div class="input-field col s12">
@@ -99,12 +89,6 @@
 				                    </select>
 				                    <label>Select Nurses</label>
 				                  </div>
-         
-				                </div>
-				              </div>
-
-				              <!-- END ASIDE 2 -->
-				            </div>
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
@@ -114,49 +98,37 @@
 				</div>
 
 				<!-- Update Fee Modal -->
-				   <div id="updateNurseStationModal" class="modal modal-fixed-footer" style="width: 700px !important;">
+				   <div id="updateNurseStationModal" class="modal modal-fixed-footer"style="width: 500px !important; border-radius: 10px; height: 400px !important;">
 				    <form id="updateNurseStationForm" class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
-				    	<input type="hidden" id="updateNurseStationFormToken" value="{!! csrf_token() !!}" />
+				    <input type="hidden" id="updateNurseStationFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Nurse Station</h4>
-				        </div>
-				              
-				                <div class="aside aside2 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                   <div class="input-field col s12">
-				                      <select class="browser-default" id="updateBuildingSelect" name="updateBuildingSelect" required>
-				                          <option disabled selected>Building</option>
-				                          @foreach($buildingList as $building)
-				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                          @endforeach
-				                      </select>
-				                      <label for="slct1" class="active">Building<span class="red-text">*</span></label>
-				                  </div>
-				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="floorUpdateSelect" name="floorUpdateSelect" required>
-				                          <option disabled selected>Floor</option>
-				                      </select>
-				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
-				                  </div>
+			              <h4 class="grey-text text-darken-1 center	">Update Nurse Station</h4>
+			                   <div class="input-field col s12">
+			                      <select id="updateBuildingSelect" name="updateBuildingSelect" required>
+			                          <option disabled selected>Building</option>
+			                          @foreach($buildingList as $building)
+			                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+			                          @endforeach
+			                      </select>
+			                      <label>Building</label>
+			                  </div>
+			                  <div class="input-field col s12">
+			                      <select id="floorUpdateSelect" name="floorUpdateSelect" required>
+			                          <option disabled selected>Floor</option>
+			                      </select>
+			                      <label>Floor</label>
+			                  </div>
 
-				                  <div class="input-field col s12">
-				                    <select multiple id="nurseUpdateSelect" name="nurseUpdateSelect[]">
-				                      <option value="" disabled selected>Choose your option</option>
-				                     	@foreach($nurses as $nurse)
-				                      <option value="{!! $nurse->intEmployeeId !!}">{!! $nurse->name !!}</option>
-				                      @endforeach
-				                    </select>
-				                    <label>Select Nurses</label>
-				                  </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 --> 
-				            </div>
-				        </div>
+			                  <div class="input-field col s12">
+			                    <select multiple id="nurseUpdateSelect" name="nurseUpdateSelect[]">
+			                      <option value="" disabled selected>Choose your option</option>
+			                     	@foreach($nurses as $nurse)
+			                      <option value="{!! $nurse->intEmployeeId !!}">{!! $nurse->name !!}</option>
+			                      @endforeach
+			                    </select>
+			                    <label>Select Nurses</label>
+			                  </div>
+				        </dsiv>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
@@ -183,7 +155,7 @@
           	        	
           	        </tbody>
           	    </table>
-          	</div>
+          </div>
          </div>
        </div>
      </form>

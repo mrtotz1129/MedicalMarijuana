@@ -14,7 +14,9 @@ class CreateTransferbedTable extends Migration
     {
         Schema::create('tblTransferBed', function(Blueprint $table){
             $table->increments('intTransferBedId');
-            $table->integer('intAdmissionIdFK')
+            $table->integer('intEmployeeIdFK')
+                ->unsigned();
+            $table->integer('intPatientIdFK')
                 ->unsigned();
             $table->integer('intBedFromIdFK')
                 ->unsigned();
@@ -25,9 +27,15 @@ class CreateTransferbedTable extends Migration
             $table->text('txtRemarks');
             $table->timestamps();
 
-            $table->foreign('intAdmissionIdFK')
-                ->references('intAdmissionId')
-                ->on('tblAdmission')
+            $table->foreign('intEmployeeIdFK')
+                ->references('intEmployeeId')
+                ->on('tblEmployee')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('intPatientIdFK')
+                ->references('intPatientId')
+                ->on('tblPatient')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 

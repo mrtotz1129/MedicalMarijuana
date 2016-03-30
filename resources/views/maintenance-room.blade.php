@@ -55,91 +55,70 @@
 					} );
 				</script>
 				<!-- Create Room Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				   <div id="create" class="modal modal-fixed-footer" style="width: 1000px !important; border-radius: 10px; height: 450px !important; margin-top: 30px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('room') !!}" enctype="multipart/form-data">
 				    <input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
+				      <div class="modal-content" style="padding-bottom: 0px !important;">		       
+				              <h4 class="thin center">Create Room</h4>
+				       			<div class="row">
+				       				<div class="col s6">
+				       					  <div class="input-field col s12">
+				       					     <select id="buildingCreate" name="selectedJob" required>
+				       					         <option disabled selected>Building</option>
+				       					         @foreach($buildings as $building)
+				       					         <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				       					         @endforeach
+				       					     </select>
+				       					     <label>Building</label>
+				       					 </div>
+				       					 <div class="input-field col s12">
+				       					     <select  id="floorCreateSelect" name="floorCreateSelect" required>
+				       					         <option disabled selected>Floor</option>
+				       					     </select>
+				       					     <label>Floor</label>
+				       					 </div>
+				       					  <div class="input-field col s12">
+				       					     <select id="roomTypeCreateSelect" name="roomTypeCreate" required>
+				       					         <option disabled selected>Room Type</option>
+				       					         @foreach($roomTypes as $roomType)
+				       					         <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+				       					         @endforeach
+				       					     </select>
+				       					     <label>Room Type</label>
+				       					 </div>
+				       					 <br>
+				       					 <div class="col s12 center" style="margin-top: 20px; margin-left: 30px;">
+				       					  <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text col s6 center"><i class="material-icons">add</i></a>
+				       					</div>
+				       				</div>
 
-				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Create Room</h4>
-				        </div>
+				       				<div class="col s6">
+				       					 <div class="input-field col s12">
+				       					     <input name="txtRoomDescription" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="roomDesc" class="active">Room Description</label>
+				       					 </div>
 
+				       					 <div class="input-field col s12">
+				       					     <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
+				       					 </div>
 
-				                <div class="aside aside2 z-depth-0">
+				       					 <div class="input-field col s12">
+				       					     <input name="intNumBed" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
+				       					 </div>
 
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="buildingCreate" name="selectedJob" required>
-				                           <option disabled selected>Building</option>
-				                           @foreach($buildings as $building)
-				                           <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
-				                           @endforeach
-				                       </select>
-				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <select class="browser-default" id="floorCreateSelect" name="floorCreateSelect" required>
-				                           <option disabled selected>Floor</option>
-				                           
-				                       </select>
-				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
-				                   </div>
-
-				                    <!-- <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomName" class="active">Room Name</label>
-				                    </div> -->
-				                    <div class="input-field col s8">
-				                       <select class="browser-default" id="roomTypeCreateSelect" name="roomTypeCreate" required>
-				                           <option disabled selected>Room Type</option>
-				                           @foreach($roomTypes as $roomType)
-				                           <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
-				                           @endforeach
-				                       </select>
-				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
-				                   </div>
-
-				                   <div class="input-field col s4">
-				                    <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
-				                  </div>
-				                    <div class="input-field col s12">
-				                        <input name="txtRoomDescription" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description</label>
-				                    </div>
-
-				                    <div class="input-field col s12">
-				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
-				                    </div>
-
-				                    <div class="input-field col s12">
-				                        <input name="intNumBed" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
-				                    </div>
-
-				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="nurseStationSelect">
-				                           <option disabled selected>Nurse Station</option>
-				                           @foreach($nurseStations as $nurseStation)
-				                           <option value="{!! $nurseStation->intNurseStationId !!}">{!! $nurseStation->intNurseStationId !!}</option>
-				                           @endforeach
-				                       </select>
-				                       <label for="slct1" class="active">Nurse Station</label>
-				                   </div>
-
-
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-
-			             
-				            </div>
+				       					 <div class="input-field col s12">
+				       					    <select id="slct1" name="nurseStationSelect">
+				       					        <option disabled selected>Nurse Station</option>
+				       					        @foreach($nurseStations as $nurseStation)
+				       					        <option value="{!! $nurseStation->intNurseStationId !!}">{!! $nurseStation->intNurseStationId !!}</option>
+				       					        @endforeach
+				       					    </select>
+				       					    <label>Nurse Station</label>
+				       					</div>
+				       				</div>
+				       			</div>
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
@@ -148,36 +127,27 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
-				   <div id="updateRoomModal" class="modal modal-fixed-footer">
+				<!-- Update Room Modal -->
+				   <div id="updateRoomModal" class="modal modal-fixed-footer" style="width: 1000px !important; border-radius: 10px; height: 450px !important; margin-top: 30px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Rooms</h4>
-				        </div>
-				              <div class="aside aside1 z-depth-0">
-
- 						<div class="aside aside1 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
+				      <h4 class="center">Update Rooms</h4>
+				      		<div class="row">
+				      			<div class="col s6">
+				      				<div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select id="" name="selectedJob" required>
 				                           <option disabled selected>Building</option>
-				                           
 				                       </select>
-				                       <label for="slct1" class="active">Building<span class="red-text">*</span></label>
+				                       <label>Building</span></label>
 				                   </div>
 				                   <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select id="" name="selectedJob" required>
 				                           <option disabled selected>Floor</option>
-				                           
 				                       </select>
-				                       <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
+				                       <label >Floor</label>
 				                   </div>
 
 				                    <div class="input-field col s12">
@@ -185,12 +155,15 @@
 				                        <label for="roomName" class="active">Room Name</label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Room Type</option>
 				                           
 				                       </select>
-				                       <label for="slct1" class="active">Room Type<span class="red-text">*</span></label>
+				                       <label>Room Type</label>
 				                   </div>
+				      			</div>
+
+				      			<div class="col s6">
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
@@ -207,81 +180,46 @@
 				                    </div>
 
 				                    <div class="input-field col s12">
-				                       <select class="browser-default" id="slct1" name="selectedJob" required>
+				                       <select id="slct1" name="selectedJob" required>
 				                           <option disabled selected>Nurse Station</option>
-				                         
 				                       </select>
-				                       <label for="slct1" class="active">Nurse Station<span class="red-text">*</span></label>
+				                       <label>Nurse Station</label>
 				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-				            </div>
-				        </div>
+				      			</div>
+				      		</div>
+				                  
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
 				      </div>
-				      </form>
+				     </div>
+				   </form>
 				</div>
 		</div>
 	</article>
 
 <!-- add option -->
-   <div id="addRoomTypeModal" class="modal" style="margin-top: 30px;">
+   <div id="addRoomTypeModal" class="modal" style="margin-top: 30px; border-radius: 10px; width: 500px !important;">
      <form id="addRoomTypeForm">
      	<input type="hidden" id="roomTypeFormToken" value="{!! csrf_token() !!}" />
        <div class="modal-content">
-         <h4>Add Room Type</h4>
-         <div class="row">
-           <div class="col s12">
+         <h4 class="thin center">Add Room Type</h4>
              <div class="input-field col s8 offset-s2">
-               <select id="roomTypeList" class="browser-default" size="10">
-                 <!-- <c:forEach items="${empCategory}" var="name"> -->
-                     <!-- <option value="${name.strCategoryName}">${name.strCategoryName }</option> -->
-                   <!-- </c:forEach> -->
+               <select id="roomTypeList" size="10">
+               		<option disabled="disabled" selected="">Choose Room</option>
                    @foreach($roomTypes as $roomType)
                    <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
                    @endforeach
                </select>
+               <label>Room</label>
              </div>
              <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
                <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$" id="roomTypeNameInput">
                <label for="addOptionName" class="active">Room Type Name</label>
              </div>
              <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
+               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light indigo darken-3 btn-flat white-text">SAVE</button>
              </div>
-           </div>
-         </div>
-       </div>
-     </form>
-   </div>
-
-   <!-- add Bed Modal -->
-   <div id="addBed" class="modal" style="margin-top: 30px;">
-     <form id="createOption">
-       <div class="modal-content">
-         <h4>Add Bed</h4>
-         <div class="row">
-           <div class="col s12">
-             <div class="input-field col s8 offset-s2">
-               <select id="addBedSelect" class="browser-default" size="10">
-                     <option value="${name.strCategoryName}">${name.strCategoryName }</option>
-               </select>
-               <label for="addBedSelect" class="active">Available Beds</label>
-             </div>
-             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="addOptionName" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">Desciption</label>
-             </div>
-             <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
-             </div>
-           </div>
-         </div>
        </div>
      </form>
    </div>

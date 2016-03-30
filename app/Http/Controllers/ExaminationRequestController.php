@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\ExaminationRequestRequest;
 use App\Http\Controllers\Controller;
 
-use App\PatientModel;
-use App\AdmissionModel;
-use App\ServiceModel;
+use App\PrescriptionModel;
+use App\PrescriptionDetailModel;
 
-class CheckupController extends Controller
+class ExaminationRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class CheckupController extends Controller
      */
     public function index()
     {
-         return view('transaction-checkup'); 
+        //
     }
 
     /**
@@ -39,9 +39,35 @@ class CheckupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExaminationRequestRequest $request)
     {
-        //
+        $prescription = new PrescriptionModel;
+
+        $prescription->intPatientIdFk   =   $request->patientId;
+        $prescription->intEmployeeIdFk  =   1;  // Will session it later
+
+        $prescription->save();
+
+        $prescriptionDetail = new PrescriptionDetailModel;
+
+        $prescriptionDetail->intPrescriptionIdFK    =   $prescription->intPrescriptionId;
+        $prescriptionDetail->intPrescriptionTypeId  =   1;
+
+        $prescriptionDetail->save();
+
+        for($i = 0; $i < (int) count($request->service); $i++)
+        {
+            \DB::table('tblPrescriptionService')
+            ->insert([
+                'intPrescriptionDetailIdFK' =>  $prescriptionDetail->intPrescriptionDetailId,
+                'intServiceIdFK'            =>  $request->service[$i],
+                'created_at'                =>  date('Y-m-d H:i:s'),
+                'updated_at'                =>  date('Y-m-d H:i:s'),
+                'txtRemarks'                =>  $request->remarks != null ? $request->remarks : null
+            ]);   
+        }
+
+        return redirect('checkup/' . $request->patientId);
     }
 
     /**
@@ -52,29 +78,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $patient = \DB::table('tblPatient')
-            ->leftJoin('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
-            ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
-            ->leftJoin('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intRoomIdFK')
-            ->select('tblPatient.intPatientId', 'tblPatient.strFirstName', 'tblPatient.txtPatientImgPath', 'tblPatient.strMiddleName', 'tblPatient.strLastName',
-                'tblRoom.intRoomId', 'tblPatient.txtAddress', 'tblBed.intBedId')
-            ->where('tblPatient.intPatientId', $id)
-            ->first();
-
-        $lastVisit = AdmissionModel::where('intPatientIdFK', $id)
-            ->orderBy('created_at', 'desc')
-            ->select('created_at')
-            ->where('intPatientIdFK', $id)
-            ->first();
-
-        $services = ServiceModel::where('intServiceStatus', '>', 0)
-            ->select('intServiceId', 'strServiceName')
-            ->get();
-
-        return view('transaction-checkup')
-            ->with('patient', $patient)
-            ->with('lastVisit', $lastVisit)
-            ->with('services', $services);
+        //
     }
 
     /**

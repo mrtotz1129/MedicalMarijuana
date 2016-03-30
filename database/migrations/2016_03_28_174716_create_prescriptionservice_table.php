@@ -17,6 +17,8 @@ class CreatePrescriptionserviceTable extends Migration
                 ->unsigned();
             $table->integer('intServiceIdFK')
                 ->unsigned();
+            $table->text('txtRemarks')
+                ->nullable();
             $table->timestamps();
 
             $table->foreign('intPrescriptionDetailIdFK')

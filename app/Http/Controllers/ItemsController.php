@@ -129,6 +129,10 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = ItemModel::find($id);
+
+        $item->intItemStatus = 0;
+
+        $item->save();
     }
 }

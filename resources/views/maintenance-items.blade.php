@@ -337,6 +337,20 @@
        </div>
      </form>
    </div>
+
+{{-- Modal Deactivate START --}}
+<div id="deactivate_item_modal" class="modal">
+	<input type="hidden" id="deactivate_item_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Item Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_item_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
 <script type="text/javascript">
 	function readURL(input) {
 
@@ -428,6 +442,29 @@
 
 	function viewPrice(id){
 		$('#viewPrice').openModal();
+	}
+
+	function deactivateId(id)
+	{
+		$('#deactivate_item_modal').openModal();
+
+		document.getElementById('deactivate_item_btn').onclick = function()
+		{
+			$.ajax({
+				url: "{!! url('item') !!}" + '/' + id,
+				type: "POST",
+				data: {
+					_method: 'DELETE',
+					_token: document.getElementById('deactivate_item_token').value
+				},
+				success: function(data) {
+					window.location.href = '{!! url("item") !!}';
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
+		};
 	}
 
 </script>

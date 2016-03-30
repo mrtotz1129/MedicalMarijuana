@@ -68,16 +68,6 @@
 	                           </div>
 	                   </div>
 	                   <br>
-	                    <div class="input-field col s12">
-	                       <select class="browser-default" id="doctorSelect" name="doctorSelect" required>
-	                           <option disabled selected>Choose Doctor</option>
-	                           @foreach($doctors as $doctor)
-	                           <option value="{!! $doctor->intEmployeeId !!}">{!! $doctor->strLastName . ', ' . $doctor->strFirstName . ($doctor->strMiddleName != null ? (' ' . $doctor->strMiddleName) : ''); !!}</option>
-	                           @endforeach
-	                       </select>
-	                       <label for="doctorSelect" class="active">Available Doctor</label>
-	                   	</div>
-	   
 	                </div>
 	              </div>
 	              <!-- END ASIDE 1 -->

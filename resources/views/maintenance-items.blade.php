@@ -34,8 +34,8 @@
 				        @foreach($itemList as $item)
 				        	<tr>
 				        		<td>{!! $item->strItemName !!}</td>
-				        		<td>{!! $item->item_category !!}</td>
-				        		<td>{!! $item->generic_name !!}</td>
+				        		<td>{!! $item->strItemCategoryDesc !!}</td>
+				        		<td>{!! $item->strGenericName !!}</td>
 				        		<td>
 				        			<a href="javascript:viewPrice({!! $item->intItemId !!})" class="btn-floating green"><i class="material-icons">money</i></a>
 				        			<a href="javascript:addPrice({!! $item->intItemId !!})" class="btn btn-floating red"><i class="material-icons">money</i></a>

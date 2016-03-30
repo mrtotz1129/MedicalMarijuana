@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\GenericModel;
+
 class GenericController extends Controller
 {
     /**
@@ -40,6 +42,9 @@ class GenericController extends Controller
         $generic = new GenericModel;
         $generic->strGenericName = $request->strGenericName;
         $generic->save();
+
+        $genericList = GenericModel::all();
+        return response()->json($genericList);
     }
 
     /**

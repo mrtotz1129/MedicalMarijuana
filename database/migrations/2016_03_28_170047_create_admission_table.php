@@ -20,8 +20,8 @@ class CreateAdmissionTable extends Migration
                 ->unsigned();
             $table->integer('intAdmissionStatusIdFK')
                 ->unsigned();
-            $table->dateTime('datAdmission');
-            $table->string('strAdmissionRemarks');
+            $table->text('txtAdmissionRemarks')
+                ->nullable();
             $table->integer('intDoctorIdFK')
                 ->unsigned();
             $table->timestamps();

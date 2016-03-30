@@ -81,8 +81,13 @@ class AdmissionController extends Controller
 
         $admission = new AdmissionModel;
 
-        $admission->intPatientIdFK  =   $patient->intPatientId;
-        $admission->intBedIdFK      =   $
+        $admission->intPatientIdFK          =   $patient->intPatientId;
+        $admission->intBedIdFK              =   $request->bed;
+        $admission->intAdmissionStatusIdFK  =   1;
+        $admission->datAdmission            =   date('Y-m-d H:i:s');
+        $admission->intDoctorIdFK           =   $request->doctorSelect;
+
+        $admission->save();
     }
 
     /**

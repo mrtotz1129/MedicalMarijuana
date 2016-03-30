@@ -32,6 +32,8 @@ Route::resource('item', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
 Route::resource('service', 'ServiceController');
 Route::resource('measurement', 'UomController');
+Route::resource('item-category', 'ItemCategoryController');
+Route::resource('generic', 'GenericController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
@@ -41,6 +43,7 @@ Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation
 Route::post('room-type/changed', 'RoomTypeAjaxController@retrieveRooms');
 
 Route::get('view-requirement', 'ViewRequirementController@viewAllRequirement');
+Route::get('get-bed-lists/{id}', 'BedAjaxController@retrieveBeds');
 
 Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');

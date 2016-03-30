@@ -15,6 +15,9 @@ class CreateGenericnameTable extends Migration
         Schema::create('tblGenericName', function(Blueprint $table) {
             $table->increments('intGenericNameId');
             $table->string('strGenericName');
+            $table->timestamps();
+
+            $table->unique('strGenericName');
         });
     }
 

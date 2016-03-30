@@ -49,9 +49,6 @@
 	      		<div class="input-field col s6">
 	      		      <h4 class="grey-text text-darken-1 left">Add Patient</h4>
 	      		</div>
-	      		<div class="input-field col s6 right">
-	      		     <a href="#addRoom" class="btn modal-trigger btn-floating red btn-large right"><i class="material-icons">local_hotel</i></a>
-	      		</div>
 	      	</div>
 	              <div class="aside aside1 z-depth-0">
 	              <!-- first -->
@@ -70,12 +67,6 @@
 	                             </div>
 	                           </div>
 	                   </div>
-	                   <p class="center">
-	                         <input name="patientType" type="radio" id="test1" value="out" />
-	                         <label for="test1">Out Patient</label>
-	                         <input name="patientType" type="radio" id="test2" value="in" />
-	                         <label for="test2">In Patient</label>
-	                   </p>
 	                   <br>
 	                    <div class="input-field col s12">
 	                       <select class="browser-default" id="doctorSelect" name="doctorSelect" required>
@@ -126,10 +117,6 @@
 	              <div class="aside aside3 z-depth-0">
 	              <!-- third -->
 	                <div class="row">
-	                 <div class="input-field col s12">
-	                      <input name="bed"  readonly placeholder="Ex: #101" type="text" id="bed" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
-	                      <label for="bed" class="active">Bed<span class="red-text">*</span></label>
-	                  </div>
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
 	                      <select required class="browser-default" name="strGender" id="createGender">
 	                        <option value="" disabled selected>Gender</option>
@@ -166,46 +153,6 @@
 	      </div>
 	      </form>
 	</div>
-
-	<!-- add Room -->
-   <div id="addRoom" class="modal" style="margin-top: 30px; width: 400px !important; border-radius: 10px;">
-     <form id="createRoomForm">
-     	<input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
-       <div class="modal-content">
-         <h4 class="grey-text text-darken-2"> Choose Room</h4>
-         <div class="row">
-            <div class="input-field col s12">
-               <select class="browser-default" id="roomTypeSelect" name="selectedJob" required>
-                   <option disabled selected>Room</option>
-                   @foreach($roomTypes as $roomType)
-                   <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
-                   @endforeach
-               </select>
-               <label for="roomTypeSelect" class="active">Room Type<span class="red-text">*</span></label>
-           	</div>
-
-           	<div class="input-field col s12">
-               <select class="browser-default" id="roomNumberSelect" name="selectedJob" required>
-                   <option disabled selected>Room Number</option>
-               </select>
-               <label for="roomNumberSelect" class="active">Room Number<span class="red-text">*</span></label>
-           	</div>
-
-           	<div class="input-field col s12">
-               <select class="browser-default" id="bedNumberSelect" name="selectedJob" required>
-                   <option disabled selected>Bed Number</option>
-               </select>
-               <label for="bedNumberSelect" class="active">Bed Number<span class="red-text">*</span></label>
-           	</div>
-           	<br>
-           	<div class="center">
-           		<br>
-           		<button type="submit" class="btn-large green darken-3 center" style="margin-top: 10px;">ADD</button>
-           	</div>
-           	
-       </div>
-     </form>
-   </div>
 </article>
 
 <script type="text/javascript">

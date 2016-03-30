@@ -76,13 +76,13 @@
 				              <!-- first -->
 				                <div class="row">
 				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+				                       <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">
 				                             <div class="btn">
 				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
+				                               <input type="file" id="fileUpload" name="image">
 				                             </div>
 				                             <div class="file-path-wrapper">
 				                               <input class="file-path validate" type="text">

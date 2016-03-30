@@ -16,7 +16,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('');
+        return view('transaction-inventory');
     }
 
     /**
@@ -37,7 +37,18 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inventoryPrev = InventoryModel::where('intItemIdFK', $request->intItemId)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $measurement = UOMModel::find($request->intMeasurementId);
+        $inventory = new InventoryModel;
+        $inventory->intItemIdFK = $request->intItemId;
+        $inventory->deciPrevValue = $inventoryPrev->deciAfterValue;
+        $newInventory = $inventoryPrev->deciAfterValue+($request->dblQuantity*$measurement->dblEquivalent);
+        $inventory->deciAfterValue = $newInventory;
+        $inventory->strReason = "add";
+        $inventory->save();
+        return redirect('inventory');
     }
 
     /**

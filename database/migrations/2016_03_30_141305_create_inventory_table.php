@@ -16,8 +16,6 @@ class CreateInventoryTable extends Migration
             $table->increments('intInventoryId');
             $table->integer('intItemIdFK')
                 ->unsigned();
-            $table->integer('intUnitOfMeasurementIdFK')
-                ->unsigned():
             $table->decimal('deciPrevValue', 8, 2);
             $table->decimal('deciAfterValue', 8, 2);
             $table->string('strReason');
@@ -26,12 +24,6 @@ class CreateInventoryTable extends Migration
             $table->foreign('intItemIdFK')
                 ->references('intItemId')
                 ->on('tblItem')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-
-            $table->foreign('intUnitOfMeasurementIdFK')
-                ->references('intUnitOfMeasurementId')
-                ->on('tblUnitOfMeasurement')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

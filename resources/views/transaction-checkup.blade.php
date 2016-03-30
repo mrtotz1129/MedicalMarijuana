@@ -21,13 +21,13 @@
 					</div>
 
 					<div class="col s3">
-						<h5>Name: <span class="thin">Jerald John</span></h5>
-						<h5>Last Visit: <span class="thin">december 23, 1996</span></h5>
-						<h5>Addresss: <span class="thin">Manila</span></h5>
+						<h5>Name: <span class="thin">{!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</span></h5>
+						<h5>Last Visit: <span class="thin">{!! $lastVisit ? date('F d, Y', strtotime($lastVisit->created_at)) : 'None' !!}</span></h5>
+						<h5>Address: <span class="thin">{!! $patient->txtAddress !!}</span></h5>
 					</div>
 
 					<div class="col s3">
-						<h5>Confined at: <span class="thin">Room 273-B</span></h5>
+						<h5>Confined at: <span class="thin">{!! $patient->intRoomId ? "Room " . $patient->intRoomId . "(Bed " . $patient->intBedId . ")" : 'None' !!}</span></h5>
 						<h5>Unsettled Balance: <span class="thin">Php 500,000.00</span></h5>
 					</div>
 				</div>

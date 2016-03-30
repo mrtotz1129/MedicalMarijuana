@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\PatientModel;
+use App\AdmissionModel;
 
 class CheckupController extends Controller
 {
@@ -18,8 +19,7 @@ class CheckupController extends Controller
      */
     public function index()
     {
-         return view('transaction-checkup');
-        
+         return view('transaction-checkup'); 
     }
 
     /**
@@ -51,10 +51,24 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $patient = PatientModel::find($id);
+        $patient = \DB::table('tblPatient')
+            ->leftJoin('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
+            ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
+            ->leftJoin('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intBedId')
+            ->select('tblPatient.strFirstName', 'tblPatient.strMiddleName', 'tblPatient.strLastName',
+                'tblRoom.intRoomId', 'tblPatient.txtAddress', 'tblBed.intBedId')
+            ->where('tblPatient.intPatientId', $id)
+            ->first();
+
+        $lastVisit = AdmissionModel::where('intPatientIdFK', $id)
+            ->orderBy('created_at', 'desc')
+            ->select('created_at')
+            ->where('intPatientIdFK', $id)
+            ->first();
 
         return view('transaction-checkup')
-            ->with('patient', $patient);
+            ->with('patient', $patient)
+            ->with('lastVisit', $lastVisit);
     }
 
     /**

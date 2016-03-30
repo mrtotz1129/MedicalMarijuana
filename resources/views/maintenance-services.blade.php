@@ -7,7 +7,7 @@
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					onclick="openCreateModal()" style="position: relative; top: 40px; right: 1%;" 
+					href="#createModal" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
@@ -28,7 +28,7 @@
 				        	<tr>
 				        		<td>{!! $service->strServiceName !!}</td>
 				        		<td>{!! $service->txtServiceDesc !!}</td>
-				        		<td>{!! number_format($service->service_price, 2) !!}</td>
+				        		<td>{!! number_format($service->service_price, 2) . 'PhP' !!}</td>
 				        		<td>
 				        			<a href="javascript:updateId({!! $service->intServiceId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
 				        			<a href="javascript:deactivateId({!! $service->intServiceId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
@@ -158,11 +158,6 @@
 {{-- Modal Deactivate END --}}
 
 <script type="text/javascript">
-
-	function openCreateModal(){
-		$('#createModal').openModal();
-	}
-
 	function updateId(id) {
 
 		$.ajax({

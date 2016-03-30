@@ -79,9 +79,10 @@ class AdmissionController extends Controller
         $patient->save();
 
 
-        // $admission = new AdmissionModel;
+        $admission = new AdmissionModel;
 
-        // $admission->
+        $admission->intPatientIdFK  =   $patient->intPatientId;
+        $admission->intBedIdFK      =   $
     }
 
     /**

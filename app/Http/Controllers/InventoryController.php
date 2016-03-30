@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\UOMModel;
+use App\ItemModel;
+use App\InventoryModel;
+
 class InventoryController extends Controller
 {
     /**
@@ -16,7 +20,23 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('transaction-inventory');
+        $measurementList = UOMModel::where('intStatus', 1)
+            ->get();
+        $itemList = ItemModel::where('intItemStatus', 1)
+            ->get();
+        foreach ($itemList as $item) {
+            $inventory = InventoryModel::where('intItemIdFK', $item->intItemId)
+                ->orderBy('created_at', 'desc')
+                ->first();
+            if ($inventory != null){
+                $item->inventory = $inventory->deciAfterValue;
+            }else{
+                $item->inventory = 0;
+            }
+        }
+        return view('transaction-inventory')
+            ->with('measurementList', $measurementList)
+            ->with('itemList', $itemList);
     }
 
     /**
@@ -43,8 +63,13 @@ class InventoryController extends Controller
         $measurement = UOMModel::find($request->intMeasurementId);
         $inventory = new InventoryModel;
         $inventory->intItemIdFK = $request->intItemId;
-        $inventory->deciPrevValue = $inventoryPrev->deciAfterValue;
-        $newInventory = $inventoryPrev->deciAfterValue+($request->dblQuantity*$measurement->dblEquivalent);
+        if ($inventoryPrev == null){
+            $inventoryPrevValue = 0;
+        }else{
+            $inventoryPrevValue = $inventoryPrev->deciAfterValue;
+        }
+        $inventory->deciPrevValue = $inventoryPrevValue;
+        $newInventory = $inventoryPrevValue+($request->dblQuantity*$measurement->dblEquivalent);
         $inventory->deciAfterValue = $newInventory;
         $inventory->strReason = "add";
         $inventory->save();

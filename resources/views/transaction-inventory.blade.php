@@ -21,7 +21,16 @@
                     <th>Quantity</th>
                     <th>Actions</th>
                 </tr>
-            </thead>  	
+            </thead>
+            <tbody>
+            @foreach($itemList as $item)
+              <tr>
+                <td>{!! $item->strItemName !!}</td>
+                <td>{!! $item->inventory !!}</td>
+                <td><a href="javascript:addInventory({!! $item->intItemId !!})"><i class="material-icons">add</i></a></td>
+              </tr>
+            @endforeach
+            </tbody>  
     </table>
     </div>
     <script type="text/javascript">
@@ -40,23 +49,24 @@
 
 	<!-- add option -->
    <div id="itemQuantity" class="modal" style="margin-top: 30px; width: 500px !important;">
-     <form id="createEquipmentTypeForm">
+     <form id="createEquipmentTypeForm" action="{!! url('inventory') !!}" method="POST">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
+      <input type="hidden" id="itemId" name="intItemId">
        <div class="modal-content">
          <h4>Add Quantity</h4>
          <div class="row container">
            <div class="col s12">
               <div class="input-field col s12">
-                  <select class="browser-default" id="buildingCreateSelect" name="selectedJob" required>
+                  <select class="browser-default" id="buildingCreateSelect" name="intMeasurementId" required>
                       <option disabled selected>Choose Measurement</option>
-              
-                      <option value="Measurement 1">Measurement 1</option>
-                 
+                      @foreach($measurementList as $measurement)
+                        <option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
+                      @endforeach
                   </select>
                   <label for="slct1" class="active">Building<span class="red-text">*</span></label>
               </div>
              <div class="input-field col s12" style="margin-top: 20px;">
-               <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 100" id="itemQuantity" name="createEquipmentType" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
+               <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 100" id="itemQuantity" name="dblQuantity" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
                <label for="itemQuantity" class="active"> Quantity</label>
              </div>
              <div class="input-field col s8 offset-s2 center">
@@ -68,4 +78,13 @@
      </form>
    </div>
 </article>
+
+<script type="text/javascript">
+function addInventory(id){
+
+  $('#itemQuantity').openModal();
+  $('#itemId').val(id);
+
+}
+</script>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\UOMModel;
 use App\ItemModel;
+use App\InventoryModel;
 
 class PosController extends Controller
 {
@@ -23,6 +24,12 @@ class PosController extends Controller
             ->get();
         $itemList = ItemModel::where('intItemStatus', 1)
             ->get();
+        foreach ($itemList as $item) {
+            $inventory = InventoryModel::where('intItemIdFK', $item->intItemId)
+                ->orderBy('created_at', 'desc')
+                ->first();
+            $item->inventory = $inventory->deciAfterValue;
+        }
         return view('transaction-pos')
             ->with('measurementList', $measurementList)
             ->with('itemList', $itemList);

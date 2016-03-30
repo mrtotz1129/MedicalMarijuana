@@ -50,6 +50,8 @@ Route::post('room-type/changed', 'RoomTypeAjaxController@retrieveRooms');
 Route::get('view-requirement', 'ViewRequirementController@viewAllRequirement');
 Route::get('get-bed-lists/{id}', 'BedAjaxController@retrieveBeds');
 
+Route::post('get-price', 'ItemPriceController@getPrice');
+
 Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');
 Route::post('fee-type/create', 'FeeTypeController@createFeeType');

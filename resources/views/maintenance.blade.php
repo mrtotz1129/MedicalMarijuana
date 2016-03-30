@@ -22,14 +22,11 @@
               </div>
           </div>
       </li>
-       <li class="li-hover"><div class="divider indigo darken-2"></div></li>
-       <li class="li-hover"><div class="divider indigo darken-2"></div></li>
-       <li class="li-hover"><div class="divider indigo darken-2"></div></li>
        <li class="no-padding">
             <ul class="collapsible collapsible-accordion ">
                 <li class="bold {!! strpos(Request::url(), 'employee') !== false || strpos(Request::url(), 'fee') !== false || strpos(Request::url(), 'equipment') !== false || 
                 strpos(Request::url(), 'room') !== false || strpos(Request::url(), 'supplier') !== false || strpos(Request::url(), 'drug') !== false || strpos(Request::url(), 'discount')
-                 !== false ? 'indigo lighten-2' : '' !!}"><a class="collapsible-header waves-effect waves-cyan indigo-text text-darken-3"><img src="{!! asset('img/settings-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
+                 !== false ? 'indigo lighten-2' : '' !!}"><a class="collapsible-header waves-effect waves-cyan"><img src="{!! asset('img/settings-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Maintenance</a>
                     <div style="" class="collapsible-body">
                         <ul>
                              <li class="{!! strpos(Request::url(), 'building') !== false ? 'indigo lighten-3' : '' !!}"><a href="{!! url('building') !!}">Building</a>
@@ -60,10 +57,10 @@
                 </li>
             </ul>
         </li>
-         <li class="li-hover"><div class="divider indigo darken-2"></div></li>
+         <li class="li-hover"><div class="divider"></div></li>
         <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan indigo-text text-darken-3"><img src="{!! asset('img/transaction-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Transactions</a>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><img src="{!! asset('img/transaction-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Transactions</a>
                             <div style="" class="collapsible-body">
                                 <ul>
                                     <li><a href="{!! url('admission') !!}">Admission</a>
@@ -83,7 +80,7 @@
                         </li>
                     </ul>
                 </li>
-           <li class="li-hover"><div class="divider indigo darken-2"></div></li>
+           <li class="li-hover"><div class="divider"></div></li>
     </ul>
 </aside>
 <aside class="aside aside-1"></aside> 

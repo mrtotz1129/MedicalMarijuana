@@ -16,7 +16,6 @@
     	<table id="example" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Patient Number</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact No.</th>
@@ -24,6 +23,20 @@
                     <th>Actions</th>
                 </tr>	
             </thead>  	
+
+            <tbody>
+            	@foreach($patients as $patient)
+            	<tr>
+            		<td>{!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : ''); !!}</td>
+            		<td>{!! str_limit($patient->txtAddress, $limit = 30, $end = '...') !!}</td>
+            		<td>{!! $patient->strContactNumber !!}</td>
+            		<td>{!! $patient->intRoomId != null ? $patient->intRoomId . ' (Bed ' . $patient->intBedId . ')' : '---' !!}</td>
+            		<td>
+            			<a href="javascript:admitId({!! $patient->intPatientId !!})"><i class="material-icons">hotel</i></a>
+            		</td>
+            	</tr>
+            	@endforeach
+            </tbody>
     </table>
     </div>
     <script type="text/javascript">
@@ -169,8 +182,9 @@
 
 	<!-- add Room -->
    <div id="addRoom" class="modal" style="margin-top: 30px; width: 400px !important; border-radius: 10px;">
-     <form id="createRoomForm">
+     <form id="createRoomForm" action="" method="POST">
      	<input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
+       	<input type="hidden" id="patientId" name="intPatientId">
        <div class="modal-content">
          <h4 class="grey-text text-darken-2"> Choose Room</h4>
          <div class="row">
@@ -192,7 +206,7 @@
            	</div>
 
            	<div class="input-field col s12">
-               <select class="browser-default" id="bedNumberSelect" name="selectedJob" required>
+               <select class="browser-default" id="bedNumberSelect" name="intBedId" required>
                    <option disabled selected>Bed Number</option>
                </select>
                <label for="bedNumberSelect" class="active">Bed Number<span class="red-text">*</span></label>
@@ -317,5 +331,11 @@
 			}
 		});
 	};
+
+	function admitId(id)
+	{
+		$('#addRoom').openModal();
+		$('#patientId').val(id);
+	}
 </script>
 @endsection

@@ -30,17 +30,18 @@ class AdmissionController extends Controller
             ->select('tblEmployee.intEmployeeId', 'tblEmployee.strFirstName', 'tblEmployee.strMiddleName', 'tblEmployee.strLastName')
             ->get();
 
-        // $patients = \DB::table('tblPatient')
-        //     ->join('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
-        //     ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
-        //     ->join('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intRoomIdFK')
-        //     ->get();
-
-        // dd($patients);
+        $patients = \DB::table('tblPatient')
+            ->leftJoin('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
+            ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
+            ->leftJoin('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intRoomIdFK')
+            ->select('tblPatient.intPatientId', 'tblPatient.strFirstName', 'tblPatient.strMiddleName', 'tblPatient.strLastName', 'tblPatient.txtAddress', 'tblPatient.strContactNumber', 'tblRoom.intRoomId', 'tblBed.intBedId')
+            ->where('tblPatient.intStatus', '>', 0)
+            ->get();
 
         return view('transaction-admission')
             ->with('roomTypes', $roomTypes)
-            ->with('doctors', $doctors);
+            ->with('doctors', $doctors)
+            ->with('patients', $patients);
     }
 
     /**
@@ -61,37 +62,37 @@ class AdmissionController extends Controller
      */
     public function store(AdmissionRequest $request)
     {
-        $imagePath = 'uploaded_images/patient';
-        $patient = new PatientModel;
+        // $imagePath = 'uploaded_images/patient';
+        // $patient = new PatientModel;
 
-        $patient->blnIsAdmitted         =   $request->patientType == 'in' ? true : false;
-        $patient->strFirstName          =   $request->strFirstName;
-        $patient->strMiddleName         =   $request->strMiddleName != null ? $request->strMiddleName : null;
-        $patient->strLastName           =   $request->strLastName;
-        $patient->strMachinePatientId   =   null;
-        $patient->strGender             =   $request->strGender;
-        $patient->dateBirthday          =   $request->strBirthdate;
-        $patient->txtAddress            =   $request->strAddress;
-        $patient->strEmail              =   $request->strEmail;
-        $patient->strContactNumber      =   $request->strContactNumber;
-        $patient->intStatus             =   1;
+        // $patient->blnIsAdmitted         =   $request->patientType == 'in' ? true : false;
+        // $patient->strFirstName          =   $request->strFirstName;
+        // $patient->strMiddleName         =   $request->strMiddleName != null ? $request->strMiddleName : null;
+        // $patient->strLastName           =   $request->strLastName;
+        // $patient->strMachinePatientId   =   null;
+        // $patient->strGender             =   $request->strGender;
+        // $patient->dateBirthday          =   $request->strBirthdate;
+        // $patient->txtAddress            =   $request->strAddress;
+        // $patient->strEmail              =   $request->strEmail;
+        // $patient->strContactNumber      =   $request->strContactNumber;
+        // $patient->intStatus             =   1;
 
-        if($request->hasFile('image'))
-        {
-            $fileName = $request->strLastName . ', ' . $request->strFirstName . ($request->strMiddleName != null ? (' ' . $request->strMiddleName) : '');
+        // if($request->hasFile('image'))
+        // {
+        //     $fileName = $request->strLastName . ', ' . $request->strFirstName . ($request->strMiddleName != null ? (' ' . $request->strMiddleName) : '');
 
-            $request->file('image')->move(public_path() . '/' . $imagePath, $fileName);
+        //     $request->file('image')->move(public_path() . '/' . $imagePath, $fileName);
             
-            $patient->txtPatientImgPath = $imagePath . '/' . $fileName;
-        }
+        //     $patient->txtPatientImgPath = $imagePath . '/' . $fileName;
+        // }
 
-        $patient->save();
+        // $patient->save();
 
 
         $admission = new AdmissionModel;
 
-        $admission->intPatientIdFK          =   $patient->intPatientId;
-        $admission->intBedIdFK              =   $request->bed;
+        $admission->intPatientIdFK          =   $request->intPatientId;
+        $admission->intBedIdFK              =   $request->intBedId;
         $admission->intAdmissionStatusIdFK  =   1;
         $admission->intDoctorIdFK           =   $request->doctorSelect;
 

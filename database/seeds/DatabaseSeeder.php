@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EquipmentTypeTableSeeder::class);
         $this->call(FeeTypeTableSeeder::class);
         $this->call(StatusTableSeeder::class);
+        $this->call(RoomTypeTableSeeder::class);
 
         Model::reguard();
     }

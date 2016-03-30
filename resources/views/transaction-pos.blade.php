@@ -38,17 +38,21 @@
 
     		<div class="col s6">
     			<h4 class="thin">My Cart</h4>
-				<table id="tblCart" class="display" cellspacing="0" width="100%">
+				<table id="cartTable" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
 			                <th>Item Name</th>
 			                <th>Quantity</th>
-			                <th>Price</th>
 			                <th style="width: 20px;">Action</th>
 			            </tr>
-			        </thead>  
+			        </thead> 
 			        <tbody>
-			        </tbody>	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+			        </tbody> 	
 				</table>
     		</div>
     	</div>
@@ -57,6 +61,18 @@
     <script type="text/javascript">  
     	$(document).ready(function() {
     	    $('#itemTable').DataTable( {
+    	        dom: 'Bfrtip',
+    	        buttons: [
+    	            'copyHtml5',
+    	            'excelHtml5',
+    	            'csvHtml5',
+    	            'pdfHtml5'
+    	        ]
+    	    } );
+    	} );
+
+    	$(document).ready(function() {
+    	    $('#cartTable').DataTable( {
     	        dom: 'Bfrtip',
     	        buttons: [
     	            'copyHtml5',

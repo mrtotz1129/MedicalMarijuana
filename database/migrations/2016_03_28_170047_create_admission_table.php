@@ -24,6 +24,7 @@ class CreateAdmissionTable extends Migration
             $table->string('strAdmissionRemarks');
             $table->integer('intDoctorIdFK')
                 ->unsigned();
+            $table->timestamps();
 
             $table->foreign('intPatientIdFK')
                 ->references('intPatientId')

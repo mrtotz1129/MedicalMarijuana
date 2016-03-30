@@ -211,6 +211,13 @@
                </select>
                <label for="bedNumberSelect" class="active">Bed Number<span class="red-text">*</span></label>
            	</div>
+           	 <div class="input-field col s12">
+           	    <select class="browser-default" id="addDoctor" name="selectedJob" required>
+           	        <option disabled selected>Choose Doctor</option>
+           	        <option value="Doctor 1">Doctor 1</option>
+           	    </select>
+           	    <label for="addDoctor" class="active">Doctor<span class="red-text">*</span></label>
+           	</div>
            	<br>
            	<div class="center">
            		<br>

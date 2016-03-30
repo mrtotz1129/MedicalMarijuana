@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\ItemPriceModel;
+use App\UOMModel;
 
 class ItemPriceController extends Controller
 {
@@ -56,7 +57,17 @@ class ItemPriceController extends Controller
      */
     public function show($id)
     {
-        //
+        
+    }
+
+    public function getPrice(Request $request){
+        $itemPrice = ItemPriceModel::where('intItemIdFK', $request->intItemId)
+            ->where('intUnitOfMeasurementIdFK', $request->intMeasurementId)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $measurement = UOMModel::find($request->intMeasurementId);
+        $itemPrice->measurement = $measurement->strUnitOfMeasurementAbbrev;
+        return response()->json($itemPrice);
     }
 
     /**

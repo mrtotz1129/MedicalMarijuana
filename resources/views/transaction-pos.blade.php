@@ -28,8 +28,8 @@
 					@foreach($itemList as $item)
 						<tr>
 							<td>{!! $item->strItemName !!}</td>
-							<td></td>
-							<td></td>
+							<td>{!! $item->inventory !!}</td>
+							<td><a href="javascript:addToCart('{!! $item->strItemName !!}', {!! $item->intItemId !!})"><i class="material-icons">shopping_cart</i></a></td>
 						</tr>
 					@endforeach
 			        </tbody> 	
@@ -38,14 +38,17 @@
 
     		<div class="col s6">
     			<h4 class="thin">My Cart</h4>
-				<table id="itemTable" class="display" cellspacing="0" width="100%">
+				<table id="tblCart" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
 			                <th>Item Name</th>
+			                <th>Quantity</th>
 			                <th>Price</th>
 			                <th style="width: 20px;">Action</th>
 			            </tr>
-			        </thead>  	
+			        </thead>  
+			        <tbody>
+			        </tbody>	
 				</table>
     		</div>
     	</div>
@@ -149,14 +152,14 @@
 	
 	<!-- add option -->
    <div id="itemDetails" class="modal" style="margin-top: 30px;">
-     <form id="createEquipmentTypeForm">
+     <form id="addToCartForm">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
        <div class="modal-content">
          <h4>Details</h4>
          <div class="row">
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
-               <select id="unitOfMeasure" class="browser-default" size="10">
+               <select id="unitOfMeasurement" class="browser-default" size="10">
                  @foreach($measurementList as $measurement)
                  	<option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
                  @endforeach
@@ -175,4 +178,42 @@
 	     </form>
 	   </div>
 </article>
+
+<script type="text/javascript">
+	
+	function addToCart(itemName, id){
+		$('#itemDetails').openModal();
+		$('#item').val(itemName);
+
+		$('#addToCartForm').on('submit', function(event) {
+			event.preventDefault();
+			$.ajax({
+				url: "get-price",
+				type: "POST",
+				data: {
+					intItemId: id,
+					intMeasurementId: document.getElementById('unitOfMeasurement').value 
+				},
+				success: function(data) {
+					$('#tblCart tbody').html('');
+					var table=document.getElementById('tblCart').insertRow(1);
+					var colName=table.insertCell(0);
+					var colQuantity = table.insertCell(1);
+					var colPrice=table.insertCell(2);
+					var quantity = document.getElementById('itemQuantity').value;
+					colName.innerHTML=itemName;
+					colQuantity.innerHTML = quantity+" "+data.measurement+"/s";
+					colPrice.innerHTML=data.deciItemPrice*quantity;
+					$('#itemDetails').closeModal();
+				},
+				error: function(xhr) {
+					alert('error');
+					console.log(xhr);
+				}
+			});
+			
+		});
+	}
+
+</script>
 @endsection

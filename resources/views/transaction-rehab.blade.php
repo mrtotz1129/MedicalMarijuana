@@ -9,7 +9,7 @@
 		</div>
 	</div>
     <br>
-    <div class="container">
+    <div class="container" style="margin-left: -30px;">
     	<table id="billTbl" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>

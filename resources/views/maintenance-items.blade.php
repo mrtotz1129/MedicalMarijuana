@@ -25,7 +25,6 @@
 				                <th>Generic Name</th>
 				                <th>Details</th>
 				                <th>Price</th>
-				               	<th>Unit of Measurement</th>
 				                <th>Actions</th>
 				            </tr>
 				        </thead>

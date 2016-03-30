@@ -37,7 +37,9 @@ class GenericController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $generic = new GenericModel;
+        $generic->strGenericName = $request->strGenericName;
+        $generic->save();
     }
 
     /**

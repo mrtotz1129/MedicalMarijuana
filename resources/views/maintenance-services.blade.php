@@ -226,10 +226,6 @@
 			
 	}
 
-	$('#fee_create_form').on('submit', function(event) {
-		event.preventDefault();
-
-	});	
 </script>
  
 @endsection

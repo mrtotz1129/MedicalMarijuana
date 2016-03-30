@@ -106,7 +106,9 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = ItemModel::find($id);
+
+        return response()->json($item);
     }
 
     /**

@@ -139,7 +139,7 @@
 							<div class="row">
 								<div class="col s4">
 									<div class="input-field col s12">
-									     <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+									     <img name="image" id="updateItemImg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
 									 </div>
 									 <div class="input-field col s12">
 									     <div class="file-field input-field">
@@ -157,12 +157,12 @@
 
 								<div class="col s8">
 									 <div class="input-field col s12">
-									      <input name="strItemName" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-									      <label for="drugName" class="active">Item Name<span class="red-text"><b>*</b></span></label>
+									      <input name="strItemName" placeholder="Ex: Aquino" id="updateItemNameInput" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+									      <label for="updateItemNameInput" class="active">Item Name<span class="red-text"><b>*</b></span></label>
 									  </div>
 									<div class="row">
 				                    	<div class="input-field col s9">
-				                        <select id="itemCategorySelect" name="strItemCategoryDesc" required>
+				                        <select id="updateItemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
 				                        	@foreach($itemCategoryList as $itemCategory)
 												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
@@ -177,7 +177,7 @@
 				                    
 				                    <div class="row">
 				                    	<div class="input-field col s9">
-				                        <select id="genericName" name="intGenericNameId" required>
+				                        <select id="updateGenericNameSelect" name="intGenericNameId" required>
 				                            <option disabled selected>Choose Generic name</option>
 				                            @foreach($genericList as $generic)
 				                            	<option value="{!! $generic->intGenericNameId !!}">{!! $generic->strGenericName !!}</option>
@@ -442,6 +442,43 @@
 
 	function viewPrice(id){
 		$('#viewPrice').openModal();
+	}
+
+	function updateId(id)
+	{
+		$.ajax({
+			url: "{!! url('item') !!}" + '/' + id + '/edit',
+			type: "GET",
+			success: function(data) {
+				var assetBaseUrl = "{!! asset('') !!}";
+
+				document.getElementById('updateItemNameInput').value = data.strItemName;
+				document.getElementById('updateItemCategorySelect').value = data.intItemCategoryIdFK;
+				$('select').material_select();
+				document.getElementById('updateGenericNameSelect').value = data.intGenericNameIdFK;
+				$('select').material_select();
+				// document.getElementById('strEmpMiddleNameEdit').value = data.strMiddleName;
+				// document.getElementById('strEmpLastNameEdit').value = data.strLastName;
+				// document.getElementById('strBirthdateEdit').value = data.dateBirthday;
+				// (data.strGender == 'Male') ? document.getElementById('strEmpGenderEdit').value = 'Male' : document.getElementById('strEmpGenderEdit').value = 'Female';
+				// document.getElementById('strEmpContactNoEdit').value = data.strContactNum;
+				// document.getElementById('strEmpEmailEdit').value = data.strEmail;
+				// document.getElementById('strEmpAddressEdit').value = data.strAddress;
+				// document.getElementById('selectedJobEdit').value = data.intEmployeeTypeIdFK;
+
+				if(data.txtImagePath != null) {
+					document.getElementById('updateItemImg').src = assetBaseUrl + data.txtImagePath;
+				} else {
+					document.getElementById('updateItemImg').src = 
+						assetBaseUrl + 'img/no_image.png';
+				}
+
+				$('#update').openModal();
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
 	}
 
 	function deactivateId(id)

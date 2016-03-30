@@ -44,6 +44,8 @@ class ItemPriceController extends Controller
         $itemPrice->deciItemPrice = $request->dblPrice;
         $itemPrice->intUnitOfMeasurementIdFK = $request->intMeasurementId;
         $itemPrice->save();
+
+        return redirect('item');
     }
 
     /**

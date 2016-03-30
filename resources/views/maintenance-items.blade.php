@@ -37,8 +37,9 @@
 				        		<td>{!! $item->item_category !!}</td>
 				        		<td>{!! $item->generic_name !!}</td>
 				        		<td>
-				        			<a href="#setPrice" class="btn modal-trigger btn-floating red"><i class="material-icons">money</i></a>
-				        			<a href="javascript:updateId({!! $item->intItemId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
+				        			<a href="javascript:viewPrice({!! $item->intItemId !!})" class="btn-floating green"><i class="material-icons">money</i></a>
+				        			<a href="javascript:addPrice({!! $item->intItemId !!})" class="btn btn-floating red"><i class="material-icons">money</i></a>
+									<a href="javascript:updateId({!! $item->intItemId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
 				        			<a href="javascript:deactivateId({!! $item->intItemId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
 				        		</td>
 				        	</tr>
@@ -284,30 +285,31 @@
 
    <!-- Set Price -->
    <div id="setPrice" class="modal" style="margin-top: 30px; border-radius: 10px;">
-     <form id="createOption">
+     <form id="createOption" action="{!! url('item-price') !!}" method="POST">
+   		<input type="hidden" id="itemId" name="intItemId">
        <div class="modal-content">
          <h4>Set Item Price</h4>
          <div class="container">
          	<div class="row">
          		  <div class="input-field col s6">
-         		    <select class="browser-default" id="measurementSelect" name="selectedJob" required>
+         		    <select class="browser-default" id="measurementSelect" name="intMeasurementId" required>
          		        <option disabled selected>Choose Measurement</option>
          		        @foreach($measurementList as $measurement)
-							<option value="{!! $measurement->strUnitOfMeasurementName !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
+							<option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
          		        @endforeach
          		    </select>
          		    <label for="measurementSelect" class="active">Set Measurement<span class="red-text">*</span></label>
          			</div>
 
          			<div class="input-field col s6" style="margin-top: 20px;">
-         		    <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 1,000" id="itemPrice" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
+         		    <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 1,000" id="itemPrice" name="dblPrice" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
          		    <label for="itemPrice" class="active">Item Price</label>
          		  	</div>
          	</div>
             
              <div class="col s12 center">
-				 <a class="waves-effect waves-light btn col s4 center indigot darken-2">SAVE</a>
-			</div>
+				 <button type="submit" value="Submit" id="createGeneric" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
+             </div>
          </div>
        </div>
      </form>
@@ -443,6 +445,15 @@
 				}
 			});
 	});
+
+	function addPrice(id){
+		$('#setPrice').openModal();
+		$('#itemId').val(id);
+	}
+
+	function viewPrice(id){
+		$('#viewPrice').openModal();
+	}
 
 </script>
 

@@ -121,7 +121,7 @@
 				</div>
 
 				<!-- Update Equipment Modal -->
-				  {{--  <div id="udpateEquipment" class="modal modal-fixed-footer" style="width: 800px !important; height: 700px !important; border-radius: 10px;">
+				   <div id="update" class="modal modal-fixed-footer" style="width: 800px !important; height: 700px !important; border-radius: 10px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('equipment') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" id="createEquipmentFormToken" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
@@ -147,11 +147,11 @@
 				              	<div class="col s8">
 				        
 				                    <div class="input-field col s12">
-				                        <input name="strEquipmentCode" placeholder="Ex: Benigno" id="updateEquipmentID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" minlength="2">
+				                        <input name="strEquipmentCode" placeholder="Ex: Benigno" id="equipmentID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" minlength="2">
 				                        <label for="equipmentID" class="active">Equipment Code<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s8">
-				                        <select id="createEquipmentTypeSelect" data-position="bottom" data-delay="30" id="updateEquipmentType" name="equipmentType" required>
+				                        <select id="createEquipmentTypeSelect" data-position="bottom" data-delay="30" id="slct1" name="equipmentType" required>
 				                            <option disabled selected>Equipment Type</option>
 				                            @foreach($equipmentTypes as $equipmentType)
 				                              <option value="{!! $equipmentType->intEquipmentCategoryId !!}">{!! $equipmentType->strEquipmentCatName !!}</option>
@@ -185,7 +185,7 @@
 				              </div>   
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
 				      </div>
 				      </form>
 				</div> --}}
@@ -389,7 +389,7 @@
 
 	function updateId(id)
 	{
-		$('#udpateEquipment').openModal();
+		$('#createEquipmentTypeModal').openModal();
 	}
 
 	function deactivateId(id)

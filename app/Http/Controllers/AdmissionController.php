@@ -12,6 +12,7 @@ use App\RoomTypeModel;
 use App\EmployeeModel;
 use App\AdmissionModel;
 use App\PatientModel;
+use App\BedModel;
 
 class AdmissionController extends Controller
 {
@@ -28,6 +29,14 @@ class AdmissionController extends Controller
             ->join('tblEmployeeType', 'tblEmployeeType.intEmployeeTypeId', '=', 'tblEmployee.intEmployeeTypeIdFK')
             ->select('tblEmployee.intEmployeeId', 'tblEmployee.strFirstName', 'tblEmployee.strMiddleName', 'tblEmployee.strLastName')
             ->get();
+
+        // $patients = \DB::table('tblPatient')
+        //     ->join('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
+        //     ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
+        //     ->join('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intRoomIdFK')
+        //     ->get();
+
+        // dd($patients);
 
         return view('transaction-admission')
             ->with('roomTypes', $roomTypes)
@@ -84,10 +93,17 @@ class AdmissionController extends Controller
         $admission->intPatientIdFK          =   $patient->intPatientId;
         $admission->intBedIdFK              =   $request->bed;
         $admission->intAdmissionStatusIdFK  =   1;
-        $admission->datAdmission            =   date('Y-m-d H:i:s');
         $admission->intDoctorIdFK           =   $request->doctorSelect;
 
         $admission->save();
+
+        $bed = BedModel::find($request->bed);
+
+        $bed->intBedStatus  =   2;
+
+        $bed->save();
+
+        return redirect('admission');
     }
 
     /**

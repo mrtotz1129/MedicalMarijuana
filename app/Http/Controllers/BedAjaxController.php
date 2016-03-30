@@ -15,7 +15,7 @@ class BedAjaxController extends Controller
             ->join('tblBed', 'tblBed.intRoomIdFK', '=', 'tblRoom.intRoomId')
             ->select('tblBed.intBedId')
             ->where('tblRoom.intRoomId', $id)
-            ->where('tblBed.intBedStatus', '>', 0)
+            ->where('tblBed.intBedStatus', 1)
             ->get();
 
         return response()->json($beds);

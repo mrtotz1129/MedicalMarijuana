@@ -10,9 +10,7 @@
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
-<<<<<<< HEAD
-		</div>	
-=======
+
 				<div class="col s4">
 					<a href="#setPrice" class="btn modal-trigger btn-floating red"><i class="material-icons">money</i></a>
 				</div>
@@ -20,7 +18,6 @@
 					<a href="#viewPrice" class="btn modal-trigger btn-floating green"><i class="material-icons">money</i></a>
 				</div>
 			</div>	
->>>>>>> 4db4bd2faa97c44e852752ce1665c6c03d85b93b
 		<div class="container" style="margin-left: -30px;">
 		<br>
 				<table id="example" class="display" cellspacing="0" width="100%">

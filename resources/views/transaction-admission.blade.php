@@ -182,7 +182,7 @@
 
 	<!-- add Room -->
    <div id="addRoom" class="modal" style="margin-top: 30px; width: 400px !important; border-radius: 10px;">
-     <form id="createRoomForm" action="" method="POST">
+     <form id="createRoomForm" action="{!! url('admission') !!}" method="POST">
      	<input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
        	<input type="hidden" id="patientId" name="intPatientId">
        <div class="modal-content">
@@ -212,9 +212,11 @@
                <label for="bedNumberSelect" class="active">Bed Number<span class="red-text">*</span></label>
            	</div>
            	 <div class="input-field col s12">
-           	    <select class="browser-default" id="addDoctor" name="selectedJob" required>
+           	    <select class="browser-default" id="addDoctor" name="intDoctorId" required>
            	        <option disabled selected>Choose Doctor</option>
-           	        <option value="Doctor 1">Doctor 1</option>
+           	        @foreach($doctors as $doctor)
+           	        	<option value="{!! $doctor->intEmployeeId !!}">{!! $doctor->strLastName . ', ' . $doctor->strFirstName . ($doctor->strMiddleName != null ? (' ' . $doctor->strMiddleName) : '') !!}</option>
+           	       	@endforeach
            	    </select>
            	    <label for="addDoctor" class="active">Doctor<span class="red-text">*</span></label>
            	</div>
@@ -304,15 +306,6 @@
 			}
 		});
 	}
-
-	document.getElementById('createRoomForm').onsubmit = function(event)
-	{
-		event.preventDefault();
-
-		document.getElementById('bed').value = document.getElementById('bedNumberSelect').value;
-		
-		$('#addRoom').closeModal();
-	};
 
 	document.getElementById('roomNumberSelect').onchange = function()
 	{

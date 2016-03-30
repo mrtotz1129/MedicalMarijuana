@@ -48,7 +48,14 @@ class BedController extends Controller
      */
     public function store(Request $request)
     {
-           
+        $bed = new BedModel;
+        
+        $bed->intRoomIdFK   =   $request->createRoomSelect;
+        $bed->intBedStatus  =   1;
+
+        $bed->save();
+
+        return redirect('bed');      
     }
 
     /**

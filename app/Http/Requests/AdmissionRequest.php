@@ -26,35 +26,16 @@ class AdmissionRequest extends Request
     public function rules()
     {
         return [
-            'patientType'       =>  'required',
-            'image'             =>  'image',
-            'doctorSelect'      =>  'required',
-            'strFirstName'      =>  'required|unique_with:tblEmployee,strMiddleName,strLastName',
-            'strLastName'       =>  'required',
-            'strBirthdate'      =>  'required',
-            'bed'               =>  'required',
-            'strGender'         =>  'required',
-            'strContactNumber'  =>  'regex:/^\d{10}/',
-            'strEmail'          =>  'email',
-            'strAddress'        =>  'required'
+            'intDoctorId'      =>  'required',
+            'intBedId'               =>  'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'patientType.required'      =>  'Patient type is required.',
-            'image.image'               =>  'Image you uploaded is not an image',
-            'doctorSelect.required'     =>  'Doctor is required.',
-            'strFirstName.required'     =>  'First name is required.',
-            'strFirstName.unique_with'  =>  'Name already exists.',
-            'strLastName.required'      =>  'Last name is required.',
-            'strBirthdate.required'     =>  'Birth date is required.',
-            'bed.required'             =>  'Room is required.',
-            'strGender.required'        =>  'Gender is required',
-            'strContactNumber.regex'    =>  'Invalid contact number format.',
-            'strEmail.email'            =>  'Invalid email format.',
-            'strAddress.required'       =>  'Address is required.'
+            'intDoctorId.required'      =>  'Doctor is required.',
+            'intBedId.required'         =>  'Bed is required.'
         ];
     }
 

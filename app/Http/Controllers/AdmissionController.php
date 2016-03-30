@@ -28,6 +28,7 @@ class AdmissionController extends Controller
         $doctors = \DB::table('tblEmployee')
             ->join('tblEmployeeType', 'tblEmployeeType.intEmployeeTypeId', '=', 'tblEmployee.intEmployeeTypeIdFK')
             ->select('tblEmployee.intEmployeeId', 'tblEmployee.strFirstName', 'tblEmployee.strMiddleName', 'tblEmployee.strLastName')
+            ->where('tblEmployeeType.strPosition','like', '%Doctor%')
             ->get();
 
         $patients = \DB::table('tblPatient')
@@ -94,11 +95,11 @@ class AdmissionController extends Controller
         $admission->intPatientIdFK          =   $request->intPatientId;
         $admission->intBedIdFK              =   $request->intBedId;
         $admission->intAdmissionStatusIdFK  =   1;
-        $admission->intDoctorIdFK           =   $request->doctorSelect;
+        $admission->intDoctorIdFK           =   $request->intDoctorId;
 
-        $admission->save();
+        $admission->save(); 
 
-        $bed = BedModel::find($request->bed);
+        $bed = BedModel::find($request->intBedId);
 
         $bed->intBedStatus  =   2;
 

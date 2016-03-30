@@ -19,11 +19,9 @@
     	<table id="example" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Patient Number</th>
-                    <th>Type</th>
                     <th>Name</th>
                     <th>Address</th>
-                    <th>Contact NO.</th>
+                    <th>Contact No.</th>
                     <th>Status</th>
                     <th>Actions</th><!--  view, request, add diagnosis -->
                 </tr>

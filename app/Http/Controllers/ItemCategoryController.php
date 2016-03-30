@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ItemCategoryRequest;
 use App\Http\Controllers\Controller;
 
+use App\ItemCategoryModel;
+
 class ItemCategoryController extends Controller
 {
     /**
@@ -40,6 +42,9 @@ class ItemCategoryController extends Controller
         $itemCategory = new ItemCategoryModel;
         $itemCategory->strItemCategoryDesc = $request->strItemCategoryDesc;
         $itemCategory->save();
+
+        $itemCategoryList = ItemCategoryModel::all();
+        return response()->json($itemCategoryList);
     }
 
     /**

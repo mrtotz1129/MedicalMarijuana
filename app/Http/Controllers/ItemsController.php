@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\ItemCategoryModel;
+use App\ItemModel;
+use App\GenericModel;
+
 class ItemsController extends Controller
 {
     /**
@@ -16,7 +20,11 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('maintenance-items');
+        $itemCategoryList = ItemCategoryModel::all();
+        $genericList = GenericModel::all();
+        return view('maintenance-items')
+                ->with('itemCategoryList', $itemCategoryList)
+                ->with('genericList', $genericList);
     }
 
     /**
@@ -40,9 +48,11 @@ class ItemsController extends Controller
         $item = new ItemModel;
         $item->strItemName = $request->strItemName;
         if ($request->strItemCategory == "Medicine"){
-            
+            $item->intGenericNameId = $request->intGenericNameId;
         }
-        
+        $itemCategory = ItemCategoryModel::where('strItemCategoryDesc', 'Medicine')
+                            ->first();
+        $item->intItemCategoryIdFK = $itemCategory->intItemCategoryId;
     }
 
     /**

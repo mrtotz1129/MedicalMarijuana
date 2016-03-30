@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\ItemCategoryModel;
 use App\ItemModel;
 use App\GenericModel;
+use App\UOMModel;
 
 class ItemsController extends Controller
 {
@@ -20,11 +21,25 @@ class ItemsController extends Controller
      */
     public function index()
     {
+        $itemList = ItemModel::all()
+                        ->where('intItemStatus', 1);
+        foreach ($itemList as $item) {
+            $itemCategory = ItemCategoryModel::find($item->intItemCategoryIdFK);
+            $item->item_category = $itemCategory->strItemCategoryDesc;
+            if ($itemCategory->strItemCategoryDesc == "Medicine"){
+                $generic = GenericModel::find($item->intGenericNameIdFK);
+                $item->generic_name = $generic->strGenericName;
+            }
+        }
         $itemCategoryList = ItemCategoryModel::all();
         $genericList = GenericModel::all();
+        $measurementList = UOMModel::all()
+                                ->where('intStatus', 1);
         return view('maintenance-items')
                 ->with('itemCategoryList', $itemCategoryList)
-                ->with('genericList', $genericList);
+                ->with('genericList', $genericList)
+                ->with('itemList', $itemList)
+                ->with('measurementList', $measurementList);
     }
 
     /**
@@ -47,12 +62,15 @@ class ItemsController extends Controller
     {
         $item = new ItemModel;
         $item->strItemName = $request->strItemName;
-        if ($request->strItemCategory == "Medicine"){
-            $item->intGenericNameId = $request->intGenericNameId;
+        if ($request->strItemCategoryDesc == "Medicine"){
+            $item->intGenericNameIdFK = $request->intGenericNameId;
         }
-        $itemCategory = ItemCategoryModel::where('strItemCategoryDesc', 'Medicine')
+        $itemCategory = ItemCategoryModel::where('strItemCategoryDesc', $request->strItemCategoryDesc)
                             ->first();
         $item->intItemCategoryIdFK = $itemCategory->intItemCategoryId;
+        $item->intItemStatus = 1;
+        $item->save();
+        return redirect('item');
     }
 
     /**

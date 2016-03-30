@@ -22,6 +22,7 @@ class CreateItemTable extends Migration
             // $table->integer('intDepartmentIdFK')
             //     ->unsigned();
             $table->integer('intItemStatus');
+            $table->timestamps();
 
             $table->foreign('intItemCategoryIdFK')
                 ->references('intItemCategoryId')

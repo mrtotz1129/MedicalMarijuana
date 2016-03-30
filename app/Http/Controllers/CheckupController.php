@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\PatientModel;
+
 class CheckupController extends Controller
 {
     /**
@@ -16,7 +18,8 @@ class CheckupController extends Controller
      */
     public function index()
     {
-        return view('transaction-checkup');
+        // return view('transaction-checkup');
+        dd('Forbidden!');
     }
 
     /**
@@ -48,7 +51,10 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        //
+        $patient = PatientModel::find($id);
+
+        return view('transaction-checkup')
+            ->with('patient', $patient);
     }
 
     /**

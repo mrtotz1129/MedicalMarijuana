@@ -32,6 +32,8 @@ Route::resource('item', 'ItemsController');
 Route::resource('requirement', 'RequirementController');
 Route::resource('service', 'ServiceController');
 Route::resource('measurement', 'UomController');
+Route::resource('item-category', 'ItemCategoryController');
+Route::resource('generic', 'GenericController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

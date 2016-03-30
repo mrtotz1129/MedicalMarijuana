@@ -15,6 +15,9 @@ class CreateItemcategoryTable extends Migration
         Schema::create('tblItemCategory', function(Blueprint $table) {
             $table->increments('intItemCategoryId');
             $table->string('strItemCategoryDesc');
+            $table->timestamps();
+
+            $table->unique('strItemCategoryDesc');
         });
     }
 

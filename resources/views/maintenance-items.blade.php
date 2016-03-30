@@ -80,13 +80,20 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="drugID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="drugID" class="active">Drug ID<span class="red-text"><b>*</b></span></label>
+				                      <div class="input-field col s12">
+				                        <select class="browser-default" id="itemCategory" name="selectedJob" required>
+				                            <option disabled selected>Choose Category</option>
+				                            <option value="{"></option>
+				                        </select>
+				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="drugType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="drugType" class="active">Drug Type</label>
+				                    </div>
+				                      <div class="input-field col s12">
+				                        <select class="browser-default" id="genericName" name="selectedJob" required>
+				                            <option disabled selected>Choose Category</option>
+				                            <option value=""></option>
+				                        </select>
+				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
@@ -140,19 +147,27 @@
 				              <!-- END ASIDE 1 -->
 
 
-				               <div class="aside aside2 z-depth-0">
+				               
+				                <div class="aside aside2 z-depth-0">
 				                <!-- second -->
 				                  <div class="row">
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="drugID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="drugID" class="active">Drug ID<span class="red-text"><b>*</b></span></label>
+				                      <div class="input-field col s12">
+				                        <select class="browser-default" id="itemCategory" name="selectedJob" required>
+				                            <option disabled selected>Choose Category</option>
+				                            <option value="{"></option>
+				                        </select>
+				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="drugType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="drugType" class="active">Drug Type</label>
+				                    </div>
+				                      <div class="input-field col s12">
+				                        <select class="browser-default" id="genericName" name="selectedJob" required>
+				                            <option disabled selected>Choose Category</option>
+				                            <option value=""></option>
+				                        </select>
+				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
 				                    </div>
 				                    <div class="input-field col s12">
 				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">

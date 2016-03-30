@@ -1,6 +1,6 @@
 @extends('maintenance')
 @section('article')
-<article class="white main z-depth-1">
+<article class="white main z-depth-4">
 <br>
 	<div class="row">
 		<div class="col s6">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\PatientModel;
 use App\AdmissionModel;
+use App\ServiceModel;
 
 class CheckupController extends Controller
 {
@@ -66,9 +67,14 @@ class CheckupController extends Controller
             ->where('intPatientIdFK', $id)
             ->first();
 
+        $services = ServiceModel::where('intServiceStatus', '>', 0)
+            ->select('intServiceId', 'strServiceName')
+            ->get();
+
         return view('transaction-checkup')
             ->with('patient', $patient)
-            ->with('lastVisit', $lastVisit);
+            ->with('lastVisit', $lastVisit)
+            ->with('services', $services);
     }
 
     /**

@@ -77,6 +77,8 @@
                                     </li>
                                     <li><a href="{!! url('pharmacy') !!}" class="white-text">Pharmacy</a>
                                     </li>
+                                    <li><a href="{!! url('inventory') !!}" class="white-text">Inventory</a>
+                                    </li>
                                     <li><a href="{!! url('pharmacy') !!}" class="white-text">Rehab</a>
                                     </li>
                                 </ul>

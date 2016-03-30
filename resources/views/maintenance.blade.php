@@ -65,6 +65,8 @@
                                 <ul class="indigo darken-2">
                                     <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>
                                     </li>
+                                    <li><a href="{!! url('admission') !!}" class="white-text">Admission OPD</a>
+                                    </li>
                                     <li><a href="{!! url('checkup') !!}" class="white-text">Check Up</a>
                                     </li>
                                     <li><a href="{!! url('cashier') !!}" class="white-text">Cashier</a>

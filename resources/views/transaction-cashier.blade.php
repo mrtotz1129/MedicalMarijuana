@@ -2,7 +2,7 @@
 @section('article')
 <article class="white main z-depth-1">
 <br>
-		<div class="row indigo lighten-1" style="margin-left: -10px; border-top-right-radius: 10px;">
+		<div class="row indigo darken-2" style="margin-left: -10px; border-top-right-radius: 10px;">
 				<div class="col s6">
 					<h4 class="thin white-text">Cashier</h4>
 				</div>

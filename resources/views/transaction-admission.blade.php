@@ -1,7 +1,7 @@
 @extends('maintenance')
 @section('article')
 <article class="white main z-depth-1">
-	<div class="row indigo lighten-1" style="margin-left: -10px; border-top-right-radius: 10px;">
+	<div class="row indigo darken-2" style="margin-left: -10px; border-top-right-radius: 10px;">
 				<div class="col s6">
 					<h4 class="thin white-text">Admission</h4>
 				</div>
@@ -40,14 +40,19 @@
     	} );
     </script>
 	
-	   <div id="create" class="modal modal-fixed-footer">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+	   <div id="create" class="modal modal-fixed-footer" style="border-radius: 10px;">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="#" enctype="multipart/form-data">
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
 	      <div class="wrapper">
-	        <div class="input-field col s12">
-	              <h4 class="grey-text text-darken-1 center	">Add Patient</h4>
-	        </div>
+	      	<div class="row">
+	      		<div class="input-field col s6">
+	      		      <h4 class="grey-text text-darken-1 left">Add Patient</h4>
+	      		</div>
+	      		<div class="input-field col s6 right">
+	      		     <a href="#addRoom" class="btn modal-trigger btn-floating red btn-large right"><i class="material-icons">local_hotel</i></a>
+	      		</div>
+	      	</div>
 	              <div class="aside aside1 z-depth-0">
 	              <!-- first -->
 	                <div class="row">
@@ -111,6 +116,10 @@
 	              <div class="aside aside3 z-depth-0">
 	              <!-- third -->
 	                <div class="row">
+	                 <div class="input-field col s12">
+	                      <input name="" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
+	                      <label for="room" class="active">Room<span class="red-text">*</span></label>
+	                  </div>
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
 	                      <select required class="browser-default" name="strEmpGender" id="createGender">
 	                        <option value="" disabled selected>Gender</option>
@@ -134,16 +143,7 @@
 	                      <input name="strEmpAddress" placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="createAddress" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^[#+A-Za-z0-9\s.,-]{10,}$">
 	                      <label for="createAddress" class="active">Address<span class="red-text">*</span></label>
 	                  </div>
-	                  <div class="input-field col s12">
-	                      <select class="browser-default" id="slct1" name="selectedJob" required>
-	                          <option value="" disabled selected> </option>
-	                          <!-- <option value="1">Room 101</option>
-	                          <option value="1">Room 102</option> -->
-	                      </select>
-	                      <label for="slct1" class="active">Available Room/Bed<span class="red-text">*</span></label>
-	                  </div>
-	      
-	                  
+	                 
 	                </div>
 	              </div>
 	              <!-- END OF ASIDE3 -->
@@ -156,6 +156,40 @@
 	      </div>
 	      </form>
 	</div>
+
+	<!-- add Room -->
+   <div id="addRoom" class="modal" style="margin-top: 30px; width: 400px !important; border-radius: 10px;">
+     <form id="createOption">
+       <div class="modal-content">
+         <h4 class="grey-text text-darken-2"> Choose Room</h4>
+         <div class="row">
+            <div class="input-field col s12">
+               <select class="browser-default" id="roomTypeSelect" name="selectedJob" required>
+                   <option disabled selected>Room</option>
+               
+                   <option value=""></option>
+              
+               </select>
+               <label for="roomTypeSelect" class="active">Room Type<span class="red-text">*</span></label>
+           	</div>
+
+           	<div class="input-field col s12">
+               <select class="browser-default" id="roomNumberSelect" name="selectedJob" required>
+                   <option disabled selected>Room Numer</option>
+              
+                   <option value=""></option>
+               </select>
+               <label for="roomNumberSelect" class="active">Room Number<span class="red-text">*</span></label>
+           	</div>
+           	<br>
+           	<div class="center">
+           		<br>
+           		<button type="submit" class="btn-large green darken-3 center" style="margin-top: 10px;">ADD</button>
+           	</div>
+           	
+       </div>
+     </form>
+   </div>
 </article>
 
 <script type="text/javascript">

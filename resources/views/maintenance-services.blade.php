@@ -3,11 +3,11 @@
 	<article class="white main z-depth-1">
 		<div class="row indigo darken-2" style="margin-left: -10px; border-top-right-radius: 10px;">
 				<div class="col s6">
-					<h4 class="thin white-text">Measurement Maintenance</h4>
+					<h4 class="thin white-text">Services Maintenance</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					href="#create" style="position: relative; top: 40px; right: 1%;" 
+					href="#createModal" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
 			</div>	
@@ -16,26 +16,17 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 				        <thead>
 				            <tr>
-				           
 				                <th>Name</th>
-				                <th>Abbreviation</th>
-				                <th>Equivalent</th>
+				                <th>Description</th>
+				                <th>Price</th>
+				                <th>Actions</th>
 				            </tr>
 				        </thead>
 				        	
 				        <tbody>
-				        	@foreach($fees as $fee)
 				        	<tr>
-				        		<td>{!! $fee->strFeeTypeName !!}</td>
-				        		<td>{!! $fee->strFeeName !!}</td>
-				        		<td>{!! $fee->txtFeeDesc !!}</td>
-				        		<td>{!! number_format($fee->dblPrice, 2) !!}</td>
-				        		<td>
-				        			<a href="javascript:updateId({!! $fee->intFeeId !!})" class="tooltipped" data-tooltip="Update Fee Details"><i class="material-icons">mode_edit</i></a>
-				        			<a href="javascript:deactivateId({!! $fee->intFeeId !!})" class="tooltipped" data-tooltip="Deactivate Fee Details"><i class="material-icons">delete</i></a>
-				        		</td>
+				        		<td></td>
 				        	</tr>
-				        	@endforeach
 				        </tbody>
 				    </table>
 				</div>
@@ -55,14 +46,14 @@
 				</script>
 
 
-				<!-- Create Fee Modal -->
+				<!-- Create Service Modal -->
 				   <div id="createModal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('fee') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Create Measurement</h4>
+				              <h4 class="grey-text text-darken-1 center	">Create Fee</h4>
 				        </div>
 				           
 				                <div class="aside aside1 z-depth-0">
@@ -71,18 +62,21 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    	<div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="measurementName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="measurementName" class="active">Measurement Name<span class="red-text"><b>*</b></span></label>
-				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="MeasurementAbbv" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="MeasurementAbbv" class="active">Measurement Abbreviation<span class="red-text"><b>*</b></span></label>
+				                        <input name="strFeeName" placeholder="Ex: Aquino" id="strFeeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="strFeeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equivalent" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equivalent" class="active">Equivalent per Piece<span class="red-text"><b>*</b></span></label>
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
+                     		      	 <div class="input-field col s6">
+                           	           <i class="material-icons prefix">mode_edit</i>
+                           	           <textarea id="remarks" class="materialize-textarea" name="txtFeeDesc"></textarea>
+                           	           <label for="remarks">Description</label>
+                           	         </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -95,7 +89,7 @@
 				      </form>
 				</div>
 
-				<!-- Update Measurement Modal -->
+				<!-- Update Fee Modal -->
 				   <div id="updateModal" class="modal modal-fixed-footer">
 				    <form class="col s12 form" method="post" id="updateFeeForm" action="createEmployee" enctype="multipart/form-data">
 				      <input type="hidden" id="updateFeeFormToken" value="{!! csrf_token() !!}" />
@@ -110,18 +104,21 @@
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
-				                    	<div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="measurementName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-				                        <label for="measurementName" class="active">Measurement Name<span class="red-text"><b>*</b></span></label>
-				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="MeasurementAbbv" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="MeasurementAbbv" class="active">Measurement Abbreviation<span class="red-text"><b>*</b></span></label>
+				                        <input name="strFeeName" placeholder="Ex: Aquino" id="strFeeName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="strFeeName" class="active">Fee Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equivalent" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equivalent" class="active">Equivalent per Piece<span class="red-text"><b>*</b></span></label>
+				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <label for="dblPrice" class="active">Fee Price<span class="red-text"><b>*</b></span></label>
 				                    </div>
+
+                     		      	 <div class="input-field col s6">
+                           	           <i class="material-icons prefix">mode_edit</i>
+                           	           <textarea id="remarks" class="materialize-textarea" name="txtFeeDesc"></textarea>
+                           	           <label for="remarks">Description</label>
+                           	         </div>
 				                </div>
 				              </div>
 				              <!-- END ASIDE 2 -->
@@ -138,40 +135,11 @@
 		</div>
 	</article>
 
-<!-- add option -->
-   <div id="feeTypeCreateModal" class="modal" style="margin-top: 30px;">
-     <form id="fee_create_form">
-     	<input type="hidden" id="fee_create_token" value="{!! csrf_token() !!}" />
-       <div class="modal-content">
-         <h4>Add Another Fee Type</h4>
-         <div class="row">
-           <div class="col s12">
-             <div class="input-field col s8 offset-s2">
-               <select id="feeTypeCreateSelect" class="browser-default" size="10">
-				@foreach($feeTypes as $feeType)
-				<option value="{!! $feeType->intFeeTypeId !!}">{!! $feeType->strFeeTypeName !!}</option>
-                @endforeach
-               </select>
-             </div>
-             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="text" class="validate tooltipped specialoption" placeholder="Ex: Cashier" id="fee_type_create" name="addOptionName" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="addOptionName" class="active">New Fee</label>
-             </div>
-             <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-             
-             </div>
-           </div>
-         </div>
-       </div>
-     </form>
-   </div>
-
 {{-- Modal Deactivate START --}}
 <div id="deactivate_fee_modal" class="modal">
 	<input type="hidden" id="deactivate_employee_token" value="{!! csrf_token() !!}" />
     <div class="modal-content">
-      <h4>Deactivate Fee Details</h4>
+      <h4>Deactivate Service Details</h4>
       <p>Are you sure?</p>
     </div>
     <div class="modal-footer">

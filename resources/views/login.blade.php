@@ -11,7 +11,6 @@
         	 <article class="center indigo z-depth-1" style="margin-right: 30%; margin-left: 30%; margin-bottom: 10%; border-radius: 10px;">
         	 		<br><h3 class="thin white-text text-darken-4 center">Log In</h3>
         			 	<div class="container" style="margin-bottom: 20px;">
-        			      <div class="row container">
         			        <form method="POST" action="{!! url('/') !!}">
                         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                       <div class="input-field col s12">
@@ -22,14 +21,12 @@
         			          <input id="password" type="password" class="validate white-text" name="strPassword">
         			          <label for="password" class="white-text">Password</label>
         			        </div>
-        			      </div>
-
         			      <button class="btn waves-effect waves-light col s12" type="submit" name="action">Login
         			          <i class="material-icons right">send</i>
         			      </button>
                     </form>
-        			     </div>
-        			     <br><br>
+        			   </div>
+        			   <br><br>
         	 </article>
         <br><br>
 

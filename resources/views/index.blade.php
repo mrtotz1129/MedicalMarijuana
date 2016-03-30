@@ -27,7 +27,7 @@
 <div class="navbar-fixed">
   <nav class="indigo darken-4">
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"><img src="{!! asset('img/title.png') !!}" width="70%" height="50%"></a>
+        <a href="#!" class="brand-logo" style="margin-left: 40%; "><img src="{!! asset('img/title.png') !!}" width="70%" height="50%"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="{!! url('logout') !!}" class="indigo-text text-darken-2 btn white">Log out</a></li>

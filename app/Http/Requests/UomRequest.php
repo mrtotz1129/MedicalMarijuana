@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 
 use Illuminate\Contracts\Validation\Validator;
 
-class ServiceRequest extends Request
+class UomRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,19 @@ class ServiceRequest extends Request
     public function rules()
     {
         return [
-            'strServiceName'    =>  'required',
-            'dblPrice'          =>  'required|numeric'
+            'strMeasurementName'            =>  'required',
+            'strMeasurementAbbrev'          =>  'required',
+            'dblEquivalent'                 =>  'required|numeric'
         ];
     }
 
     public function messages()
     {
         return [
-            'strServiceName.required'       =>  'Service name is required.',
-            'dblPrice.required'             =>  'Service price is required.',
-            'dblPrice.numeric'              =>  'Service price should be numeric.'
+            'strMeasurementName.required'               =>  'Measurement name is required.',
+            'strMeasurementAbbrev.required'             =>  'Measurement abbreviation is required.',
+            'dblEquivalent.numeric'                     =>  'Equivalent should be numeric.',
+            'dblEquivalent.required'                    =>  'Equivalent is required.'
         ];
     }
 

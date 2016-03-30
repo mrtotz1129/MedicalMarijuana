@@ -14,13 +14,13 @@ class CreateItemTable extends Migration
     {
         Schema::create('tblItem', function(Blueprint $table) {
             $table->increments('intItemId');
-            $table->string('strItemDesc');
+            $table->string('strItemName');
             $table->integer('intItemCategoryIdFK')
                 ->unsigned();
             $table->integer('intGenericNameIdFK')
                 ->unsigned();
-            $table->integer('intDepartmentIdFK')
-                ->unsigned();
+            // $table->integer('intDepartmentIdFK')
+            //     ->unsigned();
             $table->integer('intItemStatus');
 
             $table->foreign('intItemCategoryIdFK')
@@ -35,11 +35,13 @@ class CreateItemTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
-            $table->foreign('intDepartmentIdFK')
-                ->references('intDepartmentId')
-                ->on('tblDepartment')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
+            // $table->foreign('intDepartmentIdFK')
+            //     ->references('intDepartmentId')
+            //     ->on('tblDepartment')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('restrict');
+
+            $table->unique('strItemName');
         });
     }
 

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\UomRequest;
 use App\Http\Controllers\Controller;
 
-class ItemsController extends Controller
+use App\UOMModel;
+
+class UomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,10 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('maintenance-items');
+        $measurementList = UOMModel::all()
+                            ->where('intStatus', 1);
+        return view('maintenance-measurement')
+                ->with('measurementList', $measurementList);
     }
 
     /**
@@ -35,11 +40,15 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UomRequest $request)
     {
-        $item = new ItemModel;
-        $item->strItemName = $request->strItemName;
-        
+        $measurement = new UOMModel;
+        $measurement->strUnitOfMeasurementName = $request->strMeasurementName;
+        $measurement->strUnitOfMeasurementAbbrev = $request->strMeasurementAbbrev;
+        $measurement->dblEquivalent = $request->dblEquivalent;
+        $measurement->intStatus = 1;
+        $measurement->save();
+        return redirect('measurement');
     }
 
     /**
@@ -50,7 +59,8 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        return response()->json($measurement);
     }
 
     /**
@@ -73,7 +83,12 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        $measurement->strUnitOfMeasurementName = $request->strMeasurementName;
+        $measurement->strUnitOfMeasurementAbbrev = $request->strMeasurementAbbrev;
+        $measurement->dblEquivalent = $request->dblEquivalent;
+        $measurement->save();
+        return redirect('measurement');
     }
 
     /**
@@ -84,6 +99,9 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $measurement = UOMModel::find($id);
+        $measurement->intStatus = 0;
+        $measurement->save();
+        return redirect('measurement');
     }
 }

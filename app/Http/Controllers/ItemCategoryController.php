@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ItemsController extends Controller
+class ItemCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('maintenance-items');
+        //
     }
 
     /**
@@ -37,9 +37,7 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        $item = new ItemModel;
-        $item->strItemName = $request->strItemName;
-        
+        //
     }
 
     /**

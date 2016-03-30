@@ -17,6 +17,7 @@ class CreateUnitofmeasurementTable extends Migration
             $table->string('strUnitOfMeasurementName');
             $table->string('strUnitOfMeasurementAbbrev');
             $table->double('dblEquivalent');
+            $table->integer('intStatus');
             $table->timestamps();
 
             $table->unique('strUnitOfMeasurementName');

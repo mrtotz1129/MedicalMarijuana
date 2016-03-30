@@ -10,7 +10,7 @@
 					
 					<a href="#requestTest" class="btn modal-trigger">Request</a>
 					<a href="#addDiagnosis" class="btn modal-trigger">Diagnosis</a>
-					<a href="#addPrescription" class="btn modal-trigger">Prescription</a>
+					<a href="#prescription" class="btn modal-trigger">Prescription</a>
 				</div>
 			</div>	
 		<div class="container" style="margin-left: -30px;">
@@ -125,50 +125,36 @@
 	      </form>
 		</div>
 
-		<!-- Prescription Modal -->
-		<div id="addPrescription" class="modal modal-fixed-footer" style="width: 1000px !important;">
+		<!-- Add Prescription Modal -->
+		<div id="prescription" class="modal modal-fixed-footer" style="width: 800px !important;">
 	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
-		      <div class="wrapper">
+		     <div class="wrapper">
 		      	<h4 class="thin indigo-text text-darken-2">Prescription</h4>
 		      	<h6>Patient Name: Jerald John Pormon</h6>
 		      	<div class="row">
 					<h6>Medicine</h6>
- 			 		<div class="input-field col s6">
- 					 <input type="text" class="validate" id="medList">
- 					<label for="medList">Medicine Name</label>
- 				
- 					</div>
+ 			 		
+ 			 		 <div class="input-field col s12">
+ 			 		    <select class="browser-default" id="buildingCreateSelect" name="selectedJob" required>
+ 			 		        <option disabled selected>Choose Medicine</option>
+ 			 		        <option value="Medicine 1">Medicine 1</option>
+ 			 		    </select>
+ 			 		    <label for="slct1" class="active">Medicine<span class="red-text">*</span></label>
+ 			 		</div>
 
  					<div class="input-field col s6">
  						 <input type="number" class="validate" id="medQuantity">
- 						 <label for="medQuantity">quantity</label>
+ 						 <label for="medQuantity">Times/dady</label>
  					</div>
 
- 					<div class="col s12 center">
- 						 <a class="waves-effect waves-light btn col s4 center" onclick="addChargesToTable()"><i class="material-icons">add</i></a>
+ 					<div class="input-field col s6">
+ 						 <input type="number" class="validate" id="time" placeholder="minutes">
+ 						 <label for="time">Interval</label>
  					</div>
-		 		</div>
-
-		 		<div class="col s6">
-			 		<div class="row center">
-			 			<table class="centered highlight">
-			 				<thead>
-		 				        <tr>
-		 				            <th data-field="id">Name</th>
-		 				            <th data-field="name">Amount</th>
-		 				            <th data-field="price">Action</th>
-		 				        </tr>
-		 				      </thead>
-			 			</table>
-						 <table class="centered highlight bordered" id="packageTable">
-
-						 </table>
-					 </div>
-			 	</div>	
-		      	
 		      </div>
+	      </div>>
 	      </div>
 	      <div class="modal-footer">
 	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>

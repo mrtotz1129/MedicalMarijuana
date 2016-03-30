@@ -13,6 +13,9 @@
 				<div class="col s4">
 					<a href="#setPrice" class="btn modal-trigger btn-floating red"><i class="material-icons">money</i></a>
 				</div>
+					<div class="col s4">
+					<a href="#viewPrice" class="btn modal-trigger btn-floating green"><i class="material-icons">money</i></a>
+				</div>
 			</div>	
 		<div class="container" style="margin-left: -30px;">
 		<br>
@@ -266,7 +269,7 @@
    </div>
 
    <!-- Set Price -->
-   <div id="setPrice" class="modal" style="margin-top: 30px;">
+   <div id="setPrice" class="modal" style="margin-top: 30px; border-radius: 10px;">
      <form id="createOption">
        <div class="modal-content">
          <h4>Set Item Price</h4>
@@ -287,25 +290,56 @@
          	</div>
             
              <div class="col s12 center">
-				 <a class="waves-effect waves-light btn col s4 center" onclick="addPricesToTable()"><i class="material-icons">add</i></a>
+				 <a class="waves-effect waves-light btn col s4 center indigot darken-2">SAVE</a>
 			</div>
+         </div>
+       </div>
+     </form>
+   </div>
 
-             <div class="col s12">
-		 		<div class="row center">
-		 			<table class="centered highlight">
-		 				<thead>
-	 				        <tr>
-	 				            <th data-field="id">Name</th>
-	 				            <th data-field="name">Amount</th>
-	 				            <th data-field="price">Action</th>
-	 				        </tr>
-	 				      </thead>
-		 			</table>
-					 <table class="centered highlight bordered" id="packageTable">
 
-					 </table>
-				 </div>
-		 	</div>	
+   <!-- View Price -->
+   <div id="viewPrice" class="modal" style="margin-top: 30px; border-radius: 10px;">
+     <form id="createOption">
+       <div class="modal-content">
+         <h4>View Item Price</h4>
+         <div class="container">
+         	<div class="row">
+         		<h5 class="thin">Biogesic</h5>
+         		  <table id="view" class="display" cellspacing="0" width="100%">
+				        <thead>
+				            <tr>
+				                <th>Item ID</th>
+				                <th>Type</th>
+				                <th>Name</th>
+				                <th>Generic Name</th>
+				                <th>Details</th>
+				                <th>Price</th>
+				                <th>Actions</th>
+				            </tr>
+				        </thead>
+				        	
+				    </table>
+				</div>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+					    $('#view').DataTable( {
+					        dom: 'Bfrtip',
+					        buttons: [
+					            'copyHtml5',
+					            'excelHtml5',
+					            'csvHtml5',
+					            'pdfHtml5'
+					        ]
+					    } );
+					} );
+				</script>
+         	</div>
+            
+             <div class="col s12 center">
+				 <a class="waves-effect waves-light btn col s4 center indigot darken-2">SAVE</a>
+			</div>
          </div>
        </div>
      </form>
@@ -397,34 +431,5 @@
 
 </script>
 
-<script type="text/javascript">
-	
-function addPricesToTable(){
-    var table = document.getElementById("packageTable");
-    var chargeType = $("#measurementSelect").val();
-    var chargeQuantity = $("#itemPrice").val();
-    var removeBtn = document.createElement('button');
-   
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2); 
-    cell1.innerHTML = chargeType;
-    cell2.innerHTML = chargeQuantity;
-    cell3.innerHTML = '<input id="Button" type="button" value="Remove" class = "waves-effect waves-light btn red" onclick="deleteRow(this)" />';
-}
-
-function deleteRow(row){
-    var i=row.parentNode.parentNode.rowIndex;
-    var packageText = document.getElementById("packageTable").rows[i].cells[0].innerHTML;
-    document.getElementById('packageTable').deleteRow(i);
-
-    var y = document.getElementById("measurementSelect");
-    var option = document.createElement("option");
-    option.text = packageText;
-    y.add(option);
-}
-
-</script>
  
 @endsection

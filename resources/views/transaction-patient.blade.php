@@ -3,7 +3,7 @@
 <article class="white main z-depth-1">
 	<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
 				<div class="col s6">
-					<h4 class="thin white-text">Admission</h4>
+					<h4 class="thin white-text">Patient</h4>
 				</div>
 				<div class="col s6 right">
 					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
@@ -20,10 +20,23 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact No.</th>
-                    <th>Room No.</th>
                     <th>Actions</th>
                 </tr>	
             </thead>  	
+
+            <tbody>
+            	@foreach($patients as $patient)
+            	<tr>
+            		<td>{!! $patient->intPatientId !!}</td>
+            		<td>{!! $patient->name !!}</td>
+            		<td>{!! $patient->txtAddress !!}</td>
+            		<td>{!! $patient->strContactNumber !!}</td>
+            		<td>
+            			
+            		</td>
+            	</tr>
+            	@endforeach
+            </tbody>
     </table>
     </div>
     <script type="text/javascript">
@@ -41,7 +54,7 @@
     </script>
 	
 	   <div id="create" class="modal modal-fixed-footer" style="border-radius: 10px;">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('admission') !!}" enctype="multipart/form-data">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('patient') !!}" enctype="multipart/form-data">
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
 	      <div class="wrapper">
@@ -68,16 +81,6 @@
 	                           </div>
 	                   </div>
 	                   <br>
-	                    <div class="input-field col s12">
-	                       <select class="browser-default" id="doctorSelect" name="doctorSelect" required>
-	                           <option disabled selected>Choose Doctor</option>
-	                           @foreach($doctors as $doctor)
-	                           <option value="{!! $doctor->intEmployeeId !!}">{!! $doctor->strLastName . ', ' . $doctor->strFirstName . ($doctor->strMiddleName != null ? (' ' . $doctor->strMiddleName) : ''); !!}</option>
-	                           @endforeach
-	                       </select>
-	                       <label for="doctorSelect" class="active">Available Doctor</label>
-	                   	</div>
-	   
 	                </div>
 	              </div>
 	              <!-- END ASIDE 1 -->

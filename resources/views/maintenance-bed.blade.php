@@ -59,7 +59,7 @@
 				   </div>
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('bed') !!}" enctype="multipart/form-data">
 				      <div class="modal-content">
-				      <input type="hidden" id="bedCreateFormToken" value="{!! csrf_token() !!}" />
+				      <input type="hidden" id="bedCreateFormToken" name="_token" value="{!! csrf_token() !!}" />
 				        <!-- <div class="container"> -->
 				      <div class="wrapper">
 				                <div class="aside aside1 z-depth-0">
@@ -85,7 +85,7 @@
 				                      <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
 				                  </div>
 				                  <div class="input-field col s12">
-				                      <select class="browser-default" id="createRoomSelect" name="selectedJob" required>
+				                      <select class="browser-default" id="createRoomSelect" name="createRoomSelect" required>
 				                          <option disabled selected>Room</option>
 				                        
 				                      </select>

@@ -63,9 +63,9 @@
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan white-text"><img src="{!! asset('img/transaction-icon.png') !!}" width="15%" height="15%" align="center" style="margin-bottom: 5px;"> Transactions</a>
                             <div style="" class="collapsible-body">
                                 <ul class="indigo darken-2">
-                                    <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>
+                                    <li><a href="{!! url('patient') !!}" class="white-text">Patient</a>
                                     </li>
-                                    <li><a href="{!! url('admission') !!}" class="white-text">Admission OPD</a>
+                                    <li><a href="{!! url('admission') !!}" class="white-text">Admission</a>
                                     </li>
                                     <li><a href="{!! url('checkup') !!}" class="white-text">Check Up</a>
                                     </li>

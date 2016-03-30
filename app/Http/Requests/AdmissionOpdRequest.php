@@ -5,7 +5,8 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 
 use Illuminate\Contracts\Validation\Validator;
-class PatientRequest extends Request
+
+class AdmissionOpdRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +15,7 @@ class PatientRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +23,11 @@ class PatientRequest extends Request
      *
      * @return array
      */
-     public function rules()
+    public function rules()
     {
         return [
             'image'             =>  'image',
+            'doctorSelect'      =>  'required',
             'strFirstName'      =>  'required|unique_with:tblEmployee,strMiddleName,strLastName',
             'strLastName'       =>  'required',
             'strBirthdate'      =>  'required',
@@ -40,6 +42,7 @@ class PatientRequest extends Request
     {
         return [
             'image.image'               =>  'Image you uploaded is not an image',
+            'doctorSelect.required'     =>  'Doctor is required.',
             'strFirstName.required'     =>  'First name is required.',
             'strFirstName.unique_with'  =>  'Name already exists.',
             'strLastName.required'      =>  'Last name is required.',

@@ -34,6 +34,7 @@ Route::resource('service', 'ServiceController');
 Route::resource('measurement', 'UomController');
 Route::resource('item-category', 'ItemCategoryController');
 Route::resource('generic', 'GenericController');
+Route::resource('patient', 'PatientController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

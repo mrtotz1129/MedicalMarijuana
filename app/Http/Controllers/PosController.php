@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\UOMModel;
+use App\ItemModel;
+
 class PosController extends Controller
 {
     /**
@@ -16,7 +19,13 @@ class PosController extends Controller
      */
     public function index()
     {
-        return view('transaction-pos');
+        $measurementList = UOMModel::where('intStatus', 1)
+            ->get();
+        $itemList = ItemModel::where('intItemStatus', 1)
+            ->get();
+        return view('transaction-pos')
+            ->with('measurementList', $measurementList)
+            ->with('itemList', $itemList);
     }
 
     /**

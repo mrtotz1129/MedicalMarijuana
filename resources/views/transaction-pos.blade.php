@@ -20,10 +20,19 @@
 			        <thead>
 			            <tr>
 			                <th>Item Name</th>
-			                <th>Price</th>
+			                <th>Quantity</th>
 			                <th style="width: 20px;">Action</th>
 			            </tr>
-			        </thead>  	
+			        </thead> 
+			        <tbody>
+					@foreach($itemList as $item)
+						<tr>
+							<td>{!! $item->strItemName !!}</td>
+							<td></td>
+							<td></td>
+						</tr>
+					@endforeach
+			        </tbody> 	
 				</table>
     		</div>
 
@@ -148,8 +157,8 @@
            <div class="col s12">
              <div class="input-field col s8 offset-s2">
                <select id="unitOfMeasure" class="browser-default" size="10">
-                 @foreach($equipmentTypes as $equipmentType)
-                 <option value="">Measure 1</option>
+                 @foreach($measurementList as $measurement)
+                 	<option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
                  @endforeach
                </select>
              </div>

@@ -41,6 +41,7 @@ Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation
 Route::post('room-type/changed', 'RoomTypeAjaxController@retrieveRooms');
 
 Route::get('view-requirement', 'ViewRequirementController@viewAllRequirement');
+Route::get('get-bed-lists/{id}', 'BedAjaxController@retrieveBeds');
 
 Route::post('employee/update', 'EmployeeController@updateEmployee');
 Route::post('position/create', 'PositionController@createPosition');

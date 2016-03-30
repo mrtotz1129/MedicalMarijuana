@@ -82,7 +82,8 @@ class AdmissionController extends Controller
         $admission = new AdmissionModel;
 
         $admission->intPatientIdFK  =   $patient->intPatientId;
-        $admission->intBedIdFK      =   $
+        $admission->intBedIdFK      =   $request->bed;
+        $admission->
     }
 
     /**

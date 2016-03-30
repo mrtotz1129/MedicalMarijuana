@@ -127,8 +127,8 @@
 	              <!-- third -->
 	                <div class="row">
 	                 <div class="input-field col s12">
-	                      <input name="room"  readonly placeholder="Ex: #101" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
-	                      <label for="room" class="active">Bed<span class="red-text">*</span></label>
+	                      <input name="bed"  readonly placeholder="Ex: #101" type="text" id="bed" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
+	                      <label for="bed" class="active">Bed<span class="red-text">*</span></label>
 	                  </div>
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
 	                      <select required class="browser-default" name="strGender" id="createGender">
@@ -237,6 +237,8 @@
 			},
 			success: function(data)
 			{
+				var roomNumberSelect = document.getElementById('roomNumberSelect');
+
 				$('#roomNumberSelect').empty();
 
 				for(var i = 0; i < data.length; i++)
@@ -245,7 +247,9 @@
 					option.value = data[i].intRoomId;
 					option.text = data[i].intRoomId;
 
-					document.getElementById('roomNumberSelect').appendChild(option);
+					roomNumberSelect.appendChild(option);
+
+					getBedLists(roomNumberSelect.value);
 				}
 			},
 			error: function(xhr)
@@ -255,13 +259,63 @@
 		});
 	};
 
+	function getBedLists(roomId)
+	{
+		$.ajax({
+			url: "get-bed-lists/" + roomId,
+			type: "GET",
+			success: function(data)
+			{
+				$('#bedNumberSelect').empty();
+
+				for(var i = 0; i < data.length; i++)
+				{
+					var option = document.createElement('option');
+					option.value = data[i].intBedId;
+					option.text = data[i].intBedId;
+
+					document.getElementById('bedNumberSelect').appendChild(option);
+				}
+			},
+			error: function(xhr)
+			{
+				console.log(xhr);
+			}
+		});
+	}
+
 	document.getElementById('createRoomForm').onsubmit = function(event)
 	{
 		event.preventDefault();
 
-		document.getElementById('room').value = document.getElementById('roomNumberSelect').value;
+		document.getElementById('bed').value = document.getElementById('bedNumberSelect').value;
 		
 		$('#addRoom').closeModal();
+	};
+
+	document.getElementById('roomNumberSelect').onchange = function()
+	{
+		$.ajax({
+			url: "get-bed-lists/" + this.value,
+			type: "GET",
+			success: function(data)
+			{
+				$('#bedNumberSelect').empty();
+
+				for(var i = 0; i < data.length; i++)
+				{
+					var option = document.createElement('option');
+					option.text = data[i].intBedId;
+					option.value = data[i].intBedId;
+
+					document.getElementById('bedNumberSelect').appendChild(option);
+				}
+			},
+			error: function(xhr)
+			{
+				console.log(xhr);
+			}
+		});
 	};
 </script>
 @endsection

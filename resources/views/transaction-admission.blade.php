@@ -127,8 +127,8 @@
 	              <!-- third -->
 	                <div class="row">
 	                 <div class="input-field col s12">
-	                      <input name="room"  readonly placeholder="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
-	                      <label for="room" class="active">Room<span class="red-text">*</span></label>
+	                      <input name="room"  readonly placeholder="Ex: #101" type="text" id="room" minlength="10" class="validate tooltipped specialaddress" required data-position="bottom" data-delay="30" data-tooltip="Ex: #20 Julian Eymard St. Sto.Nino Meycauayan, Bulacan<br/>( At least 10 or more characters )" pattern="^\d+$">
+	                      <label for="room" class="active">Bed<span class="red-text">*</span></label>
 	                  </div>
 	                  <div class="input-field col s12" style="margin-top: 40px !important;">
 	                      <select required class="browser-default" name="strGender" id="createGender">
@@ -189,6 +189,13 @@
                    <option disabled selected>Room Number</option>
                </select>
                <label for="roomNumberSelect" class="active">Room Number<span class="red-text">*</span></label>
+           	</div>
+
+           	<div class="input-field col s12">
+               <select class="browser-default" id="bedNumberSelect" name="selectedJob" required>
+                   <option disabled selected>Bed Number</option>
+               </select>
+               <label for="bedNumberSelect" class="active">Bed Number<span class="red-text">*</span></label>
            	</div>
            	<br>
            	<div class="center">

@@ -14,16 +14,23 @@ class CreatePrescriptionTable extends Migration
     {
         Schema::create('tblPrescription', function(Blueprint $table){
             $table->increments('intPrescriptionId');
-            $table->integer('intAdmissionIdFK')
+            $table->integer('intPatientIdFK')
+                ->unsigned();
+            $table->integer('intEmployeeIdFK')
                 ->unsigned();
             $table->timestamps();
 
-            $table->foreign('intAdmissionIdFK')
-                ->references('intAdmissionId')
-                ->on('tblAdmission')
+            $table->foreign('intPatientIdFK')
+                ->references('intPatientId')
+                ->on('tblPatient')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
+            $table->foreign('intEmployeeIdFK')
+                ->references('intEmployeeId')
+                ->on('tblEmployee')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

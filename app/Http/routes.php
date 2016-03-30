@@ -38,6 +38,7 @@ Route::resource('patient', 'PatientController');
 Route::resource('item-price', 'ItemPriceController');
 Route::resource('pos', 'PosController');
 Route::resource('examination-request', 'ExaminationRequestController');
+Route::resource('inventory', 'InventoryController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
@@ -56,5 +57,5 @@ Route::post('supplier/update', 'SupplierController@updateSupplier');
 Route::post('room-type/create', 'RoomTypeController@createRoomType');
 Route::post('equipment/create', 'EquipmentController@createEquipment');
 Route::get('test', function() {
-	return view('transaction-pharmacy-outpatient');
+	return view('transaction-inventory');
 });

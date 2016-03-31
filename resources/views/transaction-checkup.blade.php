@@ -8,8 +8,6 @@
 						@foreach($errors->all() as $error)
 						<li>{!! $error !!}</li>
 						@endforeach
-					@else
-					<h1>Pusang gala</h1>
 					@endif
 				</div>
 				<div class="col s6 right">

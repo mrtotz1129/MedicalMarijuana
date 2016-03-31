@@ -37,6 +37,8 @@ Route::resource('generic', 'GenericController');
 Route::resource('patient', 'PatientController');
 Route::resource('item-price', 'ItemPriceController');
 Route::resource('pos', 'PosController');
+Route::resource('examination-request', 'ExaminationRequestController');
+Route::resource('inventory', 'InventoryController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');

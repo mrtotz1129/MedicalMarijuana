@@ -17,7 +17,7 @@
 	</div>	
 		<div class="row">
 					<div class="col s3 center ">
-						 <img name="image" id="employeeimg" class="circle center" align="middle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+						 <img name="image" id="employeeimg" class="circle center" align="middle" style="width: 200px; height: 200px;" src="{!! asset($patient->txtPatientImgPath != null ? $patient->txtPatientImgPath : 'img/no_image.png') !!}" alt=""/>
 					</div>
 
 					<div class="col s3">
@@ -114,14 +114,16 @@
 				</script>
 		<!-- Request Test Modal -->
 	   <div id="requestTest" class="modal modal-fixed-footer">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('examination-request') !!}" enctype="multipart/form-data">
+	    	<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+	    	<input type="hidden" name="patientId" value="{!! $patient->intPatientId !!}" />
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
 		      <div class="wrapper">
 		      	<h4 class="thin indigo-text text-darken-2">Request for Examination</h4>
 		      	<h6>Patient Name: {!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</h6>
 		      	<div class="input-field col s12">
-		      	    <select multiple>
+		      	    <select multiple name="service[]" required>
 		      	      <option value="" disabled selected>Choose your option</option>
 		      	      @foreach($services as $service)
 		      	      <option value="{!! $service->intServiceId !!}">{!! $service->strServiceName !!}</option>
@@ -132,7 +134,7 @@
 
 		      	 <div class="input-field col s6">
       	           <i class="material-icons prefix">mode_edit</i>
-      	           <textarea id="remarks" class="materialize-textarea"></textarea>
+      	           <textarea id="remarks" class="materialize-textarea" name="remarks"></textarea>
       	           <label for="remarks">Remarks</label>
       	         </div>
 

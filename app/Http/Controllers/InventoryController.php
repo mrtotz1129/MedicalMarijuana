@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\PatientModel;
-use App\AdmissionModel;
-use App\ServiceModel;
-
-class CheckupController extends Controller
+class InventoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +16,7 @@ class CheckupController extends Controller
      */
     public function index()
     {
-         return view('transaction-checkup'); 
+        return view('transaction-inventory');
     }
 
     /**
@@ -41,7 +37,18 @@ class CheckupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inventoryPrev = InventoryModel::where('intItemIdFK', $request->intItemId)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $measurement = UOMModel::find($request->intMeasurementId);
+        $inventory = new InventoryModel;
+        $inventory->intItemIdFK = $request->intItemId;
+        $inventory->deciPrevValue = $inventoryPrev->deciAfterValue;
+        $newInventory = $inventoryPrev->deciAfterValue+($request->dblQuantity*$measurement->dblEquivalent);
+        $inventory->deciAfterValue = $newInventory;
+        $inventory->strReason = "add";
+        $inventory->save();
+        return redirect('inventory');
     }
 
     /**
@@ -52,29 +59,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $patient = \DB::table('tblPatient')
-            ->leftJoin('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
-            ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
-            ->leftJoin('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intRoomIdFK')
-            ->select('tblPatient.intPatientId', 'tblPatient.strFirstName', 'tblPatient.txtPatientImgPath', 'tblPatient.strMiddleName', 'tblPatient.strLastName',
-                'tblRoom.intRoomId', 'tblPatient.txtAddress', 'tblBed.intBedId')
-            ->where('tblPatient.intPatientId', $id)
-            ->first();
-
-        $lastVisit = AdmissionModel::where('intPatientIdFK', $id)
-            ->orderBy('created_at', 'desc')
-            ->select('created_at')
-            ->where('intPatientIdFK', $id)
-            ->first();
-
-        $services = ServiceModel::where('intServiceStatus', '>', 0)
-            ->select('intServiceId', 'strServiceName')
-            ->get();
-
-        return view('transaction-checkup')
-            ->with('patient', $patient)
-            ->with('lastVisit', $lastVisit)
-            ->with('services', $services);
+        //
     }
 
     /**

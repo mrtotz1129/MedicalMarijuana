@@ -84,10 +84,6 @@
 	         	 <div class="input-field col s12">
                     <select multiple name="nurses[]">
                       <option value="" disabled selected>Choose your option</option>
-              
-                      <option value="Senior">Senior</option>
-                      <option value="Senior">PWD</option>
-                      <option value="Senior">Shems</option>
                   
                     </select>
                     <label>Select Discount</label>

@@ -30,9 +30,12 @@ class PosController extends Controller
                 ->first();
             $item->inventory = $inventory->deciAfterValue;
         }
+        $discountList = DiscountModel::where('intDiscountStatus')
+            ->get();
         return view('transaction-pos')
             ->with('measurementList', $measurementList)
-            ->with('itemList', $itemList);
+            ->with('itemList', $itemList)
+            ->with('discountList', $discountList);
     }
 
     /**

@@ -66,7 +66,7 @@
 				              <br>	
 				                    <div class="input-field col s12">
 				                      <select id="buildingCreateSelect" name="selectedJob" required>
-				                          <option disabled selected>Building</option>
+				                          <option disabled selected>Choose Building</option>
 				                          @foreach($buildingList as $building)
 				                          <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
 				                          @endforeach
@@ -75,7 +75,7 @@
 				                  </div>
 				                  <div class="input-field col s12">
 				                      <select id="floorCreate" name="floorCreateSelect" required>
-				                          <option disabled selected>Floor</option>
+				                          <option disabled selected>Choose Floor</option>
 				                      </select>
 				                      <label>Floor</label>
 				                  </div>

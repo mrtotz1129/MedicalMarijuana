@@ -86,9 +86,28 @@
 	         	<br>
 	         	<div class="row">
 	         		<div class="col s12 right">
-	         			<a href="#request" class="modal-trigger btn btn-floating">INPATIENT</a>
+	         			<p>
+         			      <input name="group1" type="radio" id="outPatient" class="with-gap" />
+         			      <label for="outPatient">Out Patient</label>
+         		
+         			      <input name="group1" type="radio" id="inPatient" class="with-gap" />
+         			      <label for="inPatient">In Patient</label>
+         			    </p>
 	         		</div>
 	         	</div>
+
+	         	<div class="input-field col s12">
+                    <select name="discount[]" id="patientSelect">
+                      <option value="" disabled selected>Choose your option</option>
+
+						<option value="Patient1">Patient1</option>
+          
+                    </select>
+                    
+                    <label>Select Patient</label>
+                 </div>
+                 <br>
+
 	         	 <div class="input-field col s12">
                     <select multiple name="discount[]" id="discountSelect">
                       <option value="" disabled selected>Choose your option</option>

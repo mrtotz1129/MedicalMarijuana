@@ -51,6 +51,8 @@
                             </li>
                             <li class="{!! strpos(Request::url(), 'employee') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('employee') !!}" class="white-text">Employee</a>
                             </li>
+                             <li class="{!! strpos(Request::url(), 'service') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('service') !!}" class="white-text">Services</a>
+                            </li>
                             
                         </ul>
                     </div>

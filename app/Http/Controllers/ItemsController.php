@@ -21,20 +21,19 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $itemList = ItemModel::all()
-                        ->where('intItemStatus', 1);
-        foreach ($itemList as $item) {
-            $itemCategory = ItemCategoryModel::find($item->intItemCategoryIdFK);
-            $item->item_category = $itemCategory->strItemCategoryDesc;
-            if ($itemCategory->strItemCategoryDesc == "Medicine"){
-                $generic = GenericModel::find($item->intGenericNameIdFK);
-                $item->generic_name = $generic->strGenericName;
-            }
-        }
+        // item, item category, generic name
+        $itemList = $itemList = \DB::table('tblItem')
+            ->join('tblItemCategory', 'tblItem.intItemCategoryIdFK', '=', 'tblItemCategory.intItemCategoryId')
+            ->join('tblGenericName', 'tblGenericName.intGenericNameId', '=', 'tblItem.intGenericNameIdFK')
+            ->select('tblItem.intItemId', 'tblItem.strItemName','tblItemCategory.strItemCategoryDesc', 'tblGenericName.strGenericName')
+            ->where('tblItem.intItemStatus', '>', 0)
+            ->get();
+
         $itemCategoryList = ItemCategoryModel::all();
         $genericList = GenericModel::all();
         $measurementList = UOMModel::all()
                                 ->where('intStatus', 1);
+
         return view('maintenance-items')
                 ->with('itemCategoryList', $itemCategoryList)
                 ->with('genericList', $genericList)
@@ -60,6 +59,7 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
+        $imagePath = 'uploaded_images/item';
         $item = new ItemModel;
         $item->strItemName = $request->strItemName;
         if ($request->strItemCategoryDesc == "Medicine"){
@@ -68,8 +68,22 @@ class ItemsController extends Controller
         $itemCategory = ItemCategoryModel::where('strItemCategoryDesc', $request->strItemCategoryDesc)
                             ->first();
         $item->intItemCategoryIdFK = $itemCategory->intItemCategoryId;
+        $item->intGenericNameIdFK = $request->intGenericNameId;
         $item->intItemStatus = 1;
+
+        if($request->hasFile('image'))
+        {
+            $request->file('image')->move(public_path() . '/' . $imagePath, $item->strItemName);
+
+            $item->txtImagePath = $imagePath . '/' . $item->strItemName;
+        }
+        else 
+        {
+            $item->txtImagePath = null;
+        }
+
         $item->save();
+        
         return redirect('item');
     }
 
@@ -92,7 +106,9 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = ItemModel::find($id);
+
+        return response()->json($item);
     }
 
     /**
@@ -103,7 +119,7 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         //
     }
 
@@ -115,6 +131,10 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = ItemModel::find($id);
+
+        $item->intItemStatus = 0;
+
+        $item->save();
     }
 }

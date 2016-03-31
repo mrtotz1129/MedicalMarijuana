@@ -34,8 +34,8 @@
 				        @foreach($itemList as $item)
 				        	<tr>
 				        		<td>{!! $item->strItemName !!}</td>
-				        		<td>{!! $item->item_category !!}</td>
-				        		<td>{!! $item->generic_name !!}</td>
+				        		<td>{!! $item->strItemCategoryDesc !!}</td>
+				        		<td>{!! $item->strGenericName !!}</td>
 				        		<td>
 				        			<a href="javascript:viewPrice({!! $item->intItemId !!})" class="btn-floating green"><i class="material-icons">money</i></a>
 				        			<a href="javascript:addPrice({!! $item->intItemId !!})" class="btn btn-floating red"><i class="material-icons">money</i></a>
@@ -64,81 +64,65 @@
 
 				
 				<!-- Create Item Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				   <div id="create" class="modal modal-fixed-footer" style="height: 450px !important; width: 800px !important; border-radius: 10px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('item') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Add Item</h4>
-				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                   <div class="input-field col s12">
-				                        <input name="strItemName" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="drugName" class="active">Item Name<span class="red-text"><b>*</b></span></label>
-				                    </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
+				            <h4 class="thin center">Add Item</h4>
+							<div class="row">
+								<div class="col s4">
+									<div class="input-field col s12">
+									     <img name="image" id="employeeimg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+									 </div>
+									 <div class="input-field col s12">
+									     <div class="file-field input-field">
+									           <div class="btn">
+									             <span>Upload</span>
+									             <input type="file" id="fileUpload">
+									           </div>
+									           <div class="file-path-wrapper">
+									             <input class="file-path validate" type="text">
+									           </div>
+									         </div>
+									 </div>
+								</div>
 
-
-				                <div class="aside aside2 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-
-				                    <div class="row">
-				                    	<div class="input-field col s6">
-				                        <select class="browser-default" id="itemCategorySelect" name="strItemCategoryDesc" required>
+								<div class="col s8">
+									 <div class="input-field col s12">
+									      <input name="strItemName" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+									      <label for="drugName" class="active">Item Name<span class="red-text"><b>*</b></span></label>
+									  </div>
+									<div class="row">
+				                    	<div class="input-field col s9">
+				                        <select id="itemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
 				                        	@foreach($itemCategoryList as $itemCategory)
-												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+												<option value="{!! $itemCategory->intItemCategoryId !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
 				                        	@endforeach
 				                        </select>
-				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
+				                        <label >Item Category</label>
 				                    </div>
-				                    <div class="col s6">
-				                    	<a href="#addCategory" class="modal-trigger green"><i class="material-icons">add</i></a>
+				                    <div class="col s3">
+				                    	<a href="#addCategory" class="modal-trigger btn green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    </div>
 				                    
 				                    <div class="row">
-				                    	<div class="input-field col s6">
-				                        <select class="browser-default" id="genericName" name="intGenericNameId" required>
+				                    	<div class="input-field col s9">
+				                        <select id="genericName" name="intGenericNameId" required>
 				                            <option disabled selected>Choose Generic name</option>
 				                            @foreach($genericList as $generic)
 				                            	<option value="{!! $generic->intGenericNameId !!}">{!! $generic->strGenericName !!}</option>
 				                    		@endforeach
 				                        </select>
-				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
+				                        <label>Generic Name</label>
 				                    </div>
-				                    <div class="col s6">
-				                    	<a href="#addGeneric" class="modal-trigger green"><i class="material-icons">add</i></a>
+				                    <div class="col s3">
+				                    	<a href="#addGeneric" class="modal-trigger btn green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
+								</div>
+							</div>
 
-				            </div>
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
@@ -147,84 +131,77 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				<!-- Update Item Modal -->
+				   <div id="update" class="modal modal-fixed-footer" style="height: 450px !important; width: 800px !important; border-radius: 10px;">
+				    <form class="col s12 form" method="post" id="updateItemForm" action="{!! url('item-update') !!}" enctype="multipart/form-data">
+				    	<input type="hidden" name="_token" id="updateItemFormToken" value="{!! csrf_token() !!}" />
+				    	<input type="hidden" id="updateItemFormId" name="itemId" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Item</h4>
-				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
-				                   </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="drugName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="drugName" class="active">Drug Name<span class="red-text"><b>*</b></span></label>
-				                    </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
+				            <h4 class="thin center">Add Item</h4>
+							<div class="row">
+								<div class="col s4">
+									<div class="input-field col s12">
+									     <img name="image" id="updateItemImg" class="circle" style="width: 100px; height: 100px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+									 </div>
+									 <div class="input-field col s12">
+									     <div class="file-field input-field">
+									           <div class="btn">
+									             <span>Upload</span>
+									             <input type="file" id="fileUploadEdit" name="image">
+									           </div>
+									           <div class="file-path-wrapper">
+									             <input class="file-path validate" type="text">
+									           </div>
+									         </div>
+									 </div>
+									
+								</div>
 
-
-				               
-				                <div class="aside aside2 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-
-				                    <div class="row">
-				                    	<div class="input-field col s6">
-				                        <select class="browser-default" id="itemCategory" name="selectedJob" required>
+								<div class="col s8">
+									 <div class="input-field col s12">
+									      <input name="strItemName" placeholder="Ex: Aquino" id="updateItemNameInput" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+									      <label for="updateItemNameInput" class="active">Item Name<span class="red-text"><b>*</b></span></label>
+									  </div>
+									<div class="row">
+				                    	<div class="input-field col s9">
+				                        <select id="updateItemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
-				                            <option value="{"></option>
+				                        	@foreach($itemCategoryList as $itemCategory)
+												<option value="{!! $itemCategory->intItemCategoryId !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+				                        	@endforeach
 				                        </select>
-				                        <label for="itemCategory" class="active">Item Category<span class="red-text">*</span></label>
+				                        <label >Item Category</label>
 				                    </div>
-				                    <div class="col s6">
-				                    	<a href="#addCategory" class="modal-trigger green"><i class="material-icons">add</i></a>
+				                    <div class="col s3">
+				                    	<a href="#addCategory" class="modal-trigger btn green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    </div>
 				                    
 				                    <div class="row">
-				                    	<div class="input-field col s6">
-				                        <select class="browser-default" id="genericName" name="selectedJob" required>
-				                            <option disabled selected>Choose Category</option>
-				                            <option value=""></option>
+				                    	<div class="input-field col s9">
+				                        <select id="updateGenericNameSelect" name="intGenericNameId" required>
+				                            <option disabled selected>Choose Generic name</option>
+				                            @foreach($genericList as $generic)
+				                            	<option value="{!! $generic->intGenericNameId !!}">{!! $generic->strGenericName !!}</option>
+				                    		@endforeach
 				                        </select>
-				                        <label for="genericName" class="active">Generic Name<span class="red-text">*</span></label>
+				                        <label>Generic Name</label>
 				                    </div>
-				                    <div class="col s6">
-				                    	<a href="#addGeneric" class="modal-trigger green"><i class="material-icons">add</i></a>
+				                    <div class="col s3">
+				                    	<a href="#addGeneric" class="modal-trigger btn green"><i class="material-icons">add</i></a>
 				                    </div>
 				                    </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
+								</div>
+							</div>
+
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
 				      </div>
 				      </form>
 				</div>
+				
 		</div>
 	</article>
 
@@ -362,6 +339,20 @@
        </div>
      </form>
    </div>
+
+{{-- Modal Deactivate START --}}
+<div id="deactivate_item_modal" class="modal">
+	<input type="hidden" id="deactivate_item_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Item Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_item_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
 <script type="text/javascript">
 	function readURL(input) {
 
@@ -379,6 +370,19 @@
 	$("#fileUpload").change(function(){
 	    readURL(this);
 	});
+
+	document.getElementById('fileUploadEdit').onchange = function()
+	{
+		 if (this.files && this.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            document.getElementById('updateItemImg').setAttribute('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(this.files[0]);
+	    }	
+	};
 
 	$('#createItemCategoryForm').on('submit', function(event) {
 		event.preventDefault();
@@ -455,6 +459,58 @@
 		$('#viewPrice').openModal();
 	}
 
+	function updateId(id)
+	{
+		$.ajax({
+			url: "{!! url('item') !!}" + '/' + id + '/edit',
+			type: "GET",
+			success: function(data) {
+				var assetBaseUrl = "{!! asset('') !!}";
+
+				document.getElementById('updateItemFormId').value = data.intItemId;
+				document.getElementById('updateItemNameInput').value = data.strItemName;
+				document.getElementById('updateItemCategorySelect').value = data.intItemCategoryIdFK;
+				$('select').material_select();
+				document.getElementById('updateGenericNameSelect').value = data.intGenericNameIdFK;
+				$('select').material_select();
+
+				if(data.txtImagePath != null) {
+					document.getElementById('updateItemImg').src = assetBaseUrl + data.txtImagePath;
+				} else {
+					document.getElementById('updateItemImg').src = 
+						assetBaseUrl + 'img/no_image.png';
+				}
+
+				$('#update').openModal();
+			},
+			error: function(xhr) {
+				console.log(xhr);
+			}
+		});
+	}
+
+	function deactivateId(id)
+	{
+		$('#deactivate_item_modal').openModal();
+
+		document.getElementById('deactivate_item_btn').onclick = function()
+		{
+			$.ajax({
+				url: "{!! url('item') !!}" + '/' + id,
+				type: "POST",
+				data: {
+					_method: 'DELETE',
+					_token: document.getElementById('deactivate_item_token').value
+				},
+				success: function(data) {
+					window.location.href = '{!! url("item") !!}';
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				}
+			});
+		};
+	}	
 </script>
 
  

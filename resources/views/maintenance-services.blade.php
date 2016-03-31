@@ -55,18 +55,10 @@
 
 
 				<!-- Create Service Modal -->
-				   <div id="createModal" class="modal modal-fixed-footer">
+				   <div id="createModal" class="modal modal-fixed-footer" style="width: 500px !important; height: 450px !important; border-radius: 10px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('service') !!}" enctype="multipart/form-data">
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Create Fee</h4>
-				        </div>
-				           
-				                <div class="aside aside1 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
+				              <h4 class="thin center">Create Service</h4>
 				                    <div class="col s12" style="margin-bottom: 5px;">
 				                         <label class="red-text left">(*) Indicates required field</label>
 				                    </div>
@@ -85,10 +77,6 @@
                            	           <textarea id="remarks" class="materialize-textarea" name="txtServiceDesc"></textarea>
                            	           <label for="remarks">Description</label>
                            	         </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-				            </div>
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
@@ -97,23 +85,14 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
-				   <div id="updateModal" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="updateServiceForm" action="createEmployee" enctype="multipart/form-data">
-				      <input type="hidden" id="updateServiceFormToken" value="{!! csrf_token() !!}" />
+				<!-- Update Service Modal -->
+				   <div id="updateModal" class="modal modal-fixed-footer" style="width: 500px !important; height: 450px !important; border-radius: 10px;">
+				    <form class="col s12 form" method="post" id="updateServiceForm" action="{!! url('service') !!}" enctype="multipart/form-data">
+				       <input type="hidden" id="updateServiceFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Fee</h4>
-				        </div>
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
+				              <h4 class="thin center">Create Service</h4>
 				                    <div class="input-field col s12">
-				                        <input name="strFeeName" placeholder="Ex: Aquino" id="serviceName_update" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="strServiceName" placeholder="Ex: Aquino" id="serviceName_update" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="serviceName_update" class="active">Service Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 
@@ -124,22 +103,17 @@
 
                      		      	 <div class="input-field col s6">
                            	           <i class="material-icons prefix">mode_edit</i>
-                           	           <textarea id="serviceDesc_update" class="materialize-textarea" name="txtFeeDesc"></textarea>
+                           	           <textarea id="serviceDesc_update" class="materialize-textarea" name="txtServiceDesc"></textarea>
                            	           <label for="serviceDesc_update" id="lblDesc">Description</label>
                            	         </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-
-				            </div>
-				       
-				        <div class="modal-footer">
+				        </div>
+				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
 				      </div>
 				      </form>
-				    </div>
 				</div>
+
 		</div>
 	</article>
 

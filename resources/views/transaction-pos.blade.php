@@ -107,15 +107,7 @@
 	                </div>
 	                <script type="text/javascript">
 	                	$(document).ready(function() {
-	                	    $('#totalExpenses').DataTable( {
-	                	        dom: 'Bfrtip',
-	                	        buttons: [
-	                	            'copyHtml5',
-	                	            'excelHtml5',
-	                	            'csvHtml5',
-	                	            'pdfHtml5'
-	                	        ]
-	                	    } );
+	                	    $('#totalExpenses').DataTable();
 	                	} );
 	                </script>
 

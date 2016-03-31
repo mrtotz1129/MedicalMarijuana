@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>Patient Number</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Contact No.</th>
@@ -27,6 +28,10 @@
         	@foreach($patients as $patient)
         	<tr>
         		<td>{!! $patient->intPatientId !!}</td>
+        		<td>
+        			<img src="{!! asset($patient->txtPatientImgPath != null ? $patient->txtPatientImgPath : 'img/no_image.png') !!}" alt="" class="circle center" width="40%" height="40%" align="center"
+                  style="margin-left: 30px; margin-top:0px;">
+        		</td>
         		<td>{!! $patient->name !!}</td>
         		<td>{!! $patient->txtAddress !!}</td>
         		<td>{!! $patient->strContactNumber !!}</td>

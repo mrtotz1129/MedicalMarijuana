@@ -96,7 +96,7 @@
 				                        <select id="itemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
 				                        	@foreach($itemCategoryList as $itemCategory)
-												<option value="{!! $itemCategory->intItemCategoryId !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
 				                        	@endforeach
 				                        </select>
 				                        <label >Item Category</label>
@@ -399,13 +399,15 @@
 						dropDown.append(
 					        $('<option></option>').val(itemCategory.strItemCategoryDesc).html(itemCategory.strItemCategoryDesc)
 					    );
+					    $('select').material_select;
 					});
-					$('#itemCategorySelect').html('');
-					var itemCategorySelect = $('#itemCategorySelect');
+					$('#updateItemCategorySelect').html('');
+					var itemCategorySelect = $('#updateItemCategorySelect');
 					$.each(data, function(i, itemCategory){
 						itemCategorySelect.append(
 					        $('<option></option>').val(itemCategory.strItemCategoryDesc).html(itemCategory.strItemCategoryDesc)
 					    );
+					    $('select').material_select;
 					});
 					$('#strItemCategory').val('');
 					$('#addCategory').closeModal();
@@ -432,6 +434,7 @@
 						dropDown.append(
 					        $('<option></option>').val(generic.intGenericNameId).html(generic.strGenericName)
 					    );
+					    $('select').material_select;
 					});
 					$('#genericName').html('');
 					var itemCategorySelect = $('#genericName');
@@ -439,6 +442,7 @@
 						itemCategorySelect.append(
 					        $('<option></option>').val(generic.intGenericNameId).html(generic.strGenericName)
 					    );
+					    $('select').material_select;
 					});
 					$('#strGenericName').val('');
 					$('#addGeneric').closeModal();

@@ -19,8 +19,8 @@ class RequirementController extends Controller
      */
     public function index()
     {
-        $requirementList = RequirementModel::all()
-                                ->where('intRequirementStatus', 1);
+        $requirementList = RequirementModel::where('intRequirementStatus', '>', 0)
+            ->get();
         return view('maintenance-requirements')->with('requirementList', $requirementList);
     }
 

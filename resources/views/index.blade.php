@@ -24,6 +24,9 @@
     <script src="{!! asset('js/init.js') !!}"></script>
     <script src="{!! asset('js/jquery.dataTables.js') !!}"></script>
     <script src="{!! asset('js/addToTable.js') !!}"></script>
+    <script src="{!! asset('js/highcharts.js') !!}"></script>
+    <script src="{!! asset('js/exporting.js') !!}"></script>
+    
 <div class="navbar-fixed">
   <nav class="indigo darken-4">
       <div class="nav-wrapper">

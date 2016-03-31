@@ -41,6 +41,7 @@
 	      <div class="modal-content" >
 		      <div class="container">
 		              <h4 class="grey-text text-darken-1 center	">Execute exam</h4>
+		              <a href="#chooseEquipment" class="modal-trigger btn green">Choose Equipment</a>
 
 		                <div class="row">
 		                	<h5 class="thin">Examinations</h5>
@@ -59,8 +60,6 @@
 		                	        </thead>
 		                	        	
 		                	    </table>
-
-		                	    <h5 class="thin right">Summary: <span class="green-text text-darken-2">Php 500,000.00</span> </h5>
 		                </div>
 		                <script type="text/javascript">
 		                	$(document).ready(function() {
@@ -80,6 +79,36 @@
 	      <div class="modal-footer">
 	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+	      </div>
+	      </form>
+	    </div>
+
+	    <!-- Choose Equipment -->
+	    <div id="chooseEquipment" class="modal modal-fixed-footer" style="width: 500px !important; height: 500px !important; border-radius: 10px;">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+	      <div class="modal-content" >
+		      <div class="container">
+		              <h4 class="grey-text text-darken-1 center	">Choose Equipment</h4>
+
+		                <div class="row">
+		                	<h5 class="thin">Equipments</h5>
+		                </div>
+
+		                  <div class="input-field col s12">
+		                    <select id="chooseEquipment" name="selectedJob" required>
+		                        <option disabled selected>Choose Building</option>
+
+		                        <option value="Equipment1">Equipment1</option>
+
+		                    </select>
+		                    <label>Equipments</label>
+		                </div>
+		               
+		      </div>
+		  </div>    
+	      <div class="modal-footer">
+	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
+	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">GO</button>
 	      </div>
 	      </form>
 	    </div>

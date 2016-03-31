@@ -39,6 +39,7 @@ Route::resource('item-price', 'ItemPriceController');
 Route::resource('pos', 'PosController');
 Route::resource('examination-request', 'ExaminationRequestController');
 Route::resource('inventory', 'InventoryController');
+Route::resource('prescription', 'PrescriptionController');
 
 Route::get('logout', 'LogoutController@logout');
 Route::get('hear-medical-request/{id}', 'HearRequestController@medicalRequest');

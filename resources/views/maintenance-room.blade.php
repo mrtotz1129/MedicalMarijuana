@@ -104,8 +104,8 @@
 				       					 </div>
 
 				       					 <div class="input-field col s12">
-				       					     <input name="intNumBed" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				       					     <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
+				       					     <input name="intNumBed" placeholder="Ex: Aquino" id="noOfBeds" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="noOfBeds" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
 				       					 </div>
 
 				       					 <div class="input-field col s12">
@@ -127,73 +127,77 @@
 				      </form>
 				</div>
 
-				<!-- Update Room Modal -->
+				<!-- Updates Room Modal -->
 				   <div id="updateRoomModal" class="modal modal-fixed-footer" style="width: 1000px !important; border-radius: 10px; height: 450px !important; margin-top: 30px;">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
-				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				      <h4 class="center">Update Rooms</h4>
-				      		<div class="row">
-				      			<div class="col s6">
-				      				<div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                       <select id="" name="selectedJob" required>
-				                           <option disabled selected>Building</option>
-				                       </select>
-				                       <label>Building</span></label>
-				                   </div>
-				                   <div class="input-field col s12">
-				                       <select id="" name="selectedJob" required>
-				                           <option disabled selected>Floor</option>
-				                       </select>
-				                       <label >Floor</label>
-				                   </div>
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('room') !!}" enctype="multipart/form-data">
+				    <input type="hidden" id="createRoomFormToken" name="_token" value="{!! csrf_token() !!}" />
+				      <div class="modal-content" style="padding-bottom: 0px !important;">		       
+				              <h4 class="thin center">Update Room</h4>
+				       			<div class="row">
+				       				<div class="col s6">
+				       					  <div class="input-field col s12">
+				       					     <select id="updateBuilding" name="selectedJob" required>
+				       					         <option disabled selected>Building</option>
+				       					         @foreach($buildings as $building)
+				       					         <option value="{!! $building->intBuildingId !!}">{!! $building->strBuildingName !!}</option>
+				       					         @endforeach
+				       					     </select>
+				       					     <label>Building</label>
+				       					 </div>
+				       					 <div class="input-field col s12">
+				       					     <select  id="updateFloor" name="floorCreateSelect" required>
+				       					         <option disabled selected>Floor</option>
+				       					     </select>
+				       					     <label>Floor</label>
+				       					 </div>
+				       					  <div class="input-field col s12">
+				       					     <select id="updateRoom" name="roomTypeCreate" required>
+				       					         <option disabled selected>Room Type</option>
+				       					         @foreach($roomTypes as $roomType)
+				       					         <option value="{!! $roomType->intRoomTypeId !!}">{!! $roomType->strRoomTypeDesc !!}</option>
+				       					         @endforeach
+				       					     </select>
+				       					     <label>Room Type</label>
+				       					 </div>
+				       					 <br>
+				       					 <div class="col s12 center" style="margin-top: 20px; margin-left: 30px;">
+				       					  <a href="#addRoomTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text col s6 center"><i class="material-icons">add</i></a>
+				       					</div>
+				       				</div>
 
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="roomName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomName" class="active">Room Name</label>
-				                    </div>
-				                    <div class="input-field col s12">
-				                       <select id="slct1" name="selectedJob" required>
-				                           <option disabled selected>Room Type</option>
-				                           
-				                       </select>
-				                       <label>Room Type</label>
-				                   </div>
-				      			</div>
+				       				<div class="col s6">
+				       					 <div class="input-field col s12">
+				       					     <input name="txtRoomDescription" placeholder="Ex: Aquino" id="updateRoomDesc" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="roomDesc" class="active">Room Description</label>
+				       					 </div>
 
-				      			<div class="col s6">
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="roomDesc" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="roomDesc" class="active">Room Description<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				       					 <div class="input-field col s12">
+				       					     <input name="dblPrice" placeholder="Ex: Aquino" id="updateDblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
+				       					 </div>
 
-				                    <div class="input-field col s12">
-				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Room Price<span class="red-text"><b>*</b></span></label>
-				                    </div>
+				       					 <div class="input-field col s12">
+				       					     <input name="intNumBed" placeholder="Ex: Aquino" id="updateNoOfBeds" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				       					     <label for="updateNoOfBeds" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
+				       					 </div>
 
-				                    <div class="input-field col s12">
-				                        <input name="dblPrice" placeholder="Ex: Aquino" id="dblPrice" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="dblPrice" class="active">Number of Beds<span class="red-text"><b>*</b></span></label>
-				                    </div>
-
-				                    <div class="input-field col s12">
-				                       <select id="slct1" name="selectedJob" required>
-				                           <option disabled selected>Nurse Station</option>
-				                       </select>
-				                       <label>Nurse Station</label>
-				                   </div>
-				      			</div>
-				      		</div>
-				                  
+				       					 <div class="input-field col s12">
+				       					    <select id="nurseSelect" name="nurseStationSelect">
+				       					        <option disabled selected>Nurse Station</option>
+				       					        @foreach($nurseStations as $nurseStation)
+				       					        <option value="{!! $nurseStation->intNurseStationId !!}">{!! $nurseStation->intNurseStationId !!}</option>
+				       					        @endforeach
+				       					    </select>
+				       					    <label>Nurse Station</label>
+				       					</div>
+				       				</div>
+				       			</div>
+				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
 				      </div>
-				     </div>
-				   </form>
+				      </form>
 				</div>
 		</div>
 	</article>
@@ -307,6 +311,7 @@
 				document.getElementById('roomTypeList').appendChild(option); 
 
 				document.getElementById('roomTypeNameInput').value = null;
+				$('select').material_select();
 				$('#addRoomTypeModal').closeModal();
 			},
 			error: function(xhr) {

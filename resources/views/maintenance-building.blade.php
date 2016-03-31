@@ -93,23 +93,21 @@
 				    	<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">		   
 				      <h4 class="grey-text text-darken-1 center	thin">Create Building</h4>
-		                    <div class="col s12" style="margin-bottom: 5px;">
-		                         <label class="red-text left">(*) Indicates required field</label>
-		                    </div>
+		                    
 		                    <div class="input-field col s12">
 		                        <input name="" placeholder="Ex: Cojuangco" id="buidingNameUpdate" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2" required>
-		                        <label for="buidingNameUpdate" class="active">Building Name<span class="red-text"><b>*</b></span></label>
+		                        <label for="buidingNameUpdate">Building Name</label>
 		                    </div>
 		                    <div class="input-field col s12">
 		                        <input name="strBuildingLocation" placeholder="Ex: Aquino" id="buildingLocationUpdate" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Tondo, Manila" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-		                        <label for="buildingLocationUpdate" class="active">Building Location<span class="red-text"><b>*</b></span></label>
+		                        <label for="buildingLocationUpdate">Building Location</label>
 		                    </div>
-		                    <div class="input-field col s10" style="margin-top: 28px !important; margin-left: 10px;">
+		                    <div class="input-field col s10">
 		                      <input name="intFloorDesc" placeholder="Ex: 5" type="number" id="numberOfFloorsUpdate" class="validate tooltipped" minlength="10" maxlength="10" data-position="bottom" data-delay="30" data-tooltip="Ex:4">
 		                      <label for="numberOfFloorsUpdate">Number of floors</label>
 			                </div>
 		                  	<div class="input-field col s12">
-		                        <input name="txtBuildingDesc" placeholder="Ex: Cojuangco" id="buidingDescUpdate" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+		                        <input name="txtBuildingDesc" placeholder="Ex: Cojuangco" id="buildingDescUpdate" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 		                        <label for="buidingDescUpdate" class="active">Buidling Description</label>
 		                    </div>
 				        </div>

@@ -28,7 +28,7 @@
 				        	<tr>
 				        		<td>{!! $discount->discount_type !!}</td>
 				        		<td>{!! $discount->strDiscountName !!}</td>
-				        		@if($discount->intDiscountTypeId === 1)
+				        		@if($discount->intDiscountTypeId == 1)
 				        			<td>{!! $discount->dblDiscountPercent !!}</td>
 				        		@else
 									<td>{!! $discount->dblDiscountAmount !!}</td>
@@ -98,11 +98,12 @@
 
 				<!-- Update Discount Modal -->
 				   <div id="update" class="modal modal-fixed-footer" style="width: 600px !important; height: 450px !important; border-radius: 10px;">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('discount') !!}" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="updateDiscountForm" action="{!! url('discount') !!}" enctype="multipart/form-data">
+				    	<input type="hidden" name="_token" id="updateDiscountFormToken" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				              <h4 class="thin center">Create Discount</h4>
+				              <h4 class="thin center">Update Discount</h4>
 				                    <div class="input-field col s12">
-				                       <select id="slct1" name="intDiscountTypeId" required>
+				                       <select id="updateDiscountTypeSelect" name="intDiscountTypeId" required>
 				                           <option disabled selected>Discount Type</option>
 				                           <option value="1">Percent</option>
 				                           <option value="2">Amount</option>
@@ -110,15 +111,15 @@
 				                       <label >Discount Type</label>
 				                   </div>
 				                    <div class="input-field col s12">
-				                        <input name="strDiscountName" placeholder="Ex: Aquino" id="discountName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="strDiscountName" placeholder="Ex: Aquino" id="updatediscountNameInput" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                        <input name="dblDiscount" placeholder="Ex: 10" id="discountRate" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
+				                        <input name="dblDiscount" placeholder="Ex: 10" id="updatediscountRateInput" type="number" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: PhilHealth( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
 				                        <label for="discountRate" class="active">Discount<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s12">
-				                    <select multiple name="requirementList[]">
+				                    <select multiple name="requirementList[]" id="updateRequirementSelect">
 				                      <option value="" disabled selected>Choose your option</option>
 				                      @foreach($requirementList as $requirement)
 										<option value="{!! $requirement->intRequirementId !!}">{!! $requirement->strRequirementName !!}</option>
@@ -129,7 +130,7 @@
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
 				      </div>
 				      </form>
 				</div>
@@ -189,6 +190,20 @@
 					</div>
 		</div>
 	</article>
+
+{{-- Modal Deactivate START --}}
+<div id="deactivate_discount_modal" class="modal">
+	<input type="hidden" id="deactivate_discount_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Deactivate Discount Details</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="deactivate_discount_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Deactivate END --}}
 
 <!-- add option -->
    <div id="addOption" class="modal" style="margin-top: 30px;">
@@ -260,6 +275,82 @@
 		});
 	}
 
+	function updateId(id)
+	{
+		$.ajax({
+			url: "{!! url('discount') !!}" + '/' + id + '/edit',
+			type: "GET",
+			success: function(data)
+			{
+				document.getElementById('updateDiscountTypeSelect').value = data[0].intDiscountTypeId;
+				$('select').material_select();
+				document.getElementById('updatediscountNameInput').value = data[0].strDiscountName;
+				document.getElementById('updatediscountRateInput').value = document.getElementById('updateDiscountTypeSelect').value == 1 ? data[0].dblDiscountPercent : data[0].dblDiscountAmount;
+
+				for(var i = 0; i < data[1].length; i++)
+				{
+					document.getElementById('updateRequirementSelect').value = data[1][i].intRequirementIdFK;
+
+					$('select').material_select();
+				}
+
+				$('#update').openModal();
+			},
+			error: function(xhr)
+			{
+				console.log(xhr);
+			}
+		});
+
+		document.getElementById('updateDiscountForm').onsubmit = function(event)
+		{
+			event.preventDefault();
+
+			$.ajax({
+				url: "{!! url('discount') !!}" + '/' + id,
+				type: "POST",
+				data: 
+				{
+					_method: "PUT",
+					form: $(this).serialize()
+				},
+				success: function(data)
+				{
+					window.location.href = "{!! url('discount') !!}";
+				},
+				error: function(xhr)
+				{
+					console.log(xhr);
+				}
+			});
+		};
+	}
+
+	function deactivateId(id)
+	{
+		$('#deactivate_discount_modal').openModal();
+
+		document.getElementById('deactivate_discount_btn').onclick = function()
+		{
+			$.ajax({
+				url: "{!! url('discount') !!}" + "/" + id,
+				type: "POST",
+				data: 
+				{	
+					_token: document.getElementById('deactivate_discount_token').value,
+					_method: "DELETE"
+				},
+				success: function(data)
+				{
+					window.location.href = "{!! url('discount') !!}";
+				},
+				error: function(xhr)
+				{
+					console.log(xhr);
+				}
+			})
+		};
+	}
 </script>
  
 @endsection

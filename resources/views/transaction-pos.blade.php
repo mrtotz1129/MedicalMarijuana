@@ -72,9 +72,7 @@
     	} );
 
     	$(document).ready(function() {
-    	    $('#cartTable').DataTable({
-    	    	dom: 'Bfrtip'
-    	    });
+    	    $('#cartTable').DataTable();
     	} );
     </script>
 
@@ -206,6 +204,7 @@
 					colName.innerHTML=itemName;
 					colQuantity.innerHTML = quantity+" "+data.measurement+"/s";
 					colPrice.innerHTML=data.deciItemPrice*quantity;
+					$('#itemQuantity').val('');
 					$('#itemDetails').closeModal();
 				},
 				error: function(xhr) {

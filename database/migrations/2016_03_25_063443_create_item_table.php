@@ -21,6 +21,8 @@ class CreateItemTable extends Migration
                 ->unsigned();
             // $table->integer('intDepartmentIdFK')
             //     ->unsigned();
+            $table->text('txtImagePath')
+                ->nullable();
             $table->integer('intItemStatus');
             $table->timestamps();
 

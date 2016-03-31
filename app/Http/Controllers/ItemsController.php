@@ -60,6 +60,7 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
+        $imagePath = 'uploaded_images/employee';
         $item = new ItemModel;
         $item->strItemName = $request->strItemName;
         if ($request->strItemCategoryDesc == "Medicine"){
@@ -68,8 +69,18 @@ class ItemsController extends Controller
         $itemCategory = ItemCategoryModel::where('strItemCategoryDesc', $request->strItemCategoryDesc)
                             ->first();
         $item->intItemCategoryIdFK = $itemCategory->intItemCategoryId;
+        $item->intGenericNameIdFK = $request->intGenericNameId;
         $item->intItemStatus = 1;
+
+        if($request->hasFile('image'))
+        {
+            $request->file('image')->move(public_path() . '/' . $imagePath, $item->strItemName);
+
+            $item->
+        }
+
         $item->save();
+        
         return redirect('item');
     }
 

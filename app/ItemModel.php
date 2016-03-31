@@ -24,4 +24,12 @@ class ItemModel extends Model
     public function getGenericNameAttribute(){
     	return $this->attributes['generic_name'];
     }
+
+    public function setInventoryAttribute($value){
+        $this->attributes['inventory'] = $value;
+    }
+
+    public function getInventoryAttribute(){
+        return $this->attributes['inventory'];
+    }
 }

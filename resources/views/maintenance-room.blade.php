@@ -273,6 +273,8 @@
 					option.value = data[i].intFloorId;
 
 					document.getElementById('floorCreateSelect').appendChild(option);
+
+					$('select').material_select();
 				}
 			},
 			error: function(xhr) {

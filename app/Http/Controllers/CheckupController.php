@@ -18,8 +18,8 @@ class CheckupController extends Controller
      */
     public function index()
     {
-        // return view('transaction-checkup');
-        dd('Forbidden!');
+         return view('transaction-checkup');
+        
     }
 
     /**

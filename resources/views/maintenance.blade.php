@@ -41,7 +41,7 @@
                             </li>
                             <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                             </li>
-                             <li class="{!! strpos(Request::url(), 'drug') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('drug') !!}" class="white-text">Items</a>
+                             <li class="{!! strpos(Request::url(), 'item') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('item') !!}" class="white-text">Items</a>
                             </li>
                             <li class="{!! strpos(Request::url(), 'fee') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
                             </li>

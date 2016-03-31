@@ -101,8 +101,8 @@
 				</div>
 
 				<!-- Update Supplier Modal -->
-				   <div id="create" class="modal modal-fixed-footer" style="width: 800px !important; border-radius: 10px; height: 400px !important;">
-				    <form class="col s12 form" method="post" id="createSupplierForm" action="{!! url('supplier') !!}" enctype="multipart/form-data">
+				   <div id="updateSupplierModal" class="modal modal-fixed-footer" style="width: 800px !important; border-radius: 10px; height: 400px !important;">
+				    <form class="col s12 form" method="post" id="updateSupplierFormId" action="{!! url('supplier') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content">
 				              <h4 class="thin center">Add Supplier</h4>
@@ -198,7 +198,7 @@
 					document.getElementById('updateEmployeeImg').src = imgBaseUrl + data.txtImagePath;
 				}
 
-				$('#updateFeeModal').openModal();
+				$('#updateSupplierModal').openModal();
 			},
 			error: function(xhr) {
 				console.log(xhr);

@@ -94,12 +94,12 @@
       @yield('article')
     </div>
 <style type="text/css">
-  a:hover{
+/*  a:hover{
     background-color: #5c6bc0 !important;
   }
   li:hover{
     background-color: #5c6bc0 !important;
   }
-
+*/
 </style>
 @endsection

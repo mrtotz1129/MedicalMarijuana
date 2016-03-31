@@ -18,9 +18,6 @@
 				            <tr>
 				                <th>Type</th>
 				                <th>Name</th>
-				                <!-- <th>Details</th> -->
-				                <!-- <th>Price</th> -->
-				                <!-- <th>Status</th> -->
 				                <th>Actions</th>
 				            </tr>
 				        </thead>
@@ -53,101 +50,69 @@
 					    } );
 					} );
 				</script>
-				<!-- Create Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
+				<!-- Create Equipment Modal -->
+				   <div id="create" class="modal modal-fixed-footer" style="width: 800px !important; height: 700px !important; border-radius: 10px;">
 				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('equipment') !!}" enctype="multipart/form-data">
 				    	<input type="hidden" id="createEquipmentFormToken" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
 				              <h4 class="grey-text text-darken-1 center	">Create New Equipment</h4>
-				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
+				              <div class="row">
+				              	<div class="col s4">
+				              		<div class="input-field col s12">
+				                       <img name="image" id="employeeimg" class="circle" style="width: 150px; height: 150px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload" name="image">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
+			                             <div class="btn">
+			                               <span>Upload</span>
+			                               <input type="file" id="fileUpload" name="image">
+			                             </div>
+			                             <div class="file-path-wrapper">
+			                               <input class="file-path validate" type="text">
+			                             </div>
+			                           </div>
 				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
+				              	</div>
 
-
-				                <div class="aside aside2 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
+				              	<div class="col s8">
+				        
 				                    <div class="input-field col s12">
 				                        <input name="strEquipmentCode" placeholder="Ex: Benigno" id="equipmentID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" minlength="2">
 				                        <label for="equipmentID" class="active">Equipment Code<span class="red-text"><b>*</b></span></label>
 				                    </div>
 				                    <div class="input-field col s8">
-				                        <select class="browser-default validate" id="createEquipmentTypeSelect" data-position="bottom" data-delay="30" id="slct1" name="equipmentType" required>
+				                        <select id="createEquipmentTypeSelect" data-position="bottom" data-delay="30" id="slct1" name="equipmentType" required>
 				                            <option disabled selected>Equipment Type</option>
 				                            @foreach($equipmentTypes as $equipmentType)
 				                              <option value="{!! $equipmentType->intEquipmentCategoryId !!}">{!! $equipmentType->strEquipmentCatName !!}</option>
 				                            @endforeach
 				                        </select>
-				                        <label for="slct1" class="active">Type<span class="red-text">*</span></label>
+				                        <label>Type</label>
 				                    </div>
 				                    <div class="input-field col s4">
 				                      <a href="#createEquipmentTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
 				                    </div>
-				                    <!-- <div class="input-field col s8">
-				                        <select class="browser-default" id="createBuildingSelect" name="selectedJob" required>
-				                            <option disabled selected>Building</option>
-				                            
-				                        </select>
-				                        <label for="slct1" class="active">Building<span class="red-text">*</span></label>
-				                    </div>
-				                    <div class="input-field col s8">
-				                        <select class="browser-default validate"  id="createFloorSelect" name="floor" required>
-				                            <option disabled selected>Floor</option>
-				                        </select>
-				                        <label for="slct1" class="active">Floor<span class="red-text">*</span></label>
-				                    </div> -->
-				                    <div class="input-field col s8">
-				                        <select class="browser-default" id="slct1" name="supplier" required>
+				                   
+				                    <div class="input-field col s12">
+				                        <select id="slct1" name="supplier" required>
 				                            <option disabled selected>Supplier</option>
 				                            @foreach($suppliers as $supplier)
 				                            <option value="{!! $supplier->intSupplierId !!}">{!! $supplier->strSupplierName !!}</option>
 				                            @endforeach
 				                        </select>
-				                        <label for="slct1" class="active">Supplier<span class="red-text">*</span></label>
+				                        <label>Supplier</label>
 				                    </div>
-				                    <div class="input-field col s8">
-				                        <select class="browser-default" id="createRoomSelect" name="room" required>
+				                    <div class="input-field col s12">
+				                        <select id="createRoomSelect" name="room" required>
 				                            <option disabled selected>Room</option>
 				                            @foreach($rooms as $room)
 				                            <option value="{!! $room->intRoomId !!}">{!! $room->intRoomId . '('. $room->txtRoomDescription . ')' !!}</option>
 				                            @endforeach
 				                        </select>
-				                        <label for="slct1" class="active">Room<span class="red-text">*</span></label>
+				                        <label >Room</label>
 				                    </div>
-				                    <!-- <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equipmentName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equipmentName" class="active">Equipment Name<span class="red-text"><b>*</b></span></label>
-				                    </div> -->
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-
-				            </div>
-				        </div>
+				              	</div>
+				              </div>   
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
@@ -155,61 +120,69 @@
 				      </form>
 				</div>
 
-				<!-- Update Fee Modal -->
-				   <div id="create" class="modal modal-fixed-footer">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+				<!-- Update Equipment Modal -->
+				   <div id="udpateEquipment" class="modal modal-fixed-footer" style="width: 800px !important; height: 700px !important; border-radius: 10px;">
+				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('equipment') !!}" enctype="multipart/form-data">
+				    	<input type="hidden" id="createEquipmentFormToken" name="_token" value="{!! csrf_token() !!}" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
-				        <!-- <div class="container"> -->
-				      <div class="wrapper">
-				        <div class="input-field col s12">
-				              <h4 class="grey-text text-darken-1 center	">Update Equipment</h4>
-				        </div>
-				              <div class="aside aside1 z-depth-0">
-				              <!-- first -->
-				                <div class="row">
-				                  <div class="input-field col s12">
-				                       <img name="image" id="employeeimg" class="circle" style="width: 200px; height: 200px;" src="{!! asset('img/jerald.jpg') !!}" alt=""/>
+				              <h4 class="grey-text text-darken-1 center	">Create New Equipment</h4>
+				              <div class="row">
+				              	<div class="col s4">
+				              		<div class="input-field col s12">
+				                       <img name="image" id="employeeimg" class="circle" style="width: 150px; height: 150px;" src="{!! asset('img/no_image.png') !!}" alt=""/>
 				                   </div>
 				                   <div class="input-field col s12">
 				                       <div class="file-field input-field">
-				                             <div class="btn">
-				                               <span>Upload</span>
-				                               <input type="file" id="fileUpload">
-				                             </div>
-				                             <div class="file-path-wrapper">
-				                               <input class="file-path validate" type="text">
-				                             </div>
-				                           </div>
+			                             <div class="btn">
+			                               <span>Upload</span>
+			                               <input type="file" id="fileUpload" name="image">
+			                             </div>
+			                             <div class="file-path-wrapper">
+			                               <input class="file-path validate" type="text">
+			                             </div>
+			                           </div>
 				                   </div>
-				                </div>
-				              </div>
-				              <!-- END ASIDE 1 -->
+				              	</div>
 
-
-				               <div class="aside aside2 z-depth-0">
-				                <!-- second -->
-				                  <div class="row">
-				                    <div class="col s12" style="margin-bottom: 5px;">
-				                         <label class="red-text left">(*) Indicates required field</label>
-				                    </div>
+				              	<div class="col s8">
+				        
 				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Benigno" id="equipmentID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )"  minlength="2">
+				                        <input name="strEquipmentCode" placeholder="Ex: Benigno" id="updateEquipmentID" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" minlength="2">
 				                        <label for="equipmentID" class="active">Equipment Code<span class="red-text"><b>*</b></span></label>
 				                    </div>
-				                    <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Cojuangco" id="updateEquipmentType" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equipmentType" class="active">Type</label>
+				                    <div class="input-field col s8">
+				                        <select id="createEquipmentTypeSelect" data-position="bottom" data-delay="30" id="updateEquipmentType" name="equipmentType" required>
+				                            <option disabled selected>Equipment Type</option>
+				                            @foreach($equipmentTypes as $equipmentType)
+				                              <option value="{!! $equipmentType->intEquipmentCategoryId !!}">{!! $equipmentType->strEquipmentCatName !!}</option>
+				                            @endforeach
+				                        </select>
+				                        <label>Type</label>
 				                    </div>
-				                    <!-- <div class="input-field col s12">
-				                        <input name="" placeholder="Ex: Aquino" id="equipmentName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Aquino( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-				                        <label for="equipmentName" class="active">Equipment Name<span class="red-text"><b>*</b></span></label>
-				                    </div> -->
-				                </div>
-				              </div>
-				              <!-- END ASIDE 2 -->
-
-				            </div>
-				        </div>
+				                    <div class="input-field col s4">
+				                      <a href="#createEquipmentTypeModal" class="waves-effect waves-light btn-flat modal-trigger indigo darken-1 white-text"><i class="material-icons">add</i></a>
+				                    </div>
+				                   
+				                    <div class="input-field col s12">
+				                        <select id="slct1" name="supplier" required>
+				                            <option disabled selected>Supplier</option>
+				                            @foreach($suppliers as $supplier)
+				                            <option value="{!! $supplier->intSupplierId !!}">{!! $supplier->strSupplierName !!}</option>
+				                            @endforeach
+				                        </select>
+				                        <label>Supplier</label>
+				                    </div>
+				                    <div class="input-field col s12">
+				                        <select id="createRoomSelect" name="room" required>
+				                            <option disabled selected>Room</option>
+				                            @foreach($rooms as $room)
+				                            <option value="{!! $room->intRoomId !!}">{!! $room->intRoomId . '('. $room->txtRoomDescription . ')' !!}</option>
+				                            @endforeach
+				                        </select>
+				                        <label >Room</label>
+				                    </div>
+				              	</div>
+				              </div>   
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
 				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>

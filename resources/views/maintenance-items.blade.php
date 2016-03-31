@@ -96,7 +96,7 @@
 				                        <select id="itemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
 				                        	@foreach($itemCategoryList as $itemCategory)
-												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+												<option value="{!! $itemCategory->intItemCategoryId !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
 				                        	@endforeach
 				                        </select>
 				                        <label >Item Category</label>
@@ -133,7 +133,9 @@
 
 				<!-- Update Item Modal -->
 				   <div id="update" class="modal modal-fixed-footer" style="height: 450px !important; width: 800px !important; border-radius: 10px;">
-				    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('item') !!}" enctype="multipart/form-data">
+				    <form class="col s12 form" method="post" id="updateItemForm" action="{!! url('item-update') !!}" enctype="multipart/form-data">
+				    	<input type="hidden" name="_token" id="updateItemFormToken" value="{!! csrf_token() !!}" />
+				    	<input type="hidden" id="updateItemFormId" name="itemId" />
 				      <div class="modal-content" style="padding-bottom: 0px !important;">
 				            <h4 class="thin center">Add Item</h4>
 							<div class="row">
@@ -145,7 +147,7 @@
 									     <div class="file-field input-field">
 									           <div class="btn">
 									             <span>Upload</span>
-									             <input type="file" id="fileUpload">
+									             <input type="file" id="fileUploadEdit" name="image">
 									           </div>
 									           <div class="file-path-wrapper">
 									             <input class="file-path validate" type="text">
@@ -165,7 +167,7 @@
 				                        <select id="updateItemCategorySelect" name="strItemCategoryDesc" required>
 				                            <option disabled selected>Choose Category</option>
 				                        	@foreach($itemCategoryList as $itemCategory)
-												<option value="{!! $itemCategory->strItemCategoryDesc !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
+												<option value="{!! $itemCategory->intItemCategoryId !!}">{!! $itemCategory->strItemCategoryDesc !!}</option>
 				                        	@endforeach
 				                        </select>
 				                        <label >Item Category</label>
@@ -195,7 +197,7 @@
 				        </div>
 				      <div class="modal-footer">
 				          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+				          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">UPDATE</button>
 				      </div>
 				      </form>
 				</div>
@@ -369,6 +371,19 @@
 	    readURL(this);
 	});
 
+	document.getElementById('fileUploadEdit').onchange = function()
+	{
+		 if (this.files && this.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            document.getElementById('updateItemImg').setAttribute('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(this.files[0]);
+	    }	
+	};
+
 	$('#createItemCategoryForm').on('submit', function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -452,19 +467,12 @@
 			success: function(data) {
 				var assetBaseUrl = "{!! asset('') !!}";
 
+				document.getElementById('updateItemFormId').value = data.intItemId;
 				document.getElementById('updateItemNameInput').value = data.strItemName;
 				document.getElementById('updateItemCategorySelect').value = data.intItemCategoryIdFK;
 				$('select').material_select();
 				document.getElementById('updateGenericNameSelect').value = data.intGenericNameIdFK;
 				$('select').material_select();
-				// document.getElementById('strEmpMiddleNameEdit').value = data.strMiddleName;
-				// document.getElementById('strEmpLastNameEdit').value = data.strLastName;
-				// document.getElementById('strBirthdateEdit').value = data.dateBirthday;
-				// (data.strGender == 'Male') ? document.getElementById('strEmpGenderEdit').value = 'Male' : document.getElementById('strEmpGenderEdit').value = 'Female';
-				// document.getElementById('strEmpContactNoEdit').value = data.strContactNum;
-				// document.getElementById('strEmpEmailEdit').value = data.strEmail;
-				// document.getElementById('strEmpAddressEdit').value = data.strAddress;
-				// document.getElementById('selectedJobEdit').value = data.intEmployeeTypeIdFK;
 
 				if(data.txtImagePath != null) {
 					document.getElementById('updateItemImg').src = assetBaseUrl + data.txtImagePath;
@@ -502,8 +510,7 @@
 				}
 			});
 		};
-	}
-
+	}	
 </script>
 
  

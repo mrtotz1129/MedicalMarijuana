@@ -10,33 +10,33 @@
 					href="#create" style="position: relative; top: 40px; right: 1%;" 
 					data-tooltip="Create"><i class="material-icons">add</i></a>
 				</div>
-			</div>	
-		<div class="container" style="margin-left: -30px;">
-		<br>
-    	<table id="example" class="display" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Patient Number</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Contact No.</th>
-                    <th>Actions</th>
-                </tr>	
-            </thead>  	
+	</div>	
+	<div class="container" style="margin-left: -30px;">
+	<br>
+	<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Patient Number</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact No.</th>
+                <th>Actions</th>
+            </tr>	
+        </thead>  	
 
-            <tbody>
-            	@foreach($patients as $patient)
-            	<tr>
-            		<td>{!! $patient->intPatientId !!}</td>
-            		<td>{!! $patient->name !!}</td>
-            		<td>{!! $patient->txtAddress !!}</td>
-            		<td>{!! $patient->strContactNumber !!}</td>
-            		<td>
-            			
-            		</td>
-            	</tr>
-            	@endforeach
-            </tbody>
+        <tbody>
+        	@foreach($patients as $patient)
+        	<tr>
+        		<td>{!! $patient->intPatientId !!}</td>
+        		<td>{!! $patient->name !!}</td>
+        		<td>{!! $patient->txtAddress !!}</td>
+        		<td>{!! $patient->strContactNumber !!}</td>
+        		<td>
+        			<a href=""><i class="material-icons small">pageview</i></a>
+        		</td>
+        	</tr>
+        	@endforeach
+        </tbody>
     </table>
     </div>
     <script type="text/javascript">
@@ -71,14 +71,14 @@
 	                   </div>
 	                   <div class="input-field col s12">
 	                       <div class="file-field input-field">
-	                             <div class="btn">
-	                               <span>Upload</span>
-	                               <input type="file" id="fileUpload" name="image">
-	                             </div>
-	                             <div class="file-path-wrapper">
-	                               <input class="file-path validate" type="text">
-	                             </div>
-	                           </div>
+                             <div class="btn">
+                               <span>Upload</span>
+                               <input type="file" id="fileUpload" name="image">
+                             </div>
+                             <div class="file-path-wrapper">
+                               <input class="file-path validate" type="text">
+                             </div>
+                           </div>
 	                   </div>
 	                   <br>
 	                </div>

@@ -1,7 +1,7 @@
 @extends('index')
 @section('body')
 <aside>
-    <ul id="slide-out" class="side-nav fixed indigo darken-2" style="width: 220px !important;">
+    <ul id="slide-out" class="side-nav fixed indigo darken-2" style="width: 220px !important; ">
     <li class="grey darken-4 white-text center">ADMINISTRATOR</li>
       <li class="user-details cyan darken-1" style="background-image: url({!! asset('img/user-bg.png') !!});">
           <div class="row">

@@ -31,7 +31,7 @@
         		<td>{!! $patient->txtAddress !!}</td>
         		<td>{!! $patient->strContactNumber !!}</td>
         		<td>
-        			<a href=""><i class="material-icons small">pageview</i></a>
+        			<a href="javascript:patientId({!! $patient->intPatientId !!})"><i class="material-icons small">pageview</i></a>
         		</td>
         	</tr>
         	@endforeach

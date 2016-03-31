@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\PatientModel;
-use App\AdmissionModel;
-use App\ServiceModel;
+use App\UOMModel;
+use App\ItemModel;
 
-class CheckupController extends Controller
+class PosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,13 @@ class CheckupController extends Controller
      */
     public function index()
     {
-         return view('transaction-checkup'); 
+        $measurementList = UOMModel::where('intStatus', 1)
+            ->get();
+        $itemList = ItemModel::where('intItemStatus', 1)
+            ->get();
+        return view('transaction-pos')
+            ->with('measurementList', $measurementList)
+            ->with('itemList', $itemList);
     }
 
     /**
@@ -52,29 +57,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $patient = \DB::table('tblPatient')
-            ->leftJoin('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
-            ->leftJoin('tblBed', 'tblBed.intBedId', '=', 'tblAdmission.intBedIdFK')
-            ->leftJoin('tblRoom', 'tblRoom.intRoomId', '=', 'tblBed.intBedId')
-            ->select('tblPatient.strFirstName', 'tblPatient.strMiddleName', 'tblPatient.strLastName',
-                'tblRoom.intRoomId', 'tblPatient.txtAddress', 'tblBed.intBedId')
-            ->where('tblPatient.intPatientId', $id)
-            ->first();
-
-        $lastVisit = AdmissionModel::where('intPatientIdFK', $id)
-            ->orderBy('created_at', 'desc')
-            ->select('created_at')
-            ->where('intPatientIdFK', $id)
-            ->first();
-
-        $services = ServiceModel::where('intServiceStatus', '>', 0)
-            ->select('intServiceId', 'strServiceName')
-            ->get();
-
-        return view('transaction-checkup')
-            ->with('patient', $patient)
-            ->with('lastVisit', $lastVisit)
-            ->with('services', $services);
+        //
     }
 
     /**

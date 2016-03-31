@@ -19,14 +19,15 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $serviceList = ServiceModel::all()
-                        ->where('intServiceStatus', 1);
+        $serviceList = ServiceModel::where('intServiceStatus', 1)
+            ->get();
         foreach ($serviceList as $service) {
             $servicePrice = ServicePriceModel::where('intServiceIdFK', $service->intServiceId)
                                         ->orderBy('created_at', 'desc')
                                         ->first();
             $service->service_price = $servicePrice->deciServicePrice;
         }
+
         return view('maintenance-services')
                 ->with('serviceList', $serviceList);
     }

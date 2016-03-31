@@ -21,13 +21,13 @@
 					</div>
 
 					<div class="col s3">
-						<h5>Name: <span class="thin">Jerald John</span></h5>
-						<h5>Last Visit: <span class="thin">december 23, 1996</span></h5>
-						<h5>Addresss: <span class="thin">Manila</span></h5>
+						<h5>Name: <span class="thin">{!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</span></h5>
+						<h5>Last Visit: <span class="thin">{!! $lastVisit ? date('F d, Y', strtotime($lastVisit->created_at)) : 'None' !!}</span></h5>
+						<h5>Address: <span class="thin">{!! $patient->txtAddress !!}</span></h5>
 					</div>
 
 					<div class="col s3">
-						<h5>Confined at: <span class="thin">Room 273-B</span></h5>
+						<h5>Confined at: <span class="thin">{!! $patient->intRoomId ? "Room " . $patient->intRoomId . "(Bed " . $patient->intBedId . ")" : 'None' !!}</span></h5>
 						<h5>Unsettled Balance: <span class="thin">Php 500,000.00</span></h5>
 					</div>
 				</div>
@@ -119,13 +119,13 @@
 	        <!-- <div class="container"> -->
 		      <div class="wrapper">
 		      	<h4 class="thin indigo-text text-darken-2">Request for Examination</h4>
-		      	<h6>Patient Name: Jerald John Pormon</h6>
+		      	<h6>Patient Name: {!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</h6>
 		      	<div class="input-field col s12">
 		      	    <select multiple>
 		      	      <option value="" disabled selected>Choose your option</option>
-		      	      <option value="1">Urinalysis</option>
-		      	      <option value="2">Xray</option>
-		      	      <option value="3">Blood Test</option>
+		      	      @foreach($services as $service)
+		      	      <option value="{!! $service->intServiceId !!}">{!! $service->strServiceName !!}</option>
+		      	      @endforeach
 		      	    </select>
 		      	    <label>Available Examinations</label>
 		      	 </div>
@@ -155,7 +155,7 @@
 	        <!-- <div class="container"> -->
 		      <div class="wrapper">
 		      	<h4 class="thin indigo-text text-darken-2">Add Diagnosis</h4>
-		      	<h6>Patient Name: Jerald John Pormon</h6>
+		      	<h6>Patient Name: {!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</h6>
 		      	<div class="aside aside1">
 		      		<h6 class="thin">Examinations Made</h6>
 			      	<table>
@@ -201,7 +201,7 @@
 	        <!-- <div class="container"> -->
 		     <div class="wrapper">
 		      	<h4 class="thin indigo-text text-darken-2">Prescription</h4>
-		      	<h6>Patient Name: Jerald John Pormon</h6>
+		      	<h6>Patient Name: {!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : '') !!}</h6>
 		      	<div class="row">
 					<h6>Medicine</h6>
  			 		

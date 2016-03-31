@@ -7,7 +7,7 @@
 			</div>
 			<div class="col s6 right">
 				<a class="right waves-effect waves-light modal-trigger btn-floating btn-large green darken-2 left white-text tooltipped" 
-				href="#itemDetails" style="position: relative; top: 40px; right: 1%;" 
+				href="#billOut" style="position: relative; top: 40px; right: 1%;" 
 				data-tooltip="Create"><i class="material-icons">shopping_cart</i></a>
 			</div>
 	</div>	
@@ -73,78 +73,39 @@
     </script>
 
 		<!-- Bill OUt Modal -->
-	   <div id="billOut" class="modal modal-fixed-footer" style="width: 1300px !important; height: 1000px !important;">
+	   <div id="billOut" class="modal modal-fixed-footer" style="width: 800px !important; height: 600px !important; border-radius: 10px;">
 	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
 	      <div class="modal-content" >
-	        <!-- <div class="container"> -->
-	      <div class="wrapper">
-	        <div class="input-field col s12">
-	              <h4 class="grey-text text-darken-1 center	">Bill OUt</h4>
-	        </div>
-	              <div class="aside aside1 z-depth-0">
-	              <!-- first -->
-	                <div class="row">
-	                	<h5 class="thin">Expenses</h5>
-	                </div>
-	                	<div class="divider"></div>
-	                	<br>
-	                <div class="row container">
-	                	<table id="totalExpenses" class="display" cellspacing="0" width="100%">
-	                	        <thead>
-	                	            <tr>
-	                	                <th>Fee Code</th>
-	                	                <th>Fee Name</th>
-	                	                <th>Fee Description</th>
-	                	                <th>Price</th>
-	                	                <th>Status</th>
-	                	                <th>Actions</th>
-	                	            </tr>
-	                	        </thead>
-	                	        	
-	                	    </table>
-
-	                	    <h5 class="thin right">Summary: <span class="green-text text-darken-2">Php 500,000.00</span> </h5>
-	                </div>
-	                <script type="text/javascript">
-	                	$(document).ready(function() {
-	                	    $('#totalExpenses').DataTable();
-	                	} );
-	                </script>
-
-	              </div>
-	              <!-- END ASIDE 1 -->
-
-
-	                <div class="aside aside2 z-depth-0">
-	                <!-- second -->
-	                <div class="row">
-	                	<h5 class="thin">Discount</h5>
-	                </div>
-	                	<div class="divider"></div>
-	                	<br>
-	                  <div class="row">
-	                    <div class="col s12" style="margin-bottom: 5px;">
-	                         <label class="red-text left">(*) Indicates required field</label>
-	                    </div>
-	                    <div class="input-field col s12">
-	                        <input name="strEmpFirstName" placeholder="Ex: Benigno" id="strEmpFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-	                        <label for="strEmpFirstName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
-	                    </div>
-	                    <div class="input-field col s12">
-	                        <input name="strEmpMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-	                        <label for="strEmpMiddleName" class="active">Patient ID</label>
-	                    </div>
-	                </div>
-	              </div>
-	              <!-- END ASIDE 2 -->
-	            </div>
-	        </div>
+	         <h4 class="thin center	">Bill OUt</h4>
+	         <div class="container">
+	         	<h5 class="thin">Bill out for this customer?</h5>
+	         	<br>
+	         	
+	         	 <div class="input-field col s12">
+                    <select multiple name="nurses[]">
+                      <option value="" disabled selected>Choose your option</option>
+              
+                      <option value="Senior">Senior</option>
+                      <option value="Senior">PWD</option>
+                      <option value="Senior">Shems</option>
+                  
+                    </select>
+                    <label>Select Discount</label>
+                 </div>
+                 <br>
+                 <div align="right"> 
+                 	<h2>Discount Value: <span class="thin red-text">Php 100.00</span></h2>
+                 	<h2>Total: <span class="thin green-text text-darken-2">Php 500.00</span></h2>
+                 </div>
+	         </div>
+	       </div>
 	      <div class="modal-footer">
 	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">BILL OUT</button>
 	      </div>
 	      </form>
-	</div>
+		</div>
+		<!-- Bill out End -->
 	
 	<!-- add option -->
    <div id="itemDetails" class="modal" style="margin-top: 30px;">

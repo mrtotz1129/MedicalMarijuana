@@ -5,11 +5,6 @@
 				<div class="col s6">
 					<h4 class="thin white-text">Admission</h4>
 				</div>
-				<div class="col s3 right">
-					<a class="right waves-effect waves-light modal-trigger btn-floating btn-large red darken-2 left white-text tooltipped" 
-					href="#create" style="position: relative; top: 40px; right: 1%;" 
-					data-tooltip="Create"><i class="material-icons">hotel</i></a>
-				</div>
 			</div>	
 		<div class="container" style="margin-left: -30px;">
 		<br>

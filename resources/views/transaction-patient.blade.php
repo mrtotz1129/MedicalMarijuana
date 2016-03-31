@@ -23,7 +23,6 @@
                 <th>Actions</th>
             </tr>	
         </thead>  	
-
         <tbody>
         	@foreach($patients as $patient)
         	<tr>
@@ -158,6 +157,20 @@
 	</div>
 </article>
 
+{{-- Modal Confirmation START --}}
+<div id="confirm_modal" class="modal">
+	<input type="hidden" id="deactivate_employee_token" value="{!! csrf_token() !!}" />
+    <div class="modal-content">
+      <h4>Check up confirmation</h4>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action waves-effect waves-green btn-flat" id="confirm_btn">Yes</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+</div>
+{{-- Modal Confirmation END --}}
+
 <script type="text/javascript">
 	function readURL(input) {
 	    if (input.files && input.files[0]) {
@@ -267,5 +280,15 @@
 			}
 		});
 	};
+
+	function patientId(id)
+	{
+		$('#confirm_modal').openModal();
+
+		document.getElementById('confirm_btn').onclick = function()
+		{
+			window.location.href = "{!! url('checkup') !!}" + '/' + id;
+		};
+	}
 </script>
 @endsection

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\PatientModel;
+use App\ItemPriceModel;
 
-class CheckupController extends Controller
+class ItemPriceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,7 @@ class CheckupController extends Controller
      */
     public function index()
     {
-        // return view('transaction-checkup');
-        dd('Forbidden!');
+        //
     }
 
     /**
@@ -40,7 +39,13 @@ class CheckupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $itemPrice = new ItemPriceModel;
+        $itemPrice->intItemIdFK = $request->intItemId;
+        $itemPrice->deciItemPrice = $request->dblPrice;
+        $itemPrice->intUnitOfMeasurementIdFK = $request->intMeasurementId;
+        $itemPrice->save();
+
+        return redirect('item');
     }
 
     /**
@@ -51,10 +56,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $patient = PatientModel::find($id);
-
-        return view('transaction-checkup')
-            ->with('patient', $patient);
+        //
     }
 
     /**

@@ -6,8 +6,8 @@
 				<h4 class="thin white-text">Out Patient Pharmacy</h4>
 			</div>
 			<div class="col s6 right">
-				<a class="right waves-effect waves-light modal-trigger btn-floating btn-large green darken-2 left white-text tooltipped" 
-				href="#billOut" style="position: relative; top: 40px; right: 1%;" 
+				<a class="right waves-effect waves-light btn-floating btn-large green darken-2 left white-text tooltipped" 
+				href="javascript:cashOut()" style="position: relative; top: 40px; right: 1%;" 
 				data-tooltip="Create"><i class="material-icons">shopping_cart</i></a>
 			</div>
 	</div>	
@@ -74,7 +74,7 @@
 
 		<!-- Bill OUt Modal -->
 	   <div id="billOut" class="modal modal-fixed-footer" style="width: 800px !important; height: 600px !important; border-radius: 10px;">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+	    <form class="col s12 form" method="post" id="billOutForm" action="createEmployee" enctype="multipart/form-data">
 	      <div class="modal-content" >
 	         <h4 class="thin center	">Bill OUt</h4>
 	         <div class="container">
@@ -82,20 +82,24 @@
 	         	<br>
 	         	
 	         	 <div class="input-field col s12">
-                    <select multiple name="nurses[]">
+                    <select multiple name="discount[]" id="discountSelect">
                       <option value="" disabled selected>Choose your option</option>
-              
-                      <option value="Senior">Senior</option>
-                      <option value="Senior">PWD</option>
-                      <option value="Senior">Shems</option>
-                  
+                  	  @foreach($discountList as $discount)
+						<option value="{!! $discount->intDiscountId !!}">{!! $discount->strDiscountName !!}</option>
+                  	  @endforeach
                     </select>
                     <label>Select Discount</label>
                  </div>
                  <br>
-                 <div align="right"> 
-                 	<h2>Discount Value: <span class="thin red-text">Php 100.00</span></h2>
-                 	<h2>Total: <span class="thin green-text text-darken-2">Php 500.00</span></h2>
+                 <div align="right">
+                 	<h2>Total Amount: <span class="thin green-text text-darken-2" id="totalAmount"></span></h2>
+                 	<h2>Discount Value: <span class="thin red-text" id="totalDiscount"></span></h2>
+                 	<h2>Amount To Pay: <span class="thin green-text text-darken-2" id="amountToPay"></span></h2>
+                 </div>
+
+                 <div class="input-field col s12">
+                     <input name="" placeholder="Ex: Aquino" id="payment" type="number" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Php1,000.00" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="1">
+                     <label for="payment" class="active">Payment</label>
                  </div>
 	         </div>
 	       </div>
@@ -177,7 +181,7 @@
 						console.log(value[0]);
 						console.log(document.getElementById('itemName').value);
 						console.log(arrData);
-						if (value[1] === document.getElementById('itemName').value || value[3] === measurement){
+						if (value[1] === document.getElementById('itemName').value && value[3] === measurement){
 							existing = 1;
 							$.each(arrData, function(i, itemSearch){
 								console.log('checking array...');
@@ -263,6 +267,69 @@
 
 	function remove(id){
 		alert(id);
+	}
+
+
+	var totalAmountToPay = 0;
+	function cashOut(){
+		totalAmountToPay = 0;
+		table.data()
+			.each(function (value, index){
+				
+				totalAmountToPay = Number(totalAmountToPay)+Number(value[4]);
+				
+		});
+		$('#billOut').openModal();
+		$('#totalAmount').text("P "+Number(totalAmountToPay).format(2));
+	}
+
+	Number.prototype.format = function(n, x) {
+	    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+	    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+	};
+
+	var discount = 0;
+	$('#discountSelect').change(function(){
+		console.log('changed');
+		console.log($(this).val());
+		var list = $(this).val();
+		if (list.length != 0){
+			console.log('not null');
+			$.each(list,function(i,value){
+				discount = 0;
+				console.log(value);
+				$.ajax({
+					url: "discount/"+value,
+					type: "GET",
+					success: function(data) {
+						if (data.intDiscountTypeId == 1){
+							discount = Number(discount)+(Number(totalAmountToPay)*(Number(data.dblDiscountPercent)/100));
+						}else{
+							discount = Number(discount)+Number(data.dblDiscountAmount);
+						}
+
+						$('#totalDiscount').text("P "+Number(discount).format(2));
+						$('#amountToPay').text("P "+Number((Number(totalAmountToPay.format(2)-Number(discount.format(2))))).format(2));
+					},
+					error: function(xhr) {
+						alert('error');
+						console.log(xhr);
+					}
+				});
+			});
+		}else{
+			discount = 0;
+			$('#totalDiscount').text("P "+Number(discount).format(2));
+			$('#amountToPay').text("P "+Number((Number(totalAmountToPay.format(2)-Number(discount.format(2))))).format(2));
+					
+		}
+
+	});
+
+	$('#billOutForm').on('submit', function(event) {
+		event.preventDefault();
+		var arrItems = arrData;
+		var arrDiscount = document.getElementById('discountSelect').value;
 	}
 
 </script>

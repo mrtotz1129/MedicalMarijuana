@@ -1,31 +1,50 @@
 @extends('maintenance')
 @section('article')
 <article class="white main z-depth-1">
-<br>
-	<div class="row">
-		<div class="col s6">
-			<h3 class="thin indigo-text text-darken-2 col left">Cashier</h3>
-			<a href="#billOut" class="modal-trigger">BILL OUT</a>
-		</div>
-	</div>
-    <br>
+	<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
+			<div class="col s6">
+				<h4 class="thin white-text">Out Patient Pharmacy</h4>
+			</div>
+			<div class="col s6 right">
+				<a class="right waves-effect waves-light modal-trigger btn-floating btn-large green darken-2 left white-text tooltipped" 
+				href="#create" style="position: relative; top: 40px; right: 1%;" 
+				data-tooltip="Create"><i class="material-icons">shopping_cart</i></a>
+			</div>
+	</div>	
+	<br>
     <div class="container">
-    	<table id="billTbl" class="display" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Patient Number</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Contact NO.</th>
-                    <th>Room No.</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>  	
-    </table>
+    	<div class="row">
+    		<div class="col s6">
+    			<h4 class="thin">Available Items</h4>
+				<table id="itemTable" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Item Name</th>
+			                <th>Price</th>
+			                <th style="width: 20px;">Action</th>
+			            </tr>
+			        </thead>  	
+				</table>
+    		</div>
+
+    		<div class="col s6">
+    			<h4 class="thin">My Cart</h4>
+				<table id="itemTable" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Item Name</th>
+			                <th>Price</th>
+			                <th style="width: 20px;">Action</th>
+			            </tr>
+			        </thead>  	
+				</table>
+    		</div>
+    	</div>
+    	
     </div>
-    <script type="text/javascript">
+    <script type="text/javascript">  
     	$(document).ready(function() {
-    	    $('#billTbl').DataTable( {
+    	    $('#itemTable').DataTable( {
     	        dom: 'Bfrtip',
     	        buttons: [
     	            'copyHtml5',

@@ -45,6 +45,7 @@ class ExaminationRequestController extends Controller
 
         $prescription->intPatientIdFk   =   $request->patientId;
         $prescription->intEmployeeIdFk  =   1;  // Will session it later
+        $prescription->intStatus        =   1;
 
         $prescription->save();
 

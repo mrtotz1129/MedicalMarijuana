@@ -19,10 +19,10 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $requirementList = RequirementModel::all()
-                                ->where('intRequirementStatus', 1);
-        $discountList = DiscountModel::all()
-                                ->where('intDiscountStatus', 1);
+        $requirementList = RequirementModel::where('intRequirementStatus', '>', 0)
+            ->get();
+        $discountList = DiscountModel::where('intDiscountStatus', '>', 0)
+            ->get();
         return view('maintenance-discount')
             ->with('requirementList', $requirementList)
             ->with('discountList', $discountList);
@@ -90,7 +90,18 @@ class DiscountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $discount = \DB::table('tblDiscount')
+            ->select('intDiscountId', 'intDiscountTypeId', 'strDiscountName', 'dblDiscountPercent', 'dblDiscountAmount')
+            ->where('intDiscountId', $id)
+            ->first();
+
+        $discRequirements = \DB::table('tblDiscount')
+            ->join('tblDiscountDetail', 'tblDiscount.intDiscountId', '=', 'tblDiscountDetail.intDiscountIdFK')
+            ->select('tblDiscountDetail.intRequirementIdFK')
+            ->where('tblDiscount.intDiscountId', $id)
+            ->get();
+
+        return response()->json([$discount, $discRequirements]);
     }
 
     /**
@@ -102,7 +113,41 @@ class DiscountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $arrForm = [];
+
+        parse_str($request->form, $arrForm);
+            
+        $discount = DiscountModel::find($id);
+
+        $discount->strDiscountName = $arrForm['strDiscountName'];
+        $discount->intDiscountTypeId = $arrForm['intDiscountTypeId'];
+        if ($discount->intDiscountTypeId == 1){
+            $discount->dblDiscountPercent = $arrForm['dblDiscount'];
+        }else{
+            $discount->dblDiscountAmount = $arrForm['dblDiscount'];
+        }
+        // $discount->intDiscountStatus = 1;
+        $discount->save();
+
+        \DB::table('tblDiscountDetail')
+                ->where('intDiscountIdFK', $id)
+                ->delete();
+
+
+        // return response()->json($requirementList);
+        if(isset($arrForm['requirementList']))
+        {
+            $requirementList[] = $arrForm['requirementList'];
+
+            foreach ($requirementList[0] as $requirement){
+                \DB::table('tblDiscountDetail')
+                    ->insert([
+                        'intDiscountIdFK' => $discount->intDiscountId,
+                        'intRequirementIdFK' => $requirement,
+                        'intStatus' => 1
+                    ]);
+            }
+        }
     }
 
     /**
@@ -113,6 +158,10 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $discount = DiscountModel::find($id);
+
+        $discount->intDiscountStatus = 0;
+
+        $discount->save();
     }
 }

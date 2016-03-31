@@ -13,7 +13,7 @@ class CreateItempriceTable extends Migration
     public function up()
     {
         Schema::create('tblItemPrice', function(Blueprint $table) {
-            $table->increments('intItemPrice');
+            $table->increments('intItemPriceId');
             $table->integer('intItemIdFK')
                 ->unsigned();
             $table->decimal('deciItemPrice', 6, 2);

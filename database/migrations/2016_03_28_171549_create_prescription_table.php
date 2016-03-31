@@ -18,6 +18,7 @@ class CreatePrescriptionTable extends Migration
                 ->unsigned();
             $table->integer('intEmployeeIdFK')
                 ->unsigned();
+            $table->integer('intStatus');
             $table->timestamps();
 
             $table->foreign('intPatientIdFK')

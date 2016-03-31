@@ -41,6 +41,7 @@ Route::resource('examination-request', 'ExaminationRequestController');
 Route::resource('inventory', 'InventoryController');
 
 Route::get('logout', 'LogoutController@logout');
+Route::get('hear-medical-request/{id}', 'HearRequestController@medicalRequest');
 Route::post('building/changed', 'BuildingAjaxController@retrieveFloors');
 Route::post('floor/changed', 'FloorAjaxController@retrieveRooms');
 Route::post('nurse-station/changed', 'NurseStationAjaxController@retrieveNurse');

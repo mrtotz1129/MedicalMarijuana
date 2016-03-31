@@ -71,6 +71,10 @@
 
 	                	    <h5 class="thin right">Summary: <span class="green-text text-darken-2">Php 500,000.00</span> </h5>
 	                </div>
+	                <div class="input-field col s12">
+	                     <input name="" placeholder="Ex: Aquino" id="payment" type="number" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Php1,000.00" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="1">
+	                     <label for="payment" class="active">Payment</label>
+	                 </div>
 	                <script type="text/javascript">
 	                	$(document).ready(function() {
 	                	    $('#totalExpenses').DataTable( {

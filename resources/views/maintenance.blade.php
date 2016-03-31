@@ -41,6 +41,8 @@
                             </li>
                             <li class="{!! strpos(Request::url(), 'equipment') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('equipment') !!}" class="white-text">Equipment</a>
                             </li>
+                            <li class="{!! strpos(Request::url(), 'fee') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('measurement') !!}" class="white-text">Measurement</a>
+                            </li>
                              <li class="{!! strpos(Request::url(), 'item') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('item') !!}" class="white-text">Items</a>
                             </li>
                             <li class="{!! strpos(Request::url(), 'fee') !== false ? 'indigo lighten-1' : '' !!}"><a href="{!! url('fee') !!}" class="white-text">Fee</a>
@@ -73,7 +75,7 @@
                               </li>
                               <li><a href="{!! url('laboratory') !!}" class="white-text">Laboratory</a>
                               </li>
-                              <li><a href="{!! url('pharmacy') !!}" class="white-text">Pharmacy</a>
+                              <li><a href="{!! url('pos') !!}" class="white-text">Pharmacy</a>
                               </li>
                               <li><a href="{!! url('inventory') !!}" class="white-text">Inventory</a>
                               </li>

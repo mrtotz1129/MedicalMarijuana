@@ -87,10 +87,10 @@
 	         	<div class="row">
 	         		<div class="col s12 right">
 	         			<p>
-         			      <input name="group1" type="radio" id="outPatient" class="with-gap" />
+         			      <input name="patientType" type="radio" id="outPatient" class="with-gap" value="1" />
          			      <label for="outPatient">Out Patient</label>
          		
-         			      <input name="group1" type="radio" id="inPatient" class="with-gap" />
+         			      <input name="patientType" type="radio" id="inPatient" class="with-gap" value="2"/>
          			      <label for="inPatient">In Patient</label>
          			    </p>
 	         		</div>
@@ -99,9 +99,9 @@
 	         	<div class="input-field col s12">
                     <select name="discount[]" id="patientSelect">
                       <option value="" disabled selected>Choose your option</option>
-
-						<option value="Patient1">Patient1</option>
-          
+						@foreach($patientList as $patient)
+							<option value="{!! $patient->intPatientId !!}">{!! $patient->strLastName . ', ' . $patient->strFirstName . ($patient->strMiddleName != null ? (' ' . $patient->strMiddleName) : ''); !!}</option>
+          				@endforeach
                     </select>
                     
                     <label>Select Patient</label>
@@ -141,7 +141,7 @@
 	
 	<!-- add option -->
    <div id="request" class="modal" style="margin-top: 30px;">
-     <form id="addToCartForm">
+     <form id="">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
      	<input type="hidden" id="itemName">
      	<input type="hidden" id="itemId">
@@ -191,7 +191,7 @@
 	</div>
 
 	<div id="approve" class="modal" style="margin-top: 30px; height: 200px !important; width: 300px !important;">
-     <form id="addToCartForm">
+     <form id="">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
      	<input type="hidden" id="itemName">
      	<input type="hidden" id="itemId">
@@ -205,6 +205,36 @@
 	      </div>
 	 </form>
 	</div>
+
+	<div id="itemDetails" class="modal" style="margin-top: 30px;">
+     <form id="addToCartForm">
+     	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
+     	<input type="hidden" id="itemName">
+     	<input type="hidden" id="itemId">
+       <div class="modal-content">
+         <h4>Details</h4>
+         <div class="row">
+           <div class="col s12">
+             <div class="input-field col s8 offset-s2">
+               <select id="unitOfMeasurement" class="browser-default" size="10">
+                 @foreach($measurementList as $measurement)
+                 	<option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
+                 @endforeach
+               </select>
+             </div>
+             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
+               <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 100" id="itemQuantity" name="createEquipmentType" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
+               <label for="itemQuantity" class="active"> Quantity</label>
+             </div>
+             <div class="input-field col s8 offset-s2 center">
+               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
+	             </div>
+	           </div>
+	         </div>
+	       </div>
+	     </form>
+	   </div>
+
 </article>
 
 <script type="text/javascript">
@@ -400,6 +430,7 @@
 		var arrDiscount = $('#discountSelect').val();
 		console.log(arrDiscount);
 		var dblPayment = document.getElementById('payment').value;
+		var patientType = $('input[name=patientType]:checked').val();
 		$.ajax({
 			url: "pos",
 			type: "POST",
@@ -407,7 +438,8 @@
 				_token: document.getElementById('billOutFormToken').value,
 				itemList: JSON.stringify(arrItems),
 				discountList: arrDiscount,
-				dblPayment: dblPayment
+				dblPayment: dblPayment,
+				patientType: patientType
 			},
 			success: function(data) {
 				console.log(data);

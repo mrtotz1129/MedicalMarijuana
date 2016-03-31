@@ -42,10 +42,15 @@ class PosController extends Controller
         }
         $discountList = DiscountModel::where('intDiscountStatus', 1)
             ->get();
+        $patientList = \DB::table('tblPatient')
+            ->join('tblAdmission', 'tblAdmission.intPatientIdFK', '=', 'tblPatient.intPatientId')
+            ->get();
+
         return view('transaction-pos')
             ->with('measurementList', $measurementList)
             ->with('itemList', $itemList)
-            ->with('discountList', $discountList);
+            ->with('discountList', $discountList)
+            ->with('patientList', $patientList);
     }
 
     /**
@@ -66,60 +71,68 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        $pos = new PosModel;
-        // $pos->intEmployeeIdFK = session()->get('intEmployeeId');
-        $pos->intEmployeeIdFK = 1;
-        $pos->deciAmountPaid = $request->dblPayment;
-        $pos->save();
 
-        $itemList = json_decode($request->itemList, true);
-        foreach ($itemList as $item) {
-            $itemModel = ItemModel::where('strItemName', $item['itemName'])
-                ->first();
-            $measurement = UOMModel::where('strUnitOfMeasurementAbbrev', $item['itemMeasurement'])
-                ->first();
-            $itemPrice = ItemPriceModel::where('intItemIdFK', $itemModel->intItemId)
-                ->where('intUnitOfMeasurementIdFK', $measurement->intUnitOfMeasurementId)
-                ->select('intItemPriceId')
-                ->orderBy('created_at', 'desc')
-                ->first();
-            \DB::table('tblPointOfSaleDetail')
-                ->insert([
-                    'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
-                    'intItemIdFK'           => $itemModel->intItemId,
-                    'intQuantity'           => $item['itemQuantity'],
-                    'intItemPriceIdFK'      => $itemPrice->intItemPriceId
-                    ]);
+        if($request->patientType == 1){
+            $pos = new PosModel;
+            // $pos->intEmployeeIdFK = session()->get('intEmployeeId');
+            $pos->intEmployeeIdFK = 1;
+            $pos->deciAmountPaid = $request->dblPayment;
+            $pos->save();
 
-            $inventoryPrev = InventoryModel::where('intItemIdFK', $itemModel->intItemId)
-                ->orderBy('created_at', 'desc')
-                ->first();
+            $itemList = json_decode($request->itemList, true);
+            foreach ($itemList as $item) {
+                $itemModel = ItemModel::where('strItemName', $item['itemName'])
+                    ->first();
+                $measurement = UOMModel::where('strUnitOfMeasurementAbbrev', $item['itemMeasurement'])
+                    ->first();
+                $itemPrice = ItemPriceModel::where('intItemIdFK', $itemModel->intItemId)
+                    ->where('intUnitOfMeasurementIdFK', $measurement->intUnitOfMeasurementId)
+                    ->select('intItemPriceId')
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+                \DB::table('tblPointOfSaleDetail')
+                    ->insert([
+                        'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
+                        'intItemIdFK'           => $itemModel->intItemId,
+                        'intQuantity'           => $item['itemQuantity'],
+                        'intItemPriceIdFK'      => $itemPrice->intItemPriceId
+                        ]);
 
-            $inventory = new InventoryModel;
-            $inventory->intItemIdFK = $itemModel->intItemId;
-            if ($inventoryPrev == null){
-                $inventoryPrevValue = 0;
-            }else{
-                $inventoryPrevValue = $inventoryPrev->deciAfterValue;
+                $inventoryPrev = InventoryModel::where('intItemIdFK', $itemModel->intItemId)
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+
+                $inventory = new InventoryModel;
+                $inventory->intItemIdFK = $itemModel->intItemId;
+                if ($inventoryPrev == null){
+                    $inventoryPrevValue = 0;
+                }else{
+                    $inventoryPrevValue = $inventoryPrev->deciAfterValue;
+                }
+
+                $inventory->deciPrevValue = $inventoryPrevValue;
+                $newInventory = $inventoryPrevValue-($item['itemQuantity']*$measurement->dblEquivalent);
+                $inventory->deciAfterValue = $newInventory;
+                $inventory->strReason = "minus";
+                $inventory->save();
+
             }
+                
+            $discountList = $request->discountList;
+            if ($discountList != null){
+                foreach ($discountList as $discount) {
+                    \DB::table('tblPointOfSaleDiscount')
+                        ->insert([
+                            'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
+                            'intDiscountIdFK'       => $discount
+                        ]);
+                }
+            }
+        }else{
 
-            $inventory->deciPrevValue = $inventoryPrevValue;
-            $newInventory = $inventoryPrevValue-($item['itemQuantity']*$measurement->dblEquivalent);
-            $inventory->deciAfterValue = $newInventory;
-            $inventory->strReason = "minus";
-            $inventory->save();
+
 
         }
-            
-        $discountList = $request->discountList;
-        foreach ($discountList as $discount) {
-            \DB::table('tblPointOfSaleDiscount')
-                ->insert([
-                    'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
-                    'intDiscountIdFK'       => $discount
-                ]);
-        }
-
     }
 
     /**

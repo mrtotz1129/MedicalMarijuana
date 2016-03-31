@@ -41,17 +41,16 @@
 				<table id="cartTable" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
+			            	<th>Id</th>
 			                <th>Item Name</th>
 			                <th>Quantity</th>
+			                <th>UOM</th>
+			                <th>Price</th>
 			                <th style="width: 20px;">Action</th>
 			            </tr>
 			        </thead> 
 			        <tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						
 			        </tbody> 	
 				</table>
     		</div>
@@ -71,9 +70,6 @@
     	    } );
     	} );
 
-    	$(document).ready(function() {
-    	    $('#cartTable').DataTable();
-    	} );
     </script>
 
 		<!-- Bill OUt Modal -->
@@ -154,6 +150,8 @@
    <div id="itemDetails" class="modal" style="margin-top: 30px;">
      <form id="addToCartForm">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
+     	<input type="hidden" id="itemName">
+     	<input type="hidden" id="itemId">
        <div class="modal-content">
          <h4>Details</h4>
          <div class="row">
@@ -180,40 +178,130 @@
 </article>
 
 <script type="text/javascript">
-	
+	var table = $('#cartTable').DataTable();
+	table.column(0).visible(false);
 	function addToCart(itemName, id){
 		$('#itemDetails').openModal();
-		$('#item').val(itemName);
+		$('#itemName').val(itemName);
+		$('#itemId').val(id);
+	}
 
-		$('#addToCartForm').on('submit', function(event) {
-			event.preventDefault();
-			$.ajax({
-				url: "get-price",
-				type: "POST",
-				data: {
-					intItemId: id,
-					intMeasurementId: document.getElementById('unitOfMeasurement').value 
-				},
-				success: function(data) {
-					$('#tblCart tbody').html('');
-					var table=document.getElementById('tblCart').insertRow(1);
-					var colName=table.insertCell(0);
-					var colQuantity = table.insertCell(1);
-					var colPrice=table.insertCell(2);
-					var quantity = document.getElementById('itemQuantity').value;
-					colName.innerHTML=itemName;
-					colQuantity.innerHTML = quantity+" "+data.measurement+"/s";
-					colPrice.innerHTML=data.deciItemPrice*quantity;
-					$('#itemQuantity').val('');
-					$('#itemDetails').closeModal();
-				},
-				error: function(xhr) {
-					alert('error');
-					console.log(xhr);
+	var Item = function(itemId,itemName){
+		this.itemId = itemId;
+		this.itemName = itemName;
+		this.itemPrice = 0;
+		this.itemQuantity = 0;
+		this.itemMeasurement = "";
+		console.log('Item instantiated.');
+	}
+	var arrData = [];
+	var intItemId = 1;
+	$('#addToCartForm').on('submit', function(event) {
+		event.preventDefault();
+		$.ajax({
+			url: "get-price",
+			type: "POST",
+			data: {
+				intItemId: document.getElementById('itemId').value,
+				intMeasurementId: document.getElementById('unitOfMeasurement').value 
+			},
+			success: function(data) {
+				var quantity = document.getElementById('itemQuantity').value;
+				var existing = 0;
+				var measurement = data.measurement;
+				
+
+				table.data()
+					.each(function (value, index){
+						console.log(value[0]);
+						console.log(document.getElementById('itemName').value);
+						console.log(arrData);
+						if (value[1] === document.getElementById('itemName').value || value[3] === measurement){
+							existing = 1;
+							$.each(arrData, function(i, itemSearch){
+								console.log('checking array...');
+								if (itemSearch.itemName == document.getElementById('itemName').value || itemSearch.itemMeasurement == measurement){
+									console.log('object found!');
+									itemSearch.itemQuantity = Number(itemSearch.itemQuantity)+Number(quantity);
+									itemSearch.itemPrice = Number(itemSearch.itemPrice)+Number(data.deciItemPrice*quantity);
+								}
+							});
+						}
+					});
+				console.log(existing);
+				if (existing == 0){
+					var item = new Item(intItemId, document.getElementById('itemName').value);
+					item.itemQuantity = quantity;
+					item.itemPrice = data.deciItemPrice*quantity;
+					item.itemMeasurement = measurement;
+					console.log(item);
+					arrData.push(item);
+					table.row.add( [
+						intItemId++,
+				       	document.getElementById('itemName').value,
+				        quantity,
+				        measurement,
+				        data.deciItemPrice*quantity,
+					    '<a class="remove">remove</a>'
+			    	] ).draw( false );
+				}else{
+					table.clear().draw();
+					$.each(arrData, function(i, item){
+						console.log('writing from array...');
+
+						table.row.add( [
+							item.itemId,
+					       	item.itemName,
+					        item.itemQuantity,
+					        item.itemMeasurement,
+					        item.itemPrice,
+					        '<a class="remove">remove</a>'
+				    	] ).draw( false );
+					});
 				}
-			});
-			
+				$('#itemQuantity').val('');
+				$('#itemDetails').closeModal();
+			},
+			error: function(xhr) {
+				alert('error');
+				console.log(xhr);
+			}
 		});
+		
+	});
+
+	$(document).on( 'click', '.remove', function () {
+		console.log('removing...');
+		var d = table.row( $(this).parents('tr') ).data();
+		var arrNewData = [];
+		$.each(arrData, function(i, data){
+			if (data.itemId == d[0]){
+				console.log('object found here in remove...');
+			}else{
+				console.log(data[0]+" "+d[0]);
+				console.log('object not found here in remove...');
+				arrNewData.push(data);
+			}
+		});
+		console.log(arrNewData);
+		arrData = arrNewData;
+		console.log(d[1]);
+	    table
+	        .row( $(this).parents('tr') )
+	        .remove()
+	        .draw();
+	 //  var d = table.row( $(this).parents('tr') ).data();
+     
+	 //    d.counter++;
+	 
+	 //    table
+	 //        .row( $(this).parents('tr') )
+	 //        .data( d )
+	 //        .draw();
+		} );
+
+	function remove(id){
+		alert(id);
 	}
 
 </script>

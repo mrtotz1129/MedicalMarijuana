@@ -96,6 +96,11 @@
                  	<h2>Discount Value: <span class="thin red-text" id="totalDiscount"></span></h2>
                  	<h2>Amount To Pay: <span class="thin green-text text-darken-2" id="amountToPay"></span></h2>
                  </div>
+
+                 <div class="input-field col s12">
+                     <input name="" placeholder="Ex: Aquino" id="payment" type="number" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Php1,000.00" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="1">
+                     <label for="payment" class="active">Payment</label>
+                 </div>
 	         </div>
 	       </div>
 	      <div class="modal-footer">

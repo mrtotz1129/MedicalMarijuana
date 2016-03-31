@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\UOMModel;
 use App\ItemModel;
 use App\InventoryModel;
+use App\DiscountModel;
 
 class PosController extends Controller
 {
@@ -28,9 +29,13 @@ class PosController extends Controller
             $inventory = InventoryModel::where('intItemIdFK', $item->intItemId)
                 ->orderBy('created_at', 'desc')
                 ->first();
-            $item->inventory = $inventory->deciAfterValue;
+            if ($inventory != null){
+                $item->inventory = $inventory->deciAfterValue;
+            }else{
+                $item->inventory = 0;
+            }
         }
-        $discountList = DiscountModel::where('intDiscountStatus')
+        $discountList = DiscountModel::where('intDiscountStatus', 1)
             ->get();
         return view('transaction-pos')
             ->with('measurementList', $measurementList)

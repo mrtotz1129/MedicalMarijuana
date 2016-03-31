@@ -20,7 +20,7 @@ class PatientController extends Controller
     public function index()
     {
         $patients = PatientModel::where('intStatus', 1)
-            ->select('intPatientId', 'strFirstName', 'strMiddleName', 'strLastName', 'txtAddress', 'strContactNumber')
+            ->select('intPatientId', 'strFirstName', 'strMiddleName', 'strLastName', 'txtAddress', 'strContactNumber', 'txtPatientImgPath')
             ->get();
 
         return view('transaction-patient')

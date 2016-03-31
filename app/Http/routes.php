@@ -46,6 +46,7 @@ Route::post('floor/changed', 'FloorAjaxController@retrieveRooms');
 Route::post('nurse-station/changed', 'NurseStationAjaxController@retrieveNurse');
 Route::post('nurse-station/update', 'NurseStationAjaxController@retrieveCreation');
 Route::post('room-type/changed', 'RoomTypeAjaxController@retrieveRooms');
+Route::post('item-update', 'ItemsAjaxController@itemUpdate');
 
 Route::get('view-requirement', 'ViewRequirementController@viewAllRequirement');
 Route::get('get-bed-lists/{id}', 'BedAjaxController@retrieveBeds');

@@ -3,7 +3,7 @@
 <article class="white main z-depth-1">
 	<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
 			<div class="col s6">
-				<h4 class="thin white-text">Out Patient Pharmacy</h4>
+				<h4 class="thin white-text">Point of Sale</h4>
 			</div>
 			<div class="col s6 right">
 				<a class="right waves-effect waves-light btn-floating btn-large green darken-2 left white-text tooltipped" 
@@ -20,6 +20,7 @@
 			        <thead>
 			            <tr>
 			                <th>Item Name</th>
+			                <th>Generic Name</th>
 			                <th>Quantity</th>
 			                <th style="width: 20px;">Action</th>
 			            </tr>
@@ -28,6 +29,7 @@
 					@foreach($itemList as $item)
 						<tr>
 							<td>{!! $item->strItemName !!}</td>
+							<td>{!! $item->generic !!}
 							<td>{!! $item->inventory !!}</td>
 							<td><a href="javascript:addToCart('{!! $item->strItemName !!}', {!! $item->intItemId !!})"><i class="material-icons">shopping_cart</i></a></td>
 						</tr>
@@ -75,10 +77,11 @@
 		<!-- Bill OUt Modal -->
 	   <div id="billOut" class="modal modal-fixed-footer" style="width: 800px !important; height: 600px !important; border-radius: 10px;">
 	    <form class="col s12 form" method="post" id="billOutForm" action="createEmployee" enctype="multipart/form-data">
+	      <input type="hidden" name="_token" id="billOutFormToken" value="{!! csrf_token() !!}" />
 	      <div class="modal-content" >
-	         <h4 class="thin center	">Bill OUt</h4>
+	         <h4 class="thin center	">Cash Out</h4>
 	         <div class="container">
-	         	<h5 class="thin">Bill out for this customer?</h5>
+	         	<h5 class="thin">Cash out this customer?</h5>
 	         	<br>
 	         	
 	         	 <div class="input-field col s12">
@@ -88,6 +91,7 @@
 						<option value="{!! $discount->intDiscountId !!}">{!! $discount->strDiscountName !!}</option>
                   	  @endforeach
                     </select>
+                    
                     <label>Select Discount</label>
                  </div>
                  <br>
@@ -289,10 +293,12 @@
 	};
 
 	var discount = 0;
+	var list;
+	var totalPayment = 0;
 	$('#discountSelect').change(function(){
 		console.log('changed');
 		console.log($(this).val());
-		var list = $(this).val();
+		list = $(this).val();
 		if (list.length != 0){
 			console.log('not null');
 			$.each(list,function(i,value){
@@ -309,7 +315,8 @@
 						}
 
 						$('#totalDiscount').text("P "+Number(discount).format(2));
-						$('#amountToPay').text("P "+Number((Number(totalAmountToPay.format(2)-Number(discount.format(2))))).format(2));
+						totalPayment = Number((Number(totalAmountToPay.format(2)-Number(discount.format(2))))).format(2)
+						$('#amountToPay').text("P "+totalPayment);
 					},
 					error: function(xhr) {
 						alert('error');
@@ -329,8 +336,32 @@
 	$('#billOutForm').on('submit', function(event) {
 		event.preventDefault();
 		var arrItems = arrData;
-		var arrDiscount = document.getElementById('discountSelect').value;
-	}
+		var arrDiscount = $('#discountSelect').val();
+		console.log(arrDiscount);
+		var dblPayment = document.getElementById('payment').value;
+		$.ajax({
+			url: "pos",
+			type: "POST",
+			data: {
+				_token: document.getElementById('billOutFormToken').value,
+				itemList: JSON.stringify(arrItems),
+				discountList: arrDiscount,
+				dblPayment: dblPayment
+			},
+			success: function(data) {
+				console.log(data);
+				$('#billOut').closeModal();
+				var change = dblPayment - totalPayment;
+				alert('Your change is P'+Number(change).format(2));
+				window.location.href = "{!! url('pos') !!}";
+			},
+			error: function(xhr) {
+				alert('error');
+				console.log(xhr);
+			}
+		});
+
+	});
 
 </script>
 @endsection

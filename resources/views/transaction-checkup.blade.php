@@ -12,7 +12,15 @@
 					<i class="material-icons">find_in_page</i></a>
 					<a href="#requestTest" class=" right btn modal-trigger btn-floating btn-large red darken-2" style="position: relative; top: 40px; right: 3%;">
 					<i class="material-icons">assignment_turned_in</i></a>
-					
+					<div class="fixed-action-btn vertical" style="bottom: 45px; right: 24px;">
+					    <a class="btn-floating btn-large purple">
+					      <i class="large material-icons">print</i>
+					    </a>
+					    <ul>
+					      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+					      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+					    </ul>
+					  </div>
 				</div>
 	</div>	
 		<div class="row">
@@ -233,5 +241,7 @@
 	      </div>
 	      </form>
 		</div>
+
+		
 </article>
 @endsection

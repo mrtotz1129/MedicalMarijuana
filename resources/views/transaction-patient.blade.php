@@ -29,8 +29,9 @@
         	<tr>
         		<td>{!! $patient->intPatientId !!}</td>
         		<td>
-        			<img src="{!! asset($patient->txtPatientImgPath != null ? $patient->txtPatientImgPath : 'img/no_image.png') !!}" alt="" class="circle center" width="40%" height="40%" align="center"
-                  style="margin-left: 30px; margin-top:0px;">
+        			<div>
+        				<img src="{!! asset($patient->txtPatientImgPath != null ? $patient->txtPatientImgPath : 'img/no_image.png') !!}" alt="" class="circle center" width="100px" height="100px" align="center">
+        			</div>
         		</td>
         		<td>{!! $patient->name !!}</td>
         		<td>{!! $patient->txtAddress !!}</td>

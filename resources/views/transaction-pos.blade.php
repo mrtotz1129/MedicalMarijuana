@@ -80,10 +80,15 @@
 	      <input type="hidden" name="_token" id="billOutFormToken" value="{!! csrf_token() !!}" />
 	      <div class="modal-content" >
 	         <h4 class="thin center	">Cash Out</h4>
+	         <a href="#requset" class="mdoal-trigger"></a>
 	         <div class="container">
 	         	<h5 class="thin">Cash out this customer?</h5>
 	         	<br>
-	         	
+	         	<div class="row">
+	         		<div class="col s12 right">
+	         			<a href="#request" class="modal-trigger btn btn-floating">INPATIENT</a>
+	         		</div>
+	         	</div>
 	         	 <div class="input-field col s12">
                     <select multiple name="discount[]" id="discountSelect">
                       <option value="" disabled selected>Choose your option</option>
@@ -116,34 +121,71 @@
 		<!-- Bill out End -->
 	
 	<!-- add option -->
-   <div id="itemDetails" class="modal" style="margin-top: 30px;">
+   <div id="request" class="modal" style="margin-top: 30px;">
      <form id="addToCartForm">
      	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
      	<input type="hidden" id="itemName">
      	<input type="hidden" id="itemId">
        <div class="modal-content">
-         <h4>Details</h4>
+         <h4>Patient Requests</h4>
+         <a href="#approve" class="modal-trigger btn btn-floating">Items</a>
          <div class="row">
-           <div class="col s12">
-             <div class="input-field col s8 offset-s2">
-               <select id="unitOfMeasurement" class="browser-default" size="10">
-                 @foreach($measurementList as $measurement)
-                 	<option value="{!! $measurement->intUnitOfMeasurementId !!}">{!! $measurement->strUnitOfMeasurementName !!}</option>
-                 @endforeach
-               </select>
-             </div>
-             <div class="input-field col s8 offset-s2" style="margin-top: 20px;">
-               <input type="number" class="validate tooltipped specialoption" placeholder="Ex: 100" id="itemQuantity" name="createEquipmentType" data-position="bottom" data-delay="30" data-tooltip="Ex: Cashier<br/>( At least 5 or more characters )" pattern="^[A-Za-z-\s]{5,}$">
-               <label for="itemQuantity" class="active"> Quantity</label>
-             </div>
-             <div class="input-field col s8 offset-s2 center">
-               <button type="submit" value="Submit" id="createAddPosition" class="waves-effect waves-light purple darken-3 btn-flat white-text">SAVE</button>
-	             </div>
-	           </div>
-	         </div>
-	       </div>
-	     </form>
+         	<table id="requestTable" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Patient Name</th>
+			                <th>Doctor</th>
+			                <th style="width: 20px;">Action</th>
+			            </tr>
+			        </thead> 
+			        <tbody>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td><a href="javascript:approve('{!! $item->strItemName !!}', {!! $item->intItemId !!})"><i class="material-icons">shopping_cart</i></a></td>
+						</tr>
+			        </tbody> 	
+				</table>
+				<script type="text/javascript">  
+					$(document).ready(function() {
+					    $('#requestTable').DataTable( {
+					        dom: 'Bfrtip',
+					        buttons: [
+					            'copyHtml5',
+					            'excelHtml5',
+					            'csvHtml5',
+					            'pdfHtml5'
+					        ]
+					    } );
+					} );
+
+				</script>
+
+	     </div>
 	   </div>
+	   <div class="modal-footer">
+	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
+	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">BILL OUT</button>
+	      </div>
+	 </form>
+	</div>
+
+	<div id="approve" class="modal" style="margin-top: 30px; height: 200px !important; width: 300px !important;">
+     <form id="addToCartForm">
+     	<input type="hidden" id="createEquipmentTypeFormToken" value="{!! csrf_token() !!}" />
+     	<input type="hidden" id="itemName">
+     	<input type="hidden" id="itemId">
+       <div class="modal-content">
+         <h4>Approve Items for this patient?</h4>
+         
+	   </div>
+	   <div class="modal-footer">
+	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">NOs</button>
+	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">YES</button>
+	      </div>
+	 </form>
+	</div>
 </article>
 
 <script type="text/javascript">

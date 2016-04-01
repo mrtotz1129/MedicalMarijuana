@@ -5,6 +5,9 @@
 				<div class="col s6">
 					<h4 class="thin white-text">Cashier</h4>
 				</div>
+				<div class="col s6">
+					<a href="#billOut" class="modal-trigger btn btn-floating green darken-3">Bill OUt</a>
+				</div>
 			</div>	
 		<div class="container" style="margin-left: -30px;">
 		<br>
@@ -97,14 +100,21 @@
 	                    <div class="col s12" style="margin-bottom: 5px;">
 	                         <label class="red-text left">(*) Indicates required field</label>
 	                    </div>
-	                    <div class="input-field col s12">
-	                        <input name="strEmpFirstName" placeholder="Ex: Benigno" id="strEmpFirstName" type="text" class="validate tooltipped specialname" required data-position="bottom" data-delay="30" data-tooltip="Ex: Benigno( At least 2 or more characters )" pattern="^[a-zA-Z\-'`\s]{2,}$" maxlength="15" minlength="2">
-	                        <label for="strEmpFirstName" class="active">Discount Name<span class="red-text"><b>*</b></span></label>
-	                    </div>
-	                    <div class="input-field col s12">
-	                        <input name="strEmpMiddleName" placeholder="Ex: Cojuangco" id="strEmpMiddleName" type="text" class="validate tooltipped specialname" data-position="bottom" data-delay="30" data-tooltip="Ex: Cojuangco( At least 2 or more characters)" pattern="^[a-zA-Z\-'`\s]{2,}$" minlength="2">
-	                        <label for="strEmpMiddleName" class="active">Patient ID</label>
-	                    </div>
+        	         	 <div class="input-field col s12">
+                            <select multiple name="discount[]" id="discountSelect">
+                              <option value="" disabled selected>Choose your option</option>
+                          	  @foreach($discountList as $discount)
+        						<option value="{!! $discount->intDiscountId !!}">{!! $discount->strDiscountName !!}</option>
+                          	  @endforeach
+                            </select>
+                            
+                            <label>Select Discount</label>
+                         </div>
+	                  	<div align="right">
+	                  		<h2>Total Amount: <span class="thin green-text text-darken-2" id="totalAmount"></span></h2>
+	                  		<h2>Discount Value: <span class="thin red-text" id="totalDiscount"></span></h2>
+	                  		<h2>Amount To Pay: <span class="thin green-text text-darken-2" id="amountToPay"></span></h2>
+	                  	</div>
 	                </div>
 	              </div>
 	              <!-- END ASIDE 2 -->
@@ -112,7 +122,7 @@
 	        </div>
 	      <div class="modal-footer">
 	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>
-	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">CREATE</button>
+	          <button class="waves-effect waves-light indigo darken-3 white-text btn-flat" type="submit" value="Submit">BILL OUT</button>
 	      </div>
 	      </form>
 	</div>

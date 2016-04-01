@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\PrescriptionModel;
+
 class LabController extends Controller
 {
     /**
@@ -16,7 +18,20 @@ class LabController extends Controller
      */
     public function index()
     {
-        return view('transaction-laboratory');
+        $pendingRequests = \DB::table('tblPrescription')
+            ->join('tblPatient', 'tblPatient.intPatientId', '=', 'tblPrescription.intPatientIdFK')
+            ->join('tblEmployee', 'tblEmployee.intEmployeeId', '=', 'tblPrescription.intEmployeeIdFK')
+            ->select('tblPrescription.intPrescriptionId', 'tblPatient.strFirstName', 'tblPatient.strMiddleName', 'tblPatient.strLastName', 'tblEmployee.strFirstName as strEmployeeFirstName', 'tblEmployee.strMiddleName as strEmployeeMiddleName', 'tblEmployee.strLastName as strEmployeeLastName')
+            ->get();
+
+        $lastRequestId = PrescriptionModel::where('intStatus', '>', 0)
+            ->orderBy('intPrescriptionId', 'desc')
+            ->select('intPrescriptionId')
+            ->first();
+
+        return view('transaction-laboratory')
+            ->with('pendingRequests', $pendingRequests)
+            ->with('recentId', $lastRequestId->intPrescriptionId);
     }
 
     /**

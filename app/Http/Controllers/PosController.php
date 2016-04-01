@@ -11,6 +11,9 @@ use App\UOMModel;
 use App\ItemModel;
 use App\InventoryModel;
 use App\DiscountModel;
+use App\PosModel;
+use App\ItemPriceModel;
+use App\GenericModel;
 
 class PosController extends Controller
 {
@@ -34,6 +37,8 @@ class PosController extends Controller
             }else{
                 $item->inventory = 0;
             }
+            $generic = GenericModel::find($item->intGenericNameIdFK);
+            $item->generic = $generic->strGenericName;
         }
         $discountList = DiscountModel::where('intDiscountStatus', 1)
             ->get();
@@ -61,7 +66,60 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pos = new PosModel;
+        // $pos->intEmployeeIdFK = session()->get('intEmployeeId');
+        $pos->intEmployeeIdFK = 1;
+        $pos->deciAmountPaid = $request->dblPayment;
+        $pos->save();
+
+        $itemList = json_decode($request->itemList, true);
+        foreach ($itemList as $item) {
+            $itemModel = ItemModel::where('strItemName', $item['itemName'])
+                ->first();
+            $measurement = UOMModel::where('strUnitOfMeasurementAbbrev', $item['itemMeasurement'])
+                ->first();
+            $itemPrice = ItemPriceModel::where('intItemIdFK', $itemModel->intItemId)
+                ->where('intUnitOfMeasurementIdFK', $measurement->intUnitOfMeasurementId)
+                ->select('intItemPriceId')
+                ->orderBy('created_at', 'desc')
+                ->first();
+            \DB::table('tblPointOfSaleDetail')
+                ->insert([
+                    'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
+                    'intItemIdFK'           => $itemModel->intItemId,
+                    'intQuantity'           => $item['itemQuantity'],
+                    'intItemPriceIdFK'      => $itemPrice->intItemPriceId
+                    ]);
+
+            $inventoryPrev = InventoryModel::where('intItemIdFK', $itemModel->intItemId)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            $inventory = new InventoryModel;
+            $inventory->intItemIdFK = $itemModel->intItemId;
+            if ($inventoryPrev == null){
+                $inventoryPrevValue = 0;
+            }else{
+                $inventoryPrevValue = $inventoryPrev->deciAfterValue;
+            }
+
+            $inventory->deciPrevValue = $inventoryPrevValue;
+            $newInventory = $inventoryPrevValue-($item['itemQuantity']*$measurement->dblEquivalent);
+            $inventory->deciAfterValue = $newInventory;
+            $inventory->strReason = "minus";
+            $inventory->save();
+
+        }
+            
+        $discountList = $request->discountList;
+        foreach ($discountList as $discount) {
+            \DB::table('tblPointOfSaleDiscount')
+                ->insert([
+                    'intPointOfSaleIdFK'    => $pos->intPointOfSaleId,
+                    'intDiscountIdFK'       => $discount
+                ]);
+        }
+
     }
 
     /**

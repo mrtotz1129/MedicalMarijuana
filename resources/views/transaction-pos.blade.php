@@ -143,7 +143,7 @@
 						<tr>
 							<td></td>
 							<td></td>
-							<td><a href="javascript:approve('{!! $item->strItemName !!}', {!! $item->intItemId !!})"><i class="material-icons">shopping_cart</i></a></td>
+							<td><a href="#approve" class="modal-trigger"><i class="material-icons">shopping_cart</i></a></td>
 						</tr>
 			        </tbody> 	
 				</table>

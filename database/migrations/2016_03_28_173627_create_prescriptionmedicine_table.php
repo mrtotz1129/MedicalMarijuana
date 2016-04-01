@@ -21,7 +21,6 @@ class CreatePrescriptionmedicineTable extends Migration
             $table->time('timeInterval');
             $table->integer('intUnitOfMeasurementIdFK')
                 ->unsigned();
-            $table->double('dblDosage');
             $table->timestamps();
 
             $table->foreign('intPrescriptionDetailIdFK')

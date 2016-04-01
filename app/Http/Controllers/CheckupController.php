@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\PatientModel;
 use App\AdmissionModel;
 use App\ServiceModel;
+use App\ItemModel;
 
 class CheckupController extends Controller
 {
@@ -71,10 +72,17 @@ class CheckupController extends Controller
             ->select('intServiceId', 'strServiceName')
             ->get();
 
+        $items = \DB::table('tblItem')
+            ->join('tblItemCategory', 'tblItemCategory.intItemCategoryId', '=', 'tblItem.intItemCategoryIdFK')
+            ->where('tblItem.intItemStatus', '>', 0)
+            ->where('tblItemCategory.strItemCategoryDesc', 'like', '%Medicine%')
+            ->get();
+
         return view('transaction-checkup')
             ->with('patient', $patient)
             ->with('lastVisit', $lastVisit)
-            ->with('services', $services);
+            ->with('services', $services)
+            ->with('items', $items);
     }
 
     /**

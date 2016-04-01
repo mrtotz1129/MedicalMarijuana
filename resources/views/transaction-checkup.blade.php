@@ -4,6 +4,11 @@
 	<div class="row indigo darken-2" style="margin-left: -30px; border-top-right-radius: 10px;">
 				<div class="col s6">
 					<h4 class="thin white-text">Patient</h4>
+					@if(count($errors) > 0)
+						@foreach($errors->all() as $error)
+						<li>{!! $error !!}</li>
+						@endforeach
+					@endif
 				</div>
 				<div class="col s6 right">
 					<a href="#prescription" class="right btn modal-trigger btn-floating btn-large green darken-2" style="position: relative; top: 40px; right: 1%;">
@@ -206,7 +211,10 @@
 
 		<!-- Add Prescription Modal -->
 		<div id="prescription" class="modal modal-fixed-footer" style="width: 800px !important;">
-	    <form class="col s12 form" method="post" id="createEmpForm" action="createEmployee" enctype="multipart/form-data">
+	    <form class="col s12 form" method="post" id="createEmpForm" action="{!! url('prescription') !!}" enctype="multipart/form-data">
+			<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+	    	<input type="hidden" name="patientId" value="{!! $patient->intPatientId !!}" />
+
 	      <div class="modal-content" style="padding-bottom: 0px !important;">
 	        <!-- <div class="container"> -->
 		     <div class="wrapper">
@@ -216,24 +224,26 @@
 					<h6>Medicine</h6>
  			 		
  			 		 <div class="input-field col s12">
- 			 		    <select class="browser-default" id="buildingCreateSelect" name="selectedJob" required>
+ 			 		    <select class="browser-default" id="buildingCreateSelect" name="medicineSelect" required>
  			 		        <option disabled selected>Choose Medicine</option>
- 			 		        <option value="Medicine 1">Medicine 1</option>
+ 			 		        @foreach($items as $item)
+ 			 		        <option value="{!! $item->intItemId !!}">{!! $item->strItemName !!}</option>
+ 			 		        @endforeach
  			 		    </select>
  			 		    <label for="slct1" class="active">Medicine<span class="red-text">*</span></label>
  			 		</div>
 
  					<div class="input-field col s6">
- 						 <input type="number" class="validate" id="medQuantity">
- 						 <label for="medQuantity">Times/dady</label>
+ 						 <input type="number" name="timesDayInput" class="validate" id="medQuantity">
+ 						 <label for="medQuantity">Times/day</label>
  					</div>
 
  					<div class="input-field col s6">
- 						 <input type="number" class="validate" id="time" placeholder="minutes">
+ 						 <input type="number" name="intervalInput" class="validate" id="time" placeholder="minutes">
  						 <label for="time">Interval</label>
  					</div>
 		      </div>
-	      </div>>
+	      </div>	
 	      </div>
 	      <div class="modal-footer">
 	          <button type="reset" value="Reset" class=" modal-action modal-close waves-effect waves-purple transparent btn-flat">CANCEL</button>

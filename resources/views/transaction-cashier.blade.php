@@ -103,9 +103,9 @@
         	         	 <div class="input-field col s12">
                             <select multiple name="discount[]" id="discountSelect">
                               <option value="" disabled selected>Choose your option</option>
-                          	  @foreach($discountList as $discount)
-        						<option value="{!! $discount->intDiscountId !!}">{!! $discount->strDiscountName !!}</option>
-                          	  @endforeach
+                    
+        						<option value="Discount1">Discount1</option>
+                       
                             </select>
                             
                             <label>Select Discount</label>
